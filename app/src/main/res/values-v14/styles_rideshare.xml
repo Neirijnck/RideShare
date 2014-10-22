@@ -19,7 +19,7 @@
 
 <resources>
 
-    <style name="Theme.Rideshare" parent="@style/Theme.AppCompat.Light">
+    <style name="Theme.Rideshare" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="android:actionBarItemBackground">@drawable/selectable_background_rideshare</item>
         <item name="android:popupMenuStyle">@style/PopupMenu.Rideshare</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Rideshare</item>
@@ -30,17 +30,19 @@
         <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_rideshare</item>
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Rideshare</item>
         
-        
+                <!-- Light.DarkActionBar specific -->
+        <item name="android:actionBarWidgetTheme">@style/Theme.Rideshare.Widget</item>
+
     </style>
 
-    <style name="ActionBar.Solid.Rideshare" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
+    <style name="ActionBar.Solid.Rideshare" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="android:background">@drawable/ab_solid_rideshare</item>
         <item name="android:backgroundStacked">@drawable/ab_stacked_solid_rideshare</item>
         <item name="android:backgroundSplit">@drawable/ab_bottom_solid_rideshare</item>
         <item name="android:progressBarStyle">@style/ProgressBar.Rideshare</item>
     </style>
 
-    <style name="ActionBar.Transparent.Rideshare" parent="@style/Widget.AppCompat.Light.ActionBar">
+    <style name="ActionBar.Transparent.Rideshare" parent="@style/Widget.AppCompat.ActionBar">
         <item name="android:background">@drawable/ab_transparent_rideshare</item>
         <item name="android:progressBarStyle">@style/ProgressBar.Rideshare</item>
     </style>

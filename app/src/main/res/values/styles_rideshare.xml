@@ -19,64 +19,64 @@
 
 <resources>
 
-    <style name="Theme.Rideshare" parent="@android:style/Theme.Holo.Light.DarkActionBar">
-        <item name="android:actionBarItemBackground">@drawable/selectable_background_rideshare</item>
-        <item name="android:popupMenuStyle">@style/PopupMenu.Rideshare</item>
-        <item name="android:dropDownListViewStyle">@style/DropDownListView.Rideshare</item>
-        <item name="android:actionBarTabStyle">@style/ActionBarTabStyle.Rideshare</item>
-        <item name="android:actionDropDownStyle">@style/DropDownNav.Rideshare</item>
-        <item name="android:actionBarStyle">@style/ActionBar.Solid.Rideshare</item>
-        <item name="android:actionModeBackground">@drawable/cab_background_top_rideshare</item>
-        <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_rideshare</item>
-        <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Rideshare</item>
-        
+    <style name="Theme.Rideshare" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="actionBarItemBackground">@drawable/selectable_background_rideshare</item>
+        <item name="popupMenuStyle">@style/PopupMenu.Rideshare</item>
+        <item name="dropDownListViewStyle">@style/DropDownListView.Rideshare</item>
+        <item name="actionBarTabStyle">@style/ActionBarTabStyle.Rideshare</item>
+        <item name="actionDropDownStyle">@style/DropDownNav.Rideshare</item>
+        <item name="actionBarStyle">@style/ActionBar.Solid.Rideshare</item>
+        <item name="actionModeBackground">@drawable/cab_background_top_rideshare</item>
+        <item name="actionModeSplitBackground">@drawable/cab_background_bottom_rideshare</item>
+        <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Rideshare</item>
+
                 <!-- Light.DarkActionBar specific -->
-        <item name="android:actionBarWidgetTheme">@style/Theme.Rideshare.Widget</item>
+        <item name="actionBarWidgetTheme">@style/Theme.Rideshare.Widget</item>
 
     </style>
 
-    <style name="ActionBar.Solid.Rideshare" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">@drawable/ab_solid_rideshare</item>
-        <item name="android:backgroundStacked">@drawable/ab_stacked_solid_rideshare</item>
-        <item name="android:backgroundSplit">@drawable/ab_bottom_solid_rideshare</item>
-        <item name="android:progressBarStyle">@style/ProgressBar.Rideshare</item>
+    <style name="ActionBar.Solid.Rideshare" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="background">@drawable/ab_solid_rideshare</item>
+        <item name="backgroundStacked">@drawable/ab_stacked_solid_rideshare</item>
+        <item name="backgroundSplit">@drawable/ab_bottom_solid_rideshare</item>
+        <item name="progressBarStyle">@style/ProgressBar.Rideshare</item>
     </style>
 
-    <style name="ActionBar.Transparent.Rideshare" parent="@android:style/Widget.Holo.ActionBar">
-        <item name="android:background">@drawable/ab_transparent_rideshare</item>
-        <item name="android:progressBarStyle">@style/ProgressBar.Rideshare</item>
+    <style name="ActionBar.Transparent.Rideshare" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="background">@drawable/ab_transparent_rideshare</item>
+        <item name="progressBarStyle">@style/ProgressBar.Rideshare</item>
     </style>
-
-    <style name="PopupMenu.Rideshare" parent="@android:style/Widget.Holo.ListPopupWindow">
+	
+    <style name="PopupMenu.Rideshare" parent="@style/Widget.AppCompat.PopupMenu">	
         <item name="android:popupBackground">@drawable/menu_dropdown_panel_rideshare</item>	
     </style>
-
-    <style name="DropDownListView.Rideshare" parent="@android:style/Widget.Holo.ListView.DropDown">
+	
+    <style name="DropDownListView.Rideshare" parent="@style/Widget.AppCompat.ListView.DropDown">
         <item name="android:listSelector">@drawable/selectable_background_rideshare</item>
     </style>
 
-    <style name="ActionBarTabStyle.Rideshare" parent="@android:style/Widget.Holo.ActionBar.TabView">
+    <style name="ActionBarTabStyle.Rideshare" parent="@style/Widget.AppCompat.ActionBar.TabView">
         <item name="android:background">@drawable/tab_indicator_ab_rideshare</item>
     </style>
-
-    <style name="DropDownNav.Rideshare" parent="@android:style/Widget.Holo.Spinner">
+	
+    <style name="DropDownNav.Rideshare" parent="@style/Widget.AppCompat.Spinner.DropDown.ActionBar">
         <item name="android:background">@drawable/spinner_background_ab_rideshare</item>
         <item name="android:popupBackground">@drawable/menu_dropdown_panel_rideshare</item>
         <item name="android:dropDownSelector">@drawable/selectable_background_rideshare</item>
     </style>
     
-    <style name="ProgressBar.Rideshare" parent="@android:style/Widget.Holo.ProgressBar.Horizontal">
+    <style name="ProgressBar.Rideshare" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
         <item name="android:progressDrawable">@drawable/progress_horizontal_rideshare</item>
     </style>
     
-    <style name="ActionButton.CloseMode.Rideshare" parent="@android:style/Widget.Holo.ActionButton.CloseMode">
+    <style name="ActionButton.CloseMode.Rideshare" parent="@style/Widget.AppCompat.ActionButton.CloseMode">
         <item name="android:background">@drawable/btn_cab_done_rideshare</item>
     </style>
-
+    
     <!-- this style is only referenced in a Light.DarkActionBar based theme -->
-    <style name="Theme.Rideshare.Widget" parent="@android:style/Theme.Holo">
-        <item name="android:popupMenuStyle">@style/PopupMenu.Rideshare</item>
-        <item name="android:dropDownListViewStyle">@style/DropDownListView.Rideshare</item>
+    <style name="Theme.Rideshare.Widget" parent="@style/Theme.AppCompat">
+        <item name="popupMenuStyle">@style/PopupMenu.Rideshare</item>
+        <item name="dropDownListViewStyle">@style/DropDownListView.Rideshare</item>
     </style>
 
 </resources>
