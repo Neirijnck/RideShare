@@ -29,6 +29,7 @@
         <item name="actionModeBackground">@drawable/cab_background_top_rideshare</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_rideshare</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Rideshare</item>
+        <item name="android:windowContentOverlay">@null</item>
 
                 <!-- Light.DarkActionBar specific -->
         <item name="actionBarWidgetTheme">@style/Theme.Rideshare.Widget</item>
