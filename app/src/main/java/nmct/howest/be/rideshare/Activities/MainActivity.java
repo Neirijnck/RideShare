@@ -8,9 +8,6 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import java.lang.reflect.Method;
-
 import nmct.howest.be.rideshare.Activities.Adapters.TabPagerAdapter;
 import nmct.howest.be.rideshare.R;
 
@@ -66,10 +63,11 @@ public class MainActivity extends FragmentActivity {
         actionBar.addTab(actionBar.newTab().setText("Zoeken").setTabListener(tabListener));
         actionBar.addTab(actionBar.newTab().setText("Ritten").setTabListener(tabListener));
         actionBar.addTab(actionBar.newTab().setText("Profiel").setTabListener(tabListener));
+
     }
 
 
-    @Override
+/*    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
@@ -82,7 +80,7 @@ public class MainActivity extends FragmentActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {

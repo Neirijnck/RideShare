@@ -4,8 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import nmct.howest.be.rideshare.Activities.Fragments.MijnProfielFragment;
 import nmct.howest.be.rideshare.Activities.Fragments.PlannenFragment;
-import nmct.howest.be.rideshare.Activities.Fragments.ProfielFragment;
 import nmct.howest.be.rideshare.Activities.Fragments.RittenFragment;
 import nmct.howest.be.rideshare.Activities.Fragments.ZoekenFragment;
 
@@ -32,7 +32,7 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter
                 return new RittenFragment();
             case 3:
                 //Profiel Fragment
-                return new ProfielFragment();
+                return new MijnProfielFragment();
         }
         return null;
     }

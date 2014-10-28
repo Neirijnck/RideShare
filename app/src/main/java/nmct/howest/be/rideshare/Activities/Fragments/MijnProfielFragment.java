@@ -1,5 +1,6 @@
 package nmct.howest.be.rideshare.Activities.Fragments;
 
+
 /**
  * Created by Preben on 27/10/2014.
  */
@@ -12,36 +13,42 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import nmct.howest.be.rideshare.R;
 
-public class ZoekenFragment extends Fragment
+public class MijnProfielFragment extends Fragment
 {
-    public ZoekenFragment() {}
+    public MijnProfielFragment() {}
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_zoeken, container, false);
+        return inflater.inflate(R.layout.fragment_profiel, container, false);
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.main, menu);
+       inflater.inflate(R.menu.menu_with_edit, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id)
+        {
+            case R.id.action_settings:
+                return true;
+            case R.id.action_edit:
+                Toast.makeText(getActivity(), "EDIT", Toast.LENGTH_SHORT).show();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 }
