@@ -39,7 +39,8 @@
             android:layout_alignStart="@+id/txbVanPlan"
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/txbVanZoek"
-            android:layout_alignLeft="@+id/txbZoeken" />
+            android:layout_alignLeft="@+id/txbZoeken"
+            android:hint="Van" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -59,7 +60,8 @@
             android:layout_below="@+id/txbNaarZoek"
             android:layout_alignLeft="@+id/txbZoeken"
             android:layout_alignRight="@+id/txtVanZoek"
-            android:layout_alignEnd="@+id/txtVanZoek" />
+            android:layout_alignEnd="@+id/txtVanZoek"
+            android:hint="Naar" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -81,7 +83,8 @@
             android:layout_below="@+id/txbDatumZoek"
             android:layout_alignLeft="@+id/txbZoeken"
             android:layout_alignRight="@+id/txbZoeken"
-            android:layout_alignEnd="@+id/txbZoeken" />
+            android:layout_alignEnd="@+id/txbZoeken"
+            android:hint="01/01/2015" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -100,7 +103,8 @@
             android:id="@+id/txtUurZoek"
             android:layout_alignTop="@+id/txtDatumZoek"
             android:layout_toRightOf="@+id/txtDatumZoek"
-            android:layout_toEndOf="@+id/txtDatumZoek" />
+            android:layout_toEndOf="@+id/txtDatumZoek"
+            android:hint="15:00"/>
 
         <CheckBox
             android:layout_width="wrap_content"

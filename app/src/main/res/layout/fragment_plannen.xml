@@ -20,7 +20,7 @@
             android:id="@+id/txbPlannen"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"   />
 
         <TextView
             android:layout_width="wrap_content"
@@ -40,7 +40,8 @@
             android:layout_alignLeft="@+id/txbVanPlan"
             android:layout_alignStart="@+id/txbVanPlan"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:hint="Van"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -60,7 +61,8 @@
             android:layout_alignLeft="@+id/txbNaarPlan"
             android:layout_alignStart="@+id/txbNaarPlan"
             android:layout_alignRight="@+id/txtVanPlan"
-            android:layout_alignEnd="@+id/txtVanPlan" />
+            android:layout_alignEnd="@+id/txtVanPlan"
+            android:hint="Naar" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -82,7 +84,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignRight="@+id/txbPlannen"
-            android:layout_alignEnd="@+id/txbPlannen" />
+            android:layout_alignEnd="@+id/txbPlannen"
+            android:hint="01/01/2015" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -101,7 +104,8 @@
             android:id="@+id/txtUurPlan"
             android:layout_below="@+id/txbUurPlan"
             android:layout_alignLeft="@+id/txbUurPlan"
-            android:layout_alignStart="@+id/txbUurPlan" />
+            android:layout_alignStart="@+id/txbUurPlan"
+            android:hint="15:00"/>
 
         <Switch
             android:layout_width="wrap_content"
@@ -113,7 +117,10 @@
             android:layout_alignStart="@+id/txtDatumPlan"
             android:layout_below="@+id/txtDatumPlan"
             android:layout_marginTop="15dp"
-            android:checked="false" />
+            android:checked="false"
+            android:track="@drawable/rideshare_switch_track_holo_light"
+            android:thumb="@drawable/rideshare_switch_inner_holo_light"
+            />
 
         <ToggleButton
             android:layout_width="47dp"
@@ -126,7 +133,8 @@
             android:checked="false"
             android:textOff="M"
             android:textOn="M"
-            android:layout_marginTop="15dp" />
+            android:layout_marginTop="15dp"
+            android:enabled="false" />
 
         <ToggleButton
             android:layout_width="47dp"
@@ -139,7 +147,8 @@
             android:layout_below="@+id/switchHerhaal"
             android:layout_toRightOf="@+id/tglMaandag"
             android:layout_toEndOf="@+id/tglMaandag"
-            android:layout_marginTop="15dp" />
+            android:layout_marginTop="15dp"
+            android:enabled="false" />
 
         <ToggleButton
             android:layout_width="47dp"
@@ -151,7 +160,8 @@
             android:textOn="W"
             android:layout_toEndOf="@+id/tglDinsdag"
             android:layout_alignTop="@+id/tglDinsdag"
-            android:layout_toRightOf="@+id/tglDinsdag" />
+            android:layout_toRightOf="@+id/tglDinsdag"
+            android:enabled="false" />
 
         <ToggleButton
             android:layout_width="47dp"
@@ -163,7 +173,8 @@
             android:textOn="D"
             android:layout_toEndOf="@+id/tglWoensdag"
             android:layout_alignTop="@+id/tglWoensdag"
-            android:layout_toRightOf="@+id/tglWoensdag" />
+            android:layout_toRightOf="@+id/tglWoensdag"
+            android:enabled="false" />
 
         <ToggleButton
             android:layout_width="47dp"
@@ -175,7 +186,8 @@
             android:textOn="V"
             android:layout_toEndOf="@+id/tglDonderdag"
             android:layout_alignTop="@+id/tglDonderdag"
-            android:layout_toRightOf="@+id/tglDonderdag" />
+            android:layout_toRightOf="@+id/tglDonderdag"
+            android:enabled="false" />
 
         <ToggleButton
             android:layout_width="47dp"
@@ -187,7 +199,8 @@
             android:textOn="Z"
             android:layout_toEndOf="@+id/tglVrijdag"
             android:layout_alignTop="@+id/tglVrijdag"
-            android:layout_toRightOf="@+id/tglVrijdag" />
+            android:layout_toRightOf="@+id/tglVrijdag"
+            android:enabled="false" />
 
         <ToggleButton
             android:layout_width="47dp"
@@ -199,7 +212,9 @@
             android:textOn="Z"
             android:layout_toEndOf="@+id/tglZaterdag"
             android:layout_above="@+id/txbPrijs"
-            android:layout_toRightOf="@+id/tglZaterdag" />
+            android:layout_toRightOf="@+id/tglZaterdag"
+            android:enabled="false"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -222,7 +237,8 @@
             android:layout_alignLeft="@+id/txbPrijs"
             android:layout_alignStart="@+id/txbPrijs"
             android:layout_alignRight="@+id/txtDatumPlan"
-            android:layout_alignEnd="@+id/txtDatumPlan" />
+            android:layout_alignEnd="@+id/txtDatumPlan"
+            android:hint="0" />
 
         <TextView
             android:layout_width="wrap_content"

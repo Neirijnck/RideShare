@@ -6,8 +6,6 @@ import android.content.res.Configuration;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.view.Menu;
-import android.view.MenuItem;
 import nmct.howest.be.rideshare.Activities.Adapters.TabPagerAdapter;
 import nmct.howest.be.rideshare.R;
 
@@ -67,6 +65,7 @@ public class MainActivity extends FragmentActivity {
     }
 
 
+    //Menu is per fragment
 /*    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
