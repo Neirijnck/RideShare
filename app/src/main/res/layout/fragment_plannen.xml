@@ -16,16 +16,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/listSeparatorTextViewStyle"
-            android:text="PLAN EEN VOLGENDE RIT:"
+            android:text="@string/Plan_Title"
             android:id="@+id/txbPlannen"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"   />
+            android:layout_alignParentStart="true"
+            android:capitalize="sentences" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Van:"
+            android:text="@string/From"
             android:id="@+id/txbVanPlan"
             android:layout_below="@+id/txbPlannen"
             android:layout_alignParentLeft="true"
@@ -46,7 +47,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Naar:"
+            android:text="@string/To"
             android:id="@+id/txbNaarPlan"
             android:layout_below="@+id/txtVanPlan"
             android:layout_alignLeft="@+id/txtVanPlan"
@@ -67,7 +68,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Datum:"
+            android:text="@string/Date"
             android:id="@+id/txbDatumPlan"
             android:layout_below="@+id/txtNaarPlan"
             android:layout_alignLeft="@+id/txtNaarPlan"
@@ -90,7 +91,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Uur:"
+            android:text="@string/Time"
             android:id="@+id/txbUurPlan"
             android:layout_alignTop="@+id/txbDatumPlan"
             android:layout_toRightOf="@+id/txtDatumPlan"
@@ -110,8 +111,8 @@
         <Switch
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Herhaal:"
-            android:id="@+id/switchHerhaal"
+            android:text="@string/Repeat"
+            android:id="@+id/repeatSwitch"
             android:layout_centerVertical="true"
             android:layout_alignLeft="@+id/txtDatumPlan"
             android:layout_alignStart="@+id/txtDatumPlan"
@@ -127,9 +128,9 @@
             android:layout_height="50dp"
             android:text="M"
             android:id="@+id/tglMaandag"
-            android:layout_below="@+id/switchHerhaal"
-            android:layout_alignLeft="@+id/switchHerhaal"
-            android:layout_alignStart="@+id/switchHerhaal"
+            android:layout_below="@+id/repeatSwitch"
+            android:layout_alignLeft="@+id/repeatSwitch"
+            android:layout_alignStart="@+id/repeatSwitch"
             android:checked="false"
             android:textOff="M"
             android:textOn="M"
@@ -144,7 +145,7 @@
             android:checked="false"
             android:textOff="D"
             android:textOn="D"
-            android:layout_below="@+id/switchHerhaal"
+            android:layout_below="@+id/repeatSwitch"
             android:layout_toRightOf="@+id/tglMaandag"
             android:layout_toEndOf="@+id/tglMaandag"
             android:layout_marginTop="15dp"
@@ -219,7 +220,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Prijs:"
+            android:text="@string/Prijs"
             android:id="@+id/txbPrijs"
             android:layout_below="@+id/tglMaandag"
             android:layout_alignLeft="@+id/tglMaandag"
@@ -232,34 +233,33 @@
             android:inputType="numberDecimal"
             android:ems="10"
             android:id="@+id/txtPrijs"
-            android:layout_toEndOf="@+id/txbDatumPlan"
+            android:layout_toEndOf="@+id/txbEuro"
             android:layout_below="@+id/txbPrijs"
-            android:layout_alignLeft="@+id/txbPrijs"
-            android:layout_alignStart="@+id/txbPrijs"
             android:layout_alignRight="@+id/txtDatumPlan"
             android:layout_alignEnd="@+id/txtDatumPlan"
-            android:hint="0" />
+            android:hint="0"
+            android:layout_toRightOf="@+id/txbEuro" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="€"
             android:id="@+id/txbEuro"
+            android:layout_alignBaseline="@+id/txtPrijs"
             android:layout_alignBottom="@+id/txtPrijs"
-            android:layout_alignLeft="@+id/txtUurPlan"
-            android:layout_alignStart="@+id/txtUurPlan"
-            android:layout_marginBottom="5dp" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Opslaan"
+            android:text="@string/Save"
             android:id="@+id/btnOpslaan"
             android:layout_below="@+id/txtPrijs"
-            android:layout_alignLeft="@+id/txtPrijs"
-            android:layout_alignStart="@+id/txtPrijs"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
     </RelativeLayout>
 </ScrollView>

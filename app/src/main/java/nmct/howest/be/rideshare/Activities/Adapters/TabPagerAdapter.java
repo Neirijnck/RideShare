@@ -9,9 +9,6 @@ import nmct.howest.be.rideshare.Activities.Fragments.PlannenFragment;
 import nmct.howest.be.rideshare.Activities.Fragments.RittenFragment;
 import nmct.howest.be.rideshare.Activities.Fragments.ZoekenFragment;
 
-/**
- * Created by Preben on 27/10/2014.
- */
 public class TabPagerAdapter extends FragmentStatePagerAdapter
 {
     public TabPagerAdapter(FragmentManager fm) {
@@ -22,16 +19,16 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter
     public Fragment getItem(int i) {
         switch (i) {
             case 0:
-                //Plannen Fragment
+                //Plan Fragment
                 return new PlannenFragment();
             case 1:
-                //Zoeken Fragment
+                //Search Fragment
                 return new ZoekenFragment();
             case 2:
-                //Ritten Fragment
+                //Trips Fragment
                 return new RittenFragment();
             case 3:
-                //Profiel Fragment
+                //Profile Fragment
                 return new MijnProfielFragment();
         }
         return null;
@@ -39,7 +36,6 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter
 
     @Override
     public int getCount() {
-        //Number of tabs
-        return 4;
+        return 4;   //Number of tabs
     }
 }

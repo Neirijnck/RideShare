@@ -1,8 +1,5 @@
 package nmct.howest.be.rideshare.Activities.Fragments;
 
-/**
- * Created by Preben on 27/10/2014.
- */
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -20,14 +17,14 @@ import nmct.howest.be.rideshare.R;
 public class PlannenFragment extends Fragment
 {
     //Variables
-    private Switch herhaalSwitch;
-    private ToggleButton tglMaandag;
-    private ToggleButton tglDinsdag;
-    private ToggleButton tglWoensdag;
-    private ToggleButton tglDonderdag;
-    private ToggleButton tglVrijdag;
-    private ToggleButton tglZaterdag;
-    private ToggleButton tglZondag;
+    private Switch repeatSwitch;
+    private ToggleButton tglMonday;
+    private ToggleButton tglTuesday;
+    private ToggleButton tglWednesday;
+    private ToggleButton tglThursday;
+    private ToggleButton tglFriday;
+    private ToggleButton tglSaturday;
+    private ToggleButton tglSunday;
 
     public PlannenFragment() {}
 
@@ -43,41 +40,38 @@ public class PlannenFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_plannen, container, false);
 
         //Get widgets
-        herhaalSwitch = (Switch) view.findViewById(R.id.switchHerhaal);
-        tglMaandag = (ToggleButton) view.findViewById(R.id.tglMaandag);
-        tglDinsdag = (ToggleButton) view.findViewById(R.id.tglDinsdag);
-        tglWoensdag = (ToggleButton) view.findViewById(R.id.tglWoensdag);
-        tglDonderdag = (ToggleButton) view.findViewById(R.id.tglDonderdag);
-        tglVrijdag = (ToggleButton) view.findViewById(R.id.tglVrijdag);
-        tglZaterdag = (ToggleButton) view.findViewById(R.id.tglZaterdag);
-        tglZondag = (ToggleButton) view.findViewById(R.id.tglZondag);
+        repeatSwitch = (Switch) view.findViewById(R.id.repeatSwitch);
+        tglMonday = (ToggleButton) view.findViewById(R.id.tglMaandag);
+        tglTuesday = (ToggleButton) view.findViewById(R.id.tglDinsdag);
+        tglWednesday = (ToggleButton) view.findViewById(R.id.tglWoensdag);
+        tglThursday = (ToggleButton) view.findViewById(R.id.tglDonderdag);
+        tglFriday = (ToggleButton) view.findViewById(R.id.tglVrijdag);
+        tglSaturday = (ToggleButton) view.findViewById(R.id.tglZaterdag);
+        tglSunday = (ToggleButton) view.findViewById(R.id.tglZondag);
 
 
         //Enable togglebuttons when switch is on
-        herhaalSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        repeatSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if(isChecked)
-                {
+                if (isChecked) {
                     //Enable all weektogglebuttons
-                    tglMaandag.setEnabled(true);
-                    tglDinsdag.setEnabled(true);
-                    tglWoensdag.setEnabled(true);
-                    tglDonderdag.setEnabled(true);
-                    tglVrijdag.setEnabled(true);
-                    tglZaterdag.setEnabled(true);
-                    tglZondag.setEnabled(true);
-                }
-                else
-                {
+                    tglMonday.setEnabled(true);
+                    tglTuesday.setEnabled(true);
+                    tglWednesday.setEnabled(true);
+                    tglThursday.setEnabled(true);
+                    tglFriday.setEnabled(true);
+                    tglSaturday.setEnabled(true);
+                    tglSunday.setEnabled(true);
+                } else {
                     //Disable all weektogglebuttons
-                    tglMaandag.setEnabled(false);
-                    tglDinsdag.setEnabled(false);
-                    tglWoensdag.setEnabled(false);
-                    tglDonderdag.setEnabled(false);
-                    tglVrijdag.setEnabled(false);
-                    tglZaterdag.setEnabled(false);
-                    tglZondag.setEnabled(false);
+                    tglMonday.setEnabled(false);
+                    tglTuesday.setEnabled(false);
+                    tglWednesday.setEnabled(false);
+                    tglThursday.setEnabled(false);
+                    tglFriday.setEnabled(false);
+                    tglSaturday.setEnabled(false);
+                    tglSunday.setEnabled(false);
                 }
             }
         });

@@ -1,8 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Ride Share</string>
-    <string name="action_settings">Settings</string>
-    <string name="action_edit">Edit</string>
+    <!-- General -->
+    <string name="app_name">Share My Ride</string>
+    <string name="action_settings">Instellingen</string>
+    <string name="action_logout">Uitloggen</string>
+    <string name="action_edit">Aanpassen</string>
+
+    <!-- Components -->
+    <string name="Plan">Plannen</string>
+    <string name="Search">Zoeken</string>
+    <string name="Trips">Ritten</string>
+    <string name="Profile">Profiel</string>
+
+    <!-- Common -->
+    <string name="From">Van:</string>
+    <string name="To">Naar:</string>
+    <string name="Date">Datum:</string>
+    <string name="Time">Tijd:</string>
+    <string name="Repeat">Herhaal</string>
+    <string name="Prijs">Price</string>
+    <string name="Save">Opslaan</string>
+    <string name="Searching">Zoeken</string>
+
+    <!-- Plan -->
+    <string name="Plan_Title">Plan een volgende rit:</string>
+
+    <!-- Search -->
+    <string name="Search_ShareFb">Deel op Facebook</string>
+    <string name="Search_Title">Zoek om mee te rijden:</string>
+
+    <!-- Trips -->
+    <string name="Trip_MyRequests">Ritaanvragen</string>
+    <string name="Trip_Requests">Ritverzoeken</string>
+    <string name="Trip_SavedTrips">Mijn opgeslagen ritten</string>
+
+    <!-- Profile -->
+    <string name="Profile_Reviews">Beoordelingen</string>
 
 </resources>
