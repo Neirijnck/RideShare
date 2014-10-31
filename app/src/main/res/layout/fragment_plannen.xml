@@ -10,6 +10,8 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingBottom="@dimen/activity_vertical_margin"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         >
 
         <TextView
@@ -30,7 +32,9 @@
             android:layout_below="@+id/txbPlannen"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="15dp" />
+            android:layout_marginTop="15dp"
+            android:textSize="17sp"
+            />
 
         <EditText
             android:layout_width="wrap_content"
@@ -51,7 +55,8 @@
             android:layout_below="@+id/txtVanPlan"
             android:layout_alignLeft="@+id/txtVanPlan"
             android:layout_alignStart="@+id/txtVanPlan"
-            android:layout_marginTop="15dp" />
+            android:layout_marginTop="15dp"
+            android:textSize="17sp" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -72,7 +77,8 @@
             android:layout_below="@+id/txtNaarPlan"
             android:layout_alignLeft="@+id/txtNaarPlan"
             android:layout_alignStart="@+id/txtNaarPlan"
-            android:layout_marginTop="15dp" />
+            android:layout_marginTop="15dp"
+            android:textSize="17sp" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -94,7 +100,8 @@
             android:id="@+id/txbUurPlan"
             android:layout_alignTop="@+id/txbDatumPlan"
             android:layout_toRightOf="@+id/txtDatumPlan"
-            android:layout_toEndOf="@+id/txtDatumPlan" />
+            android:layout_toEndOf="@+id/txtDatumPlan"
+            android:textSize="17sp" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -224,7 +231,8 @@
             android:layout_below="@+id/tglMaandag"
             android:layout_alignLeft="@+id/tglMaandag"
             android:layout_alignStart="@+id/tglMaandag"
-            android:layout_marginTop="15dp" />
+            android:layout_marginTop="15dp"
+            android:textSize="17sp" />
 
         <EditText
             android:layout_width="wrap_content"

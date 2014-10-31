@@ -1,4 +1,5 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
     <RelativeLayout
@@ -12,10 +13,10 @@
         android:paddingBottom="@dimen/activity_vertical_margin">
 
         <ImageView
-            android:layout_width="135dp"
-            android:layout_height="135dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:id="@+id/imgProfielFoto"
-            android:src="@drawable/ic_launcher"
+            android:src="@drawable/account"
             android:layout_alignParentTop="true"
             android:layout_alignRight="@+id/txbBeoordelingen"
             android:layout_alignEnd="@+id/txbBeoordelingen" />
@@ -30,8 +31,7 @@
             android:textStyle="bold"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/imgProfielFoto"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="16dp"
             />
 
         <TextView
@@ -42,7 +42,8 @@
             android:layout_below="@+id/txtNaam"
             android:layout_alignLeft="@+id/txtNaam"
             android:layout_alignStart="@+id/txtNaam"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:textSize="17sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -52,7 +53,8 @@
             android:layout_below="@+id/txtPlaats"
             android:layout_alignLeft="@+id/txtPlaats"
             android:layout_alignStart="@+id/txtPlaats"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:textSize="17sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -62,25 +64,19 @@
             android:layout_below="@+id/txtGeslachtLeeftijd"
             android:layout_alignLeft="@+id/txtGeslachtLeeftijd"
             android:layout_alignStart="@+id/txtGeslachtLeeftijd"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:textSize="17sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="BEOORDELINGEN:"
-            android:id="@+id/txbBeoordelingen"
-            android:layout_marginTop="27dp"
-            android:textAppearance="?android:attr/listSeparatorTextViewStyle"
+        <fragment
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:name="nmct.howest.be.rideshare.Activities.Fragments.BeoordelingenFragment"
+            tools:layout="@layout/fragment_beoordelingen"
             android:layout_below="@+id/imgProfielFoto"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="25dp">
+            </fragment>
 
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/lstBeoordelingen"
-            android:layout_below="@+id/txbBeoordelingen"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
     </RelativeLayout>
 </ScrollView>
