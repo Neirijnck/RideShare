@@ -1,10 +1,5 @@
 package nmct.howest.be.rideshare.Activities.Fragments;
 
-
-/**
- * Created by Preben on 27/10/2014.
- */
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -46,7 +41,7 @@ public class MijnProfielFragment extends Fragment
             case R.id.action_settings:
                 return true;
             case R.id.action_edit:
-                Toast.makeText(getActivity(), "EDIT", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getString(R.string.action_edit), Toast.LENGTH_SHORT).show();
                 return true;
         }
         return super.onOptionsItemSelected(item);

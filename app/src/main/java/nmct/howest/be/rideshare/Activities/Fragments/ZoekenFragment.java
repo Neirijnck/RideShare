@@ -1,9 +1,5 @@
 package nmct.howest.be.rideshare.Activities.Fragments;
 
-/**
- * Created by Preben on 27/10/2014.
- */
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;

@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/listSeparatorTextViewStyle"
-            android:text="RITAANVRAGEN:"
+            android:text="@string/Trip_MyRequests"
             android:id="@+id/txbRitAanvragen"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/listSeparatorTextViewStyle"
-            android:text="RITVERZOEKEN:"
+            android:text="@string/Trip_Requests"
             android:id="@+id/txbRitVerzoeken"
             android:layout_below="@+id/lstRitAanvragen"
             android:layout_alignParentLeft="true"
@@ -55,12 +55,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/listSeparatorTextViewStyle"
-            android:text="MIJN OPGESLAGEN RITTEN:"
+            android:text="@string/Trip_SavedTrips"
             android:id="@+id/txbOpgeslagenRitten"
             android:layout_below="@+id/txbRitVerzoeken"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="25dp" />
+            android:layout_marginTop="25dp"
+            android:autoText="false" />
 
         <ListView
             android:layout_width="wrap_content"

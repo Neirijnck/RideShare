@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/listSeparatorTextViewStyle"
-            android:text="ZOEK OM MEE TE RIJDEN:"
+            android:text="@string/Search_Title"
             android:id="@+id/txbZoeken"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
@@ -26,7 +26,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Van:"
+            android:text="@string/From"
             android:id="@+id/txbVanZoek"
             android:layout_below="@+id/txbZoeken"
             android:layout_alignLeft="@+id/txbZoeken"
@@ -48,7 +48,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Naar:"
+            android:text="@string/To"
             android:id="@+id/txbNaarZoek"
             android:layout_alignStart="@+id/txtVanPlan"
             android:layout_below="@+id/txtVanZoek"
@@ -70,7 +70,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Datum:"
+            android:text="@string/Date"
             android:id="@+id/txbDatumZoek"
             android:layout_alignStart="@+id/txtNaarPlan"
             android:layout_below="@+id/txtNaarZoek"
@@ -94,7 +94,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Uur:"
+            android:text="@string/Time"
             android:id="@+id/txbUurZoek"
             android:layout_toEndOf="@+id/txtDatumZoek"
             android:layout_alignTop="@+id/txbDatumZoek"
@@ -115,7 +115,7 @@
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Deel op Facebook"
+            android:text="@string/Search_ShareFb"
             android:id="@+id/chkDelen"
             android:layout_below="@+id/txtDatumZoek"
             android:layout_marginTop="15dp"
@@ -126,7 +126,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Zoeken"
+            android:text="@string/Searching"
             android:id="@+id/btnZoeken"
             android:layout_below="@+id/chkDelen"
             android:layout_alignParentRight="true"

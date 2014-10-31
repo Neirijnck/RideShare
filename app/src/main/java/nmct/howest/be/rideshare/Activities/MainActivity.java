@@ -9,7 +9,6 @@ import android.support.v4.view.ViewPager;
 import nmct.howest.be.rideshare.Activities.Adapters.TabPagerAdapter;
 import nmct.howest.be.rideshare.R;
 
-
 public class MainActivity extends FragmentActivity {
 
     //Tab variables
@@ -57,11 +56,11 @@ public class MainActivity extends FragmentActivity {
         };
 
         //Add our tabs
-        actionBar.addTab(actionBar.newTab().setText("Plannen").setTabListener(tabListener));
-        actionBar.addTab(actionBar.newTab().setText("Zoeken").setTabListener(tabListener));
-        actionBar.addTab(actionBar.newTab().setText("Ritten").setTabListener(tabListener));
-        actionBar.addTab(actionBar.newTab().setText("Profiel").setTabListener(tabListener));
 
+        actionBar.addTab(actionBar.newTab().setText(getString(R.string.Plan)).setTabListener(tabListener));
+        actionBar.addTab(actionBar.newTab().setText(getString(R.string.Search)).setTabListener(tabListener));
+        actionBar.addTab(actionBar.newTab().setText(getString(R.string.Trips)).setTabListener(tabListener));
+        actionBar.addTab(actionBar.newTab().setText(getString(R.string.Profile)).setTabListener(tabListener));
     }
 
 
