@@ -26,7 +26,7 @@ public class LoginActivity extends FragmentActivity {
         {
             LoginFragment loginFragment = new LoginFragment();
 
-            // Add the fragment to the 'fragment_container' FrameLayout
+            // Add the fragment to the 'fragment_container' Layout
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, loginFragment).commit();
         }
 
