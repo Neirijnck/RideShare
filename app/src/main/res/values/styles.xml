@@ -35,6 +35,7 @@
         <item name="android:background">@color/rideshare_color</item>
         <item name="android:backgroundStacked">@color/rideshare_color</item>
         <item name="android:backgroundSplit">@color/rideshare_color</item>
+        <item name="android:height">56dp</item>
     </style>
 
     <style name="ActionBarWidget" parent="Theme.AppCompat.Light.DarkActionBar"/>
