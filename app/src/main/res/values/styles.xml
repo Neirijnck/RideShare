@@ -139,4 +139,10 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <!--Login Theme without action bar-->
+    <style name="LoginTheme" parent="AppTheme">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowTitleSize">0dp</item>
+    </style>
+
 </resources>
