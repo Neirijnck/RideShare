@@ -1,9 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'RideshareKey'
+            keyPassword 'sharemyride'
+            storeFile file('D:/Preben/School/Howest/Jaar 3/Vakken/App Dev Android/Project/RideShare/androidKeystore.jks')
+            storePassword 'sharemyride'
+        }
+    }
     compileSdkVersion 20
     buildToolsVersion "20.0.0"
-
     defaultConfig {
         applicationId "nmct.howest.be.rideshare"
         minSdkVersion 14
