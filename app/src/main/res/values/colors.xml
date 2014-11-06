@@ -4,5 +4,6 @@
     <color name="rideshare_color_background">#f5f2ed</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="red">#da4336</color>
     <color name="textColorHightLight">#9927ae60</color>
 </resources>

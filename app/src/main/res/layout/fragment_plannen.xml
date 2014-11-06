@@ -33,7 +33,7 @@
             android:layout_below="@+id/txbPlannen"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="12dp"
             android:textSize="17sp"
             />
 
@@ -56,7 +56,7 @@
             android:layout_below="@+id/txtVanPlan"
             android:layout_alignLeft="@+id/txtVanPlan"
             android:layout_alignStart="@+id/txtVanPlan"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="12dp"
             android:textSize="17sp" />
 
         <EditText
@@ -78,7 +78,7 @@
             android:layout_below="@+id/txtNaarPlan"
             android:layout_alignLeft="@+id/txtNaarPlan"
             android:layout_alignStart="@+id/txtNaarPlan"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="12dp"
             android:textSize="17sp" />
 
         <EditText
@@ -124,7 +124,7 @@
             android:layout_alignLeft="@+id/txtDatumPlan"
             android:layout_alignStart="@+id/txtDatumPlan"
             android:layout_below="@+id/txtDatumPlan"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="12dp"
             android:checked="false"
             android:track="@drawable/rideshare_switch_track_holo_light"
             android:thumb="@drawable/rideshare_switch_inner_holo_light"
@@ -141,7 +141,7 @@
             android:checked="false"
             android:textOff="M"
             android:textOn="M"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="12dp"
             android:enabled="false" />
 
         <ToggleButton
@@ -155,7 +155,7 @@
             android:layout_below="@+id/repeatSwitch"
             android:layout_toRightOf="@+id/tglMaandag"
             android:layout_toEndOf="@+id/tglMaandag"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="12dp"
             android:enabled="false" />
 
         <ToggleButton
@@ -232,7 +232,7 @@
             android:layout_below="@+id/tglMaandag"
             android:layout_alignLeft="@+id/tglMaandag"
             android:layout_alignStart="@+id/tglMaandag"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="12dp"
             android:textSize="17sp" />
 
         <EditText
@@ -262,12 +262,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Save"
+            android:textAllCaps="true"
             android:id="@+id/btnOpslaan"
             android:layout_below="@+id/txtPrijs"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 </ScrollView>

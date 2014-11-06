@@ -133,6 +133,8 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="13dp"/>
+            android:layout_marginTop="13dp"
+            android:textAllCaps="true"
+            android:textStyle="bold" />
     </RelativeLayout>
 </ScrollView>

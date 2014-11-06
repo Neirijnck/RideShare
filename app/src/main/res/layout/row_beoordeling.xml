@@ -42,7 +42,7 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:id="@+id/imgStar5"
-        android:src="@drawable/ic_action_important"
+        android:src="@drawable/ic_star_outline_grey600_38dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -56,7 +56,7 @@
         android:layout_toStartOf="@+id/imgStar5"
         android:layout_alignTop="@+id/imgStar5"
         android:layout_toLeftOf="@+id/imgStar5"
-        android:src="@drawable/ic_action_important" />
+        android:src="@drawable/ic_star_half_grey600_38dp" />
 
     <ImageView
         android:layout_width="25dp"
@@ -65,7 +65,7 @@
         android:layout_toStartOf="@+id/imgStar4"
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/imgStar4"
-        android:src="@drawable/ic_action_important" />
+        android:src="@drawable/ic_star_grey600_38dp" />
 
     <ImageView
         android:layout_width="25dp"
@@ -74,7 +74,7 @@
         android:layout_toStartOf="@+id/imgStar3"
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/imgStar3"
-        android:src="@drawable/ic_action_important" />
+        android:src="@drawable/ic_star_grey600_38dp" />
 
     <ImageView
         android:layout_width="25dp"
@@ -83,6 +83,6 @@
         android:layout_toStartOf="@+id/imgStar2"
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/imgStar2"
-        android:src="@drawable/ic_action_important" />
+        android:src="@drawable/ic_star_grey600_38dp" />
 
 </RelativeLayout>
