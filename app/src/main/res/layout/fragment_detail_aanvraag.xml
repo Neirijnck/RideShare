@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="185dp"
+        android:id="@+id/imgDetailAanvraag"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Naam Voornaam"
+        android:id="@+id/txbAanvraagNaam"
+        android:layout_below="@+id/imgDetailAanvraag"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"  />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Van: straat"
+        android:id="@+id/txbAanvraagVan"
+        android:layout_below="@+id/txbAanvraagNaam"
+        android:layout_alignLeft="@+id/txbAanvraagNaam"
+        android:layout_alignStart="@+id/txbAanvraagNaam"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Naar: straat"
+        android:id="@+id/txbAanvraagNaar"
+        android:layout_below="@+id/txbAanvraagVan"
+        android:layout_alignLeft="@+id/txbAanvraagVan"
+        android:layout_alignStart="@+id/txbAanvraagVan"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Dag: datum"
+        android:id="@+id/txbAanvraagDag"
+        android:layout_below="@+id/txbAanvraagNaar"
+        android:layout_alignLeft="@+id/txbAanvraagNaar"
+        android:layout_alignStart="@+id/txbAanvraagNaar"
+        android:layout_marginTop="10dp"  />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Uur: uur"
+        android:id="@+id/txbAanvraagUur"
+        android:layout_below="@+id/txbAanvraagDag"
+        android:layout_alignLeft="@+id/txbAanvraagDag"
+        android:layout_alignStart="@+id/txbAanvraagDag"
+        android:layout_marginTop="10dp"  />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/Added_Message"
+        android:id="@+id/txbAanvraagBericht"
+        android:layout_below="@+id/txbAanvraagUur"
+        android:layout_alignLeft="@+id/txbAanvraagUur"
+        android:layout_alignStart="@+id/txbAanvraagUur"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Hallo, dit is een bijgevoegd bericht :)"
+        android:id="@+id/txbAanvraagBijgevoegd"
+        android:layout_below="@+id/txbAanvraagBericht"
+        android:layout_alignLeft="@+id/txbAanvraagBericht"
+        android:layout_alignStart="@+id/txbAanvraagBericht"
+        android:layout_marginTop="7dp"
+        android:layout_marginLeft="7dp"   />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/Status"
+        android:id="@+id/txbAanvraagStatus"
+        android:layout_below="@+id/txbAanvraagBijgevoegd"
+        android:layout_alignLeft="@+id/txbAanvraagBericht"
+        android:layout_alignStart="@+id/txbAanvraagBericht"
+        android:layout_marginTop="30dp"  />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/AanvraagProgBarStatus"
+        android:layout_toEndOf="@+id/txbAanvraagUur"
+        android:layout_alignBottom="@+id/txbAanvraagStatus"
+        android:layout_toRightOf="@+id/txbAanvraagUur"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="20dp"
+        android:progress="100"
+        android:max="100"
+        android:indeterminate="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/Status_Accepted"
+        android:id="@+id/txbAanvraagState"
+        android:layout_below="@+id/AanvraagProgBarStatus"
+        android:layout_alignLeft="@+id/AanvraagProgBarStatus"
+        android:layout_alignStart="@+id/AanvraagProgBarStatus"
+        android:layout_marginTop="5dp" />
+
+
+</RelativeLayout>
