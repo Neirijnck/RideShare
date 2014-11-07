@@ -5,10 +5,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.viewpagerindicator.CirclePageIndicator;
+
+import nmct.howest.be.rideshare.Activities.Adapters.ImagePagerAdapter;
 import nmct.howest.be.rideshare.R;
 
 /**
@@ -16,7 +21,6 @@ import nmct.howest.be.rideshare.R;
  */
 public class LearnMoreFragment extends Fragment
 {
-
     private FragmentActivity context;
     private TextView getBack;
     private FragmentTransaction transaction;
@@ -38,6 +42,15 @@ public class LearnMoreFragment extends Fragment
                 slideDownFragment();
             }
         });
+
+
+        //Set adapter to viewpager
+        ViewPager gallery = (ViewPager) view.findViewById(R.id.gallery_view);
+        gallery.setAdapter(new ImagePagerAdapter(getActivity().getSupportFragmentManager()));
+
+        //Bind indicators to pager
+        CirclePageIndicator indicator = (CirclePageIndicator) view.findViewById(R.id.indicator);
+        indicator.setViewPager(gallery);
 
         return view;
     }

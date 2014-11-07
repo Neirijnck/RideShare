@@ -40,7 +40,8 @@
     <!-- Profile -->
     <string name="Profile_Reviews">Beoordelingen</string>
 
-    <!--Search Results-->
+    <!-- Search Results -->
     <string name="title_activity_zoek">Zoekresultaten</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
