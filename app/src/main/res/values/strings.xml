@@ -3,9 +3,11 @@
 
     <!-- General -->
     <string name="app_name">Share My Ride</string>
+    <string name="app_description">The best carpool app out there!</string>
     <string name="action_settings">Instellingen</string>
     <string name="action_logout">Uitloggen</string>
     <string name="action_edit">Aanpassen</string>
+    <string name="learn_more">Learn more</string>
 
     <!-- Components -->
     <string name="Plan">Plannen</string>
@@ -37,5 +39,8 @@
 
     <!-- Profile -->
     <string name="Profile_Reviews">Beoordelingen</string>
+
+    <!--Search Results-->
+    <string name="title_activity_zoek">Zoekresultaten</string>
 
 </resources>

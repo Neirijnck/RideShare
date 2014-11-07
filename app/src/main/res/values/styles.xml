@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="RideShare.Green" parent="Theme.AppCompat.Light.DarkActionBar">
 
         <!-- Customized theme-->
         <item name="android:windowBackground">@color/rideshare_color_background</item>
@@ -9,6 +9,8 @@
         <item name="android:actionBarWidgetTheme">@style/ActionBarWidget</item>
         <item name="android:actionBarTabStyle">@style/ActionBarTabStyle</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
+
 
         <!--Widgets-->
         <item name="android:editTextStyle">@style/EditTextRideShare</item>
@@ -35,12 +37,17 @@
         <item name="android:background">@color/rideshare_color</item>
         <item name="android:backgroundStacked">@color/rideshare_color</item>
         <item name="android:backgroundSplit">@color/rideshare_color</item>
+        <item name="android:height">56dp</item>
     </style>
 
     <style name="ActionBarWidget" parent="Theme.AppCompat.Light.DarkActionBar"/>
 
     <style name="ActionBarTabStyle" parent="Widget.AppCompat.ActionBar.TabView">
         <item name="android:background">@drawable/tab_indicator_ab_rideshare</item>
+    </style>
+
+    <style name="OverFlow" parent="android:Widget.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_more_vert_white_36dp</item>
     </style>
 
 
@@ -137,6 +144,17 @@
 
     <style name="SpinnerItemRideShare" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
         <item name="android:textColor">@color/black</item>
+    </style>
+
+    <!--Login Theme without action bar-->
+    <style name="LoginTheme" parent="RideShare.Green">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowTitleSize">0dp</item>
+    </style>
+
+    <!--Theme with backbutton-->
+    <style name="BackButtonTheme" parent="RideShare.Green">
+        <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back_white_36dp</item>
     </style>
 
 </resources>
