@@ -102,7 +102,9 @@
         android:layout_alignRight="@+id/txbVerzoekBericht"
         android:layout_alignEnd="@+id/txbVerzoekBericht"
         android:layout_marginTop="20dp"
-        android:width="185dp" />
+        android:width="185dp"
+        android:drawableLeft="@drawable/ic_check_white_36dp"
+        />
 
     <Button
         android:layout_width="wrap_content"
@@ -114,6 +116,7 @@
         android:layout_alignEnd="@+id/txtVerzoekBijgevoegd"
         android:layout_marginTop="20dp"
         android:width="185dp"
+        android:drawableLeft="@drawable/ic_close_white_36dp"
         />
 
 

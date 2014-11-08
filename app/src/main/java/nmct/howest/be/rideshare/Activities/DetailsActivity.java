@@ -2,6 +2,8 @@ package nmct.howest.be.rideshare.Activities;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+
+import nmct.howest.be.rideshare.Activities.Fragments.DetailAanvraagFragment;
 import nmct.howest.be.rideshare.R;
 
 public class DetailsActivity extends FragmentActivity {
@@ -16,10 +18,10 @@ public class DetailsActivity extends FragmentActivity {
         if (findViewById(R.id.fragment_container_details) != null)
         {
             //Get the correct Details fragment
-            //LoginFragment loginFragment = new LoginFragment();
+            DetailAanvraagFragment detailFragment = new DetailAanvraagFragment();
 
             // Add the fragment to the 'fragment_container_details' Layout
-            //getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, loginFragment).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container_details, detailFragment).commit();
         }
 
     }

@@ -54,5 +54,12 @@
     <string name="Button_Accept">Accepteer</string>
     <string name="Button_Decline">Weiger</string>
     <string name="Title_Saved">Mijn rit:</string>
+    <string name="OR_From">Van:</string>
+    <string name="OR_To">Naar:</string>
+    <string name="OR_Date">Datum:</string>
+    <string name="OR_Hour">Uur:</string>
+    <string name="OR_Repeat">Herhaald:</string>
+    <string name="OR_Price">Prijs:</string>
+    <string name="OR_Travelers">Medereizigers:</string>
 
 </resources>
