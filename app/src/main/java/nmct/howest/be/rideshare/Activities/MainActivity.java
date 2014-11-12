@@ -55,7 +55,6 @@ public class MainActivity extends FragmentActivity {
             };
 
             //Add our tabs
-
             actionBar.addTab(actionBar.newTab().setText(getString(R.string.Plan)).setTabListener(tabListener));
             actionBar.addTab(actionBar.newTab().setText(getString(R.string.Search)).setTabListener(tabListener));
             actionBar.addTab(actionBar.newTab().setText(getString(R.string.Trips)).setTabListener(tabListener));

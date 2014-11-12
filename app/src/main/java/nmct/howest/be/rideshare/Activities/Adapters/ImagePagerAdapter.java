@@ -7,12 +7,8 @@ import com.viewpagerindicator.IconPagerAdapter;
 import nmct.howest.be.rideshare.Activities.Fragments.ImageFragment;
 import nmct.howest.be.rideshare.R;
 
-/**
- * Created by Preben on 7/11/2014.
- */
 public class ImagePagerAdapter extends FragmentPagerAdapter implements IconPagerAdapter
 {
-
     //Different images to show
     private int[] Images = new int[] { R.drawable.photo1, R.drawable.photo2};
 

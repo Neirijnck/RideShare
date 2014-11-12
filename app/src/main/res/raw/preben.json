@@ -1,0 +1,27 @@
+{
+	"_id":"54524491f27e86f190c2110p",
+	"userName": "Preben",
+	"facebookToken": "000",
+	"facebookID": "1176787216",
+	"facebookLink": "https://www.facebook.com/preben.neirijnck",
+	"firstName": "Preben",
+	"lastName": "Neirijcnk",
+	"email": "neirijnck@gmail.com",
+	"gender": "M",
+	"birthday": "1994-01-11",
+	"location": "Kortrijk",
+	"carType": "Audi R8",
+	"amountOfSeats": "5",
+	"reviews": [{
+		"userID": "54524491f27e86f190c2110s",
+		"date": "2014-10-30T14:46:26.511+00:00",
+		"score":  4,
+		"text": "Heel gezellig"
+	},{
+		"userID": "54524491f27e86f190c2110a",
+		"date": "2014-10-30T14:46:26.511+00:00",
+		"score":  4,
+		"text": "Top rit"
+	}
+	]
+}
