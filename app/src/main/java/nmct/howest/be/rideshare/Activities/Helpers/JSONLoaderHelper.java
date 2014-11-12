@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.util.JsonReader;
 import android.util.Log;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -14,7 +13,7 @@ import java.io.InputStreamReader;
 /**
  * Created by Preben on 12/11/2014.
  */
-public abstract class JsonHelperTest extends AsyncTaskLoader<Cursor>
+public abstract class JSONLoaderHelper extends android.support.v4.content.AsyncTaskLoader<Cursor>
 {
 
     private final String[] mColumnNames;
@@ -24,7 +23,7 @@ public abstract class JsonHelperTest extends AsyncTaskLoader<Cursor>
     private Cursor mCursor;
     private Object lock = new Object();
 
-    public JsonHelperTest(Context context, String propertyName, String[] columnNames, int rawResourceId) {
+    public JSONLoaderHelper(Context context, String propertyName, String[] columnNames, int rawResourceId) {
         super(context);
         mPropertyName = propertyName;
         mColumnNames = columnNames;
