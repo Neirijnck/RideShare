@@ -158,14 +158,10 @@
         <item name="android:actionBarStyle">@style/BackButtonActionBar</item>
     </style>
 
-    <style name="BackButtonActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+    <style name="BackButtonActionBar" parent="ActionBar">
         <item name="android:displayOptions">showHome|homeAsUp|showTitle</item>
         <item name="displayOptions">showHome|homeAsUp|showTitle</item>
         <item name="android:icon">@android:color/transparent</item>
-        <item name="android:background">@color/rideshare_color</item>
-        <item name="android:backgroundStacked">@color/rideshare_color</item>
-        <item name="android:backgroundSplit">@color/rideshare_color</item>
-        <item name="android:height">56dp</item>
     </style>
 
 </resources>

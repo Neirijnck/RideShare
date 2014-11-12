@@ -2,6 +2,7 @@ package nmct.howest.be.rideshare.Activities.Fragments;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -9,9 +10,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import nmct.howest.be.rideshare.Activities.MainActivity;
+import nmct.howest.be.rideshare.Activities.ZoekActivity;
 import nmct.howest.be.rideshare.R;
 
 /**
@@ -43,6 +47,18 @@ public class LoginFragment extends Fragment
 
                 learnMoreFragment = new LearnMoreFragment();
                 slideUpFragment();
+            }
+        });
+
+
+        //Button to start mainactivity
+        //!!TEMPORARY
+        Button btnLogin = (Button) view.findViewById(R.id.btnLogin);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                getActivity().startActivity(intent);
             }
         });
 
