@@ -6,12 +6,12 @@ import android.util.JsonReader;
 
 import java.io.IOException;
 
-import nmct.howest.be.rideshare.Activities.Helpers.JsonHelper;
+import nmct.howest.be.rideshare.Activities.Helpers.JsonHelperTest;
 
 /**
  * Created by Preben on 12/11/2014.
  */
-public class TripLoader extends JsonHelper
+public class TripLoader extends JsonHelperTest
 {
 
     public TripLoader(Context context, String propertyName, String[] columnNames, int rawResourceId) {
