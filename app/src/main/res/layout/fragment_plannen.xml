@@ -242,12 +242,12 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:ems="10"
-            android:id="@+id/txtPrijs"
+            android:id="@+id/txtPrice"
             android:layout_toEndOf="@+id/txbEuro"
             android:layout_below="@+id/txbPrijs"
             android:layout_alignRight="@+id/txtDatumPlan"
             android:layout_alignEnd="@+id/txtDatumPlan"
-            android:hint="0"
+            android:hint="€0"
             android:layout_toRightOf="@+id/txbEuro" />
 
         <TextView
@@ -255,8 +255,8 @@
             android:layout_height="wrap_content"
             android:text="€"
             android:id="@+id/txbEuro"
-            android:layout_alignBaseline="@+id/txtPrijs"
-            android:layout_alignBottom="@+id/txtPrijs"
+            android:layout_alignBaseline="@+id/txtPrice"
+            android:layout_alignBottom="@+id/txtPrice"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -266,7 +266,7 @@
             android:text="@string/Save"
             android:textAllCaps="true"
             android:id="@+id/btnOpslaan"
-            android:layout_below="@+id/txtPrijs"
+            android:layout_below="@+id/txtPrice"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"

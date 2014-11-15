@@ -78,10 +78,10 @@ public class RittenFragment extends Fragment implements LoaderManager.LoaderCall
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor)
-    {
-            mAdapter.swapCursor(cursor);
-    }
+     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor)
+{
+    //mAdapter.swapCursor(cursor);
+}
 
     @Override
     public void onLoaderReset(Loader<Cursor> cursorLoader)

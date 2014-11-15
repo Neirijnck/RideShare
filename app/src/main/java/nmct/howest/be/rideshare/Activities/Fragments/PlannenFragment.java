@@ -2,9 +2,12 @@ package nmct.howest.be.rideshare.Activities.Fragments;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +16,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -20,9 +25,12 @@ import android.widget.Switch;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Calendar;
 
 import nmct.howest.be.rideshare.Activities.Helpers.TimePickerHelper;
+import nmct.howest.be.rideshare.Activities.MainActivity;
 import nmct.howest.be.rideshare.R;
 
 public class PlannenFragment extends Fragment
@@ -38,7 +46,7 @@ public class PlannenFragment extends Fragment
     private ToggleButton tglSunday;
     static EditText txbDatePlan;
     static EditText txbTimePlan;
-
+    static EditText txtPrice;
 
     //Ctor
     public PlannenFragment() {}
@@ -63,34 +71,19 @@ public class PlannenFragment extends Fragment
         tglFriday = (ToggleButton) view.findViewById(R.id.tglVrijdag);
         tglSaturday = (ToggleButton) view.findViewById(R.id.tglZaterdag);
         tglSunday = (ToggleButton) view.findViewById(R.id.tglZondag);
+        txtPrice = (EditText) view.findViewById(R.id.txtPrice);
 
+
+        //Hide togglebuttons
+        checkToggleBtns(false);
 
         //Enable togglebuttons when switch is on
         repeatSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if (isChecked) {
-                    //Enable all weektogglebuttons
-                    tglMonday.setEnabled(true);
-                    tglTuesday.setEnabled(true);
-                    tglWednesday.setEnabled(true);
-                    tglThursday.setEnabled(true);
-                    tglFriday.setEnabled(true);
-                    tglSaturday.setEnabled(true);
-                    tglSunday.setEnabled(true);
-                } else {
-                    //Disable all weektogglebuttons
-                    tglMonday.setEnabled(false);
-                    tglTuesday.setEnabled(false);
-                    tglWednesday.setEnabled(false);
-                    tglThursday.setEnabled(false);
-                    tglFriday.setEnabled(false);
-                    tglSaturday.setEnabled(false);
-                    tglSunday.setEnabled(false);
-                }
+                checkToggleBtns(isChecked);
             }
         });
-
 
         //Date picker
         txbDatePlan = (EditText) view.findViewById(R.id.txtDatePlan);
@@ -131,6 +124,29 @@ public class PlannenFragment extends Fragment
         return super.onOptionsItemSelected(item);
     }
 
+
+
+    public void checkToggleBtns (Boolean isChecked) {
+        if (isChecked) {
+            //Enable all weektogglebuttons
+            tglMonday.setVisibility(View.VISIBLE);
+            tglTuesday.setVisibility(View.VISIBLE);
+            tglWednesday.setVisibility(View.VISIBLE);
+            tglThursday.setVisibility(View.VISIBLE);
+            tglFriday.setVisibility(View.VISIBLE);
+            tglSaturday.setVisibility(View.VISIBLE);
+            tglSunday.setVisibility(View.VISIBLE);
+        } else {
+            //Disable all weektogglebuttons
+            tglMonday.setVisibility(View.GONE);
+            tglTuesday.setVisibility(View.GONE);
+            tglWednesday.setVisibility(View.GONE);
+            tglThursday.setVisibility(View.GONE);
+            tglFriday.setVisibility(View.GONE);
+            tglSaturday.setVisibility(View.GONE);
+            tglSunday.setVisibility(View.GONE);
+        }
+    }
 
 
 
