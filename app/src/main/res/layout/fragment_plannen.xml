@@ -143,8 +143,7 @@
             android:checked="false"
             android:textOff="M"
             android:textOn="M"
-            android:layout_marginTop="12dp"
-            android:enabled="false" />
+            android:layout_marginTop="12dp"/>
 
         <ToggleButton
             android:layout_width="47dp"
@@ -157,8 +156,7 @@
             android:layout_below="@+id/repeatSwitch"
             android:layout_toRightOf="@+id/tglMaandag"
             android:layout_toEndOf="@+id/tglMaandag"
-            android:layout_marginTop="12dp"
-            android:enabled="false" />
+            android:layout_marginTop="12dp" />
 
         <ToggleButton
             android:layout_width="47dp"
@@ -170,8 +168,7 @@
             android:textOn="W"
             android:layout_toEndOf="@+id/tglDinsdag"
             android:layout_alignTop="@+id/tglDinsdag"
-            android:layout_toRightOf="@+id/tglDinsdag"
-            android:enabled="false" />
+            android:layout_toRightOf="@+id/tglDinsdag" />
 
         <ToggleButton
             android:layout_width="47dp"
@@ -183,8 +180,7 @@
             android:textOn="D"
             android:layout_toEndOf="@+id/tglWoensdag"
             android:layout_alignTop="@+id/tglWoensdag"
-            android:layout_toRightOf="@+id/tglWoensdag"
-            android:enabled="false" />
+            android:layout_toRightOf="@+id/tglWoensdag" />
 
         <ToggleButton
             android:layout_width="47dp"
@@ -196,8 +192,7 @@
             android:textOn="V"
             android:layout_toEndOf="@+id/tglDonderdag"
             android:layout_alignTop="@+id/tglDonderdag"
-            android:layout_toRightOf="@+id/tglDonderdag"
-            android:enabled="false" />
+            android:layout_toRightOf="@+id/tglDonderdag" />
 
         <ToggleButton
             android:layout_width="47dp"
@@ -209,8 +204,7 @@
             android:textOn="Z"
             android:layout_toEndOf="@+id/tglVrijdag"
             android:layout_alignTop="@+id/tglVrijdag"
-            android:layout_toRightOf="@+id/tglVrijdag"
-            android:enabled="false" />
+            android:layout_toRightOf="@+id/tglVrijdag" />
 
         <ToggleButton
             android:layout_width="47dp"
@@ -222,9 +216,7 @@
             android:textOn="Z"
             android:layout_toEndOf="@+id/tglZaterdag"
             android:layout_above="@+id/txbPrijs"
-            android:layout_toRightOf="@+id/tglZaterdag"
-            android:enabled="false"
-            />
+            android:layout_toRightOf="@+id/tglZaterdag" />
 
         <TextView
             android:layout_width="wrap_content"

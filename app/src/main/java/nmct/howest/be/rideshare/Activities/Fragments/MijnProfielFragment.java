@@ -1,5 +1,9 @@
 package nmct.howest.be.rideshare.Activities.Fragments;
 
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.support.v4.widget.CursorAdapter;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,11 +13,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
+import nmct.howest.be.rideshare.Activities.Loaders.ProfileLoader;
 import nmct.howest.be.rideshare.R;
 
-public class MijnProfielFragment extends Fragment
+public class MijnProfielFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>
 {
+    private CursorAdapter mAdapter;
+
     public MijnProfielFragment() {}
 
     @Override
@@ -46,4 +52,24 @@ public class MijnProfielFragment extends Fragment
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+    //Implementation of ProfileLoader
+    @Override
+    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+        return new ProfileLoader(getActivity());
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
+    mAdapter.swapCursor(cursor);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> cursorLoader) {
+mAdapter.swapCursor(null);
+    }
+
+
+
 }

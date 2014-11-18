@@ -1,5 +1,6 @@
 package nmct.howest.be.rideshare.Activities.Fragments;
 
+import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
@@ -28,6 +29,13 @@ public class RittenFragment extends Fragment implements LoaderManager.LoaderCall
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        //Init loader to get data
+        getLoaderManager().initLoader(0, null, this);
     }
 
     @Override
@@ -60,14 +68,12 @@ public class RittenFragment extends Fragment implements LoaderManager.LoaderCall
     //Method to fill the data in UI
     private void fillData(ListView list)
     {
-        //Init loader to get data
-        getLoaderManager().initLoader(0, null, this);
         // Fields on the UI to which we map
         String[] columns = new String[]{"trip"};
         int[] views = new int[]{R.id.txbBeoordeling};
         //Setting cursoradapter
-        mAdapter = new SimpleCursorAdapter(getActivity(), android.R.layout.simple_list_item_1, null, columns, views,0);
-        list.setAdapter(mAdapter);
+        //mAdapter = new SimpleCursorAdapter(getActivity(), android.R.layout.simple_list_item_1, null, columns, views,0);
+        //list.setAdapter(mAdapter);
     }
 
     //Implementation of the triploader
@@ -80,7 +86,7 @@ public class RittenFragment extends Fragment implements LoaderManager.LoaderCall
     @Override
      public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor)
 {
-    //mAdapter.swapCursor(cursor);
+    mAdapter.swapCursor(cursor);
 }
 
     @Override
