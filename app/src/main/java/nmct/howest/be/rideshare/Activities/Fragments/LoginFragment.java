@@ -18,9 +18,6 @@ import nmct.howest.be.rideshare.Activities.MainActivity;
 import nmct.howest.be.rideshare.Activities.ZoekActivity;
 import nmct.howest.be.rideshare.R;
 
-/**
- * Created by Preben on 5/11/2014.
- */
 public class LoginFragment extends Fragment
 {
     private FragmentActivity context;
@@ -44,7 +41,6 @@ public class LoginFragment extends Fragment
         learnMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 learnMoreFragment = new LearnMoreFragment();
                 slideUpFragment();
             }

@@ -132,108 +132,87 @@
             android:thumb="@drawable/rideshare_switch_inner_holo_light"
             />
 
-        <ToggleButton
-            android:layout_width="47dp"
-            android:layout_height="50dp"
-            android:text="M"
-            android:id="@+id/tglMaandag"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:layout_below="@+id/repeatSwitch"
-            android:layout_alignLeft="@+id/repeatSwitch"
-            android:layout_alignStart="@+id/repeatSwitch"
-            android:checked="false"
-            android:textOff="M"
-            android:textOn="M"
             android:layout_marginTop="12dp"
-            android:enabled="false" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/tglBtns"
+            android:visibility="gone">
 
-        <ToggleButton
-            android:layout_width="47dp"
-            android:layout_height="50dp"
-            android:text="D"
-            android:id="@+id/tglDinsdag"
-            android:checked="false"
-            android:textOff="D"
-            android:textOn="D"
-            android:layout_below="@+id/repeatSwitch"
-            android:layout_toRightOf="@+id/tglMaandag"
-            android:layout_toEndOf="@+id/tglMaandag"
-            android:layout_marginTop="12dp"
-            android:enabled="false" />
+            <ToggleButton
+                android:layout_width="47dp"
+                android:layout_height="50dp"
+                android:text="M"
+                android:id="@+id/tglMaandag"
+                android:checked="false"
+                android:textOff="M"
+                android:textOn="M" />
 
-        <ToggleButton
-            android:layout_width="47dp"
-            android:layout_height="50dp"
-            android:text="W"
-            android:id="@+id/tglWoensdag"
-            android:checked="false"
-            android:textOff="W"
-            android:textOn="W"
-            android:layout_toEndOf="@+id/tglDinsdag"
-            android:layout_alignTop="@+id/tglDinsdag"
-            android:layout_toRightOf="@+id/tglDinsdag"
-            android:enabled="false" />
+            <ToggleButton
+                android:layout_width="47dp"
+                android:layout_height="50dp"
+                android:text="D"
+                android:id="@+id/tglDinsdag"
+                android:checked="false"
+                android:textOff="D"
+                android:textOn="D" />
 
-        <ToggleButton
-            android:layout_width="47dp"
-            android:layout_height="50dp"
-            android:text="D"
-            android:id="@+id/tglDonderdag"
-            android:checked="false"
-            android:textOff="D"
-            android:textOn="D"
-            android:layout_toEndOf="@+id/tglWoensdag"
-            android:layout_alignTop="@+id/tglWoensdag"
-            android:layout_toRightOf="@+id/tglWoensdag"
-            android:enabled="false" />
+            <ToggleButton
+                android:layout_width="47dp"
+                android:layout_height="50dp"
+                android:text="W"
+                android:id="@+id/tglWoensdag"
+                android:checked="false"
+                android:textOff="W"
+                android:textOn="W"/>
 
-        <ToggleButton
-            android:layout_width="47dp"
-            android:layout_height="50dp"
-            android:text="V"
-            android:id="@+id/tglVrijdag"
-            android:checked="false"
-            android:textOff="V"
-            android:textOn="V"
-            android:layout_toEndOf="@+id/tglDonderdag"
-            android:layout_alignTop="@+id/tglDonderdag"
-            android:layout_toRightOf="@+id/tglDonderdag"
-            android:enabled="false" />
+            <ToggleButton
+                android:layout_width="47dp"
+                android:layout_height="50dp"
+                android:text="D"
+                android:id="@+id/tglDonderdag"
+                android:checked="false"
+                android:textOff="D"
+                android:textOn="D" />
 
-        <ToggleButton
-            android:layout_width="47dp"
-            android:layout_height="50dp"
-            android:text="Z"
-            android:id="@+id/tglZaterdag"
-            android:checked="false"
-            android:textOff="Z"
-            android:textOn="Z"
-            android:layout_toEndOf="@+id/tglVrijdag"
-            android:layout_alignTop="@+id/tglVrijdag"
-            android:layout_toRightOf="@+id/tglVrijdag"
-            android:enabled="false" />
+            <ToggleButton
+                android:layout_width="47dp"
+                android:layout_height="50dp"
+                android:text="V"
+                android:id="@+id/tglVrijdag"
+                android:checked="false"
+                android:textOff="V"
+                android:textOn="V" />
 
-        <ToggleButton
-            android:layout_width="47dp"
-            android:layout_height="50dp"
-            android:text="Z"
-            android:id="@+id/tglZondag"
-            android:checked="false"
-            android:textOff="Z"
-            android:textOn="Z"
-            android:layout_toEndOf="@+id/tglZaterdag"
-            android:layout_above="@+id/txbPrijs"
-            android:layout_toRightOf="@+id/tglZaterdag"
-            android:enabled="false"
-            />
+            <ToggleButton
+                android:layout_width="47dp"
+                android:layout_height="50dp"
+                android:text="Z"
+                android:id="@+id/tglZaterdag"
+                android:checked="false"
+                android:textOff="Z"
+                android:textOn="Z" />
+
+            <ToggleButton
+                android:layout_width="47dp"
+                android:layout_height="50dp"
+                android:text="Z"
+                android:id="@+id/tglZondag"
+                android:checked="false"
+                android:textOff="Z"
+                android:textOn="Z" />
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Price"
             android:id="@+id/txbPrijs"
-            android:layout_below="@+id/tglMaandag"
-            android:layout_alignLeft="@+id/tglMaandag"
-            android:layout_alignStart="@+id/tglMaandag"
+            android:layout_below="@+id/tglBtns"
             android:layout_marginTop="12dp"
             android:textSize="17sp" />
 
@@ -243,22 +222,8 @@
             android:inputType="numberDecimal"
             android:ems="10"
             android:id="@+id/txtPrice"
-            android:layout_toEndOf="@+id/txbEuro"
             android:layout_below="@+id/txbPrijs"
-            android:layout_alignRight="@+id/txtDatumPlan"
-            android:layout_alignEnd="@+id/txtDatumPlan"
-            android:hint="€0"
-            android:layout_toRightOf="@+id/txbEuro" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="€"
-            android:id="@+id/txbEuro"
-            android:layout_alignBaseline="@+id/txtPrice"
-            android:layout_alignBottom="@+id/txtPrice"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:hint="€0" />
 
         <Button
             android:layout_width="wrap_content"
@@ -271,7 +236,10 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginTop="12dp" />
+
+
 
     </RelativeLayout>
 </ScrollView>

@@ -2,11 +2,11 @@ package nmct.howest.be.rideshare.Activities.Fragments;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.Selection;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -21,29 +21,19 @@ import android.view.animation.Animation;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TimePicker;
-import android.widget.ToggleButton;
-
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.Calendar;
 
 import nmct.howest.be.rideshare.Activities.Helpers.TimePickerHelper;
-import nmct.howest.be.rideshare.Activities.MainActivity;
 import nmct.howest.be.rideshare.R;
 
 public class PlannenFragment extends Fragment
 {
     //Variables
     private Switch repeatSwitch;
-    private ToggleButton tglMonday;
-    private ToggleButton tglTuesday;
-    private ToggleButton tglWednesday;
-    private ToggleButton tglThursday;
-    private ToggleButton tglFriday;
-    private ToggleButton tglSaturday;
-    private ToggleButton tglSunday;
+    private LinearLayout tglBtns;
     static EditText txbDatePlan;
     static EditText txbTimePlan;
     static EditText txtPrice;
@@ -64,18 +54,8 @@ public class PlannenFragment extends Fragment
 
         //Get widgets
         repeatSwitch = (Switch) view.findViewById(R.id.repeatSwitch);
-        tglMonday = (ToggleButton) view.findViewById(R.id.tglMaandag);
-        tglTuesday = (ToggleButton) view.findViewById(R.id.tglDinsdag);
-        tglWednesday = (ToggleButton) view.findViewById(R.id.tglWoensdag);
-        tglThursday = (ToggleButton) view.findViewById(R.id.tglDonderdag);
-        tglFriday = (ToggleButton) view.findViewById(R.id.tglVrijdag);
-        tglSaturday = (ToggleButton) view.findViewById(R.id.tglZaterdag);
-        tglSunday = (ToggleButton) view.findViewById(R.id.tglZondag);
+        tglBtns = (LinearLayout) view.findViewById(R.id.tglBtns);
         txtPrice = (EditText) view.findViewById(R.id.txtPrice);
-
-
-        //Hide togglebuttons
-        checkToggleBtns(false);
 
         //Enable togglebuttons when switch is on
         repeatSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -107,6 +87,31 @@ public class PlannenFragment extends Fragment
             }
         });
 
+        //Price field
+        txtPrice.setText("€");
+        Selection.setSelection(txtPrice.getText(), txtPrice.getText().length());
+
+        txtPrice.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(!s.toString().startsWith("€")){
+                    txtPrice.setText("€");
+                    Selection.setSelection(txtPrice.getText(), txtPrice.getText().length());
+                }
+            }
+        });
+
         return view;
     }
 
@@ -128,23 +133,38 @@ public class PlannenFragment extends Fragment
 
     public void checkToggleBtns (Boolean isChecked) {
         if (isChecked) {
-            //Enable all weektogglebuttons
-            tglMonday.setVisibility(View.VISIBLE);
-            tglTuesday.setVisibility(View.VISIBLE);
-            tglWednesday.setVisibility(View.VISIBLE);
-            tglThursday.setVisibility(View.VISIBLE);
-            tglFriday.setVisibility(View.VISIBLE);
-            tglSaturday.setVisibility(View.VISIBLE);
-            tglSunday.setVisibility(View.VISIBLE);
+            AlphaAnimation fade_in = new AlphaAnimation(0, 1);
+            fade_in.setDuration(500);
+            fade_in.setAnimationListener(new Animation.AnimationListener() {
+                public void onAnimationStart(Animation arg0)
+                {
+                    tglBtns.setVisibility(View.VISIBLE);
+                }
+                public void onAnimationRepeat(Animation arg0)
+                {
+                }
+                public void onAnimationEnd(Animation arg0)
+                {
+                }
+            });
+            tglBtns.startAnimation(fade_in);
+
         } else {
-            //Disable all weektogglebuttons
-            tglMonday.setVisibility(View.GONE);
-            tglTuesday.setVisibility(View.GONE);
-            tglWednesday.setVisibility(View.GONE);
-            tglThursday.setVisibility(View.GONE);
-            tglFriday.setVisibility(View.GONE);
-            tglSaturday.setVisibility(View.GONE);
-            tglSunday.setVisibility(View.GONE);
+            AlphaAnimation fade_out = new AlphaAnimation(1, 0);
+            fade_out.setDuration(500);
+                fade_out.setAnimationListener(new Animation.AnimationListener() {
+                public void onAnimationStart(Animation arg0)
+                {
+                }
+                public void onAnimationRepeat(Animation arg0)
+                {
+                }
+                public void onAnimationEnd(Animation arg0)
+                {
+                    tglBtns.setVisibility(View.GONE);
+                }
+            });
+            tglBtns.startAnimation(fade_out);
         }
     }
 
