@@ -46,7 +46,7 @@
     </style>
 
     <style name="OverFlow" parent="android:Widget.ActionButton.Overflow">
-        <item name="android:src">@drawable/ic_more_vert_white_36dp</item>
+        <item name="android:src">@drawable/ic_more_vert_white_24dp</item>
     </style>
 
 
@@ -153,7 +153,7 @@
 
     <!--Theme with backbutton-->
     <style name="BackButtonTheme" parent="RideShare.Green">
-        <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back_white_36dp</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back_white_24dp</item>
         <item name="android:actionBarStyle">@style/BackButtonActionBar</item>
     </style>
 

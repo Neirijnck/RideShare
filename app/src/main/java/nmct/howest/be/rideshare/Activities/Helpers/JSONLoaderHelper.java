@@ -9,6 +9,7 @@ import android.util.Log;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 
 /**
  * Created by Preben on 12/11/2014.
@@ -17,15 +18,17 @@ public abstract class JSONLoaderHelper extends android.support.v4.content.AsyncT
 {
 
     private final String[] mColumnNames;
-    private final String mPropertyName;
+    //Int voor raw json file
     private final int mRawResourceId;
+    //String voor url json
+    //private final String mRawResourceId;
 
     private Cursor mCursor;
     private Object lock = new Object();
 
-    public JSONLoaderHelper(Context context, String propertyName, String[] columnNames, int rawResourceId) {
+    public JSONLoaderHelper(Context context, String[] columnNames, int rawResourceId) {
         super(context);
-        mPropertyName = propertyName;
+
         mColumnNames = columnNames;
         mRawResourceId = rawResourceId;
     }
@@ -59,7 +62,12 @@ public abstract class JSONLoaderHelper extends android.support.v4.content.AsyncT
             if(mCursor != null) return;
 
             MatrixCursor cursor = new MatrixCursor(mColumnNames);
+
+            //Met raw json
             InputStream in = getContext().getResources().openRawResource(mRawResourceId);
+
+            //Met url json
+            //InputStream in = new URL(mRawResourceId).openStream();
 
             JsonReader reader = new JsonReader(new InputStreamReader(in));
             try
@@ -67,15 +75,9 @@ public abstract class JSONLoaderHelper extends android.support.v4.content.AsyncT
                 reader.beginObject();
                 while(reader.hasNext())
                 {
-                    String propName = reader.nextName();
-                    if(propName.equals(mPropertyName))
-                    {
+
                         parse(reader, cursor);
-                    }
-                    else
-                    {
-                        reader.skipValue();
-                    }
+
                 }
                 reader.endObject();
             }catch(IOException e)

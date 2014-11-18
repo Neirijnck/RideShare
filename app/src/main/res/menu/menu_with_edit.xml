@@ -6,14 +6,13 @@
 
     <!--Edit-->
     <item android:id="@+id/action_edit"
-        android:icon="@drawable/ic_mode_edit_white_36dp"
+        android:icon="@drawable/ic_mode_edit_white_24dp"
         android:title="@string/action_edit"
         android:showAsAction="always" />
 
     <!--Settings-->
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
-        android:icon="@drawable/ic_settings_black_36dp"
         android:orderInCategory="100"
         app:showAsAction="never" />
 

@@ -15,6 +15,13 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter
         super(fm);
     }
 
+    private final String[] TITLES = {"Plannen","Zoeken","Ritten","Profiel"};
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return TITLES[position];
+    }
+
     @Override
     public Fragment getItem(int i) {
         switch (i) {
@@ -36,6 +43,6 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter
 
     @Override
     public int getCount() {
-        return 4;   //Number of tabs
+        return TITLES.length;   //Number of tabs
     }
 }
