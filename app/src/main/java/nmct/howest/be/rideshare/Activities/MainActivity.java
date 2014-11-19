@@ -49,6 +49,12 @@ public class MainActivity extends FragmentActivity {
 
 
 
+
+
+
+
+
+
         //Not necessary with our pagerslidingtabstrip
 /*
         tabs.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {

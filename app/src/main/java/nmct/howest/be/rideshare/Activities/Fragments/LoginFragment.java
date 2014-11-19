@@ -1,6 +1,9 @@
 package nmct.howest.be.rideshare.Activities.Fragments;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,6 +25,7 @@ import com.facebook.widget.LoginButton;
 
 import java.util.Arrays;
 
+import nmct.howest.be.rideshare.Activities.Helpers.ConnectivityHelper;
 import nmct.howest.be.rideshare.Activities.MainActivity;
 import nmct.howest.be.rideshare.R;
 
@@ -44,6 +48,22 @@ public class LoginFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
+        //Has internet?
+        Context c = getActivity();
+        if(!ConnectivityHelper.isNetworkAvailable(c)) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(c);
+            builder.setTitle("No Internet connection.");
+            builder.setMessage("You have no internet connection");
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            builder.show();
+        }
+
         learnMore = (TextView) view.findViewById(R.id.txbLearnMore);
         //Set click listener for "Learn more" textview
         learnMore.setOnClickListener(new View.OnClickListener() {
@@ -56,6 +76,7 @@ public class LoginFragment extends Fragment
 
         //Facebook Login
         LoginButton authButton = (LoginButton) view.findViewById(R.id.btnLogin);
+
         authButton.setOnErrorListener(new LoginButton.OnErrorListener() {
             @Override
             public void onError(FacebookException error) {
@@ -66,27 +87,23 @@ public class LoginFragment extends Fragment
         authButton.setSessionStatusCallback(new Session.StatusCallback() {
             @Override
             public void call(final Session session, SessionState state, Exception exception) {
+            if (session.isOpened()) {
+                Log.i(TAG,"Access Token"+ session.getAccessToken());
+                Request.executeMeRequestAsync(session, new Request.GraphUserCallback() {
+                    @Override
+                    public void onCompleted(GraphUser user, Response response) {
+                    if (user != null) {
+                        Log.i(TAG, "token: " + session.getAccessToken());
+                        Log.i(TAG, "Email " + user.asMap().get("email"));
 
-                if (session.isOpened()) {
-                    Log.i(TAG,"Access Token"+ session.getAccessToken());
-                    Request.executeMeRequestAsync(session,
-                            new Request.GraphUserCallback() {
-                                @Override
-                                public void onCompleted(GraphUser user, Response response) {
-                                    if (user != null) {
-                                        Log.i(TAG, "token: " + session.getAccessToken());
-                                        Log.i(TAG, "Email " + user.asMap().get("email"));
-
-
-                                        Intent intent = new Intent(getActivity(), MainActivity.class);
-                                         getActivity().startActivity(intent);
-                                    }
-                                }
-                            });
-                }
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                         getActivity().startActivity(intent);
+                    }
+                    }
+                });
+            }
             }
         });
-        //End Facebook Login
 
         return view;
     }

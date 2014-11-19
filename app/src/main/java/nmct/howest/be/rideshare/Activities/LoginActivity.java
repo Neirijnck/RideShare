@@ -16,6 +16,24 @@ public class LoginActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //Check de facebook keyhash
+        /*try {
+            PackageInfo info = getPackageManager().getPackageInfo(
+                    this.getPackageName(),
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.d("erreur", "");
+
+
+        } catch (NoSuchAlgorithmException e) {
+
+        }*/
+
         Session session = Session.getActiveSession();
         if(session==null){
             // try to restore from cache
