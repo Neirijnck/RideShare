@@ -24,6 +24,8 @@ import com.facebook.model.GraphUser;
 import com.facebook.widget.LoginButton;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 import nmct.howest.be.rideshare.Activities.Helpers.ConnectivityHelper;
 import nmct.howest.be.rideshare.Activities.MainActivity;
@@ -36,7 +38,11 @@ public class LoginFragment extends Fragment
     private FragmentTransaction transaction;
     private LearnMoreFragment learnMoreFragment;
     private String TAG = "LoginActivity";
+    private static final List<String> PERMISSIONS = Arrays.asList("publish_actions", "email");
+    private boolean isPermissionsGiven = false;
+
     public LoginFragment() {}
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState);
@@ -47,7 +53,6 @@ public class LoginFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-
         //Has internet?
         Context c = getActivity();
         if(!ConnectivityHelper.isNetworkAvailable(c)) {
@@ -63,7 +68,6 @@ public class LoginFragment extends Fragment
             });
             builder.show();
         }
-
         learnMore = (TextView) view.findViewById(R.id.txbLearnMore);
         //Set click listener for "Learn more" textview
         learnMore.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +80,6 @@ public class LoginFragment extends Fragment
 
         //Facebook Login
         LoginButton authButton = (LoginButton) view.findViewById(R.id.btnLogin);
-
         authButton.setOnErrorListener(new LoginButton.OnErrorListener() {
             @Override
             public void onError(FacebookException error) {
@@ -87,23 +90,33 @@ public class LoginFragment extends Fragment
         authButton.setSessionStatusCallback(new Session.StatusCallback() {
             @Override
             public void call(final Session session, SessionState state, Exception exception) {
-            if (session.isOpened()) {
-                Log.i(TAG,"Access Token"+ session.getAccessToken());
-                Request.executeMeRequestAsync(session, new Request.GraphUserCallback() {
-                    @Override
-                    public void onCompleted(GraphUser user, Response response) {
-                    if (user != null) {
-                        Log.i(TAG, "token: " + session.getAccessToken());
-                        Log.i(TAG, "Email " + user.asMap().get("email"));
 
-                        Intent intent = new Intent(getActivity(), MainActivity.class);
-                         getActivity().startActivity(intent);
-                    }
-                    }
-                });
-            }
+                if (session.isOpened()) {
+
+                    List<String> permissions = session.getPermissions();
+                    Log.d("permissions", permissions.toString());
+                    if (isSubsetOf(PERMISSIONS, permissions))
+                        isPermissionsGiven = true;
+
+                    Log.i(TAG, "Access Token" + session.getAccessToken());
+                    Request.executeMeRequestAsync(session,
+                            new Request.GraphUserCallback() {
+                                @Override
+                                public void onCompleted(GraphUser user, Response response) {
+                                    if (user != null) {
+                                        Log.i(TAG, "token: " + session.getAccessToken());
+                                        Log.i(TAG, "Email " + user.asMap().get("email"));
+
+
+                                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                                        getActivity().startActivity(intent);
+                                    }
+                                }
+                            });
+                }
             }
         });
+        //End Facebook Login
 
         return view;
     }
@@ -119,6 +132,16 @@ public class LoginFragment extends Fragment
     public boolean isLoggedIn() {
         Session session = Session.getActiveSession();
         return (session != null && session.isOpened());
+    }
+
+    private boolean isSubsetOf(Collection<String> subset,
+                               Collection<String> superset) {
+        for (String string : subset) {
+            if (!superset.contains(string)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private void slideUpFragment()
