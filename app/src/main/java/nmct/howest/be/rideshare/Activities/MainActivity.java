@@ -35,15 +35,14 @@ public class MainActivity extends FragmentActivity {
         // Bind the tabs to the ViewPager + properties
         tabs.setViewPager(pager);
         tabs.setBackgroundColor(getResources().getColor(R.color.rideshare_color));
-        tabs.setIndicatorColor(getResources().getColor(R.color.white));
-        tabs.setIndicatorHeight(11);
+        tabs.setTabBackground(R.drawable.tab_indicator_ab_rideshare);
+        tabs.setIndicatorColor(getResources().getColor(R.color.teal));
+        tabs.setIndicatorHeight(21);
         tabs.setTextColor(getResources().getColor(R.color.white));
         tabs.setUnderlineColor(getResources().getColor(R.color.rideshare_color));
-        tabs.setUnderlineHeight(5);
+        tabs.setUnderlineHeight(10);
         tabs.setDividerColor(getResources().getColor(R.color.rideshare_color));
         tabs.setAllCaps(true);
-        tabs.setMinimumHeight(48);
-
 
         //Not necessary with our pagerslidingtabstrip
 /*

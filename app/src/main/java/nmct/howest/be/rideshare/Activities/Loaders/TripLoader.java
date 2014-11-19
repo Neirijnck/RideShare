@@ -109,12 +109,15 @@ public class TripLoader extends JSONLoaderHelper
             }
             else{reader.skipValue();}
 
+
+            //Object toevoegen
+            MatrixCursor.RowBuilder builder = cursor.newRow();
+            builder.add(new Object[]{ID, userID, from, to, dateTime, payment, mo, tu, we, th, fr, sa, su, matchUserID, matchFrom, matchTo, matchDateTime, matchStatus, messages});
             id++;
         }
 
         //Dit zal nog niet werken bij meerdere, zal string telkens overschrijven
-        MatrixCursor.RowBuilder builder = cursor.newRow();
-        builder.add(ID);
+/*      builder.add(ID);
         builder.add(userID);
         builder.add(from);
         builder.add(to);
@@ -132,6 +135,6 @@ public class TripLoader extends JSONLoaderHelper
         builder.add(matchTo);
         builder.add(matchDateTime);
         builder.add(matchStatus);
-        builder.add(messages);
+        builder.add(messages);*/
     }
 }
