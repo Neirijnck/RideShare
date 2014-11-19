@@ -24,7 +24,7 @@
         android:textStyle="bold"
         />
 
-    <Button
+    <com.facebook.widget.LoginButton
         android:layout_width="wrap_content"
         android:layout_height="55dp"
         android:text="Login with Facebook"

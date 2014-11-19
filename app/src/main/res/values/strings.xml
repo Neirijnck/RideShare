@@ -63,4 +63,7 @@
     <string name="OR_Travelers">Medereizigers:</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- Facebook login and admin -->
+    <string name="app_id">551430101654024</string>
+
 </resources>

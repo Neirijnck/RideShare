@@ -1,13 +1,15 @@
 package nmct.howest.be.rideshare.Activities;
 
-import android.app.ActionBar;
-import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.MenuItem;
 
 import com.astuetz.PagerSlidingTabStrip;
+import com.facebook.Session;
 
 import nmct.howest.be.rideshare.Activities.Adapters.TabPagerAdapter;
 import nmct.howest.be.rideshare.R;
@@ -87,6 +89,45 @@ public class MainActivity extends FragmentActivity {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                //uitloggen
+                return true;
+            case R.id.action_logout:
+                callFacebookLogout(this.getApplicationContext());
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /**
+     * Logout From Facebook
+     */
+    public static void callFacebookLogout(Context context) {
+        Session session = Session.getActiveSession();
+        if (session != null) {
+
+            if (!session.isClosed()) {
+                session.closeAndClearTokenInformation();
+                Intent intent = new Intent(context, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+                //clear your preferences if saved
+            }
+        } else {
+
+            session = new Session(context);
+            Session.setActiveSession(session);
+            session.closeAndClearTokenInformation();
+            //clear your preferences if saved
+
+        }
+
     }
 
 

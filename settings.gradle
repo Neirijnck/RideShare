@@ -1,2 +1,2 @@
-include ':app', 'PagerSlidingTabStrip'
-include ':viewPagerIndicatorLibrary'
+include 'PagerSlidingTabStrip', ':PagerSlidingTabStrip', ':app', ':facebook', ':viewPagerIndicatorLibrary'
+
