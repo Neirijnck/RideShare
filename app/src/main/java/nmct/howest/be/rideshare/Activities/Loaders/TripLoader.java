@@ -113,6 +113,7 @@ public class TripLoader extends JSONLoaderHelper
             //Object toevoegen
             MatrixCursor.RowBuilder builder = cursor.newRow();
             builder.add(new Object[]{ID, userID, from, to, dateTime, payment, mo, tu, we, th, fr, sa, su, matchUserID, matchFrom, matchTo, matchDateTime, matchStatus, messages});
+
             id++;
         }
 

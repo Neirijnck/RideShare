@@ -69,7 +69,7 @@ public class RittenFragment extends Fragment implements LoaderManager.LoaderCall
     private void fillData(ListView list)
     {
         // Fields on the UI to which we map
-        String[] columns = new String[]{"trip"};
+        String[] columns = new String[]{"from", "to", ""};
         int[] views = new int[]{R.id.txbBeoordeling};
         //Setting cursoradapter
         //mAdapter = new SimpleCursorAdapter(getActivity(), android.R.layout.simple_list_item_1, null, columns, views,0);
