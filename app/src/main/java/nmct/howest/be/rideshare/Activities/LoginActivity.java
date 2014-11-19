@@ -16,16 +16,29 @@ public class LoginActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        Session session = Session.getActiveSession();
+        if(session==null){
+            // try to restore from cache
+            session = Session.openActiveSessionFromCache(this.getApplicationContext());
+        }
 
-        // Check that the activity is using the layout version with
-        // the fragment_container FrameLayout
-        if (findViewById(R.id.fragment_container) != null)
-        {
+        if(session!=null && session.isOpened()){
+            Intent intent = new Intent(this.getApplicationContext(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            this.getApplicationContext().startActivity(intent);
+        }
+        else {
 
-            LoginFragment loginFragment = new LoginFragment();
 
-            // Add the fragment to the 'fragment_container' Layout
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, loginFragment).commit();
+            // Check that the activity is using the layout version with
+            // the fragment_container FrameLayout
+            if (findViewById(R.id.fragment_container) != null) {
+
+                LoginFragment loginFragment = new LoginFragment();
+
+                // Add the fragment to the 'fragment_container' Layout
+                getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, loginFragment).commit();
+            }
         }
 
     }

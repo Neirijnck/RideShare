@@ -44,6 +44,11 @@ public class MainActivity extends FragmentActivity {
         tabs.setDividerColor(getResources().getColor(R.color.rideshare_color));
         tabs.setAllCaps(true);
 
+        //Facebook session check
+
+
+
+
         //Not necessary with our pagerslidingtabstrip
 /*
         tabs.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
