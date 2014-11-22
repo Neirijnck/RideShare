@@ -6,7 +6,10 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.facebook.Session;
@@ -14,7 +17,7 @@ import com.facebook.Session;
 import nmct.howest.be.rideshare.Activities.Adapters.TabPagerAdapter;
 import nmct.howest.be.rideshare.R;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends ActionBarActivity {
 
     //Tab variables
     private ViewPager pager;
@@ -26,28 +29,20 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         //Setting pageradapter
         tabs = (PagerSlidingTabStrip) findViewById(R.id.tabStrip);
         TabAdapter = new TabPagerAdapter(getSupportFragmentManager());
         pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(TabAdapter);
 
-        // Bind the tabs to the ViewPager + properties
+        // Bind the tabs to the ViewPager
         tabs.setViewPager(pager);
-        tabs.setBackgroundColor(getResources().getColor(R.color.rideshare_color));
-        tabs.setTabBackground(R.drawable.tab_indicator_ab_rideshare);
-        tabs.setIndicatorColor(getResources().getColor(R.color.teal));
-        tabs.setIndicatorHeight(21);
-        tabs.setTextColor(getResources().getColor(R.color.white));
-        tabs.setUnderlineColor(getResources().getColor(R.color.rideshare_color));
-        tabs.setUnderlineHeight(10);
-        tabs.setDividerColor(getResources().getColor(R.color.rideshare_color));
-        tabs.setAllCaps(true);
+        tabs.setTextColor(getResources().getColor(R.color.rideshare_secondary));
 
         //Facebook session check
-
-
-
 
 
 
@@ -107,7 +102,8 @@ public class MainActivity extends FragmentActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_settings:
-                //uitloggen
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
                 return true;
             case R.id.action_logout:
                 callFacebookLogout(this.getApplicationContext());

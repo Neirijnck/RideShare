@@ -8,32 +8,17 @@
     <item android:id="@+id/action_edit"
         android:icon="@drawable/ic_mode_edit_white_24dp"
         android:title="@string/action_edit"
-        android:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
     <!--Settings-->
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
-        android:orderInCategory="100"
+        android:orderInCategory="90"
         app:showAsAction="never" />
 
     <item android:id="@+id/action_logout"
         android:title="@string/action_logout"
         android:orderInCategory="100"
         app:showAsAction="never" />
-
-    <!--Overflow menu with icon-->
-
-<!--    <item android:id="@+id/action_overflow"
-        android:title="test"
-        android:icon="@drawable/ic_more_vert_white_36dp"
-        android:showAsAction="always">
-                <menu>
-                    <item android:id="@+id/action_settingsTEST"
-                        android:title="@string/action_settings"
-                        android:icon="@drawable/ic_settings_black_36dp"
-                        android:orderInCategory="100"
-                        app:showAsAction="always|withText" />
-                </menu>
-        </item>-->
 
 </menu>

@@ -32,7 +32,7 @@
         android:layout_width="fill_parent"
         android:layout_alignParentBottom="true"
         app:radius="4dp"
-        app:fillColor="@color/black"
+        app:fillColor="@color/rideshare_accent"
         android:layout_marginBottom="50dp"
         />
 

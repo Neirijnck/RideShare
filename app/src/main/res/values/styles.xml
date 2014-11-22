@@ -1,166 +1,19 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="RideShare.Green" parent="Theme.AppCompat.Light.DarkActionBar">
+    <!-- Material Design-->
+    <style name="RideShare.Material" parent="Theme.AppCompat.Light">
 
-        <!-- Customized theme-->
-        <item name="android:windowBackground">@color/rideshare_color_background</item>
-        <item name="android:actionBarStyle">@style/ActionBar</item>
-        <item name="android:actionBarWidgetTheme">@style/ActionBarWidget</item>
-        <item name="android:actionBarTabStyle">@style/ActionBarTabStyle</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
+        <!-- colorPrimary is used for the default action bar background -->
+        <item name="colorPrimary">@color/rideshare_primary</item>
 
-        <!--Widgets-->
-        <item name="android:editTextStyle">@style/EditTextRideShare</item>
-        <item name="android:textColorHighlight">@color/textColorHightLight</item>
-        <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewRideShare</item>
-        <item name="android:checkboxStyle">@style/CheckBoxRideShare</item>
-        <item name="android:radioButtonStyle">@style/RadioButtonRideShare</item>
-        <item name="android:buttonStyle">@style/ButtonRideShare</item>
-        <item name="android:imageButtonStyle">@style/ImageButtonRideShare</item>
-        <item name="android:spinnerStyle">@style/SpinnerRideShare</item>
-        <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemRideShare</item>
-        <item name="android:progressBarStyleHorizontal">@style/ProgressBarRideShare</item>
-        <item name="android:seekBarStyle">@style/SeekBarRideShare</item>
-        <item name="android:ratingBarStyle">@style/RatingBarRideShare</item>
-        <item name="android:ratingBarStyleIndicator">@style/RatingBarBigRideShare</item>
-        <item name="android:ratingBarStyleSmall">@style/RatingBarSmallRideShare</item>
-        <item name="android:buttonStyleToggle">@style/ToggleRideShare</item>
-        <item name="android:listViewStyle">@style/ListViewRideShare</item>
-        <item name="android:listViewWhiteStyle">@style/ListViewRideShare.White</item>
-        <item name="android:spinnerItemStyle">@style/SpinnerItemRideShare</item>
-    </style>
+        <!-- colorPrimaryDark is used for the status bar -->
+        <item name="colorPrimaryDark">@color/rideshare_primary_dark</item>
 
-    <style name="ActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">@color/rideshare_color</item>
-        <item name="android:backgroundStacked">@color/rideshare_color</item>
-        <item name="android:backgroundSplit">@color/rideshare_color</item>
-        <item name="android:height">56dp</item>
-    </style>
+        <!-- colorAccent is used as the default value for colorControlActivated, which is used to tint widgets -->
+        <item name="colorAccent">@color/rideshare_accent</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowBackground">@color/rideshare_background</item>
 
-    <style name="ActionBarWidget" parent="Theme.AppCompat.Light.DarkActionBar"/>
-
-    <style name="ActionBarTabStyle" parent="Widget.AppCompat.ActionBar.TabView">
-        <item name="android:background">@drawable/tab_indicator_ab_rideshare</item>
-    </style>
-
-    <style name="OverFlow" parent="android:Widget.ActionButton.Overflow">
-        <item name="android:src">@drawable/ic_more_vert_white_24dp</item>
-    </style>
-
-
-    <!-- Generated with http://android-holo-colors.com -->
-
-    <style name="EditTextRideShare" parent="android:Widget.EditText">
-        <item name="android:background">@drawable/rideshare_edit_text_holo_light</item>
-        <item name="android:textColor">@color/black</item>
-    </style>
-
-    <style name="AutoCompleteTextViewRideShare" parent="android:Widget.AutoCompleteTextView">
-        <item name="android:dropDownSelector">@drawable/rideshare_list_selector_holo_light</item>
-        <item name="android:background">@drawable/rideshare_edit_text_holo_light</item>
-        <item name="android:textColor">@color/black</item>
-    </style>
-
-    <style name="CheckBoxRideShare" parent="android:Widget.CompoundButton.CheckBox">
-        <item name="android:button">@drawable/rideshare_btn_check_holo_light</item>
-    </style>
-
-    <style name="RadioButtonRideShare" parent="android:Widget.CompoundButton.RadioButton">
-        <item name="android:button">@drawable/rideshare_btn_radio_holo_light</item>
-    </style>
-
-    <style name="ButtonRideShare" parent="android:Widget.Button">
-        <item name="android:background">@drawable/rideshare_btn_default_holo_light</item>
-        <item name="android:minHeight">48dip</item>
-        <item name="android:minWidth">64dip</item>
-        <item name="android:textColor">@color/white</item>
-    </style>
-
-    <style name="ImageButtonRideShare" parent="android:Widget.ImageButton">
-        <item name="android:background">@drawable/rideshare_btn_default_holo_light</item>
-    </style>
-
-    <style name="SpinnerRideShare" parent="android:Widget.Spinner">
-        <item name="android:background">@drawable/rideshare_spinner_background_holo_light</item>
-        <item name="android:dropDownSelector">@drawable/rideshare_list_selector_holo_light</item>
-    </style>
-
-    <style name="SpinnerDropDownItemRideShare" parent="android:Widget.DropDownItem.Spinner">
-        <item name="android:checkMark">@drawable/rideshare_btn_radio_holo_light</item>
-    </style>
-    <style name="ProgressBarRideShare" parent="android:Widget.ProgressBar.Horizontal">
-        <item name="android:progressDrawable">@drawable/rideshare_progress_horizontal_holo_light</item>
-        <item name="android:indeterminateDrawable">@drawable/rideshare_progress_indeterminate_horizontal_holo_light</item>
-        <item name="android:minHeight">16dip</item>
-        <item name="android:maxHeight">16dip</item>
-    </style>
-
-    <style name="SeekBarRideShare" parent="android:Widget.SeekBar">
-        <item name="android:progressDrawable">@drawable/rideshare_scrubber_progress_horizontal_holo_light</item>
-        <item name="android:indeterminateDrawable">@drawable/rideshare_scrubber_progress_horizontal_holo_light</item>
-        <item name="android:minHeight">13dip</item>
-        <item name="android:maxHeight">13dip</item>
-        <item name="android:thumb">@drawable/rideshare_scrubber_control_selector_holo_light</item>
-        <item name="android:thumbOffset">16dip</item>
-        <item name="android:paddingLeft">16dip</item>
-        <item name="android:paddingRight">16dip</item>
-    </style>
-
-    <style name="RatingBarRideShare" parent="android:Widget.RatingBar">
-        <item name="android:progressDrawable">@drawable/rideshare_ratingbar_full_holo_light</item>
-        <item name="android:indeterminateDrawable">@drawable/rideshare_ratingbar_full_holo_light</item>
-    </style>
-
-    <style name="RatingBarBigRideShare" parent="android:Widget.RatingBar">
-        <item name="android:progressDrawable">@drawable/rideshare_ratingbar_holo_light</item>
-        <item name="android:indeterminateDrawable">@drawable/rideshare_ratingbar_holo_light</item>
-        <item name="android:minHeight">35dip</item>
-        <item name="android:maxHeight">35dip</item>
-    </style>
-
-    <style name="RatingBarSmallRideShare" parent="android:Widget.RatingBar">
-        <item name="android:progressDrawable">@drawable/rideshare_ratingbar_small_holo_light</item>
-        <item name="android:indeterminateDrawable">@drawable/rideshare_ratingbar_small_holo_light</item>
-        <item name="android:minHeight">16dip</item>
-        <item name="android:maxHeight">16dip</item>
-    </style>
-
-    <style name="ToggleRideShare" parent="android:Widget.Button.Toggle">
-        <item name="android:background">@drawable/rideshare_btn_toggle_holo_light</item>
-        <item name="android:minHeight">48dip</item>
-        <item name="android:textColor">@color/black</item>
-    </style>
-
-    <style name="ListViewRideShare" parent="android:Widget.ListView">
-        <item name="android:listSelector">@drawable/rideshare_list_selector_holo_light</item>
-    </style>
-
-    <style name="ListViewRideShare.White" parent="android:Widget.ListView.White">
-        <item name="android:listSelector">@drawable/rideshare_list_selector_holo_light</item>
-    </style>
-
-    <style name="SpinnerItemRideShare" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
-        <item name="android:textColor">@color/black</item>
-    </style>
-
-    <!--Login Theme without action bar-->
-    <style name="LoginTheme" parent="RideShare.Green">
-        <item name="android:windowActionBar">false</item>
-        <item name="android:windowTitleSize">0dp</item>
-    </style>
-
-    <!--Theme with backbutton-->
-    <style name="BackButtonTheme" parent="RideShare.Green">
-        <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back_white_24dp</item>
-        <item name="android:actionBarStyle">@style/BackButtonActionBar</item>
-    </style>
-
-    <style name="BackButtonActionBar" parent="ActionBar">
-        <item name="android:displayOptions">showHome|homeAsUp|showTitle</item>
-        <item name="displayOptions">showHome|homeAsUp|showTitle</item>
-        <item name="android:icon">@android:color/transparent</item>
     </style>
 
 </resources>

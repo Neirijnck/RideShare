@@ -29,6 +29,7 @@
         android:layout_height="55dp"
         android:text="Login with Facebook"
         android:id="@+id/btnLogin"
+        android:elevation="2dp"
         android:layout_alignBottom="@+id/txbLearnMore"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"

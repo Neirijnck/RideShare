@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Material Design-->
+    <style name="RideShare.Material" parent="Theme.AppCompat.Light">
+
+        <!-- colorPrimary is used for the default action bar background -->
+        <item name="colorPrimary">@color/rideshare_primary</item>
+
+        <!-- colorPrimaryDark is used for the status bar -->
+        <item name="colorPrimaryDark">@color/rideshare_primary_dark</item>
+
+        <!-- colorAccent is used as the default value for colorControlActivated, which is used to tint widgets -->
+        <item name="colorAccent">@color/rideshare_accent</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowBackground">@color/rideshare_background</item>
+        <item name="android:colorButtonNormal">@color/rideshare_primary</item>
+
+    </style>
+
+
+</resources>

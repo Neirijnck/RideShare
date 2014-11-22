@@ -3,7 +3,11 @@ package nmct.howest.be.rideshare.Activities.Loaders;
 import android.content.Context;
 import android.database.MatrixCursor;
 import android.provider.BaseColumns;
+import android.text.TextUtils;
 import android.util.JsonReader;
+
+import org.w3c.dom.Text;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -100,7 +104,21 @@ public class TripLoader extends JSONLoaderHelper
                             }
                             reader.endArray();
                         }
-                        else if(key.equals("status")){matchStatus = reader.nextInt();}
+                        else if(key.equals("status"))
+                        {
+                            matchStatus = reader.nextInt();
+
+                            //Last property - add the object to a row
+
+                            MatrixCursor.RowBuilder builder = cursor.newRow();
+                            //builder.add(new Object[]{ID, userID, from, to, dateTime, payment, mo, tu, we, th, fr, sa, su, matchUserID, matchFrom, matchTo, matchDateTime, matchStatus, messages});
+                            if(!TextUtils.isEmpty(ID)&& !TextUtils.isEmpty(userID)&&!TextUtils.isEmpty(from)&&!TextUtils.isEmpty(to)&& !TextUtils.isEmpty(dateTime)&& !TextUtils.isEmpty(payment)) {
+                                builder.add(from);
+                                builder.add(to);
+                                builder.add(dateTime);
+                            }
+
+                        }
                         else{reader.skipValue();}
                     }
                     reader.endObject();
@@ -108,11 +126,6 @@ public class TripLoader extends JSONLoaderHelper
                 reader.endArray();
             }
             else{reader.skipValue();}
-
-
-            //Object toevoegen
-            MatrixCursor.RowBuilder builder = cursor.newRow();
-            builder.add(new Object[]{ID, userID, from, to, dateTime, payment, mo, tu, we, th, fr, sa, su, matchUserID, matchFrom, matchTo, matchDateTime, matchStatus, messages});
 
             id++;
         }

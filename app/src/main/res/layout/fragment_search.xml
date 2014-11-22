@@ -1,0 +1,145 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:transitionName="@string/transition_search_activity"
+    >
+    <RelativeLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="nmct.howest.be.rideshare.Activities.Fragments.SearchFragment"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/listSeparatorTextViewStyle"
+            android:text="@string/Search_Title"
+            android:id="@+id/txbZoeken"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/From"
+            android:id="@+id/txbVanZoek"
+            android:layout_below="@+id/txbZoeken"
+            android:layout_alignLeft="@+id/txbZoeken"
+            android:layout_alignStart="@+id/txbZoeken"
+            android:layout_marginTop="13dp"
+            android:textSize="17sp"
+            />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtVanZoek"
+            android:layout_alignStart="@+id/txbVanPlan"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/txbVanZoek"
+            android:layout_alignLeft="@+id/txbZoeken"
+            android:hint="Van" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/To"
+            android:id="@+id/txbNaarZoek"
+            android:layout_alignStart="@+id/txtVanPlan"
+            android:layout_below="@+id/txtVanZoek"
+            android:layout_alignLeft="@+id/txbZoeken"
+            android:layout_marginTop="13dp"
+            android:textSize="17sp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtNaarZoek"
+            android:layout_alignStart="@+id/txbNaarPlan"
+            android:layout_below="@+id/txbNaarZoek"
+            android:layout_alignLeft="@+id/txbZoeken"
+            android:layout_alignRight="@+id/txtVanZoek"
+            android:layout_alignEnd="@+id/txtVanZoek"
+            android:hint="Naar" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Date"
+            android:id="@+id/txbDatumZoek"
+            android:layout_alignStart="@+id/txtNaarPlan"
+            android:layout_below="@+id/txtNaarZoek"
+            android:layout_alignLeft="@+id/txbZoeken"
+            android:layout_marginTop="13dp"
+            android:textSize="17sp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:ems="10"
+            android:id="@+id/txtDatumZoek"
+            android:focusable="false"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/txbDatumZoek"
+            android:layout_alignLeft="@+id/txbZoeken"
+            android:layout_alignRight="@+id/txbZoeken"
+            android:layout_alignEnd="@+id/txbZoeken"
+            android:hint="01/01/2015" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Time"
+            android:id="@+id/txbUurZoek"
+            android:layout_toEndOf="@+id/txtDatumZoek"
+            android:layout_alignTop="@+id/txbDatumZoek"
+            android:layout_toRightOf="@+id/txtDatumZoek"
+            android:textSize="17sp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:ems="10"
+            android:id="@+id/txtUurZoek"
+            android:focusable="false"
+            android:layout_alignTop="@+id/txtDatumZoek"
+            android:layout_toRightOf="@+id/txtDatumZoek"
+            android:layout_toEndOf="@+id/txtDatumZoek"
+            android:hint="15:00"/>
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Search_ShareFb"
+            android:id="@+id/chkDelen"
+            android:layout_below="@+id/txtDatumZoek"
+            android:layout_marginTop="13dp"
+            android:checked="false"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="36dp"
+            android:text="@string/Searching"
+            android:id="@+id/btnZoeken"
+            android:layout_below="@+id/chkDelen"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="13dp"
+            android:textAllCaps="true"
+            android:textColor="@color/rideshare_secondary"
+            android:background="@drawable/button_selector"
+            android:elevation="2dp"
+            />
+    </RelativeLayout>
+</ScrollView>

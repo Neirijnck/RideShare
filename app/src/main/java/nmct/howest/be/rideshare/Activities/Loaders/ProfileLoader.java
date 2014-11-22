@@ -50,19 +50,22 @@ public class ProfileLoader extends JSONLoaderHelper
             else if(key.equals("carType")){carType= reader.nextString();}
             else if(key.equals("amountOfSeats")){amountOfSeats= reader.nextString();}
             else{reader.skipValue();}
+
+            MatrixCursor.RowBuilder builder = cursor.newRow();
+            builder.add(ID);
+            builder.add(userName);
+            builder.add(facebookLink);
+            builder.add(firstName);
+            builder.add(lastName);
+
             id++;
         }
-        MatrixCursor.RowBuilder builder = cursor.newRow();
-        builder.add(ID);
-        builder.add(userName);
-        builder.add(facebookLink);
-        builder.add(firstName);
-        builder.add(lastName);
-        builder.add(email);
+
+/*        builder.add(email);
         builder.add(gender);
         builder.add(birthday);
         builder.add(location);
         builder.add(carType);
-        builder.add(amountOfSeats);
+        builder.add(amountOfSeats);*/
     }
 }

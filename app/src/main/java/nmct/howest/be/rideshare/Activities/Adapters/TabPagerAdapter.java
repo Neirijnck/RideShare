@@ -4,10 +4,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import nmct.howest.be.rideshare.Activities.Fragments.MijnProfielFragment;
-import nmct.howest.be.rideshare.Activities.Fragments.PlannenFragment;
-import nmct.howest.be.rideshare.Activities.Fragments.RittenFragment;
-import nmct.howest.be.rideshare.Activities.Fragments.ZoekenFragment;
+import nmct.howest.be.rideshare.Activities.Fragments.MyProfileFragment;
+import nmct.howest.be.rideshare.Activities.Fragments.PlanningFragment;
+import nmct.howest.be.rideshare.Activities.Fragments.TripsFragment;
+import nmct.howest.be.rideshare.Activities.Fragments.SearchFragment;
 
 public class TabPagerAdapter extends FragmentStatePagerAdapter
 {
@@ -27,16 +27,16 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter
         switch (i) {
             case 0:
                 //Plan Fragment
-                return new PlannenFragment();
+                return new PlanningFragment();
             case 1:
                 //Search Fragment
-                return new ZoekenFragment();
+                return new SearchFragment();
             case 2:
                 //Trips Fragment
-                return new RittenFragment();
+                return new TripsFragment();
             case 3:
                 //Profile Fragment
-                return new MijnProfielFragment();
+                return new MyProfileFragment();
         }
         return null;
     }

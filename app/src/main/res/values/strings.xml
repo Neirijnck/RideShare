@@ -66,4 +66,11 @@
     <!-- Facebook login and admin -->
     <string name="app_id">551430101654024</string>
 
+    <!-- Transitions -->
+    <string name="transition_search_activity">transitionSearchActivity</string>
+    <string name="transition_details_activity">transitionDetailsActivity</string>
+
+    <!--Settings-->
+    <string name="title_activity_settings">Instellingen</string>
+
 </resources>
