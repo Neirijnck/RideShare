@@ -1,5 +1,6 @@
 package nmct.howest.be.rideshare.Activities.Fragments;
 
+import android.content.Intent;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
@@ -14,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 import nmct.howest.be.rideshare.Activities.Loaders.ProfileLoader;
+import nmct.howest.be.rideshare.Activities.ProfileActivity;
+import nmct.howest.be.rideshare.Activities.SearchActivity;
 import nmct.howest.be.rideshare.R;
 
 public class MyProfileFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>
@@ -50,7 +53,8 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
             case R.id.action_settings:
                 return true;
             case R.id.action_edit:
-                Toast.makeText(getActivity(), getString(R.string.action_edit), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), ProfileActivity.class);
+                startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);

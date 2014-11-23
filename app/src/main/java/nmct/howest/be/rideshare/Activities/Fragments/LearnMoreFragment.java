@@ -16,9 +16,6 @@ import com.viewpagerindicator.CirclePageIndicator;
 import nmct.howest.be.rideshare.Activities.Adapters.ImagePagerAdapter;
 import nmct.howest.be.rideshare.R;
 
-/**
- * Created by Preben on 5/11/2014.
- */
 public class LearnMoreFragment extends Fragment
 {
     private FragmentActivity context;

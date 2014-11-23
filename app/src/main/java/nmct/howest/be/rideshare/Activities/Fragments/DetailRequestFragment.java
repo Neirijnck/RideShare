@@ -7,9 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import nmct.howest.be.rideshare.R;
 
-/**
- * Created by Preben on 7/11/2014.
- */
 public class DetailRequestFragment extends Fragment
 {
     public DetailRequestFragment() {}

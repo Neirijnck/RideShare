@@ -39,6 +39,11 @@
 
     <!-- Profile -->
     <string name="Profile_Reviews">Beoordelingen</string>
+    <string name="Profile_Name">Naam</string>
+    <string name="Profile_FirstName">Voornaam</string>
+    <string name="Profile_Place">Plaats</string>
+    <string name="Profile_Auto">Type van auto</string>
+    <string name="Profile_Places">Aantal plaatsen</string>
 
     <!-- Search Results -->
     <string name="title_activity_zoek">Zoekresultaten</string>
@@ -70,7 +75,9 @@
     <string name="transition_search_activity">transitionSearchActivity</string>
     <string name="transition_details_activity">transitionDetailsActivity</string>
 
-    <!--Settings-->
+    <!-- Settings -->
     <string name="title_activity_settings">Instellingen</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

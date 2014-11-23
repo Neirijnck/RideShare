@@ -7,6 +7,6 @@
 
 
     <include layout="@layout/toolbar"
-        android:id="@+id/toolbarLayout" />
+        android:id="@+id/toolbarLayoutSearch" />
 
 </RelativeLayout>

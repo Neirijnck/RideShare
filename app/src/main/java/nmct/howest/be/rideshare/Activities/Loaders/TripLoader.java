@@ -14,9 +14,6 @@ import java.util.ArrayList;
 import nmct.howest.be.rideshare.Activities.Helpers.JSONLoaderHelper;
 import nmct.howest.be.rideshare.R;
 
-/**
- * Created by Preben on 12/11/2014.
- */
 public class TripLoader extends JSONLoaderHelper
 {
 

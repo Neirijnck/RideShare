@@ -9,9 +9,6 @@ import java.io.IOException;
 import nmct.howest.be.rideshare.Activities.Helpers.JSONLoaderHelper;
 import nmct.howest.be.rideshare.R;
 
-/**
- * Created by Preben on 15/11/2014.
- */
 public class ProfileLoader extends JSONLoaderHelper
 {
     public ProfileLoader(Context context)

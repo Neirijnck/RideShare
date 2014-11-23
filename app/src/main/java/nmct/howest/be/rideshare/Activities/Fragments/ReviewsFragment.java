@@ -7,9 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import nmct.howest.be.rideshare.R;
 
-/**
- * Created by Preben on 30/10/2014.
- */
 public class ReviewsFragment extends Fragment
 {
     public ReviewsFragment() {

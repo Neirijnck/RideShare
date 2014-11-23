@@ -54,6 +54,16 @@
         <activity
             android:name="nmct.howest.be.rideshare.Activities.SettingsActivity"
             android:label="@string/title_activity_settings" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="nmct.howest.be.rideshare.Activities.MainActivity" />
+        </activity>
+        <activity
+            android:name="nmct.howest.be.rideshare.Activities.ProfileActivity"
+            android:label="@string/title_activity_profile" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="nmct.howest.be.rideshare.Activities.MainActivity" />
         </activity>
     </application>
 

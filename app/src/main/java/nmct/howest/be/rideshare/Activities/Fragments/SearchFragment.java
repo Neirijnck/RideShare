@@ -2,6 +2,7 @@ package nmct.howest.be.rideshare.Activities.Fragments;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -22,7 +23,6 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import java.util.Calendar;
 
-import nmct.howest.be.rideshare.Activities.Helpers.TimePickerHelper;
 import nmct.howest.be.rideshare.Activities.SearchActivity;
 import nmct.howest.be.rideshare.R;
 
@@ -141,13 +141,13 @@ public class SearchFragment extends Fragment
 
             Log.e("", date);
 
-            txbDatePlan.setText(date.toString());
+            txbDatePlan.setText(date);
         }
     }
 
     //timepicker class
     public static class TimePickerFragment extends DialogFragment
-            implements TimePickerHelper.OnTimeSetListener {
+            implements TimePickerDialog.OnTimeSetListener {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -155,14 +155,24 @@ public class SearchFragment extends Fragment
             int hour = c.get(Calendar.HOUR_OF_DAY);
             int minute = c.get(Calendar.MINUTE);
 
-            return new TimePickerHelper(getActivity(), this, hour, minute,
+            return new TimePickerDialog(getActivity(), this, hour, minute,
                     DateFormat.is24HourFormat(getActivity()));
         }
 
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            String time = hourOfDay + ":" + minute;
+            String time;
+            if (hourOfDay < 10) {
+                time = "0" + hourOfDay + ":";
+            } else {
+                time = hourOfDay + ":";
+            }
+            if (minute < 10) {
+                time += "0" + minute;
+            } else {
+                time += minute;
+            }
 
-            txbTimePlan.setText(time.toString());
+            txbTimePlan.setText(time);
         }
     }
 

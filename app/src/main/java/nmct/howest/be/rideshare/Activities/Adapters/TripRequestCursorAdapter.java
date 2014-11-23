@@ -10,9 +10,6 @@ import android.widget.TextView;
 
 import nmct.howest.be.rideshare.R;
 
-/**
- * Created by Preben on 19/11/2014.
- */
 public class TripRequestCursorAdapter extends CursorAdapter
 {
     private Cursor mCursor;
