@@ -20,16 +20,6 @@ public class ProfileActivity extends ActionBarActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-
-//        FragmentManager fm = getSupportFragmentManager();
-//        FragmentTransaction ft = fm.beginTransaction();
-//
-//        ft.replace(R.id.fragment_container, fragment);
-//        ft.addToBackStack(null);
-//
-//        ft.commit();
-
     }
 
     @Override

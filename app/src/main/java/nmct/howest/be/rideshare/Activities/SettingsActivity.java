@@ -1,22 +1,33 @@
 package nmct.howest.be.rideshare.Activities;
 
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
+import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+
+import java.util.List;
+
 import nmct.howest.be.rideshare.R;
 
-public class SettingsActivity extends ActionBarActivity {
+public class SettingsActivity extends PreferenceActivity {
 
-    @Override
+   @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+       /*
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
+       
+
+       addPreferencesFromResource(R.xml.advanced_preferences);
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -28,4 +39,6 @@ public class SettingsActivity extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

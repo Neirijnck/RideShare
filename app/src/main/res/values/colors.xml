@@ -10,6 +10,7 @@
     <color name="rideshare_accent">#16a085</color>
     <color name="rideshare_background">#fafafa</color>
     <color name="rideshare_text">#87000000</color>
+    <color name="rideshare_icon_color">#ff555555</color>
 
     <!--Indigo Theme-->
 <!--    <color name="rideshare_primary">#3f51b5</color>
@@ -17,7 +18,8 @@
     <color name="rideshare_secondary">#FFFFFF</color>
     <color name="rideshare_accent">#ff4081</color>
     <color name="rideshare_background">#fafafa</color>
-    <color name="rideshare_text">#87000000</color>-->
+    <color name="rideshare_text">#87000000</color>
+    <color name="rideshare_icon_color">#ff555555</color>-->
 
     <!--Red Theme-->
 <!--    <color name="rideshare_primary">#F44336</color>
@@ -25,7 +27,8 @@
     <color name="rideshare_secondary">#FFFFFF</color>
     <color name="rideshare_accent">#03A9F4</color>
     <color name="rideshare_background">#fafafa</color>
-    <color name="rideshare_text">#87000000</color>-->
+    <color name="rideshare_text">#87000000</color>
+    <color name="rideshare_icon_color">#ff555555</color>-->
 
     <!--Blue theme-->
 <!--    <color name="rideshare_primary">#00bbd3</color>
@@ -33,6 +36,7 @@
     <color name="rideshare_secondary">#FFFFFF</color>
     <color name="rideshare_accent">#EEFF41</color>
     <color name="rideshare_background">#fafafa</color>
-    <color name="rideshare_text">#87000000</color>-->
+    <color name="rideshare_text">#87000000</color>
+    <color name="rideshare_icon_color">#ff555555</color>-->
 
 </resources>

@@ -1,7 +1,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:transitionName="@string/transition_search_activity"
     >
     <RelativeLayout
         xmlns:tools="http://schemas.android.com/tools"
@@ -25,96 +24,55 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/From"
-            android:id="@+id/txbVanZoek"
-            android:layout_below="@+id/txbZoeken"
-            android:layout_alignLeft="@+id/txbZoeken"
-            android:layout_alignStart="@+id/txbZoeken"
-            android:layout_marginTop="13dp"
-            android:textSize="17sp"
-            />
-
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/txtVanZoek"
-            android:layout_alignStart="@+id/txbVanPlan"
             android:layout_alignParentEnd="true"
-            android:layout_below="@+id/txbVanZoek"
-            android:layout_alignLeft="@+id/txbZoeken"
-            android:hint="Van" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/To"
-            android:id="@+id/txbNaarZoek"
-            android:layout_alignStart="@+id/txtVanPlan"
-            android:layout_below="@+id/txtVanZoek"
-            android:layout_alignLeft="@+id/txbZoeken"
-            android:layout_marginTop="13dp"
-            android:textSize="17sp" />
+            android:hint="@string/From"
+            android:layout_below="@+id/txbZoeken"
+            android:layout_toRightOf="@+id/imgIconSearchFrom"
+            android:layout_toEndOf="@+id/imgIconSearchFrom"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="25dp" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/txtNaarZoek"
-            android:layout_alignStart="@+id/txbNaarPlan"
-            android:layout_below="@+id/txbNaarZoek"
-            android:layout_alignLeft="@+id/txbZoeken"
             android:layout_alignRight="@+id/txtVanZoek"
             android:layout_alignEnd="@+id/txtVanZoek"
-            android:hint="Naar" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Date"
-            android:id="@+id/txbDatumZoek"
-            android:layout_alignStart="@+id/txtNaarPlan"
-            android:layout_below="@+id/txtNaarZoek"
-            android:layout_alignLeft="@+id/txbZoeken"
-            android:layout_marginTop="13dp"
-            android:textSize="17sp" />
+            android:hint="@string/To"
+            android:layout_below="@+id/txtVanZoek"
+            android:layout_alignLeft="@+id/txtVanZoek"
+            android:layout_alignStart="@+id/txtVanZoek"
+            android:layout_marginTop="25dp" />
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="144dp"
             android:layout_height="wrap_content"
             android:inputType="date"
             android:ems="10"
             android:id="@+id/txtDatumZoek"
             android:focusable="false"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/txbDatumZoek"
-            android:layout_alignLeft="@+id/txbZoeken"
-            android:layout_alignRight="@+id/txbZoeken"
-            android:layout_alignEnd="@+id/txbZoeken"
-            android:hint="01/01/2015" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Time"
-            android:id="@+id/txbUurZoek"
-            android:layout_toEndOf="@+id/txtDatumZoek"
-            android:layout_alignTop="@+id/txbDatumZoek"
-            android:layout_toRightOf="@+id/txtDatumZoek"
-            android:textSize="17sp" />
+            android:hint="@string/Date"
+            android:layout_below="@+id/txtNaarZoek"
+            android:layout_alignLeft="@+id/txtNaarZoek"
+            android:layout_alignStart="@+id/txtNaarZoek"
+            android:layout_marginTop="25dp" />
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="144dp"
             android:layout_height="wrap_content"
             android:inputType="time"
             android:ems="10"
             android:id="@+id/txtUurZoek"
             android:focusable="false"
-            android:layout_alignTop="@+id/txtDatumZoek"
-            android:layout_toRightOf="@+id/txtDatumZoek"
             android:layout_toEndOf="@+id/txtDatumZoek"
-            android:hint="15:00"/>
+            android:hint="@string/Time"
+            android:layout_alignTop="@+id/txtDatumZoek"
+            android:layout_alignRight="@+id/txtNaarZoek"
+            android:layout_alignEnd="@+id/txtNaarZoek" />
 
         <CheckBox
             android:layout_width="wrap_content"
@@ -122,24 +80,53 @@
             android:text="@string/Search_ShareFb"
             android:id="@+id/chkDelen"
             android:layout_below="@+id/txtDatumZoek"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="22dp"
             android:checked="false"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:textColor="@color/rideshare_text"
+            />
 
         <Button
             android:layout_width="120dp"
-            android:layout_height="36dp"
+            android:layout_height="40dp"
             android:text="@string/Searching"
             android:id="@+id/btnZoeken"
             android:layout_below="@+id/chkDelen"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="20dp"
             android:textAllCaps="true"
             android:textColor="@color/rideshare_secondary"
             android:background="@drawable/button_selector"
             android:elevation="2dp"
             />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgIconSearchFrom"
+            android:layout_alignTop="@+id/txtVanZoek"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/ic_place_grey600_36dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgIconSearchTo"
+            android:layout_alignTop="@+id/txtNaarZoek"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/ic_flag_grey600_36dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:layout_alignTop="@+id/txtDatumZoek"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/ic_access_time_grey600_36dp" />
     </RelativeLayout>
 </ScrollView>

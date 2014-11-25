@@ -24,6 +24,7 @@ import android.widget.TimePicker;
 import java.util.Calendar;
 
 import nmct.howest.be.rideshare.Activities.SearchActivity;
+import nmct.howest.be.rideshare.Activities.SettingsActivity;
 import nmct.howest.be.rideshare.R;
 
 public class SearchFragment extends Fragment
@@ -51,17 +52,7 @@ public class SearchFragment extends Fragment
             public void onClick(View view)
             {
                 Intent intent = new Intent(getActivity(), SearchActivity.class);
-
-                String transitionName = getString(R.string.transition_search_activity);
-
-                //Only lollipop, nice transition
-                ActivityOptionsCompat options =
-                        ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),
-                                view,   // The view which starts the transition
-                                transitionName    // The transitionName of the view we’re transitioning to
-                        );
-
-                ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
+                startActivity(intent);
             }
         });
 

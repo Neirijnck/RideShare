@@ -25,97 +25,53 @@
             android:layout_alignParentStart="true"
             android:capitalize="sentences" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/From"
-            android:id="@+id/txbVanPlan"
-            android:layout_below="@+id/txbPlannen"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="12dp"
-            android:textSize="17sp"
-            />
-
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/txtVanPlan"
-            android:layout_below="@+id/txbVanPlan"
-            android:layout_alignLeft="@+id/txbVanPlan"
-            android:layout_alignStart="@+id/txbVanPlan"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:hint="Van"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/To"
-            android:id="@+id/txbNaarPlan"
-            android:layout_below="@+id/txtVanPlan"
-            android:layout_alignLeft="@+id/txtVanPlan"
-            android:layout_alignStart="@+id/txtVanPlan"
-            android:layout_marginTop="12dp"
-            android:textSize="17sp" />
+            android:hint="@string/From"
+            android:layout_toRightOf="@+id/imgIconPlanningFrom"
+            android:layout_toEndOf="@+id/imgIconPlanningFrom"
+            android:layout_below="@+id/txbPlannen"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="25dp" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/txtNaarPlan"
-            android:layout_below="@+id/txbNaarPlan"
-            android:layout_alignLeft="@+id/txbNaarPlan"
-            android:layout_alignStart="@+id/txbNaarPlan"
             android:layout_alignRight="@+id/txtVanPlan"
             android:layout_alignEnd="@+id/txtVanPlan"
-            android:hint="Naar" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Date"
-            android:id="@+id/txbDatePlan"
-            android:layout_below="@+id/txtNaarPlan"
-            android:layout_alignLeft="@+id/txtNaarPlan"
-            android:layout_alignStart="@+id/txtNaarPlan"
-            android:layout_marginTop="12dp"
-            android:textSize="17sp" />
+            android:hint="@string/To"
+            android:layout_below="@+id/txtVanPlan"
+            android:layout_alignLeft="@+id/txtVanPlan"
+            android:layout_marginTop="25dp" />
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="144dp"
             android:layout_height="wrap_content"
             android:inputType="date"
             android:ems="10"
             android:id="@+id/txtDatePlan"
-            android:layout_below="@+id/txbDatePlan"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignRight="@+id/txbPlannen"
-            android:layout_alignEnd="@+id/txbPlannen"
             android:focusable="false"
-            android:hint="01/01/2015" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Time"
-            android:id="@+id/txbTimePlan"
-            android:layout_alignTop="@+id/txbDatePlan"
-            android:layout_toRightOf="@+id/txtDatePlan"
-            android:layout_toEndOf="@+id/txtDatePlan"
-            android:textSize="17sp" />
+            android:hint="@string/Date"
+            android:layout_below="@+id/txtNaarPlan"
+            android:layout_alignLeft="@+id/txtNaarPlan"
+            android:layout_marginTop="25dp" />
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="144dp"
             android:layout_height="wrap_content"
             android:inputType="time"
             android:ems="10"
             android:id="@+id/txtTimePlan"
             android:focusable="false"
-            android:layout_below="@+id/txbTimePlan"
-            android:layout_alignLeft="@+id/txbTimePlan"
-            android:layout_alignStart="@+id/txbTimePlan"
-            android:hint="15:00"/>
+            android:hint="@string/Time"
+            android:layout_toEndOf="@+id/txtDatePlan"
+            android:layout_alignTop="@+id/txtDatePlan"
+            android:layout_toRightOf="@+id/txtDatePlan" />
 
          <android.support.v7.widget.SwitchCompat
              android:layout_width="match_parent"
@@ -123,13 +79,12 @@
              android:text="@string/Repeat"
              android:id="@+id/repeatSwitch"
              android:layout_centerVertical="true"
-             android:layout_alignLeft="@+id/txtDatePlan"
-             android:layout_alignStart="@+id/txtDatePlan"
-             android:layout_below="@+id/txtDatePlan"
-             android:layout_marginTop="12dp"
+             android:layout_below="@+id/txtPrice"
+             android:layout_marginTop="22dp"
              android:checked="false"
              android:textColor="@color/rideshare_text"
-             >
+             android:layout_alignParentLeft="true"
+             android:layout_alignParentStart="true">
          </android.support.v7.widget.SwitchCompat>
 
         <LinearLayout
@@ -209,39 +164,69 @@
         </LinearLayout>
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Price"
-            android:id="@+id/txbPrijs"
-            android:layout_below="@+id/tglBtns"
-            android:layout_marginTop="12dp"
-            android:textSize="17sp" />
-
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:ems="10"
             android:id="@+id/txtPrice"
-            android:layout_below="@+id/txbPrijs"
             android:hint="€0"
-            />
+            android:layout_toStartOf="@+id/txtTimePlan"
+            android:layout_below="@+id/txtDatePlan"
+            android:layout_alignLeft="@+id/txtDatePlan"
+            android:layout_alignStart="@+id/txtDatePlan"
+            android:layout_marginTop="25dp"/>
 
         <Button
             android:layout_width="120dp"
-            android:layout_height="36dp"
+            android:layout_height="40dp"
             android:text="@string/Save"
             android:textAllCaps="true"
             android:id="@+id/btnOpslaan"
-            android:layout_below="@+id/txtPrice"
+            android:layout_below="@+id/repeatSwitch"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="20dp"
             android:textColor="@color/rideshare_secondary"
             android:background="@drawable/button_selector"
             android:elevation="2dp"
             />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgIconPlanningFrom"
+            android:src="@drawable/ic_place_grey600_36dp"
+            android:layout_alignTop="@+id/txtVanPlan"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgIconPlanningTo"
+            android:layout_alignTop="@+id/txtNaarPlan"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/ic_flag_grey600_36dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgIconPlanningTime"
+            android:layout_alignTop="@+id/txtDatePlan"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/ic_access_time_grey600_36dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgIconPlanningMoney"
+            android:layout_alignTop="@+id/txtPrice"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/ic_attach_money_grey600_36dp" />
 
     </RelativeLayout>
 </ScrollView>

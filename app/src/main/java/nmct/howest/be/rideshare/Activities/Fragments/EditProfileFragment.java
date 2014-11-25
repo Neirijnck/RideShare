@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,13 @@ public class EditProfileFragment extends Fragment {
 
     public EditProfileFragment() {
 
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        ((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.title_fragment_edit_profile));
     }
 
     @Override

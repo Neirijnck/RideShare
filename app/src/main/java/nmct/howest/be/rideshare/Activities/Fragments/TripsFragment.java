@@ -68,7 +68,6 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
     private void fillData()
     {
         //Setting cursoradapter
-        mAdapter = new TripRequestCursorAdapter(getActivity(), null, 0);
         listAanvragen.setAdapter(mAdapter);
     }
 
@@ -82,6 +81,7 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor)
     {
+        mAdapter = new TripRequestCursorAdapter(getActivity(), null, 0);
         mAdapter.swapCursor(cursor);
     }
 

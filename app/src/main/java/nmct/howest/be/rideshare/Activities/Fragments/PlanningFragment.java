@@ -56,10 +56,12 @@ public class PlanningFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_planning, container, false);
 
+
         //Get widgets
         repeatSwitch = (SwitchCompat) view.findViewById(R.id.repeatSwitch);
         tglBtns = (LinearLayout) view.findViewById(R.id.tglBtns);
         txtPrice = (EditText) view.findViewById(R.id.txtPrice);
+        btnSave = (Button) view.findViewById(R.id.btnOpslaan);
 
         //Enable togglebuttons when switch is on
         repeatSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -115,10 +117,6 @@ public class PlanningFragment extends Fragment
                 }
             }
         });
-
-
-        //Button listener
-        btnSave = (Button) view.findViewById(R.id.btnOpslaan);
 
         return view;
     }

@@ -1,15 +1,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="nmct.howest.be.rideshare.Activities.ProfileActivity"
+    >
 
     <include layout="@layout/toolbar"
         android:id="@+id/toolbarLayoutProfile" />
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/fragment_container"
+    <fragment
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-    </RelativeLayout>
+        android:layout_height="match_parent"
+        android:id="@+id/settings_fragment"
+        android:name="nmct.howest.be.rideshare.Activities.Fragments.EditProfileFragment"
+        tools:layout="@layout/fragment_edit_profile"
+        android:layout_below="@+id/toolbarLayoutProfile" />
 
 </RelativeLayout>

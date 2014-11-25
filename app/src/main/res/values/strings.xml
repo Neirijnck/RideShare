@@ -16,10 +16,10 @@
     <string name="Profile">Profiel</string>
 
     <!-- Common -->
-    <string name="From">Van:</string>
-    <string name="To">Naar:</string>
-    <string name="Date">Datum:</string>
-    <string name="Time">Tijd:</string>
+    <string name="From">Van</string>
+    <string name="To">Naar</string>
+    <string name="Date">Datum</string>
+    <string name="Time">Tijd</string>
     <string name="Repeat">Herhaal</string>
     <string name="Price">Prijs</string>
     <string name="Save">Opslaan</string>
@@ -38,12 +38,14 @@
     <string name="Trip_SavedTrips">Mijn opgeslagen ritten</string>
 
     <!-- Profile -->
+    <string name="title_activity_profile">Profiel</string>
     <string name="Profile_Reviews">Beoordelingen</string>
     <string name="Profile_Name">Naam</string>
     <string name="Profile_FirstName">Voornaam</string>
     <string name="Profile_Place">Plaats</string>
-    <string name="Profile_Auto">Type van auto</string>
+    <string name="Profile_Car">Type auto</string>
     <string name="Profile_Places">Aantal plaatsen</string>
+    <string name="title_fragment_edit_profile">Profiel</string>
 
     <!-- Search Results -->
     <string name="title_activity_zoek">Zoekresultaten</string>
@@ -66,18 +68,11 @@
     <string name="OR_Repeat">Herhaald:</string>
     <string name="OR_Price">Prijs:</string>
     <string name="OR_Travelers">Medereizigers:</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Facebook login and admin -->
     <string name="app_id">551430101654024</string>
 
-    <!-- Transitions -->
-    <string name="transition_search_activity">transitionSearchActivity</string>
-    <string name="transition_details_activity">transitionDetailsActivity</string>
-
     <!-- Settings -->
     <string name="title_activity_settings">Instellingen</string>
-    <string name="title_activity_profile">ProfileActivity</string>
-    <string name="hello_world">Hello world!</string>
 
 </resources>
