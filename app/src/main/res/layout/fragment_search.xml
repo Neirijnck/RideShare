@@ -89,7 +89,7 @@
 
         <Button
             android:layout_width="120dp"
-            android:layout_height="40dp"
+            android:layout_height="36dp"
             android:text="@string/Searching"
             android:id="@+id/btnZoeken"
             android:layout_below="@+id/chkDelen"
@@ -103,28 +103,28 @@
             />
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="28dp"
             android:layout_height="wrap_content"
             android:id="@+id/imgIconSearchFrom"
-            android:layout_alignTop="@+id/txtVanZoek"
+            android:layout_alignBottom="@+id/txtVanZoek"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:src="@drawable/ic_place_grey600_36dp" />
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="28dp"
             android:layout_height="wrap_content"
             android:id="@+id/imgIconSearchTo"
-            android:layout_alignTop="@+id/txtNaarZoek"
+            android:layout_alignBottom="@+id/txtNaarZoek"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:src="@drawable/ic_flag_grey600_36dp" />
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="28dp"
             android:layout_height="wrap_content"
             android:id="@+id/imageView"
-            android:layout_alignTop="@+id/txtDatumZoek"
+            android:layout_alignBottom="@+id/txtDatumZoek"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:src="@drawable/ic_access_time_grey600_36dp" />

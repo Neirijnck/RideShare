@@ -13,15 +13,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+
+import com.facebook.widget.ProfilePictureView;
+
 import nmct.howest.be.rideshare.Activities.Loaders.ProfileLoader;
 import nmct.howest.be.rideshare.Activities.ProfileActivity;
-import nmct.howest.be.rideshare.Activities.SearchActivity;
 import nmct.howest.be.rideshare.R;
 
 public class MyProfileFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>
 {
     private CursorAdapter mAdapter;
+    private ProfilePictureView profilePictureView;
 
     public MyProfileFragment() {}
 
@@ -37,7 +39,12 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        View view =  inflater.inflate(R.layout.fragment_profile, container, false);
+
+        profilePictureView = (ProfilePictureView) view.findViewById(R.id.imgProfilePicture);
+        profilePictureView.setCropped(true);
+
+        return view;
     }
 
     @Override

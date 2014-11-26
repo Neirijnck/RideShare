@@ -93,7 +93,7 @@
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
+        android:layout_height="36dp"
         android:text="@string/Button_Accept"
         android:id="@+id/btnVerzoekAccept"
         android:layout_below="@+id/txtVerzoekBijgevoegd"
@@ -109,7 +109,7 @@
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
+        android:layout_height="36dp"
         android:text="@string/Button_Decline"
         android:id="@+id/btnVerzoekWeiger"
         android:width="140dp"

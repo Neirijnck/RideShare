@@ -179,7 +179,7 @@
 
         <Button
             android:layout_width="120dp"
-            android:layout_height="40dp"
+            android:layout_height="36dp"
             android:text="@string/Save"
             android:textAllCaps="true"
             android:id="@+id/btnOpslaan"
@@ -193,37 +193,37 @@
             />
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="28dp"
             android:layout_height="wrap_content"
             android:id="@+id/imgIconPlanningFrom"
             android:src="@drawable/ic_place_grey600_36dp"
-            android:layout_alignTop="@+id/txtVanPlan"
+            android:layout_alignBottom="@+id/txtVanPlan"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="28dp"
             android:layout_height="wrap_content"
             android:id="@+id/imgIconPlanningTo"
-            android:layout_alignTop="@+id/txtNaarPlan"
+            android:layout_alignBottom="@+id/txtNaarPlan"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:src="@drawable/ic_flag_grey600_36dp" />
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="28dp"
             android:layout_height="wrap_content"
             android:id="@+id/imgIconPlanningTime"
-            android:layout_alignTop="@+id/txtDatePlan"
+            android:layout_alignBottom="@+id/txtDatePlan"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:src="@drawable/ic_access_time_grey600_36dp" />
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="28dp"
             android:layout_height="wrap_content"
             android:id="@+id/imgIconPlanningMoney"
-            android:layout_alignTop="@+id/txtPrice"
+            android:layout_alignBottom="@+id/txtPrice"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:src="@drawable/ic_attach_money_grey600_36dp" />

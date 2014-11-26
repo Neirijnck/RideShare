@@ -13,14 +13,14 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingBottom="@dimen/activity_vertical_margin">
 
-        <ImageView
+        <com.facebook.widget.ProfilePictureView
             android:layout_width="130dp"
             android:layout_height="130dp"
-            android:id="@+id/imgProfielFoto"
-            android:src="@drawable/account"
-            android:layout_alignParentTop="true"
+            android:id="@+id/imgProfilePicture"
             android:layout_alignRight="@+id/txbBeoordelingen"
-            android:layout_alignEnd="@+id/txbBeoordelingen" />
+            android:layout_alignParentTop="true"
+            android:layout_alignEnd="@+id/txbBeoordelingen"
+            ></com.facebook.widget.ProfilePictureView>
 
         <TextView
             android:layout_width="wrap_content"
@@ -28,10 +28,10 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Voornaam Naam"
             android:id="@+id/txtNaam"
-            android:layout_toEndOf="@+id/imgProfielFoto"
+            android:layout_toEndOf="@+id/imgProfilePicture"
             android:textStyle="bold"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/imgProfielFoto"
+            android:layout_toRightOf="@+id/imgProfilePicture"
             android:layout_marginLeft="16dp"
             />
 
@@ -73,7 +73,7 @@
             android:layout_height="fill_parent"
             android:name="nmct.howest.be.rideshare.Activities.Fragments.ReviewsFragment"
             tools:layout="@layout/fragment_reviews"
-            android:layout_below="@+id/imgProfielFoto"
+            android:layout_below="@+id/imgProfilePicture"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="25dp">

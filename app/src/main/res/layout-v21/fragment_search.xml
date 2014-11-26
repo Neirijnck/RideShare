@@ -96,35 +96,35 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginTop="20dp"
-            android:textAllCaps="true"
             android:textColor="@color/rideshare_secondary"
+            android:textAllCaps="true"
             android:elevation="2dp"
             android:stateListAnimator="@anim/button_elevation"
             />
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="28dp"
             android:layout_height="wrap_content"
             android:id="@+id/imgIconSearchFrom"
-            android:layout_alignTop="@+id/txtVanZoek"
+            android:layout_alignBottom="@+id/txtVanZoek"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:src="@drawable/ic_place_grey600_36dp" />
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="28dp"
             android:layout_height="wrap_content"
             android:id="@+id/imgIconSearchTo"
-            android:layout_alignTop="@+id/txtNaarZoek"
+            android:layout_alignBottom="@+id/txtNaarZoek"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:src="@drawable/ic_flag_grey600_36dp" />
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="28dp"
             android:layout_height="wrap_content"
             android:id="@+id/imageView"
-            android:layout_alignTop="@+id/txtDatumZoek"
+            android:layout_alignBottom="@+id/txtDatumZoek"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:src="@drawable/ic_access_time_grey600_36dp" />
