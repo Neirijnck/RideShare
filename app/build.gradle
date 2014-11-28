@@ -37,4 +37,5 @@ dependencies {
     compile 'com.viewpagerindicator:library:2.4.1@aar'
     compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
     compile 'com.android.support:support-v4:21.0.2'
+    compile "com.google.android.gms:play-services:3.1.+"
 }

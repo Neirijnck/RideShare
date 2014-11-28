@@ -27,20 +27,25 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TimePicker;
+
 import java.util.Calendar;
 
+import nmct.howest.be.rideshare.Activities.Helpers.POSTHelper;
 import nmct.howest.be.rideshare.Activities.SearchActivity;
 import nmct.howest.be.rideshare.R;
 
-public class PlanningFragment extends Fragment
-{
+public class PlanningFragment extends Fragment{
+
     //Variables
     private SwitchCompat repeatSwitch;
     private LinearLayout tglBtns;
-    private Button btnSave;
     static EditText txbDatePlan;
     static EditText txbTimePlan;
     static EditText txtPrice;
+    static EditText txtNaarPlan;
+    static EditText txtVanPlan;
+    static Button btnOpslaan;
+
 
     //Ctor
     public PlanningFragment() {}
@@ -61,7 +66,9 @@ public class PlanningFragment extends Fragment
         repeatSwitch = (SwitchCompat) view.findViewById(R.id.repeatSwitch);
         tglBtns = (LinearLayout) view.findViewById(R.id.tglBtns);
         txtPrice = (EditText) view.findViewById(R.id.txtPrice);
-        btnSave = (Button) view.findViewById(R.id.btnOpslaan);
+        txtNaarPlan = (EditText) view.findViewById(R.id.txtNaarPlan);
+        txtVanPlan = (EditText) view.findViewById(R.id.txtVanPlan);
+        btnOpslaan = (Button) view.findViewById(R.id.btnOpslaan);
 
         //Enable togglebuttons when switch is on
         repeatSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -115,6 +122,21 @@ public class PlanningFragment extends Fragment
                     txtPrice.setText("€");
                     Selection.setSelection(txtPrice.getText(), txtPrice.getText().length());
                 }
+            }
+        });
+
+        btnOpslaan.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                String date = txbDatePlan.getText().toString();
+                String time = txbTimePlan.getText().toString();
+                String price = txtPrice.getText().toString();
+                String from = txtVanPlan.getText().toString();
+                String to = txtNaarPlan.getText().toString();
+
+                //sendPostRequest(from, to);
+                POSTHelper.PlanTrip(from, to, date, time, price);
             }
         });
 
@@ -175,6 +197,49 @@ public class PlanningFragment extends Fragment
             tglBtns.startAnimation(fade_out);
         }
     }
+
+
+
+    //POST
+    /*public void sendPostRequest(String from, String to) {
+        new AsyncTask<Void, Void, String>() {
+            @Override
+            protected String doInBackground(Void... params) {
+                try {
+                    HttpClient httpclient = new DefaultHttpClient();
+                    HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/trips");
+
+                    //set header
+                    httppost.addHeader("auth", "000");
+
+                    // Add your data
+                    List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+                    parameters.add(new BasicNameValuePair("from", from));
+                    parameters.add(new BasicNameValuePair("to", to));
+                    //nameValuePairs.add(new BasicNameValuePair("datetime", datetime));
+                    httppost.setEntity(new UrlEncodedFormEntity(parameters));
+
+                    // Execute HTTP Post Request
+                    HttpResponse response = httpclient.execute(httppost);
+
+                    HttpEntity entity = response.getEntity();
+
+                    InputStream is = entity.getContent();
+
+                    Toast.makeText(getActivity(), "send", Toast.LENGTH_LONG).show();
+
+                }
+                catch (ClientProtocolException e) {
+                    Log.e("log_tag", "Error in http connection "+e.toString());
+                } catch (IOException e) {
+                    Log.e("log_tag", "Error in http connection "+e.toString());
+                }
+            }
+
+        }.execute(null, null, null);
+
+
+    }*/
 
 
 

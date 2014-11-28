@@ -53,6 +53,7 @@ public class LoginFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
+
         //Has internet?
         Context c = getActivity();
         if(!ConnectivityHelper.isNetworkAvailable(c)) {
@@ -68,8 +69,8 @@ public class LoginFragment extends Fragment
             });
             builder.show();
         }
+
         learnMore = (TextView) view.findViewById(R.id.txbLearnMore);
-        //Set click listener for "Learn more" textview
         learnMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,6 +78,8 @@ public class LoginFragment extends Fragment
                 slideUpFragment();
             }
         });
+
+
 
         //Facebook Login
         LoginButton authButton = (LoginButton) view.findViewById(R.id.btnLogin);
@@ -116,7 +119,6 @@ public class LoginFragment extends Fragment
                 }
             }
         });
-        //End Facebook Login
 
         return view;
     }
@@ -134,8 +136,7 @@ public class LoginFragment extends Fragment
         return (session != null && session.isOpened());
     }
 
-    private boolean isSubsetOf(Collection<String> subset,
-                               Collection<String> superset) {
+    private boolean isSubsetOf(Collection<String> subset, Collection<String> superset) {
         for (String string : subset) {
             if (!superset.contains(string)) {
                 return false;

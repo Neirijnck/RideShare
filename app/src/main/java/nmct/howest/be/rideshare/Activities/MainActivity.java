@@ -4,12 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.facebook.Session;
@@ -29,6 +27,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Set toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -42,17 +41,8 @@ public class MainActivity extends ActionBarActivity {
         tabs.setViewPager(pager);
         tabs.setTextColor(getResources().getColor(R.color.rideshare_secondary));
 
-        //Facebook session check
-
-
-
-
-
-
-
         //Not necessary with our pagerslidingtabstrip
-/*
-        tabs.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+/*      tabs.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 actionBar = getActionBar();
@@ -73,12 +63,10 @@ public class MainActivity extends ActionBarActivity {
 
                 @Override
                 public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-
                 }
 
                 @Override
                 public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-
                 }
             };
 
@@ -99,7 +87,6 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_settings:
                 Intent intent = new Intent(this, SettingsActivity.class);
@@ -135,8 +122,5 @@ public class MainActivity extends ActionBarActivity {
             //clear your preferences if saved
 
         }
-
     }
-
-
 }
