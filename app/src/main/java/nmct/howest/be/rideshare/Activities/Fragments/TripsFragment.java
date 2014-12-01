@@ -17,12 +17,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import com.melnykov.fab.FloatingActionButton;
+
 import java.util.List;
 
 import nmct.howest.be.rideshare.Activities.Adapters.TripRequestAdapter;
 import nmct.howest.be.rideshare.Activities.Adapters.TripRequestedAdapter;
 import nmct.howest.be.rideshare.Activities.Adapters.TripSavedAdapter;
 import nmct.howest.be.rideshare.Activities.Loaders.Json.TripLoader;
+import nmct.howest.be.rideshare.Activities.MainActivity;
 import nmct.howest.be.rideshare.Activities.Models.Review;
 import nmct.howest.be.rideshare.Activities.Models.Trip;
 import nmct.howest.be.rideshare.Activities.SearchActivity;
@@ -97,13 +100,6 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    //Method to fill the data in UI
-    private void fillData()
-    {
-        //Setting cursoradapter
-        listAanvragen.setAdapter(mAdapter);
     }
 
     //Implementation of the triploader

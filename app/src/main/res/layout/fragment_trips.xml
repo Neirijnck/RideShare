@@ -84,6 +84,7 @@
     android:src="@drawable/ic_action_add"
     fab:fab_colorNormal="@color/rideshare_primary"
     fab:fab_colorPressed="@color/rideshare_primary_dark"
-    fab:fab_colorRipple="@color/rideshare_secondary" />
+    fab:fab_colorRipple="@color/rideshare_secondary"
+        />
 
 </FrameLayout>
