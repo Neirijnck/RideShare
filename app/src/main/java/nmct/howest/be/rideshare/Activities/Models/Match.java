@@ -72,4 +72,8 @@ public class Match {
         this.messages = messages;
         this.status = status;
     }
+
+    public Match() {
+    }
+
 }

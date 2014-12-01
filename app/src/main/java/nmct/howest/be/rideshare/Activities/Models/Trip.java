@@ -91,4 +91,7 @@ public class Trip {
         this.repeat = repeat;
         this.matches = matches;
     }
+
+    public Trip() {
+    }
 }

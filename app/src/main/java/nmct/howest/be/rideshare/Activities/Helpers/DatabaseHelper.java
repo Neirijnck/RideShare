@@ -9,6 +9,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
@@ -19,7 +20,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class POSTHelper {
+public class DatabaseHelper {
 
     public static void AddUser(String userName, String firstName, String lastName, String email, String fbToken, String fbLink, String fbID, String location, String gender, String regID) {
         try {
@@ -41,6 +42,34 @@ public class POSTHelper {
 
             PostAsync task = new PostAsync();
             task.execute(httppost);
+        }
+        catch (IOException e) {
+            Log.d("", "Error in http connection " + e.toString());
+        }
+    }
+
+    public static void EditUser(String userName, String firstName, String lastName, String email, String fbToken, String fbLink, String fbID, String location, String gender, String regID)
+    {
+        try {
+            HttpPut httpput = new HttpPut();
+            httpput.addHeader("auth", fbToken);
+
+
+            List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+            parameters.add(new BasicNameValuePair("userName", userName));
+            parameters.add(new BasicNameValuePair("firstName", firstName));
+            parameters.add(new BasicNameValuePair("lastName", lastName));
+            parameters.add(new BasicNameValuePair("email", email));
+            parameters.add(new BasicNameValuePair("fbLink", fbLink));
+            parameters.add(new BasicNameValuePair("fbID", fbID));
+            parameters.add(new BasicNameValuePair("location", location));
+            parameters.add(new BasicNameValuePair("gender", gender));
+            parameters.add(new BasicNameValuePair("notifications", regID));
+            parameters.add(new BasicNameValuePair("firstName", firstName));
+            httpput.setEntity(new UrlEncodedFormEntity(parameters));
+
+            PutAsync task = new PutAsync();
+            task.execute(httpput);
         }
         catch (IOException e) {
             Log.d("", "Error in http connection " + e.toString());
@@ -78,19 +107,15 @@ public class POSTHelper {
     }
 
 
-
-
-
-
-    //Helper
+    //Helper Post
     public static class PostAsync extends AsyncTask<HttpPost, Void, String> {
 
         @Override
-        protected String doInBackground(HttpPost... param) {
+        protected String doInBackground(HttpPost... params) {
             try {
                 HttpClient httpclient = new DefaultHttpClient();
 
-                HttpPost httppost = param[0];
+                HttpPost httppost = params[0];
                 HttpResponse response = httpclient.execute(httppost);
 
                 HttpEntity entity = response.getEntity();
@@ -104,28 +129,52 @@ public class POSTHelper {
                 return null;
             }
         }
+    }
 
+    //Helper Put
+    public static class PutAsync extends AsyncTask<HttpPut, Void, String>
+    {
+        @Override
+        protected String doInBackground(HttpPut... params) {
+            try
+            {
+                HttpClient httpClient = new DefaultHttpClient();
 
-        private String convertStreamToString(InputStream is) {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-            StringBuilder sb = new StringBuilder();
+                HttpPut httpput = params[0];
+                HttpResponse response = httpClient.execute(httpput);
 
-            String line = null;
-            try {
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line + "\n");
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    is.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                HttpEntity entity = response.getEntity();
+                String result = convertStreamToString(entity.getContent());
+
+                return new String(result);
             }
-            return sb.toString();
-
+            catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
         }
     }
+
+    public static String convertStreamToString(InputStream is) {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        StringBuilder sb = new StringBuilder();
+
+        String line = null;
+        try {
+            while ((line = reader.readLine()) != null) {
+                sb.append(line + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return sb.toString();
+
+    }
+
 }

@@ -37,4 +37,8 @@ public class Message {
         this.datetime = datetime;
         this.text = text;
     }
+
+    public Message() {
+    }
+
 }

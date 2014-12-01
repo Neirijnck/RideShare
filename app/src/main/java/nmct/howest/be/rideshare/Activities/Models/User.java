@@ -151,4 +151,7 @@ public class User {
         this.amountOfSeats = amountOfSeats;
         this.reviews = reviews;
     }
+
+    public User() { }
+
 }

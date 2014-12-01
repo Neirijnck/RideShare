@@ -13,20 +13,33 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.melnykov.fab.FloatingActionButton;
+import java.util.List;
 
-import nmct.howest.be.rideshare.Activities.Adapters.TripRequestCursorAdapter;
-import nmct.howest.be.rideshare.Activities.Loaders.TripLoader;
-import nmct.howest.be.rideshare.Activities.MainActivity;
+import nmct.howest.be.rideshare.Activities.Adapters.TripRequestAdapter;
+import nmct.howest.be.rideshare.Activities.Adapters.TripRequestedAdapter;
+import nmct.howest.be.rideshare.Activities.Adapters.TripSavedAdapter;
+import nmct.howest.be.rideshare.Activities.Loaders.Json.TripLoader;
+import nmct.howest.be.rideshare.Activities.Models.Review;
+import nmct.howest.be.rideshare.Activities.Models.Trip;
 import nmct.howest.be.rideshare.Activities.SearchActivity;
 import nmct.howest.be.rideshare.R;
 
-public class TripsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>
+public class TripsFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<Trip>>
 {
-    private CursorAdapter mAdapter;
-    private ListView listAanvragen;
+    private List<Trip> mTrips;
+
+    private ArrayAdapter mAdapterTripSaved;
+    private ListView listMyTrips;
+
+    private ArrayAdapter mAdapterTripRequest;
+    private ListView listRequestTrips;
+
+    private ArrayAdapter mAdapterTripRequested;
+    private ListView listRequestedTrips;
 
     public TripsFragment() {}
 
@@ -34,16 +47,14 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
         //Init loader to get data
-        getLoaderManager().initLoader(0, null, this);
+        getLoaderManager().initLoader(0, null, this).forceLoad();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view;
-        view = inflater.inflate(R.layout.fragment_trips, container, false);
-
-
+        View view = inflater.inflate(R.layout.fragment_trips, container, false);
 
 
         FloatingActionButton addButton = (FloatingActionButton) view.findViewById(R.id.add_button);
@@ -55,9 +66,18 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
         });
 
 
-        //List ophalen en opvullen
-        listAanvragen = (ListView) view.findViewById(R.id.lstRitAanvragen);
-        fillData();
+        //Lists ophalen en opvullen
+        listMyTrips = (ListView) view.findViewById(R.id.lstOpgeslagenRitten);
+        listRequestTrips = (ListView) view.findViewById(R.id.lstRitAanvragen);
+        listRequestedTrips = (ListView) view.findViewById(R.id.lstRitVerzoeken);
+
+        //Setting adapters
+        mAdapterTripSaved = new TripSavedAdapter(getActivity(), R.layout.card_trip, R.id.txtTripInfo1);
+        mAdapterTripRequest = new TripRequestAdapter(getActivity(), R.layout.card_trip, R.id.txtTripInfo1);
+        mAdapterTripRequested = new TripRequestedAdapter(getActivity(), R.layout.card_trip, R.id.txtTripInfo1);
+
+        listMyTrips.setAdapter(mAdapterTripSaved);
+
 
         return view;
     }
@@ -88,21 +108,22 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
 
     //Implementation of the triploader
     @Override
-    public Loader<Cursor> onCreateLoader(int i, Bundle bundle)
+    public Loader<List<Trip>> onCreateLoader(int i, Bundle bundle)
     {
-        return new TripLoader(getActivity());
+        String url = "http://188.226.154.228:8080/api/v1/trips";
+        return new TripLoader(getActivity(), url );
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor)
+    public void onLoadFinished(Loader<List<Trip>> cursorLoader, List<Trip> trips)
     {
-        mAdapter = new TripRequestCursorAdapter(getActivity(), null, 0);
-        mAdapter.swapCursor(cursor);
+        mTrips = trips;
+        mAdapterTripSaved.addAll(mTrips);
     }
 
     @Override
-    public void onLoaderReset(Loader<Cursor> cursorLoader)
+    public void onLoaderReset(Loader<List<Trip>> cursorLoader)
     {
-        mAdapter.swapCursor(null);
+        mTrips.clear();
     }
 }

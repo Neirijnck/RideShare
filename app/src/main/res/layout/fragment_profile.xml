@@ -1,17 +1,14 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-
-    <RelativeLayout
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         tools:context="nmct.howest.be.rideshare.Activities.Fragments.MyProfileFragment"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin">
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        >
 
         <com.facebook.widget.ProfilePictureView
             android:layout_width="130dp"
@@ -35,15 +32,26 @@
             android:layout_marginLeft="16dp"
             />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username"
+        android:id="@+id/txtUserName"
+        android:layout_below="@+id/txtNaam"
+        android:layout_alignLeft="@+id/txtNaam"
+        android:layout_alignStart="@+id/txtNaam"
+        android:layout_marginTop="0dp"
+        android:textSize="12sp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Plaats"
             android:id="@+id/txtPlaats"
-            android:layout_below="@+id/txtNaam"
-            android:layout_alignLeft="@+id/txtNaam"
-            android:layout_alignStart="@+id/txtNaam"
-            android:layout_marginTop="10dp"
+            android:layout_below="@+id/txtUserName"
+            android:layout_alignLeft="@+id/txtUserName"
+            android:layout_alignStart="@+id/txtUserName"
+            android:layout_marginTop="7dp"
             android:textSize="17sp" />
 
         <TextView
@@ -54,7 +62,7 @@
             android:layout_below="@+id/txtPlaats"
             android:layout_alignLeft="@+id/txtPlaats"
             android:layout_alignStart="@+id/txtPlaats"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="4dp"
             android:textSize="17sp" />
 
         <TextView
@@ -65,19 +73,19 @@
             android:layout_below="@+id/txtGeslachtLeeftijd"
             android:layout_alignLeft="@+id/txtGeslachtLeeftijd"
             android:layout_alignStart="@+id/txtGeslachtLeeftijd"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="4dp"
             android:textSize="17sp" />
 
         <fragment
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:name="nmct.howest.be.rideshare.Activities.Fragments.ReviewsFragment"
             tools:layout="@layout/fragment_reviews"
             android:layout_below="@+id/imgProfilePicture"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="25dp">
+            android:layout_marginTop="25dp"
+            android:layout_alignParentBottom="true">
         </fragment>
 
     </RelativeLayout>
-</ScrollView>

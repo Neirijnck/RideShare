@@ -30,7 +30,7 @@ import android.widget.TimePicker;
 
 import java.util.Calendar;
 
-import nmct.howest.be.rideshare.Activities.Helpers.POSTHelper;
+import nmct.howest.be.rideshare.Activities.Helpers.DatabaseHelper;
 import nmct.howest.be.rideshare.Activities.SearchActivity;
 import nmct.howest.be.rideshare.R;
 
@@ -136,7 +136,7 @@ public class PlanningFragment extends Fragment{
                 String to = txtNaarPlan.getText().toString();
 
                 //sendPostRequest(from, to);
-                POSTHelper.PlanTrip(from, to, date, time, price);
+                DatabaseHelper.PlanTrip(from, to, date, time, price);
             }
         });
 

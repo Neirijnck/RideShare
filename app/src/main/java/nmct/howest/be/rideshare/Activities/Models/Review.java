@@ -49,4 +49,8 @@ public class Review {
         this.score = score;
         this.text = text;
     }
+
+    public Review() {
+    }
+
 }

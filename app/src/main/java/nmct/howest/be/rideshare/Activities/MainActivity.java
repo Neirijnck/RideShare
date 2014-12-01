@@ -41,42 +41,6 @@ public class MainActivity extends ActionBarActivity {
         tabs.setViewPager(pager);
         tabs.setTextColor(getResources().getColor(R.color.rideshare_secondary));
 
-        //Not necessary with our pagerslidingtabstrip
-/*      tabs.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-                actionBar = getActionBar();
-                actionBar.setSelectedNavigationItem(position);
-            }
-        });
-
-
-       //Enable tabs as navigation
-        actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-            ActionBar.TabListener tabListener = new ActionBar.TabListener() {
-                @Override
-                public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-                    pager.setCurrentItem(tab.getPosition());
-                }
-
-                @Override
-                public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-                }
-
-                @Override
-                public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-                }
-            };
-
-            //Add our tabs
-            actionBar.addTab(actionBar.newTab().setText(getString(R.string.Plan)).setTabListener(tabListener));
-            actionBar.addTab(actionBar.newTab().setText(getString(R.string.Search)).setTabListener(tabListener));
-            actionBar.addTab(actionBar.newTab().setText(getString(R.string.Trips)).setTabListener(tabListener));
-            actionBar.addTab(actionBar.newTab().setText(getString(R.string.Profile)).setTabListener(tabListener));
-        }*/
-
     }
 
     @Override

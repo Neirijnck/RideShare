@@ -43,6 +43,7 @@
     <string name="Profile_Reviews">Beoordelingen</string>
     <string name="Profile_Name">Naam</string>
     <string name="Profile_FirstName">Voornaam</string>
+    <string name="Profile_UserName">Gebruikersnaam</string>
     <string name="Profile_Place">Plaats</string>
     <string name="Profile_Car">Type auto</string>
     <string name="Profile_Places">Aantal plaatsen</string>

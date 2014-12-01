@@ -9,13 +9,43 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import nmct.howest.be.rideshare.R;
 
-public class EditProfileFragment extends Fragment {
+public class EditProfileFragment extends Fragment
+{
+    private String firstName;
+    private String lastName;
+    private String userName;
+    private String location;
+    private String carType;
+    private String places;
+
+    private EditText txtFirstName;
+    private EditText txtLastName;
+    private EditText txtUserName;
+    private EditText txtLocation;
+    private EditText txtCarType;
+    private EditText txtPlaces;
+
+    private Button btnSaveProfile;
 
     public EditProfileFragment() {
 
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle b = getActivity().getIntent().getExtras();
+        firstName = b.getString("firstName");
+        lastName = b.getString("lastName");
+        userName = b.getString("userName");
+        location = b.getString("location");
+        carType = b.getString("carType");
+        places = b.getString("places");
     }
 
     @Override
@@ -27,6 +57,31 @@ public class EditProfileFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_edit_profile, container, false);
+        View v = inflater.inflate(R.layout.fragment_edit_profile, container, false);
+
+        txtFirstName = (EditText) v.findViewById(R.id.txtEditFirstName);
+        txtLastName = (EditText) v.findViewById(R.id.txtEditName);
+        txtUserName = (EditText) v.findViewById(R.id.txtEditUserName);
+        txtLocation = (EditText) v.findViewById(R.id.txtEditPlace);
+        txtCarType = (EditText) v.findViewById(R.id.txtEditCarType);
+        txtPlaces = (EditText) v.findViewById(R.id.txtEditPlaces);
+
+        txtFirstName.setText(firstName);
+        txtLastName.setText(lastName);
+        txtUserName.setText(userName);
+        txtLocation.setText(location);
+        txtCarType.setText(carType);
+        txtPlaces.setText(places);
+
+        btnSaveProfile = (Button) v.findViewById(R.id.btnEditSaveProfile);
+        btnSaveProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //When clicking on save, update the profile info in database
+                
+            }
+        });
+
+        return v;
     }
 }

@@ -3,27 +3,50 @@ package nmct.howest.be.rideshare.Activities.Fragments;
 import android.content.Intent;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.support.v4.widget.CursorAdapter;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.facebook.widget.ProfilePictureView;
 
-import nmct.howest.be.rideshare.Activities.Loaders.ProfileLoader;
+import org.w3c.dom.Text;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.TimeZone;
+
+import nmct.howest.be.rideshare.Activities.Adapters.ReviewAdapter;
+import nmct.howest.be.rideshare.Activities.Adapters.TripRequestedAdapter;
+import nmct.howest.be.rideshare.Activities.Loaders.Json.ProfileLoader;
+import nmct.howest.be.rideshare.Activities.Models.Review;
+import nmct.howest.be.rideshare.Activities.Models.User;
 import nmct.howest.be.rideshare.Activities.ProfileActivity;
 import nmct.howest.be.rideshare.R;
 
-public class MyProfileFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>
+public class MyProfileFragment extends Fragment implements LoaderManager.LoaderCallbacks<User>
 {
-    private CursorAdapter mAdapter;
+    private User mUser;
     private ProfilePictureView profilePictureView;
+    private TextView txtName;
+    private TextView txtPlace;
+    private TextView txtGenderAge;
+    private TextView txtCar;
+    private TextView txtUserName;
+    private ListView lstReviews;
+    private ArrayAdapter mAdapterReview;
+    private List<Review> reviews;
 
     public MyProfileFragment() {}
 
@@ -32,17 +55,20 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
     {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        //Init loader to get data
-        getLoaderManager().initLoader(1, null, this);
 
+        //Init loader to get data
+        getLoaderManager().initLoader(1, null, this).forceLoad();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_profile, container, false);
 
-        profilePictureView = (ProfilePictureView) view.findViewById(R.id.imgProfilePicture);
-        profilePictureView.setCropped(true);
+        lstReviews = (ListView) view.findViewById(R.id.lstBeoordelingen);
+
+        mAdapterReview = new ReviewAdapter(getActivity(), R.layout.card_review, R.id.txbBeoordelingNaam);
+
+        lstReviews.setAdapter(mAdapterReview);
 
         return view;
     }
@@ -61,6 +87,17 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
                 return true;
             case R.id.action_edit:
                 Intent intent = new Intent(getActivity(), ProfileActivity.class);
+                Bundle b = new Bundle();
+                if(mUser!=null)
+                {
+                    b.putString("firstName", mUser.getFirstName());
+                    b.putString("lastName", mUser.getLastName());
+                    b.putString("userName", mUser.getUserName());
+                    b.putString("location", mUser.getLocation());
+                    b.putString("carType", mUser.getCarType());
+                    b.putString("places", mUser.getAmountOfSeats());
+                }
+                intent.putExtras(b);
                 startActivity(intent);
                 return true;
         }
@@ -70,27 +107,68 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
 
     //Implementation of ProfileLoader
     @Override
-    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return new ProfileLoader(getActivity());
+    public Loader<User> onCreateLoader(int i, Bundle bundle)
+    {
+        String url = "http://188.226.154.228:8080/api/v1/profile";
+        return new ProfileLoader(getActivity(), url);
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-        if (cursor.moveToFirst()){
-            do{
-                String firstName = cursor.getString(cursor.getColumnIndex("firstName"));
-                String lastName = cursor.getString(cursor.getColumnIndex("lastName"));
-                String email = cursor.getString(cursor.getColumnIndex("email"));
-            }while(cursor.moveToNext());
+    public void onLoadFinished(Loader<User> Loader, User user)
+    {
+        mUser = user;
+        fillData(user);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<User> Loader)
+    {
+            reviews.clear();
+    }
+
+    private void fillData(User user)
+    {
+        txtName = (TextView) getView().findViewById(R.id.txtNaam);
+        txtPlace = (TextView) getView().findViewById(R.id.txtPlaats);
+        txtGenderAge = (TextView) getView().findViewById(R.id.txtGeslachtLeeftijd);
+        txtCar = (TextView) getView().findViewById(R.id.txtAuto);
+        txtUserName = (TextView) getView().findViewById(R.id.txtUserName);
+        profilePictureView = (ProfilePictureView) getView().findViewById(R.id.imgProfilePicture);
+
+        txtName.setText(user.getFirstName() + " " + user.getLastName());
+        txtPlace.setText(user.getLocation());
+        txtUserName.setText(user.getUserName());
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setTimeZone(TimeZone.getDefault());
+        String birthday="";
+        try {
+            Date date = sdf.parse(user.getBirthday());
+
+            SimpleDateFormat fmtOut = new SimpleDateFormat("dd-MM-yyyy");
+            birthday = fmtOut.format(date);
+        }catch (ParseException ex){
+            Log.e("ParseException Date", ex.getMessage());}
+        txtGenderAge.setText(user.getGender() + ", " + birthday);
+
+
+        if(!TextUtils.isEmpty(user.getCarType())&&!TextUtils.isEmpty(user.getAmountOfSeats())) {
+            txtCar.setText(user.getCarType() + " (" + user.getAmountOfSeats() + " plaatsen)");
         }
-        cursor.close();
-    }
+        else if(!TextUtils.isEmpty(user.getCarType()))
+        {
+            txtCar.setText(user.getCarType());
+        }
+        else
+        {
+            txtCar.setText("Auto niet bekend");
+        }
+        profilePictureView.setCropped(true);
 
-    @Override
-    public void onLoaderReset(Loader<Cursor> cursorLoader) {
-        //mAdapter.swapCursor(null);
-    }
+        reviews = user.getReviews();
+        mAdapterReview.addAll(reviews);
 
+    }
 
 
 }
