@@ -18,7 +18,7 @@ import nmct.howest.be.rideshare.R;
 public class MainActivity extends ActionBarActivity {
 
     //Tab variables
-    private ViewPager pager;
+    static public ViewPager pager;
     private TabPagerAdapter TabAdapter;
     private PagerSlidingTabStrip tabs;
 

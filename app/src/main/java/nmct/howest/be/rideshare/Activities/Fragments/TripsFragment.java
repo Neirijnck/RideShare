@@ -15,8 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.melnykov.fab.FloatingActionButton;
+
 import nmct.howest.be.rideshare.Activities.Adapters.TripRequestCursorAdapter;
 import nmct.howest.be.rideshare.Activities.Loaders.TripLoader;
+import nmct.howest.be.rideshare.Activities.MainActivity;
 import nmct.howest.be.rideshare.Activities.SearchActivity;
 import nmct.howest.be.rideshare.R;
 
@@ -37,8 +40,20 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view;
+        view = inflater.inflate(R.layout.fragment_trips, container, false);
 
-        View view =  inflater.inflate(R.layout.fragment_trips, container, false);
+
+
+
+        FloatingActionButton addButton = (FloatingActionButton) view.findViewById(R.id.add_button);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.pager.setCurrentItem(0);
+            }
+        });
+
 
         //List ophalen en opvullen
         listAanvragen = (ListView) view.findViewById(R.id.lstRitAanvragen);

@@ -88,7 +88,7 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
 
     @Override
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
-        mAdapter.swapCursor(null);
+        //mAdapter.swapCursor(null);
     }
 
 

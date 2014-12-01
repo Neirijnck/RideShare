@@ -7,6 +7,7 @@
     <string name="action_settings">Instellingen</string>
     <string name="action_logout">Uitloggen</string>
     <string name="action_edit">Aanpassen</string>
+    <string name="action_add">Toevoegen</string>
     <string name="learn_more">Learn more</string>
 
     <!-- Components -->
