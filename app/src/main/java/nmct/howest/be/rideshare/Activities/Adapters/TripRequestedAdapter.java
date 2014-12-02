@@ -30,21 +30,21 @@ public class TripRequestedAdapter extends ArrayAdapter<Trip>
 
         Trip trip = getItem(position);
 
-        holder.txtTripInfo1.setText("Requested to");
-        holder.txtTripInfo2.setText(trip.getTo());
+        holder.txtTripInfoDate.setText("Requested to");
+        holder.txtTripInfo.setText(trip.getTo());
 
         return card;
     }
 
     static class ViewHolderItem
     {
-        TextView txtTripInfo1;
-        TextView txtTripInfo2;
+        TextView txtTripInfoDate;
+        TextView txtTripInfo;
 
         public ViewHolderItem(View row)
         {
-            this.txtTripInfo1 = (TextView) row.findViewById(R.id.txtTripInfo1);
-            this.txtTripInfo2 = (TextView) row.findViewById(R.id.txtTripInfo2);
+            this.txtTripInfoDate = (TextView) row.findViewById(R.id.txtTripInfoDate);
+            this.txtTripInfo = (TextView) row.findViewById(R.id.txtTripInfo);
         }
     }
 }

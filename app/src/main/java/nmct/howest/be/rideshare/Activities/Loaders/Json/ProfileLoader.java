@@ -18,7 +18,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import nmct.howest.be.rideshare.Activities.Helpers.DatabaseHelper;
+import nmct.howest.be.rideshare.Activities.Helpers.APIHelper;
 import nmct.howest.be.rideshare.Activities.Models.Review;
 import nmct.howest.be.rideshare.Activities.Models.User;
 
@@ -57,7 +57,7 @@ public class ProfileLoader extends AsyncTaskLoader<User>
         HttpEntity entity = response.getEntity();
         InputStream in = entity.getContent();
 
-        String JSONbody = DatabaseHelper.convertStreamToString(in);
+        String JSONbody = APIHelper.convertStreamToString(in);
         Reader stringReader = new StringReader(JSONbody);
 
         JsonReader reader = new JsonReader(stringReader);

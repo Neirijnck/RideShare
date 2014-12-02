@@ -60,6 +60,19 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
         View view = inflater.inflate(R.layout.fragment_trips, container, false);
 
 
+        //Lists ophalen en opvullen
+        listMyTrips = (ListView) view.findViewById(R.id.lstOpgeslagenRitten);
+        listRequestTrips = (ListView) view.findViewById(R.id.lstRitAanvragen);
+        listRequestedTrips = (ListView) view.findViewById(R.id.lstRitVerzoeken);
+
+        //Setting adapters
+        mAdapterTripSaved = new TripSavedAdapter(getActivity(), R.layout.card_trip, R.id.txtTripInfo);
+        mAdapterTripRequest = new TripRequestAdapter(getActivity(), R.layout.card_trip, R.id.txtTripInfo);
+        mAdapterTripRequested = new TripRequestedAdapter(getActivity(), R.layout.card_trip, R.id.txtTripInfo);
+
+        listMyTrips.setAdapter(mAdapterTripSaved);
+
+
         FloatingActionButton addButton = (FloatingActionButton) view.findViewById(R.id.add_button);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,20 +80,6 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
                 MainActivity.pager.setCurrentItem(0);
             }
         });
-
-
-        //Lists ophalen en opvullen
-        listMyTrips = (ListView) view.findViewById(R.id.lstOpgeslagenRitten);
-        listRequestTrips = (ListView) view.findViewById(R.id.lstRitAanvragen);
-        listRequestedTrips = (ListView) view.findViewById(R.id.lstRitVerzoeken);
-
-        //Setting adapters
-        mAdapterTripSaved = new TripSavedAdapter(getActivity(), R.layout.card_trip, R.id.txtTripInfo1);
-        mAdapterTripRequest = new TripRequestAdapter(getActivity(), R.layout.card_trip, R.id.txtTripInfo1);
-        mAdapterTripRequested = new TripRequestedAdapter(getActivity(), R.layout.card_trip, R.id.txtTripInfo1);
-
-        listMyTrips.setAdapter(mAdapterTripSaved);
-
 
         return view;
     }
@@ -107,7 +106,7 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
     public Loader<List<Trip>> onCreateLoader(int i, Bundle bundle)
     {
         String url = "http://188.226.154.228:8080/api/v1/trips";
-        return new TripLoader(getActivity(), url );
+        return new TripLoader(getActivity(), url);
     }
 
     @Override

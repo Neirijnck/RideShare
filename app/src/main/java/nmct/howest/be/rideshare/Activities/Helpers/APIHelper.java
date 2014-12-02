@@ -2,6 +2,7 @@ package nmct.howest.be.rideshare.Activities.Helpers;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -20,7 +21,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseHelper {
+public class APIHelper {
 
     public static void AddUser(String userName, String firstName, String lastName, String email, String fbToken, String fbLink, String fbID, String location, String gender, String regID) {
         try {
@@ -37,7 +38,6 @@ public class DatabaseHelper {
             parameters.add(new BasicNameValuePair("location", location));
             parameters.add(new BasicNameValuePair("gender", gender));
             parameters.add(new BasicNameValuePair("notifications", regID));
-            parameters.add(new BasicNameValuePair("firstName", firstName));
             httppost.setEntity(new UrlEncodedFormEntity(parameters));
 
             PostAsync task = new PostAsync();
@@ -48,10 +48,10 @@ public class DatabaseHelper {
         }
     }
 
-    public static void EditUser(String userName, String firstName, String lastName, String email, String fbToken, String fbLink, String fbID, String location, String gender, String regID)
+    public static void EditUser(String userName, String firstName, String lastName, String fbToken, String location, String carType, String amountOfSeats)
     {
         try {
-            HttpPut httpput = new HttpPut();
+            HttpPut httpput = new HttpPut("http://188.226.154.228:8080/api/v1/profile");
             httpput.addHeader("auth", fbToken);
 
 
@@ -59,13 +59,9 @@ public class DatabaseHelper {
             parameters.add(new BasicNameValuePair("userName", userName));
             parameters.add(new BasicNameValuePair("firstName", firstName));
             parameters.add(new BasicNameValuePair("lastName", lastName));
-            parameters.add(new BasicNameValuePair("email", email));
-            parameters.add(new BasicNameValuePair("fbLink", fbLink));
-            parameters.add(new BasicNameValuePair("fbID", fbID));
             parameters.add(new BasicNameValuePair("location", location));
-            parameters.add(new BasicNameValuePair("gender", gender));
-            parameters.add(new BasicNameValuePair("notifications", regID));
-            parameters.add(new BasicNameValuePair("firstName", firstName));
+            parameters.add(new BasicNameValuePair("carType", carType));
+            parameters.add(new BasicNameValuePair("amountOfSeats", amountOfSeats));
             httpput.setEntity(new UrlEncodedFormEntity(parameters));
 
             PutAsync task = new PutAsync();
@@ -99,7 +95,6 @@ public class DatabaseHelper {
 
             PostAsync task = new PostAsync();
             task.execute(httppost);
-
         }
         catch (IOException e) {
             Log.d("", "Error in http connection " + e.toString());
@@ -111,11 +106,11 @@ public class DatabaseHelper {
     public static class PostAsync extends AsyncTask<HttpPost, Void, String> {
 
         @Override
-        protected String doInBackground(HttpPost... params) {
+        protected String doInBackground(HttpPost... param) {
             try {
                 HttpClient httpclient = new DefaultHttpClient();
 
-                HttpPost httppost = params[0];
+                HttpPost httppost = param[0];
                 HttpResponse response = httpclient.execute(httppost);
 
                 HttpEntity entity = response.getEntity();
@@ -135,12 +130,12 @@ public class DatabaseHelper {
     public static class PutAsync extends AsyncTask<HttpPut, Void, String>
     {
         @Override
-        protected String doInBackground(HttpPut... params) {
+        protected String doInBackground(HttpPut... param) {
             try
             {
                 HttpClient httpClient = new DefaultHttpClient();
 
-                HttpPut httpput = params[0];
+                HttpPut httpput = param[0];
                 HttpResponse response = httpClient.execute(httpput);
 
                 HttpEntity entity = response.getEntity();
