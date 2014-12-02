@@ -310,5 +310,7 @@ public class PlanningFragment extends Fragment{
 
             txbTimePlan.setText(time);
         }
+
+
     }
 }

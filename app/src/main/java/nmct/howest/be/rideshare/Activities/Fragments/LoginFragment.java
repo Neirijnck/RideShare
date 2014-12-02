@@ -2,9 +2,11 @@ package nmct.howest.be.rideshare.Activities.Fragments;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -23,11 +25,16 @@ import com.facebook.SessionState;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.LoginButton;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 import nmct.howest.be.rideshare.Activities.Helpers.ConnectivityHelper;
+import nmct.howest.be.rideshare.Activities.Helpers.ParseHelper;
 import nmct.howest.be.rideshare.Activities.MainActivity;
 import nmct.howest.be.rideshare.R;
 
@@ -38,8 +45,6 @@ public class LoginFragment extends Fragment
     private FragmentTransaction transaction;
     private LearnMoreFragment learnMoreFragment;
     private String TAG = "LoginActivity";
-    private static final List<String> PERMISSIONS = Arrays.asList("publish_actions", "email");
-    private boolean isPermissionsGiven = false;
 
     public LoginFragment() {}
 
@@ -53,7 +58,6 @@ public class LoginFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-
         //Has internet?
         Context c = getActivity();
         if(!ConnectivityHelper.isNetworkAvailable(c)) {
@@ -64,13 +68,17 @@ public class LoginFragment extends Fragment
 
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
+                    //dialog.dismiss();
+                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.addCategory(Intent.CATEGORY_HOME);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
                 }
             });
             builder.show();
         }
-
         learnMore = (TextView) view.findViewById(R.id.txbLearnMore);
+        //Set click listener for "Learn more" textview
         learnMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,8 +86,6 @@ public class LoginFragment extends Fragment
                 slideUpFragment();
             }
         });
-
-
 
         //Facebook Login
         LoginButton authButton = (LoginButton) view.findViewById(R.id.btnLogin);
@@ -89,7 +95,10 @@ public class LoginFragment extends Fragment
                 Log.i(TAG, "Error " + error.getMessage());
             }
         });
-        authButton.setReadPermissions(Arrays.asList("public_profile", "email"));
+
+
+        authButton.setReadPermissions(Arrays.asList("email", "user_birthday", "public_profile"));
+
         authButton.setSessionStatusCallback(new Session.StatusCallback() {
             @Override
             public void call(final Session session, SessionState state, Exception exception) {
@@ -97,9 +106,8 @@ public class LoginFragment extends Fragment
                 if (session.isOpened()) {
 
                     List<String> permissions = session.getPermissions();
-                    Log.d("permissions", permissions.toString());
-                    if (isSubsetOf(PERMISSIONS, permissions))
-                        isPermissionsGiven = true;
+                    Log.d("permissies", permissions.toString());
+
 
                     Log.i(TAG, "Access Token" + session.getAccessToken());
                     Request.executeMeRequestAsync(session,
@@ -109,9 +117,9 @@ public class LoginFragment extends Fragment
                                     if (user != null) {
                                         Log.i(TAG, "token: " + session.getAccessToken());
                                         Log.i(TAG, "Email " + user.asMap().get("email"));
-
-
+                                        parseLoginToDatabase();
                                         Intent intent = new Intent(getActivity(), MainActivity.class);
+
                                         getActivity().startActivity(intent);
                                     }
                                 }
@@ -119,6 +127,8 @@ public class LoginFragment extends Fragment
                 }
             }
         });
+
+        //End Facebook Login
 
         return view;
     }
@@ -131,19 +141,8 @@ public class LoginFragment extends Fragment
     }
 
     //facebook loggedInCheck
-    public boolean isLoggedIn() {
-        Session session = Session.getActiveSession();
-        return (session != null && session.isOpened());
-    }
 
-    private boolean isSubsetOf(Collection<String> subset, Collection<String> superset) {
-        for (String string : subset) {
-            if (!superset.contains(string)) {
-                return false;
-            }
-        }
-        return true;
-    }
+
 
     private void slideUpFragment()
     {
@@ -159,6 +158,63 @@ public class LoginFragment extends Fragment
         transaction.commit();
     }
 
+
+    private class JSONParse extends AsyncTask<String, Integer, ArrayList<HashMap<String, String>>> {
+
+        ArrayList<HashMap<String, String>> newsList = new ArrayList<HashMap<String, String>>();
+
+
+        private ProgressDialog pDialog;
+
+        protected void onPreExecute() {
+
+            super.onPreExecute();
+            AlertDialog.Builder builder = new AlertDialog.Builder(c);
+            builder.setTitle("Logging...");
+            builder.setMessage("We are saving your data");
+            builder.show();
+
+        }
+
+        @Override
+        protected ArrayList<HashMap<String, String>> doInBackground(String... params) {
+
+            ParseHelper jParser = new ParseHelper();
+            JSONObject json = jParser.getJSONData("http://188.226.154.228:8080/api/v1/profile");
+            try{
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("userid", 1);
+                jsonObject.put("gender", "m");
+                jsonObject.put("lastName", "De Coster");
+                jsonObject.put("firstName", "Ashim");
+                jsonObject.put("facebookLink","link");
+                jsonObject.put("facebookID", "id");
+                jsonObject.put("facebookToken", "token");
+                jsonObject.put("userName", "jimmydc");
+                    HashMap<String, String> map = new HashMap<String, String>();
+                  //  map.put(HEAD_LINE, headLine);
+                   // map.put(DATE_LINE, dateLine);
+                    //newsList.add(map);
+                } catch (JSONException e1) {
+                e1.printStackTrace();
+            }
+
+            return newsList;
+        }
+        @Override
+        protected void onPostExecute(ArrayList<HashMap<String, String>> result) {
+
+
+            super.onPostExecute(result);
+            pDialog.dismiss();
+            String []from = {HEAD_LINE,DATE_LINE};
+            int []to = {R.id.tv_headLn,R.id.tv_dateLn};
+            ListAdapter adapter = new SimpleAdapter(MainActivity.this, result, R.layout.listview_item, from, to);
+            setListAdapter(adapter);
+
+        }
+
+    }
 
 
 }
