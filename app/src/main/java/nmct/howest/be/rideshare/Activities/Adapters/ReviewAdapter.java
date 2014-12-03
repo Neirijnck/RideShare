@@ -114,6 +114,14 @@ public class ReviewAdapter extends ArrayAdapter<Review>
                 star4.setImageDrawable(getContext().getResources().getDrawable(R.drawable.ic_star_grey600_38dp));
                 star5.setImageDrawable(getContext().getResources().getDrawable(R.drawable.ic_star_grey600_38dp));
                 break;
+            default:
+                star1.setImageDrawable(getContext().getResources().getDrawable(R.drawable.ic_star_outline_grey600_38dp));
+                star2.setImageDrawable(getContext().getResources().getDrawable(R.drawable.ic_star_outline_grey600_38dp));
+                star3.setImageDrawable(getContext().getResources().getDrawable(R.drawable.ic_star_outline_grey600_38dp));
+                star4.setImageDrawable(getContext().getResources().getDrawable(R.drawable.ic_star_outline_grey600_38dp));
+                star5.setImageDrawable(getContext().getResources().getDrawable(R.drawable.ic_star_outline_grey600_38dp));
+                break;
+
         }
     }
 

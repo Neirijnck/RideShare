@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.SwitchCompat;
 import android.text.Editable;
 import android.text.Selection;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -27,6 +28,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -135,8 +137,22 @@ public class PlanningFragment extends Fragment{
                 String from = txtVanPlan.getText().toString();
                 String to = txtNaarPlan.getText().toString();
 
-                //sendPostRequest(from, to);
-                APIHelper.PlanTrip(from, to, date, time, price);
+                //Check if required fields are not empty
+                if(TextUtils.isEmpty(date)||TextUtils.isEmpty(time)||TextUtils.isEmpty(from)||TextUtils.isEmpty(to))
+                {
+                    Toast.makeText(getActivity(), "Vul alle verplichte velden in", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    //Post info to database
+
+                    //If there is a price
+                    if(!TextUtils.isEmpty(price))
+                    {
+                        APIHelper.PlanTrip(from, to, date, time, price);
+                    }
+                    else{APIHelper.PlanTrip(from, to, date, time);}
+                }
             }
         });
 

@@ -38,6 +38,7 @@
     <string name="Trip_Requests">Ritverzoeken</string>
     <string name="Trip_SavedTrips">Mijn opgeslagen ritten</string>
     <string name="Trip_MyRequests_title">Rit:</string>
+    <string name="Trip_NoTrips">You don\'t have any saved trips or requests.</string>
 
     <!-- Profile -->
     <string name="title_activity_profile">Profiel</string>
@@ -49,6 +50,7 @@
     <string name="Profile_Car">Type auto</string>
     <string name="Profile_Places">Aantal plaatsen</string>
     <string name="title_fragment_edit_profile">Profiel</string>
+    <string name="Profile_NoReviews">There aren\'t any reviews yet.</string>
 
     <!-- Search Results -->
     <string name="title_activity_zoek">Zoekresultaten</string>

@@ -13,9 +13,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.melnykov.fab.FloatingActionButton;
 
@@ -24,6 +26,7 @@ import java.util.List;
 import nmct.howest.be.rideshare.Activities.Adapters.TripRequestAdapter;
 import nmct.howest.be.rideshare.Activities.Adapters.TripRequestedAdapter;
 import nmct.howest.be.rideshare.Activities.Adapters.TripSavedAdapter;
+import nmct.howest.be.rideshare.Activities.Helpers.Utils;
 import nmct.howest.be.rideshare.Activities.Loaders.Json.TripLoader;
 import nmct.howest.be.rideshare.Activities.MainActivity;
 import nmct.howest.be.rideshare.Activities.Models.Review;
@@ -71,6 +74,8 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
         mAdapterTripRequested = new TripRequestedAdapter(getActivity(), R.layout.card_trip, R.id.txtTripInfo);
 
         listMyTrips.setAdapter(mAdapterTripSaved);
+        listRequestTrips.setAdapter(mAdapterTripRequest);
+        listRequestedTrips.setAdapter(mAdapterTripRequested);
 
 
         FloatingActionButton addButton = (FloatingActionButton) view.findViewById(R.id.add_button);
@@ -105,8 +110,7 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
     @Override
     public Loader<List<Trip>> onCreateLoader(int i, Bundle bundle)
     {
-        String url = "http://188.226.154.228:8080/api/v1/trips";
-        return new TripLoader(getActivity(), url);
+        return new TripLoader(getActivity(), getResources().getString(R.string.API_Trips));
     }
 
     @Override
@@ -114,11 +118,39 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
     {
         mTrips = trips;
         mAdapterTripSaved.addAll(mTrips);
+
+        //Check if all 3 lists are empty
+        if(mTrips.isEmpty())    //&& mRequests.isEmpty()&&mRequested.isEmpty()
+        {
+            TextView txbSavedTrips = (TextView) getActivity().findViewById(R.id.txbOpgeslagenRitten);
+            TextView txbRequest = (TextView) getActivity().findViewById(R.id.txbRitAanvragen);
+            TextView txbRequested = (TextView) getActivity().findViewById(R.id.txbRitVerzoeken);
+
+            txbSavedTrips.setVisibility(View.INVISIBLE);
+            txbRequest.setVisibility(View.INVISIBLE);
+            txbRequested.setVisibility(View.INVISIBLE);
+            listMyTrips.setVisibility(View.INVISIBLE);
+            listRequestTrips.setVisibility(View.INVISIBLE);
+            listRequestedTrips.setVisibility(View.INVISIBLE);
+
+            TextView txbNoTrips = (TextView) getActivity().findViewById(R.id.txbNoTrips);
+            txbNoTrips.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            Utils.setListViewHeightBasedOnChildren(listMyTrips);
+            Utils.setListViewHeightBasedOnChildren(listRequestTrips);
+            Utils.setListViewHeightBasedOnChildren(listRequestedTrips);
+        }
+
     }
 
     @Override
     public void onLoaderReset(Loader<List<Trip>> cursorLoader)
     {
         mTrips.clear();
+        mAdapterTripSaved.notifyDataSetChanged();
+        listMyTrips.setAdapter(null);
     }
+
 }

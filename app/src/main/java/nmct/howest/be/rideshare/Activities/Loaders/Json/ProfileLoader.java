@@ -75,7 +75,7 @@ public class ProfileLoader extends AsyncTaskLoader<User>
                 String birthday = "";
                 String location = "";
                 String carType = "";
-                String amountOfSeats = "";
+                String amountOfSeats="";
 
                 while (reader.hasNext()) {
                     String key = reader.nextName();
