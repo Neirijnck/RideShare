@@ -24,6 +24,7 @@ public class SearchActivity extends ActionBarActivity {
         switch (id)
         {
             case R.id.home:
+                MainActivity.pager.setCurrentItem(1, true);
                 return true;
         }
         return super.onOptionsItemSelected(item);

@@ -6,12 +6,16 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import nmct.howest.be.rideshare.Activities.Helpers.APIHelper;
+import nmct.howest.be.rideshare.Activities.MainActivity;
 import nmct.howest.be.rideshare.R;
 
 public class EditProfileFragment extends Fragment
@@ -77,8 +81,26 @@ public class EditProfileFragment extends Fragment
         btnSaveProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 //When clicking on save, update the profile info in database
-                
+                firstName = txtFirstName.getText().toString();
+                lastName = txtLastName.getText().toString();
+                userName = txtUserName.getText().toString();
+                location = txtLocation.getText().toString();
+                carType = txtCarType.getText().toString();
+                places = txtPlaces.getText().toString();
+
+                //Check if empty!
+                if(TextUtils.isEmpty(firstName)||TextUtils.isEmpty(lastName)||TextUtils.isEmpty(userName)||TextUtils.isEmpty(location)||TextUtils.isEmpty(carType)||TextUtils.isEmpty(places))
+                {
+                    Toast.makeText(getActivity(), "Vul alle velden in", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    APIHelper.EditUser(userName, firstName, lastName, "000", location, carType, places);
+                    getActivity().finish();
+                    MainActivity.pager.setCurrentItem(3, true);
+                }
             }
         });
 
