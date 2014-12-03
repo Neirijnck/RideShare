@@ -91,13 +91,31 @@ public class EditProfileFragment extends Fragment
                 places = txtPlaces.getText().toString();
 
                 //Check if empty!
-                if(TextUtils.isEmpty(firstName)||TextUtils.isEmpty(lastName)||TextUtils.isEmpty(userName)||TextUtils.isEmpty(location)||TextUtils.isEmpty(carType)||TextUtils.isEmpty(places))
+                if(TextUtils.isEmpty(firstName)||TextUtils.isEmpty(lastName)||TextUtils.isEmpty(userName)||TextUtils.isEmpty(location))
                 {
-                    Toast.makeText(getActivity(), "Vul alle velden in", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Vul alle verplichte velden in", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
-                    APIHelper.EditUser(userName, firstName, lastName, "000", location, carType, places);
+                    //Cartype and amount of seats are not empty
+                    if(TextUtils.isEmpty(carType)&&TextUtils.isEmpty(places))
+                    {
+                        APIHelper.EditUser(userName.trim(), firstName.trim(), lastName.trim(), "000", location.trim());
+                    }
+                    else if(TextUtils.isEmpty(places)&&!TextUtils.isEmpty(carType))
+                    {
+                        APIHelper.EditUser(userName.trim(), firstName.trim(), lastName.trim(), "000", location.trim(), carType.trim());
+                    }
+                    else if(!TextUtils.isEmpty(places)&&TextUtils.isEmpty(carType))
+                    {
+                        int amount=1;
+                        try{ amount = Integer.parseInt(places);}
+                        catch (NumberFormatException  ex){Toast.makeText(getActivity(), "Aantal plaatsen moet een getal zijn", Toast.LENGTH_SHORT).show();}
+
+                        APIHelper.EditUser(userName.trim(), firstName.trim(), lastName.trim(), "000", location.trim(), amount);
+                    }
+                    else{APIHelper.EditUser(userName.trim(), firstName.trim(), lastName.trim(), "000", location.trim(), carType.trim(), places.trim());}
+
                     getActivity().finish();
                     MainActivity.pager.setCurrentItem(3, true);
                 }

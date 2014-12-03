@@ -1,6 +1,11 @@
-<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:context="nmct.howest.be.rideshare.Activities.Fragments.MyProfileFragment"
@@ -51,7 +56,7 @@
             android:layout_below="@+id/txtUserName"
             android:layout_alignLeft="@+id/txtUserName"
             android:layout_alignStart="@+id/txtUserName"
-            android:layout_marginTop="7dp"
+            android:layout_marginTop="4dp"
             android:textSize="17sp" />
 
         <TextView
@@ -62,7 +67,7 @@
             android:layout_below="@+id/txtPlaats"
             android:layout_alignLeft="@+id/txtPlaats"
             android:layout_alignStart="@+id/txtPlaats"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="2dp"
             android:textSize="17sp" />
 
         <TextView
@@ -73,7 +78,7 @@
             android:layout_below="@+id/txtGeslachtLeeftijd"
             android:layout_alignLeft="@+id/txtGeslachtLeeftijd"
             android:layout_alignStart="@+id/txtGeslachtLeeftijd"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="2dp"
             android:textSize="17sp" />
 
         <fragment
@@ -89,3 +94,5 @@
         </fragment>
 
     </RelativeLayout>
+
+    </ScrollView>

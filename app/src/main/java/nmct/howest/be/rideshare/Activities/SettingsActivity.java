@@ -1,31 +1,37 @@
 package nmct.howest.be.rideshare.Activities;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import java.util.List;
-
 import nmct.howest.be.rideshare.R;
 
-public class SettingsActivity extends PreferenceActivity {
+public class SettingsActivity extends ActionBarActivity {
 
-   @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_settings);
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-       /*
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
-       
 
-       addPreferencesFromResource(R.xml.advanced_preferences);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if (findViewById(R.id.fragment_container_settings) != null) {
+
+            SettingsFragment settingsFragment = new SettingsFragment();
+
+            // Add the fragment to the 'fragment_container' Layout
+
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.add(R.id.fragment_container_settings, settingsFragment);
+            ft.commit();
+        }
     }
 
 
@@ -40,5 +46,16 @@ public class SettingsActivity extends PreferenceActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public static class SettingsFragment extends PreferenceFragment
+    {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+            addPreferencesFromResource(R.xml.basic_preferences);
+
+
+        }
+    }
 
 }

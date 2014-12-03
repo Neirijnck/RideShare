@@ -1,7 +1,9 @@
 package nmct.howest.be.rideshare.Activities.Helpers;
 
 import android.os.AsyncTask;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.TextureView;
 import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
@@ -42,6 +44,80 @@ public class APIHelper {
 
             PostAsync task = new PostAsync();
             task.execute(httppost);
+        }
+        catch (IOException e) {
+            Log.d("", "Error in http connection " + e.toString());
+        }
+    }
+
+    public static void EditUser(String userName, String firstName, String lastName, String fbToken, String location)
+    {
+        try {
+            HttpPut httpput = new HttpPut("http://188.226.154.228:8080/api/v1/profile");
+            httpput.addHeader("auth", fbToken);
+
+
+            List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+            parameters.add(new BasicNameValuePair("userName", userName));
+            parameters.add(new BasicNameValuePair("firstName", firstName));
+            parameters.add(new BasicNameValuePair("lastName", lastName));
+            parameters.add(new BasicNameValuePair("location", location));
+            parameters.add(new BasicNameValuePair("carType", ""));
+            parameters.add(new BasicNameValuePair("amountOfSeats", ""));
+            httpput.setEntity(new UrlEncodedFormEntity(parameters));
+
+            PutAsync task = new PutAsync();
+            task.execute(httpput);
+        }
+        catch (IOException e) {
+            Log.d("", "Error in http connection " + e.toString());
+        }
+    }
+
+    public static void EditUser(String userName, String firstName, String lastName, String fbToken, String location, String carType)
+    {
+        try {
+            HttpPut httpput = new HttpPut("http://188.226.154.228:8080/api/v1/profile");
+            httpput.addHeader("auth", fbToken);
+
+
+            List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+            parameters.add(new BasicNameValuePair("userName", userName));
+            parameters.add(new BasicNameValuePair("firstName", firstName));
+            parameters.add(new BasicNameValuePair("lastName", lastName));
+            parameters.add(new BasicNameValuePair("location", location));
+            parameters.add(new BasicNameValuePair("carType", carType));
+            parameters.add(new BasicNameValuePair("amountOfSeats", ""));
+            httpput.setEntity(new UrlEncodedFormEntity(parameters));
+
+            PutAsync task = new PutAsync();
+            task.execute(httpput);
+        }
+        catch (IOException e) {
+            Log.d("", "Error in http connection " + e.toString());
+        }
+    }
+
+    public static void EditUser(String userName, String firstName, String lastName, String fbToken, String location, int amountOfSeats)
+    {
+        try {
+            HttpPut httpput = new HttpPut("http://188.226.154.228:8080/api/v1/profile");
+            httpput.addHeader("auth", fbToken);
+
+
+            List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+            parameters.add(new BasicNameValuePair("userName", userName));
+            parameters.add(new BasicNameValuePair("firstName", firstName));
+            parameters.add(new BasicNameValuePair("lastName", lastName));
+            parameters.add(new BasicNameValuePair("location", location));
+
+            String amount = Integer.toString(amountOfSeats);
+            parameters.add(new BasicNameValuePair("amountOfSeats", amount));
+            parameters.add(new BasicNameValuePair("carType", ""));
+            httpput.setEntity(new UrlEncodedFormEntity(parameters));
+
+            PutAsync task = new PutAsync();
+            task.execute(httpput);
         }
         catch (IOException e) {
             Log.d("", "Error in http connection " + e.toString());
@@ -101,6 +177,31 @@ public class APIHelper {
         }
     }
 
+    public static void PlanTrip(String from, String to, String date, String time)
+    {
+        try {
+            String datetime = "";
+
+            HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/trips");
+            httppost.addHeader("auth", "000");
+
+            List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+            parameters.add(new BasicNameValuePair("from", from));
+            parameters.add(new BasicNameValuePair("to", to));
+
+            if(!datetime.isEmpty())
+                parameters.add(new BasicNameValuePair("datetime", datetime));
+
+            httppost.setEntity(new UrlEncodedFormEntity(parameters));
+
+            PostAsync task = new PostAsync();
+            task.execute(httppost);
+        }
+        catch (IOException e) {
+            Log.d("", "Error in http connection " + e.toString());
+        }
+    }
+
 
     //Helper Post
     public static class PostAsync extends AsyncTask<HttpPost, Void, String> {
@@ -116,6 +217,8 @@ public class APIHelper {
                 HttpEntity entity = response.getEntity();
                 String result = convertStreamToString(entity.getContent());
 
+
+                //CONTROL STATUS CODE 200??
                 return new String(result);
 
             }

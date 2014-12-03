@@ -29,6 +29,7 @@ import java.util.TimeZone;
 
 import nmct.howest.be.rideshare.Activities.Adapters.ReviewAdapter;
 import nmct.howest.be.rideshare.Activities.Adapters.TripRequestedAdapter;
+import nmct.howest.be.rideshare.Activities.Helpers.Utils;
 import nmct.howest.be.rideshare.Activities.Loaders.Json.ProfileLoader;
 import nmct.howest.be.rideshare.Activities.Models.Review;
 import nmct.howest.be.rideshare.Activities.Models.User;
@@ -109,8 +110,7 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
     @Override
     public Loader<User> onCreateLoader(int i, Bundle bundle)
     {
-        String url = "http://188.226.154.228:8080/api/v1/profile";
-        return new ProfileLoader(getActivity(), url);
+        return new ProfileLoader(getActivity(), getResources().getString(R.string.API_Profile));
     }
 
     @Override
@@ -118,12 +118,25 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
     {
         mUser = user;
         fillData(user);
+
+        if(reviews.isEmpty())
+        {
+            lstReviews.setVisibility(View.INVISIBLE);
+
+            TextView txbNoReviews = (TextView) getActivity().findViewById(R.id.txbNoReviews);
+            txbNoReviews.setVisibility(View.VISIBLE);
+        }
+        else {
+            Utils.setListViewHeightBasedOnChildren(lstReviews);
+        }
     }
 
     @Override
     public void onLoaderReset(Loader<User> Loader)
     {
-            reviews.clear();
+        lstReviews.setAdapter(null);
+        reviews.clear();
+        mAdapterReview.notifyDataSetChanged();
     }
 
     private void fillData(User user)
@@ -153,11 +166,15 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
 
 
         if(!TextUtils.isEmpty(user.getCarType())&&!TextUtils.isEmpty(user.getAmountOfSeats())) {
-            txtCar.setText(user.getCarType() + " (" + user.getAmountOfSeats() + " plaatsen)");
+            txtCar.setText(user.getCarType() + " (" + user.getAmountOfSeats() + " pl.)");
         }
-        else if(!TextUtils.isEmpty(user.getCarType()))
+        else if(!TextUtils.isEmpty(user.getCarType())&&TextUtils.isEmpty(user.getAmountOfSeats()))
         {
             txtCar.setText(user.getCarType());
+        }
+        else if(TextUtils.isEmpty(user.getCarType())&&!TextUtils.isEmpty(user.getAmountOfSeats()))
+        {
+            txtCar.setText(user.getAmountOfSeats() + " plaatsen");
         }
         else
         {
