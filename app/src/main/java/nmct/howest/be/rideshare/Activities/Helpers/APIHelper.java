@@ -24,8 +24,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import nmct.howest.be.rideshare.RideshareApp;
 
@@ -56,6 +60,7 @@ public class APIHelper {
         }
     }
 
+    //Minimum parameters
     public static void EditUser(String userName, String firstName, String lastName, String fbToken, String location)
     {
         try {
@@ -154,11 +159,38 @@ public class APIHelper {
         }
     }
 
+    //Minimum parameters
+    public static void PlanTrip(String from, String to, String date, String time)
+    {
+        try {
+            String datetime = "";
+
+            HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/trips");
+            httppost.addHeader("Authorization", "000");
+
+            List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+            parameters.add(new BasicNameValuePair("from", from));
+            parameters.add(new BasicNameValuePair("to", to));
+
+            if(!datetime.isEmpty())
+                parameters.add(new BasicNameValuePair("datetime", datetime));
+
+            httppost.setEntity(new UrlEncodedFormEntity(parameters));
+
+            PostAsync task = new PostAsync();
+            task.execute(httppost);
+        }
+        catch (IOException e) {
+            Log.d("", "Error in http connection " + e.toString());
+        }
+    }
+
+    //With price
     public static void PlanTrip(String from, String to, String date, String time, String price) {
         try {
             String datetime = "";
 
-            //prim.trim("€");
+            price = TextUtils.substring(price, 1, price.length());
 
             HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/trips");
             httppost.addHeader("Authorization", "000");
@@ -183,10 +215,12 @@ public class APIHelper {
         }
     }
 
-    public static void PlanTrip(String from, String to, String date, String time)
+    //With repeat
+    public static void PlanTrip(String from, String to, String date, String time, boolean[] repeat)
     {
         try {
             String datetime = "";
+
 
             HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/trips");
             httppost.addHeader("Authorization", "000");
@@ -197,6 +231,41 @@ public class APIHelper {
 
             if(!datetime.isEmpty())
                 parameters.add(new BasicNameValuePair("datetime", datetime));
+
+                //parameters.add(new BasicNameValuePair("repeat", repeat));
+
+            httppost.setEntity(new UrlEncodedFormEntity(parameters));
+
+            PostAsync task = new PostAsync();
+            task.execute(httppost);
+        }
+        catch (IOException e) {
+            Log.d("", "Error in http connection " + e.toString());
+        }
+    }
+
+    //With everything filled in
+    public static void PlanTrip(String from, String to, String date, String time, String price, boolean[] repeat)
+    {
+        try {
+            String datetime = "";
+
+            price = TextUtils.substring(price, 1, price.length());
+
+            HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/trips");
+            httppost.addHeader("Authorization", "000");
+
+            List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+            parameters.add(new BasicNameValuePair("from", from));
+            parameters.add(new BasicNameValuePair("to", to));
+
+            if(!datetime.isEmpty())
+                parameters.add(new BasicNameValuePair("datetime", datetime));
+
+            if(!price.isEmpty())
+                parameters.add(new BasicNameValuePair("price", price));
+
+            //parameters.add(new BasicNameValuePair("repeat", repeat));
 
             httppost.setEntity(new UrlEncodedFormEntity(parameters));
 
@@ -240,7 +309,7 @@ public class APIHelper {
             //Parse json for status code
             //if 200 = Toast for success
             String statusCode = ParseJsonStatusCode(result);
-            if(statusCode=="200")
+            if(statusCode=="200"||statusCode=="201")
             {
                 Toast.makeText(RideshareApp.getAppContext(), "Succesvol opgeslagen in database", Toast.LENGTH_SHORT).show();
             }
@@ -280,7 +349,7 @@ public class APIHelper {
             //Parse json for status code
             //if 200 = Toast for success
             String statusCode = ParseJsonStatusCode(result);
-            if(statusCode=="200")
+            if(statusCode=="200"||statusCode=="201")
             {
                     Toast.makeText(RideshareApp.getAppContext(), "Succesvol aangepast in database", Toast.LENGTH_SHORT).show();
             }

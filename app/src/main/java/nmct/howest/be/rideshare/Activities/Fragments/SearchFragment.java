@@ -5,10 +5,9 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,13 +17,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
+
 import java.util.Calendar;
 
 import nmct.howest.be.rideshare.Activities.SearchActivity;
-import nmct.howest.be.rideshare.Activities.SettingsActivity;
 import nmct.howest.be.rideshare.R;
 
 public class SearchFragment extends Fragment
@@ -32,6 +35,11 @@ public class SearchFragment extends Fragment
     private Button btnSearch;
     static EditText txbDatePlan;
     static EditText txbTimePlan;
+    private EditText txtFrom;
+    private EditText txtTo;
+    private EditText txtDate;
+    private EditText txtTime;
+    private CheckBox chkShare;
 
     public SearchFragment() {}
 
@@ -45,19 +53,46 @@ public class SearchFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
+        //Widgets
+        txtFrom = (EditText) view.findViewById(R.id.txtFromSearch);
+        txtTo = (EditText) view.findViewById(R.id.txtToSearch);
+        txbDatePlan = (EditText) view.findViewById(R.id.txtDateSearch);
+        //txtDate = (EditText) view.findViewById(R.id.txtDateSearch);
+        txbTimePlan = (EditText) view.findViewById(R.id.txtTimeSearch);
+        //txtTime = (EditText) view.findViewById(R.id.txtTimeSearch);
+        chkShare = (CheckBox) view.findViewById(R.id.chkShareOnFacebook);
+
         //SearchActivity
         btnSearch = (Button) view.findViewById(R.id.btnZoeken);
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
-                Intent intent = new Intent(getActivity(), SearchActivity.class);
-                startActivity(intent);
+                //Required fields should not be empty
+                if(TextUtils.isEmpty(txtFrom.getText().toString())||TextUtils.isEmpty(txtTo.getText().toString())||TextUtils.isEmpty(txbDatePlan.getText().toString())||TextUtils.isEmpty(txbTimePlan.getText().toString()))
+                {
+                    Toast.makeText(getActivity(), "Vul alle verplichte velden in", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Intent intent = new Intent(getActivity(), SearchActivity.class);
+                    Bundle b = new Bundle();
+
+                    //Enter all parameters
+                    b.putString("from", txtFrom.getText().toString());
+                    b.putString("to", txtTo.getText().toString());
+                    b.putString("date", txbDatePlan.getText().toString());
+                    b.putString("time", txbTimePlan.getText().toString());
+                    if(chkShare.isChecked()){b.putBoolean("share", true);}
+                    else{b.putBoolean("share", false);}
+
+                    intent.putExtras(b);
+                    startActivity(intent);
+                }
             }
         });
 
         //Date picker
-        txbDatePlan = (EditText) view.findViewById(R.id.txtDatumZoek);
         txbDatePlan.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -68,7 +103,6 @@ public class SearchFragment extends Fragment
         });
 
         //Time picker
-        txbTimePlan = (EditText) view.findViewById(R.id.txtUurZoek);
         txbTimePlan.setOnClickListener(new View.OnClickListener() {
 
             @Override

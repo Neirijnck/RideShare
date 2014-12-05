@@ -27,7 +27,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/txtVanZoek"
+            android:id="@+id/txtFromSearch"
             android:layout_alignParentEnd="true"
             android:hint="@string/From"
             android:layout_below="@+id/txbZoeken"
@@ -39,13 +39,13 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/txtNaarZoek"
-            android:layout_alignRight="@+id/txtVanZoek"
-            android:layout_alignEnd="@+id/txtVanZoek"
+            android:id="@+id/txtToSearch"
+            android:layout_alignRight="@+id/txtFromSearch"
+            android:layout_alignEnd="@+id/txtFromSearch"
             android:hint="@string/To"
-            android:layout_below="@+id/txtVanZoek"
-            android:layout_alignLeft="@+id/txtVanZoek"
-            android:layout_alignStart="@+id/txtVanZoek"
+            android:layout_below="@+id/txtFromSearch"
+            android:layout_alignLeft="@+id/txtFromSearch"
+            android:layout_alignStart="@+id/txtFromSearch"
             android:layout_marginTop="25dp" />
 
         <EditText
@@ -53,12 +53,12 @@
             android:layout_height="wrap_content"
             android:inputType="date"
             android:ems="10"
-            android:id="@+id/txtDatumZoek"
+            android:id="@+id/txtDateSearch"
             android:focusable="false"
             android:hint="@string/Date"
-            android:layout_below="@+id/txtNaarZoek"
-            android:layout_alignLeft="@+id/txtNaarZoek"
-            android:layout_alignStart="@+id/txtNaarZoek"
+            android:layout_below="@+id/txtToSearch"
+            android:layout_alignLeft="@+id/txtToSearch"
+            android:layout_alignStart="@+id/txtToSearch"
             android:layout_marginTop="25dp" />
 
         <EditText
@@ -68,18 +68,18 @@
             android:ems="10"
             android:id="@+id/txtUurZoek"
             android:focusable="false"
-            android:layout_toEndOf="@+id/txtDatumZoek"
+            android:layout_toEndOf="@+id/txtDateSearch"
             android:hint="@string/Time"
-            android:layout_alignTop="@+id/txtDatumZoek"
-            android:layout_alignRight="@+id/txtNaarZoek"
-            android:layout_alignEnd="@+id/txtNaarZoek" />
+            android:layout_alignTop="@+id/txtDateSearch"
+            android:layout_alignRight="@+id/txtToSearch"
+            android:layout_alignEnd="@+id/txtToSearch" />
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Search_ShareFb"
-            android:id="@+id/chkDelen"
-            android:layout_below="@+id/txtDatumZoek"
+            android:id="@+id/chkShareOnFacebook"
+            android:layout_below="@+id/txtDateSearch"
             android:layout_marginTop="22dp"
             android:checked="false"
             android:layout_alignParentLeft="true"
@@ -92,7 +92,7 @@
             android:layout_height="45dp"
             android:text="@string/Searching"
             android:id="@+id/btnZoeken"
-            android:layout_below="@+id/chkDelen"
+            android:layout_below="@+id/chkShareOnFacebook"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginTop="20dp"
@@ -106,7 +106,7 @@
             android:layout_width="28dp"
             android:layout_height="wrap_content"
             android:id="@+id/imgIconSearchFrom"
-            android:layout_alignBottom="@+id/txtVanZoek"
+            android:layout_alignBottom="@+id/txtFromSearch"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:src="@drawable/ic_place_grey600_36dp" />
@@ -115,7 +115,7 @@
             android:layout_width="28dp"
             android:layout_height="wrap_content"
             android:id="@+id/imgIconSearchTo"
-            android:layout_alignBottom="@+id/txtNaarZoek"
+            android:layout_alignBottom="@+id/txtToSearch"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:src="@drawable/ic_flag_grey600_36dp" />
@@ -124,7 +124,7 @@
             android:layout_width="28dp"
             android:layout_height="wrap_content"
             android:id="@+id/imageView"
-            android:layout_alignBottom="@+id/txtDatumZoek"
+            android:layout_alignBottom="@+id/txtDateSearch"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:src="@drawable/ic_access_time_grey600_36dp" />

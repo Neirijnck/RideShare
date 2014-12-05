@@ -10,7 +10,13 @@ import nmct.howest.be.rideshare.Activities.Fragments.LoginFragment;
 import nmct.howest.be.rideshare.Activities.Fragments.SearchResultsFragment;
 import nmct.howest.be.rideshare.R;
 
-public class SearchActivity extends ActionBarActivity {
+public class SearchActivity extends ActionBarActivity
+{
+    private String from="";
+    private String to="";
+    private String date="";
+    private String time="";
+    private boolean share;
 
     @Override
      protected void onCreate(Bundle savedInstanceState) {
@@ -21,10 +27,17 @@ public class SearchActivity extends ActionBarActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        Bundle b = getIntent().getExtras();
+        from = b.getString("from");
+        to = b.getString("to");
+        date = b.getString("date");
+        time = b.getString("time");
+        share = b.getBoolean("share");
+
         //Add searchResultsFragment to the container
         if (findViewById(R.id.fragment_container_search) != null) {
 
-            SearchResultsFragment searchResultsFragment = new SearchResultsFragment();
+            SearchResultsFragment searchResultsFragment = SearchResultsFragment.newInstance(from, to, date, time, share);
 
             // Add the fragment to the 'fragment_container' Layout
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

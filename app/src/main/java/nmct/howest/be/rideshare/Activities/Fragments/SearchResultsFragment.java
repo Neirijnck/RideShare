@@ -21,11 +21,14 @@ public class SearchResultsFragment extends Fragment
     public SearchResultsFragment() { }
 
     //New instance of this fragment with parameters
-    public static SearchResultsFragment newInstance(String from, String to) {
+    public static SearchResultsFragment newInstance(String from, String to, String date, String time, boolean share) {
         SearchResultsFragment fragment = new SearchResultsFragment();
         Bundle args = new Bundle();
         args.putString("from", from);
         args.putString("to", to);
+        args.putString("date", date);
+        args.putString("time", time);
+        args.putBoolean("share", share);
         fragment.setArguments(args);
         return fragment;
     }
@@ -36,15 +39,16 @@ public class SearchResultsFragment extends Fragment
 
         mProgressBar = (ProgressBar) view.findViewById(R.id.progressBarSearch);
 
+        Bundle b = getArguments();
+        SearchResultsTask task = new SearchResultsTask(mProgressBar);
+        task.execute(b);
+
         return view;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //new SearchResultsTask(mProgressBar);
-
     }
 
 }
