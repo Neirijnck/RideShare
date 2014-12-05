@@ -52,7 +52,7 @@ public class ProfileLoader extends AsyncTaskLoader<User>
         //Met url json
         HttpClient client = new DefaultHttpClient();
         HttpGet httpGet = new HttpGet(mUrl);
-        httpGet.addHeader("auth", "000");
+        httpGet.addHeader("Authorization", "000");
         HttpResponse response = client.execute(httpGet);
         HttpEntity entity = response.getEntity();
         InputStream in = entity.getContent();
@@ -145,6 +145,7 @@ public class ProfileLoader extends AsyncTaskLoader<User>
                             {
                                 String key_second = reader.nextName();
                                 if(key_second.equals("userID")){review.setUserID(reader.nextString());}
+                                else if(key_second.equals("userName")){review.setUserName(reader.nextString());}
                                 else if(key_second.equals("date")){review.setDate(reader.nextString());}
                                 else if(key_second.equals("score")){review.setScore(reader.nextInt());}
                                 else if(key_second.equals("text")){review.setText(reader.nextString());}

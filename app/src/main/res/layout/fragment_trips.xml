@@ -5,12 +5,14 @@
     xmlns:fab="http://schemas.android.com/apk/res-auto">
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/layout_trip_lists"
+        android:visibility="invisible"
+        >
 
-    <LinearLayout
+    <RelativeLayout
         xmlns:tools="http://schemas.android.com/tools"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="nmct.howest.be.rideshare.Activities.Fragments.TripsFragment"
@@ -27,54 +29,62 @@
             android:text="@string/Trip_MyRequests"
             android:id="@+id/txbRitAanvragen"/>
 
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
             android:id="@+id/lstRitAanvragen"
+            android:layout_below="@+id/txbRitAanvragen"
             android:layout_weight="1"
             android:fastScrollEnabled="true"
             android:layout_marginTop="10dp"
             android:divider="@null"
-            android:dividerHeight="0dp"
-            />
+            android:dividerHeight="8dp"
+            android:clickable="false"></LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/listSeparatorTextViewStyle"
             android:text="@string/Trip_Requests"
+            android:layout_below="@+id/lstRitAanvragen"
             android:id="@+id/txbRitVerzoeken"
             android:layout_marginTop="22dp" />
 
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:layout_below="@+id/txbRitVerzoeken"
             android:id="@+id/lstRitVerzoeken"
             android:layout_weight="1"
             android:fastScrollEnabled="true"
             android:divider="@null"
-            android:dividerHeight="0dp"
-            android:layout_marginTop="10dp" />
+            android:dividerHeight="8dp"
+            android:layout_marginTop="10dp"></LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/listSeparatorTextViewStyle"
             android:text="@string/Trip_SavedTrips"
+            android:layout_below="@+id/lstRitVerzoeken"
             android:id="@+id/txbOpgeslagenRitten"
             android:layout_marginTop="22dp"/>
 
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:layout_below="@+id/txbOpgeslagenRitten"
             android:id="@+id/lstOpgeslagenRitten"
             android:layout_marginTop="10dp"
             android:divider="@null"
-            android:dividerHeight="0dp"
+            android:dividerHeight="8dp"
             android:layout_weight="1"
-            android:fastScrollEnabled="true" />
+            android:fastScrollEnabled="true"></LinearLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
     </ScrollView>
 
     <com.melnykov.fab.FloatingActionButton
@@ -95,7 +105,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Trip_NoTrips"
-        android:visibility="invisible"
         android:id="@+id/txbNoTrips"
         android:layout_gravity="center" />
 

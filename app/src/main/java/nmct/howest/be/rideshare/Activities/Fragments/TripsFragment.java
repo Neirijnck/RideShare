@@ -3,8 +3,6 @@ package nmct.howest.be.rideshare.Activities.Fragments;
 import android.content.Intent;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.support.v4.widget.CursorAdapter;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,10 +11,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.melnykov.fab.FloatingActionButton;
@@ -26,7 +23,6 @@ import java.util.List;
 import nmct.howest.be.rideshare.Activities.Adapters.TripRequestAdapter;
 import nmct.howest.be.rideshare.Activities.Adapters.TripRequestedAdapter;
 import nmct.howest.be.rideshare.Activities.Adapters.TripSavedAdapter;
-import nmct.howest.be.rideshare.Activities.Helpers.Utils;
 import nmct.howest.be.rideshare.Activities.Loaders.Json.TripLoader;
 import nmct.howest.be.rideshare.Activities.MainActivity;
 import nmct.howest.be.rideshare.Activities.Models.Review;
@@ -39,13 +35,13 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
     private List<Trip> mTrips;
 
     private ArrayAdapter mAdapterTripSaved;
-    private ListView listMyTrips;
+    private LinearLayout listMyTrips;
 
     private ArrayAdapter mAdapterTripRequest;
-    private ListView listRequestTrips;
+    private LinearLayout listRequestTrips;
 
     private ArrayAdapter mAdapterTripRequested;
-    private ListView listRequestedTrips;
+    private LinearLayout listRequestedTrips;
 
     public TripsFragment() {}
 
@@ -64,19 +60,18 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
 
 
         //Lists ophalen en opvullen
-        listMyTrips = (ListView) view.findViewById(R.id.lstOpgeslagenRitten);
-        listRequestTrips = (ListView) view.findViewById(R.id.lstRitAanvragen);
-        listRequestedTrips = (ListView) view.findViewById(R.id.lstRitVerzoeken);
+        listMyTrips = (LinearLayout) view.findViewById(R.id.lstOpgeslagenRitten);
+        listRequestTrips = (LinearLayout) view.findViewById(R.id.lstRitAanvragen);
+        listRequestedTrips = (LinearLayout) view.findViewById(R.id.lstRitVerzoeken);
 
         //Setting adapters
         mAdapterTripSaved = new TripSavedAdapter(getActivity(), R.layout.card_trip, R.id.txtTripInfo);
         mAdapterTripRequest = new TripRequestAdapter(getActivity(), R.layout.card_trip, R.id.txtTripInfo);
         mAdapterTripRequested = new TripRequestedAdapter(getActivity(), R.layout.card_trip, R.id.txtTripInfo);
 
-        listMyTrips.setAdapter(mAdapterTripSaved);
-        listRequestTrips.setAdapter(mAdapterTripRequest);
-        listRequestedTrips.setAdapter(mAdapterTripRequested);
-
+        //listMyTrips.setAdapter(mAdapterTripSaved);
+       //listRequestTrips.setAdapter(mAdapterTripRequest);
+        //listRequestedTrips.setAdapter(mAdapterTripRequested);
 
         FloatingActionButton addButton = (FloatingActionButton) view.findViewById(R.id.add_button);
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -117,30 +112,61 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
     public void onLoadFinished(Loader<List<Trip>> cursorLoader, List<Trip> trips)
     {
         mTrips = trips;
-        mAdapterTripSaved.addAll(mTrips);
-
-        //Check if all 3 lists are empty
-        if(mTrips.isEmpty())    //&& mRequests.isEmpty()&&mRequested.isEmpty()
+        if(mTrips!=null)
         {
-            TextView txbSavedTrips = (TextView) getActivity().findViewById(R.id.txbOpgeslagenRitten);
-            TextView txbRequest = (TextView) getActivity().findViewById(R.id.txbRitAanvragen);
-            TextView txbRequested = (TextView) getActivity().findViewById(R.id.txbRitVerzoeken);
-
-            txbSavedTrips.setVisibility(View.INVISIBLE);
-            txbRequest.setVisibility(View.INVISIBLE);
-            txbRequested.setVisibility(View.INVISIBLE);
-            listMyTrips.setVisibility(View.INVISIBLE);
-            listRequestTrips.setVisibility(View.INVISIBLE);
-            listRequestedTrips.setVisibility(View.INVISIBLE);
-
-            TextView txbNoTrips = (TextView) getActivity().findViewById(R.id.txbNoTrips);
-            txbNoTrips.setVisibility(View.VISIBLE);
+            mAdapterTripSaved.addAll(mTrips);
         }
-        else
+
+        //Check if lists are not empty
+        if(!mTrips.isEmpty())    //         || !mRequests.isEmpty()||!mRequested.isEmpty()
         {
-            Utils.setListViewHeightBasedOnChildren(listMyTrips);
-            Utils.setListViewHeightBasedOnChildren(listRequestTrips);
-            Utils.setListViewHeightBasedOnChildren(listRequestedTrips);
+            //Hide textview
+            TextView txbNoTrips = (TextView) getActivity().findViewById(R.id.txbNoTrips);
+            txbNoTrips.setVisibility(View.INVISIBLE);
+
+            //Show lists
+            ScrollView layoutTrips = (ScrollView) getActivity().findViewById(R.id.layout_trip_lists);
+            layoutTrips.setVisibility(View.VISIBLE);
+        }
+
+        //Adding items to linear layouts
+        int adaptercountSavedTrips = mAdapterTripSaved.getCount();
+        for(int i =0; i < adaptercountSavedTrips; i++)
+        {
+            View item = mAdapterTripSaved.getView(i, null, null);
+            item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Get info from item
+                }
+            });
+            listMyTrips.addView(item);
+        }
+
+        int adaptercountRequests = mAdapterTripRequest.getCount();
+        for(int i =0; i < adaptercountRequests; i++)
+        {
+            View item = mAdapterTripRequest.getView(i, null, null);
+            item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Get info from item
+                }
+            });
+            listRequestTrips.addView(item);
+        }
+
+        int adaptercountRequested = mAdapterTripRequested.getCount();
+        for(int i=0; i < adaptercountRequested; i++)
+        {
+            View item = mAdapterTripRequested.getView(i, null, null);
+            item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Get info from item
+                }
+            });
+            listRequestedTrips.addView(item);
         }
 
     }
@@ -150,7 +176,6 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
     {
         mTrips.clear();
         mAdapterTripSaved.notifyDataSetChanged();
-        listMyTrips.setAdapter(null);
     }
 
 }

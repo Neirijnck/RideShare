@@ -3,6 +3,7 @@ package nmct.howest.be.rideshare.Activities.Models;
 public class Review {
     //Fields
     private String userID = "";
+    private String userName="";
     private String date = "";
     private Integer score;
     private String text = "";
@@ -15,6 +16,16 @@ public class Review {
 
     public void setUserID(String userID) {
         this.userID = userID;
+    }
+
+    public String getUserName()
+    {
+        return userName;
+    }
+
+    public void setUserName(String userName)
+    {
+        this.userName = userName;
     }
 
     public String getDate() {
@@ -43,8 +54,9 @@ public class Review {
 
 
     //Ctor
-    public Review(String userID, String date, Integer score, String text) {
+    public Review(String userID, String userName, String date, Integer score, String text) {
         this.userID = userID;
+        this.userName = userName;
         this.date = date;
         this.score = score;
         this.text = text;

@@ -57,7 +57,7 @@ public class TripLoader extends AsyncTaskLoader<List<Trip>>
         //Met url json
         HttpClient client = new DefaultHttpClient();
         HttpGet httpGet = new HttpGet(mUrl);
-        httpGet.addHeader("auth", "000");
+        httpGet.addHeader("Authorization", "000");
         HttpResponse response = client.execute(httpGet);
         HttpEntity entity = response.getEntity();
         InputStream in = entity.getContent();
