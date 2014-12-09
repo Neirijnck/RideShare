@@ -152,14 +152,14 @@ public class SearchFragment extends Fragment
             String date;
             month++;
             if (day < 10) {
-                date = "0" + day + "/";
+                date = "0" + day + "-";
             } else {
-                date = day + "/";
+                date = day + "-";
             }
             if (month < 10) {
-                date += "0" + month + "/";
+                date += "0" + month + "-";
             } else {
-                date += month + "/";
+                date += month + "-";
             }
 
             date += year;

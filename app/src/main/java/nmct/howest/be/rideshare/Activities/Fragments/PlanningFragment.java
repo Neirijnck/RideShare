@@ -265,49 +265,6 @@ public class PlanningFragment extends Fragment{
 
 
 
-    //POST
-    /*public void sendPostRequest(String from, String to) {
-        new AsyncTask<Void, Void, String>() {
-            @Override
-            protected String doInBackground(Void... params) {
-                try {
-                    HttpClient httpclient = new DefaultHttpClient();
-                    HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/trips");
-
-                    //set header
-                    httppost.addHeader("auth", "000");
-
-                    // Add your data
-                    List<NameValuePair> parameters = new ArrayList<NameValuePair>();
-                    parameters.add(new BasicNameValuePair("from", from));
-                    parameters.add(new BasicNameValuePair("to", to));
-                    //nameValuePairs.add(new BasicNameValuePair("datetime", datetime));
-                    httppost.setEntity(new UrlEncodedFormEntity(parameters));
-
-                    // Execute HTTP Post Request
-                    HttpResponse response = httpclient.execute(httppost);
-
-                    HttpEntity entity = response.getEntity();
-
-                    InputStream is = entity.getContent();
-
-                    Toast.makeText(getActivity(), "send", Toast.LENGTH_LONG).show();
-
-                }
-                catch (ClientProtocolException e) {
-                    Log.e("log_tag", "Error in http connection "+e.toString());
-                } catch (IOException e) {
-                    Log.e("log_tag", "Error in http connection "+e.toString());
-                }
-            }
-
-        }.execute(null, null, null);
-
-
-    }*/
-
-
-
     //Datepicker class
     public static class DatePickerFragment extends DialogFragment
             implements DatePickerDialog.OnDateSetListener {
@@ -328,14 +285,14 @@ public class PlanningFragment extends Fragment{
             String date;
             month++;
             if (day < 10) {
-                date = "0" + day + "/";
+                date = "0" + day + "-";
             } else {
-                date = day + "/";
+                date = day + "-";
             }
             if (month < 10) {
-                date += "0" + month + "/";
+                date += "0" + month + "-";
             } else {
-                date += month + "/";
+                date += month + "-";
             }
 
             date += year;

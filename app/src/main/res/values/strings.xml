@@ -54,6 +54,7 @@
 
     <!-- Search Results -->
     <string name="title_activity_zoek">Zoekresultaten</string>
+    <string name="no_search_results">Er zijn geen trips gevonden die voldoen.</string>
 
     <!-- Details Activity and fragments -->
     <string name="title_activity_details">Details</string>

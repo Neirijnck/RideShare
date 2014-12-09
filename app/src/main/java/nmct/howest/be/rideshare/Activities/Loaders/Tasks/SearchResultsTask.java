@@ -5,7 +5,11 @@ import android.os.Bundle;
 import android.util.JsonReader;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -19,30 +23,43 @@ import org.apache.http.message.BasicNameValuePair;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
+import nmct.howest.be.rideshare.Activities.Adapters.SearchResultAdapter;
+import nmct.howest.be.rideshare.Activities.Fragments.SearchResultsFragment;
 import nmct.howest.be.rideshare.Activities.Helpers.APIHelper;
 import nmct.howest.be.rideshare.Activities.Models.Match;
 import nmct.howest.be.rideshare.Activities.Models.Message;
 import nmct.howest.be.rideshare.Activities.Models.Trip;
+import nmct.howest.be.rideshare.R;
+import nmct.howest.be.rideshare.RideshareApp;
 
 /**
  * Created by Preben on 4/12/2014.
  */
-public class SearchResultsTask extends AsyncTask<Bundle, Integer, List<Trip>>
+public class SearchResultsTask extends AsyncTask<Bundle, Void, List<Trip>>
 {
     private final ProgressBar mProgress;
+    private LinearLayout lstSearchResults;
+    private ArrayAdapter<Trip> mAdapterSearchResults;
+    private TextView mTxtNoResults;
+    private ScrollView mLayoutSearchResults;
 
-    public SearchResultsTask(final ProgressBar progress)
+    public SearchResultsTask(final ProgressBar progress, LinearLayout listSearchResults, TextView txtNoResults, ScrollView layout_search_results)
     {
         this.mProgress = progress;
+        this.lstSearchResults = listSearchResults;
+        this.mTxtNoResults = txtNoResults;
+        this.mLayoutSearchResults = layout_search_results;
     }
 
     @Override
     protected List<Trip> doInBackground(Bundle... params)
     {
-        ArrayList<Trip> trips = new ArrayList<Trip>();
+        List<Trip> trips = new ArrayList<>();
         Trip trip = new Trip();
 
         Bundle b = params[0];
@@ -52,7 +69,8 @@ public class SearchResultsTask extends AsyncTask<Bundle, Integer, List<Trip>>
         String time = b.getString("time");
         boolean share = b.getBoolean("share");
 
-        String datetime="";
+        //TEST
+        String datetime="2014-12-02T23:27:41.389Z";
 
         //Search trips from api with these parameters
         try {
@@ -243,5 +261,33 @@ public class SearchResultsTask extends AsyncTask<Bundle, Integer, List<Trip>>
     {
         //Hide the progressbar after loading
         mProgress.setVisibility(View.INVISIBLE);
+
+        mAdapterSearchResults = new SearchResultAdapter(RideshareApp.getAppContext(), R.layout.card_search_result, R.id.txtSearchResultName);
+        mAdapterSearchResults.addAll(result);
+
+        //Adding items to linear layouts
+        int adaptercountSearchResults = mAdapterSearchResults.getCount();
+        for(int i =0; i < adaptercountSearchResults; i++)
+        {
+            View item = mAdapterSearchResults.getView(i, null, null);
+            item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Get info from item
+                }
+            });
+            lstSearchResults.addView(item);
+        }
+
+        //Empty, no results
+        if(adaptercountSearchResults==0)
+        {
+                mTxtNoResults.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            mLayoutSearchResults.setVisibility(View.VISIBLE);
+        }
+
     }
 }

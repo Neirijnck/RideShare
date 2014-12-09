@@ -24,9 +24,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
+import java.sql.Time;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -162,8 +165,20 @@ public class APIHelper {
     //Minimum parameters
     public static void PlanTrip(String from, String to, String date, String time)
     {
+        StringBuilder sb = new StringBuilder().append(date).append("T").append(time).append(":00Z");
+        String dateTime =sb.toString();
+
         try {
-            String datetime = "";
+            Date dateObject = new Date();
+
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy'T'HH:mm:ssZ");
+                sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+                dateObject = sdf.parse(dateTime);
+
+            }catch (ParseException ex){
+                Log.e("ParseException Date", ex.getMessage());}
+
 
             HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/trips");
             httppost.addHeader("Authorization", "000");
@@ -172,8 +187,8 @@ public class APIHelper {
             parameters.add(new BasicNameValuePair("from", from));
             parameters.add(new BasicNameValuePair("to", to));
 
-            if(!datetime.isEmpty())
-                parameters.add(new BasicNameValuePair("datetime", datetime));
+//            if(!datetime.isEmpty())
+//                parameters.add(new BasicNameValuePair("datetime", datetime));
 
             httppost.setEntity(new UrlEncodedFormEntity(parameters));
 
