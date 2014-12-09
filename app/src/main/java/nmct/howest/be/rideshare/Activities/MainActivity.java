@@ -2,11 +2,14 @@ package nmct.howest.be.rideshare.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 
@@ -19,7 +22,7 @@ import nmct.howest.be.rideshare.R;
 public class MainActivity extends ActionBarActivity {
 
     //Tab variables
-    private ViewPager pager;
+    public static ViewPager pager;
     private TabPagerAdapter TabAdapter;
     private PagerSlidingTabStrip tabs;
 
@@ -27,6 +30,16 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+        String token = pref.getString("accessToken", "");
+
+        if(token == null || token == "") {
+            Log.d("deToken", "is leeg");
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            this.startActivity(intent);
+        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -111,7 +124,6 @@ public class MainActivity extends ActionBarActivity {
     public static void callFacebookLogout(Context context) {
         Session session = Session.getActiveSession();
         if (session != null) {
-
             if (!session.isClosed()) {
                 session.closeAndClearTokenInformation();
                 Intent intent = new Intent(context, LoginActivity.class);
@@ -119,13 +131,17 @@ public class MainActivity extends ActionBarActivity {
                 context.startActivity(intent);
                 //clear your preferences if saved
             }
+            else{
+                Intent intent = new Intent(context, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
         } else {
 
-            session = new Session(context);
-            Session.setActiveSession(session);
-            session.closeAndClearTokenInformation();
+            Intent intent = new Intent(context, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
             //clear your preferences if saved
-
         }
 
     }

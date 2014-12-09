@@ -1,12 +1,7 @@
 package nmct.howest.be.rideshare.Activities.Helpers;
 
-import android.content.Context;
 import android.os.AsyncTask;
-import android.text.TextUtils;
-import android.util.JsonReader;
 import android.util.Log;
-import android.view.TextureView;
-import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -22,25 +17,16 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.StringReader;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
-
-import nmct.howest.be.rideshare.RideshareApp;
 
 public class APIHelper {
 
-    public static void AddUser(String userName, String firstName, String lastName, String email, String fbToken, String fbLink, String fbID, String location, String gender, String regID) {
+    public static void AddUser(String userName, String firstName, String lastName, String email, String fbToken, String fbLink, String fbID, String location, String gender, String regID, String facebookImg) {
         try {
             HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/profile");
-            httppost.addHeader("Authorization", fbToken);
-
             List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+
             parameters.add(new BasicNameValuePair("userName", userName));
             parameters.add(new BasicNameValuePair("firstName", firstName));
             parameters.add(new BasicNameValuePair("lastName", lastName));
@@ -50,6 +36,9 @@ public class APIHelper {
             parameters.add(new BasicNameValuePair("location", location));
             parameters.add(new BasicNameValuePair("gender", gender));
             parameters.add(new BasicNameValuePair("notifications", regID));
+            parameters.add((new BasicNameValuePair("facebookImg", facebookImg)));
+            parameters.add((new BasicNameValuePair("facebookToken", fbToken)));
+
             httppost.setEntity(new UrlEncodedFormEntity(parameters));
 
             PostAsync task = new PostAsync();
@@ -60,7 +49,6 @@ public class APIHelper {
         }
     }
 
-    //Minimum parameters
     public static void EditUser(String userName, String firstName, String lastName, String fbToken, String location)
     {
         try {
@@ -159,7 +147,35 @@ public class APIHelper {
         }
     }
 
-    //Minimum parameters
+    public static void PlanTrip(String from, String to, String date, String time, String price) {
+        try {
+            String datetime = "";
+
+            //prim.trim("€");
+
+            HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/trips");
+            httppost.addHeader("Authorization", "000");
+
+            List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+            parameters.add(new BasicNameValuePair("from", from));
+            parameters.add(new BasicNameValuePair("to", to));
+
+            if(!datetime.isEmpty())
+                parameters.add(new BasicNameValuePair("datetime", datetime));
+
+            if(!price.isEmpty())
+                parameters.add(new BasicNameValuePair("price", price));
+
+            httppost.setEntity(new UrlEncodedFormEntity(parameters));
+
+            PostAsync task = new PostAsync();
+            task.execute(httppost);
+        }
+        catch (IOException e) {
+            Log.d("", "Error in http connection " + e.toString());
+        }
+    }
+
     public static void PlanTrip(String from, String to, String date, String time)
     {
         try {
@@ -185,102 +201,9 @@ public class APIHelper {
         }
     }
 
-    //With price
-    public static void PlanTrip(String from, String to, String date, String time, String price) {
-        try {
-            String datetime = "";
-
-            price = TextUtils.substring(price, 1, price.length());
-
-            HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/trips");
-            httppost.addHeader("Authorization", "000");
-
-            List<NameValuePair> parameters = new ArrayList<NameValuePair>();
-            parameters.add(new BasicNameValuePair("from", from));
-            parameters.add(new BasicNameValuePair("to", to));
-
-            if(!datetime.isEmpty())
-                parameters.add(new BasicNameValuePair("datetime", datetime));
-
-            if(!price.isEmpty())
-                parameters.add(new BasicNameValuePair("price", price));
-
-            httppost.setEntity(new UrlEncodedFormEntity(parameters));
-
-            PostAsync task = new PostAsync();
-            task.execute(httppost);
-        }
-        catch (IOException e) {
-            Log.d("", "Error in http connection " + e.toString());
-        }
-    }
-
-    //With repeat
-    public static void PlanTrip(String from, String to, String date, String time, boolean[] repeat)
-    {
-        try {
-            String datetime = "";
-
-
-            HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/trips");
-            httppost.addHeader("Authorization", "000");
-
-            List<NameValuePair> parameters = new ArrayList<NameValuePair>();
-            parameters.add(new BasicNameValuePair("from", from));
-            parameters.add(new BasicNameValuePair("to", to));
-
-            if(!datetime.isEmpty())
-                parameters.add(new BasicNameValuePair("datetime", datetime));
-
-                //parameters.add(new BasicNameValuePair("repeat", repeat));
-
-            httppost.setEntity(new UrlEncodedFormEntity(parameters));
-
-            PostAsync task = new PostAsync();
-            task.execute(httppost);
-        }
-        catch (IOException e) {
-            Log.d("", "Error in http connection " + e.toString());
-        }
-    }
-
-    //With everything filled in
-    public static void PlanTrip(String from, String to, String date, String time, String price, boolean[] repeat)
-    {
-        try {
-            String datetime = "";
-
-            price = TextUtils.substring(price, 1, price.length());
-
-            HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/trips");
-            httppost.addHeader("Authorization", "000");
-
-            List<NameValuePair> parameters = new ArrayList<NameValuePair>();
-            parameters.add(new BasicNameValuePair("from", from));
-            parameters.add(new BasicNameValuePair("to", to));
-
-            if(!datetime.isEmpty())
-                parameters.add(new BasicNameValuePair("datetime", datetime));
-
-            if(!price.isEmpty())
-                parameters.add(new BasicNameValuePair("price", price));
-
-            //parameters.add(new BasicNameValuePair("repeat", repeat));
-
-            httppost.setEntity(new UrlEncodedFormEntity(parameters));
-
-            PostAsync task = new PostAsync();
-            task.execute(httppost);
-        }
-        catch (IOException e) {
-            Log.d("", "Error in http connection " + e.toString());
-        }
-    }
-
 
     //Helper Post
-    public static class PostAsync extends AsyncTask<HttpPost, Void, String>
-    {
+    public static class PostAsync extends AsyncTask<HttpPost, Void, String> {
 
         @Override
         protected String doInBackground(HttpPost... param) {
@@ -294,28 +217,13 @@ public class APIHelper {
                 String result = convertStreamToString(entity.getContent());
 
 
+                //CONTROL STATUS CODE 200??
                 return new String(result);
 
             }
             catch (Exception e) {
                 e.printStackTrace();
                 return null;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String result)
-        {
-            //Parse json for status code
-            //if 200 = Toast for success
-            String statusCode = ParseJsonStatusCode(result);
-            if(statusCode=="200"||statusCode=="201")
-            {
-                Toast.makeText(RideshareApp.getAppContext(), "Succesvol opgeslagen in database", Toast.LENGTH_SHORT).show();
-            }
-            else
-            {
-                Toast.makeText(RideshareApp.getAppContext(), "Er is iets misgelopen", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -342,61 +250,6 @@ public class APIHelper {
                 return null;
             }
         }
-
-        @Override
-        protected void onPostExecute(String result)
-        {
-            //Parse json for status code
-            //if 200 = Toast for success
-            String statusCode = ParseJsonStatusCode(result);
-            if(statusCode=="200"||statusCode=="201")
-            {
-                    Toast.makeText(RideshareApp.getAppContext(), "Succesvol aangepast in database", Toast.LENGTH_SHORT).show();
-            }
-            else
-            {
-                Toast.makeText(RideshareApp.getAppContext(), "Er is iets misgelopen", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    public static String ParseJsonStatusCode(String json)
-    {
-        String statusCode="";
-        String message="";
-
-        Reader stringReader = new StringReader(json);
-        JsonReader reader = new JsonReader(stringReader);
-        try
-        {
-            reader.beginObject();
-            while (reader.hasNext())
-            {
-                while (reader.hasNext())
-                {
-                    String key = reader.nextName();
-                    if (key.equals("status")) {
-                        statusCode = reader.nextString();
-                    } else if (key.equals("message")) {
-                        message = reader.nextString();
-                    }
-                    else{
-                        reader.skipValue();
-                    }
-                }
-            }
-            reader.endObject();
-        }
-        catch(IOException ex)
-        {
-            Log.e("IOException", ex.getMessage());
-        }
-        finally
-        {
-            try{reader.close();}catch(IOException e){}
-        }
-
-        return statusCode;
     }
 
     public static String convertStreamToString(InputStream is) {

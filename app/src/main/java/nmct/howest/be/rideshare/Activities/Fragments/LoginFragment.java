@@ -2,12 +2,12 @@ package nmct.howest.be.rideshare.Activities.Fragments;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -25,16 +25,11 @@ import com.facebook.SessionState;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.LoginButton;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
+import nmct.howest.be.rideshare.Activities.Helpers.APIHelper;
 import nmct.howest.be.rideshare.Activities.Helpers.ConnectivityHelper;
-import nmct.howest.be.rideshare.Activities.Helpers.ParseHelper;
 import nmct.howest.be.rideshare.Activities.MainActivity;
 import nmct.howest.be.rideshare.R;
 
@@ -115,11 +110,22 @@ public class LoginFragment extends Fragment
                                 @Override
                                 public void onCompleted(GraphUser user, Response response) {
                                     if (user != null) {
-                                        Log.i(TAG, "token: " + session.getAccessToken());
-                                        Log.i(TAG, "Email " + user.asMap().get("email"));
-                                        parseLoginToDatabase();
-                                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                                        String location = "";
+                                        if(user.getLocation() != null){
+                                            location = user.getLocation().toString();
+                                        }
 
+                                        APIHelper.AddUser(user.getName(), user.getFirstName(),
+                                                user.getLastName(), user.asMap().get("email").toString(),
+                                                session.getAccessToken().toString(), user.getLink(), user.getId(), location,
+                                                user.asMap().get("gender").toString(), "", "https://graph.facebook.com/" + user.getId() + "/picture?type=large");
+                                        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                                        SharedPreferences.Editor edt = pref.edit();
+
+                                        edt.putString("accessToken", session.getAccessToken().toString());
+                                        edt.commit();
+
+                                        Intent intent = new Intent(getActivity(), MainActivity.class);
                                         getActivity().startActivity(intent);
                                     }
                                 }
@@ -157,64 +163,4 @@ public class LoginFragment extends Fragment
         // Commit the transaction
         transaction.commit();
     }
-
-
-    private class JSONParse extends AsyncTask<String, Integer, ArrayList<HashMap<String, String>>> {
-
-        ArrayList<HashMap<String, String>> newsList = new ArrayList<HashMap<String, String>>();
-
-
-        private ProgressDialog pDialog;
-
-        protected void onPreExecute() {
-
-            super.onPreExecute();
-            AlertDialog.Builder builder = new AlertDialog.Builder(c);
-            builder.setTitle("Logging...");
-            builder.setMessage("We are saving your data");
-            builder.show();
-
-        }
-
-        @Override
-        protected ArrayList<HashMap<String, String>> doInBackground(String... params) {
-
-            ParseHelper jParser = new ParseHelper();
-            JSONObject json = jParser.getJSONData("http://188.226.154.228:8080/api/v1/profile");
-            try{
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("userid", 1);
-                jsonObject.put("gender", "m");
-                jsonObject.put("lastName", "De Coster");
-                jsonObject.put("firstName", "Ashim");
-                jsonObject.put("facebookLink","link");
-                jsonObject.put("facebookID", "id");
-                jsonObject.put("facebookToken", "token");
-                jsonObject.put("userName", "jimmydc");
-                    HashMap<String, String> map = new HashMap<String, String>();
-                  //  map.put(HEAD_LINE, headLine);
-                   // map.put(DATE_LINE, dateLine);
-                    //newsList.add(map);
-                } catch (JSONException e1) {
-                e1.printStackTrace();
-            }
-
-            return newsList;
-        }
-        @Override
-        protected void onPostExecute(ArrayList<HashMap<String, String>> result) {
-
-
-            super.onPostExecute(result);
-            pDialog.dismiss();
-            String []from = {HEAD_LINE,DATE_LINE};
-            int []to = {R.id.tv_headLn,R.id.tv_dateLn};
-            ListAdapter adapter = new SimpleAdapter(MainActivity.this, result, R.layout.listview_item, from, to);
-            setListAdapter(adapter);
-
-        }
-
-    }
-
-
 }

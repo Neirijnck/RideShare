@@ -1,6 +1,8 @@
 package nmct.howest.be.rideshare.Activities.Loaders.Json;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.JsonReader;
 import android.util.Log;
@@ -25,12 +27,13 @@ import nmct.howest.be.rideshare.Activities.Models.User;
 public class ProfileLoader extends AsyncTaskLoader<User>
 {
     private final String mUrl;
-    private User user = new User();
+    public User user = new User();
     private List<Review> reviews = new ArrayList<Review>();
-
+    private Context context;
     public ProfileLoader(Context context, String mUrl) {
         super(context);
         this.mUrl = mUrl;
+        this.context = context;
     }
 
     @Override
@@ -52,7 +55,9 @@ public class ProfileLoader extends AsyncTaskLoader<User>
         //Met url json
         HttpClient client = new DefaultHttpClient();
         HttpGet httpGet = new HttpGet(mUrl);
-        httpGet.addHeader("Authorization", "000");
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+        String token = pref.getString("accessToken", "");
+        httpGet.addHeader("auth", "000");
         HttpResponse response = client.execute(httpGet);
         HttpEntity entity = response.getEntity();
         InputStream in = entity.getContent();
@@ -145,7 +150,6 @@ public class ProfileLoader extends AsyncTaskLoader<User>
                             {
                                 String key_second = reader.nextName();
                                 if(key_second.equals("userID")){review.setUserID(reader.nextString());}
-                                else if(key_second.equals("userName")){review.setUserName(reader.nextString());}
                                 else if(key_second.equals("date")){review.setDate(reader.nextString());}
                                 else if(key_second.equals("score")){review.setScore(reader.nextInt());}
                                 else if(key_second.equals("text")){review.setText(reader.nextString());}
