@@ -9,6 +9,7 @@
     <color name="rideshare_secondary">#FFFFFF</color>
     <color name="rideshare_accent">#16a085</color>
     <color name="rideshare_background">#fafafa</color>
+    <color name="rideshare_card">#fff4f4f4</color>
     <color name="rideshare_text">#87000000</color>
     <color name="rideshare_icon_color">#ff555555</color>
 

@@ -40,7 +40,7 @@ public class ReviewAdapter extends ArrayAdapter<Review>
         }
 
         Review review = getItem(position);
-        holder.txtReviewName.setText(""+review.getScore());
+        holder.txtReviewName.setText(review.getUserName());
         holder.txtReview.setText(review.getText());
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

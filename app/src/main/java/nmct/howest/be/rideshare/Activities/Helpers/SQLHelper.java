@@ -9,10 +9,90 @@ class SQLHelper extends SQLiteOpenHelper {
     private static SQLHelper INSTANCE;
     private static Object lock = new Object();
 
-    private static final String DB_NAME = "sharemyride.db";
+    // Logcat tag
+    private static final String LOG = "DatabaseHelper";
+
+    // Database Version
     private static final int DB_VERSION = 1;
 
-    private SQLHelper(Context context) {
+    //Database Name
+    private static final String DB_NAME = "sharemyride.db";
+
+    //Table Names
+    private static final String TABLE_USER = "User";
+    private static final String TABLE_REVIEW = "Review";
+    private static final String TABLE_TRIP = "Trip";
+    private static final String TABLE_MATCH = "Match";
+    private static final String TABLE_MESSAGE = "Message";
+
+    // Common column names
+    private static final String KEY_ID = "ID";
+    private static final String KEY_USERID = "UserID";
+    private static final String KEY_USER_ID = "User_ID";
+    private static final String KEY_DATE_TIME = "DateTime";
+    private static final String KEY_FROM = "From";
+    private static final String KEY_TO = "To";
+    private static final String KEY_TEXT = "Text";
+
+    // USER Table - column names
+    private static final String KEY_FACEBOOK_TOKEN = "FacebookToken";
+    private static final String KEY_FACEBOOK_ID = "FacebookID";
+    private static final String KEY_FACEBOOK_URL = "FacebookURL";
+    private static final String KEY_FIRSTNAME = "FirstName";
+    private static final String KEY_LASTNAME = "LastName";
+    private static final String KEY_EMAIL = "Email";
+    private static final String KEY_GENDER = "Gender";
+    private static final String KEY_BIRTHDAY = "Birthday";
+    private static final String KEY_LOCATION = "Location";
+    private static final String KEY_CARTYPE = "Cartype";
+    private static final String KEY_AMOUNT_OF_SEATS = "AmountOfSeats";
+
+    // REVIEW Table - column names
+    private static final String KEY_SCORE = "Score";
+
+    // TRIP Table - column names
+    private static final String KEY_TRIPID = "TripID";
+    private static final String KEY_PAYMENT = "Payment";
+    private static final String KEY_REPEAT= "Repeat";
+
+    // MATCH Table - column names
+    private static final String KEY_STATUS = "Status";
+    private static final String KEY_TRIP_ID = "Trip_ID";
+
+    // MESSAGE Table - column names
+    private static final String KEY_MATCH_ID = "Match_ID";
+
+
+    // Table Create Statements
+    private static final String CREATE_TABLE_USER = "CREATE TABLE "
+            + TABLE_USER + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_USERID
+            + " TEXT," + KEY_FACEBOOK_TOKEN + " TEXT," + KEY_FACEBOOK_ID + " TEXT" + KEY_FACEBOOK_URL + " TEXT,"
+            + KEY_FIRSTNAME + " TEXT,"+ KEY_LASTNAME + " TEXT,"+ KEY_EMAIL + " TEXT,"+ KEY_GENDER + " TEXT,"
+            + KEY_BIRTHDAY + " TEXT,"+ KEY_LOCATION + " TEXT,"+ KEY_CARTYPE + " TEXT,"+ KEY_AMOUNT_OF_SEATS + " TEXT,"
+            + ")";
+
+    private static final String CREATE_TABLE_REVIEW ="CREATE TABLE "
+            + TABLE_REVIEW + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_USERID
+            + " TEXT," + KEY_DATE_TIME + " DATETIME," + KEY_SCORE + " INTEGER" + KEY_TEXT + " TEXT" + KEY_USER_ID + " INTEGER"+ ")";
+
+    private static final String CREATE_TABLE_TRIP ="CREATE TABLE "
+            + TABLE_TRIP + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_TRIP_ID + " TEXT," + KEY_USERID + " TEXT,"
+            + KEY_FROM + " TEXT" + KEY_TO + " TEXT"+ KEY_DATE_TIME + " DATETIME"+ KEY_PAYMENT + " TEXT"
+            + KEY_REPEAT + " TEXT"+ KEY_USER_ID + " INTEGER"
+            + ")";
+
+    private static final String CREATE_TABLE_MATCH ="CREATE TABLE "
+            + TABLE_MATCH + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_USERID + " TEXT," + KEY_FROM + " TEXT,"
+            + KEY_TO + " TEXT" + KEY_DATE_TIME + " DATETIME"+ KEY_STATUS + " INTEGER"+ KEY_TRIP_ID + " INTEGER"
+            + ")";
+
+    private static final String CREATE_TABLE_MESSAGE ="CREATE TABLE "
+            + TABLE_MESSAGE + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_USERID + " TEXT,"
+            + KEY_TEXT + " TEXT," + KEY_DATE_TIME + " DATETIME" + KEY_MATCH_ID + " INTEGER,"
+            + ")";
+
+
+    public SQLHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
@@ -35,32 +115,18 @@ class SQLHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        /*db.execSQL("DROP TABLE " + Contract.Ribbons.CONTENT_DIRECTORY);
-        db.execSQL("DROP TABLE " + Contract.Orders.CONTENT_DIRECTORY);
+        db.execSQL("DROP TABLE " + TABLE_USER);
+        db.execSQL("DROP TABLE " + TABLE_REVIEW);
+        db.execSQL("DROP TABLE " + TABLE_TRIP);
+        db.execSQL("DROP TABLE " + TABLE_MATCH);
+        db.execSQL("DROP TABLE " + TABLE_MESSAGE);
 
-        createOrdersTableV1(db);
-        createRibbonsTableV1(db);*/
+        db.execSQL(CREATE_TABLE_USER);
+        db.execSQL(CREATE_TABLE_REVIEW);
+        db.execSQL(CREATE_TABLE_TRIP);
+        db.execSQL(CREATE_TABLE_MATCH);
+        db.execSQL(CREATE_TABLE_MESSAGE);
     }
-    /*
-    private void createOrdersTableV1(SQLiteDatabase db) {
-        String sql = "CREATE TABLE " + Contract.Orders.CONTENT_DIRECTORY + " ("
-                + Contract.OrderColumns._ID + " INTEGER PRIMARY KEY,"
-                + Contract.OrderColumns.NAME + " TEXT"
-                + ");";
-
-        db.execSQL(sql);
-    }
-
-    private void createRibbonsTableV1(SQLiteDatabase db) {
-        String sql = "CREATE TABLE " + Contract.Ribbons.CONTENT_DIRECTORY + " ("
-                + Contract.RibbonColumns._ID + " INTEGER PRIMARY KEY,"
-                + Contract.RibbonColumns.NAME + " TEXT,"
-                + Contract.RibbonColumns.IMAGE + " TEXT,"
-                + Contract.RibbonColumns.ORDER_ID + " TEXT"
-                + ");";
-
-        db.execSQL(sql);
-    }*/
 
 
 }

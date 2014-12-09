@@ -14,11 +14,14 @@
     <uses-permission android:name="com.example.gcm.permission.C2D_MESSAGE" />
 
     <application
+        android:name="nmct.howest.be.rideshare.RideshareApp"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:logo="@drawable/ic_logo"
         android:theme="@style/RideShare.Material" >
+
+        <!--ACTIVITIES-->
         <activity
             android:name="nmct.howest.be.rideshare.Activities.LoginActivity"
             android:configChanges="orientation|keyboardHidden"
@@ -59,10 +62,6 @@
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/app_id" />
-
         <activity
             android:name="nmct.howest.be.rideshare.Activities.SettingsActivity"
             android:label="@string/title_activity_settings" >
@@ -78,6 +77,7 @@
                 android:value="nmct.howest.be.rideshare.Activities.MainActivity" />
         </activity>
 
+        <!--RECEIVER-->
         <receiver
             android:name="nmct.howest.be.rideshare.services.GcmBroadcastReceiver"
             android:enabled="true"
@@ -90,9 +90,35 @@
             </intent-filter>
         </receiver>
 
+        <!--SERVICES-->
         <service
             android:name="nmct.howest.be.rideshare.services.GcmIntentService"
             android:exported="false" />
+
+        <service
+            android:name=".services.SyncService"
+            android:enabled="true"
+            android:exported="true">
+            <!--android:process=":sync"-->
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/sync_adapter" />
+
+        </service>
+
+        <!--META DATA-->
+        <meta-data
+            android:name="nmct.howest.be.rideshare.webservice.auth.location"
+            android:value="http://188.226.154.228:8080" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/app_id" />
+
     </application>
 
 </manifest>

@@ -29,6 +29,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TimePicker;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import java.util.Calendar;
 
@@ -47,6 +48,13 @@ public class PlanningFragment extends Fragment{
     static EditText txtNaarPlan;
     static EditText txtVanPlan;
     static Button btnOpslaan;
+    private ToggleButton tglMo;
+    private ToggleButton tglTu;
+    private ToggleButton tglWe;
+    private ToggleButton tglTh;
+    private ToggleButton tglFr;
+    private ToggleButton tglSa;
+    private ToggleButton tglSu;
 
 
     //Ctor
@@ -71,6 +79,14 @@ public class PlanningFragment extends Fragment{
         txtNaarPlan = (EditText) view.findViewById(R.id.txtNaarPlan);
         txtVanPlan = (EditText) view.findViewById(R.id.txtVanPlan);
         btnOpslaan = (Button) view.findViewById(R.id.btnOpslaan);
+
+        tglMo = (ToggleButton) view.findViewById(R.id.tglMaandag);
+        tglTu = (ToggleButton) view.findViewById(R.id.tglDinsdag);
+        tglWe = (ToggleButton) view.findViewById(R.id.tglWoensdag);
+        tglTh = (ToggleButton) view.findViewById(R.id.tglDonderdag);
+        tglFr = (ToggleButton) view.findViewById(R.id.tglVrijdag);
+        tglSa = (ToggleButton) view.findViewById(R.id.tglZaterdag);
+        tglSu = (ToggleButton) view.findViewById(R.id.tglZondag);
 
         //Enable togglebuttons when switch is on
         repeatSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -110,12 +126,10 @@ public class PlanningFragment extends Fragment{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // TODO Auto-generated method stub
             }
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // TODO Auto-generated method stub
             }
 
             @Override
@@ -136,6 +150,14 @@ public class PlanningFragment extends Fragment{
                 String price = txtPrice.getText().toString();
                 String from = txtVanPlan.getText().toString();
                 String to = txtNaarPlan.getText().toString();
+                boolean mo = tglMo.isChecked();
+                boolean tu = tglTu.isChecked();
+                boolean we = tglWe.isChecked();
+                boolean th = tglTh.isChecked();
+                boolean fr = tglFr.isChecked();
+                boolean sa = tglSa.isChecked();
+                boolean su = tglSu.isChecked();
+                boolean[] repeatDays = new boolean[7];
 
                 //Check if required fields are not empty
                 if(TextUtils.isEmpty(date)||TextUtils.isEmpty(time)||TextUtils.isEmpty(from)||TextUtils.isEmpty(to))
@@ -146,12 +168,39 @@ public class PlanningFragment extends Fragment{
                 {
                     //Post info to database
 
-                    //If there is a price
-                    if(!TextUtils.isEmpty(price))
+                    //If there is only a price
+                    if(!price.equals("€")&&!repeatSwitch.isChecked())
                     {
-                        APIHelper.PlanTrip(from, to, date, time, price);
+                        APIHelper.PlanTrip(from.trim(), to.trim(), date, time, price.trim());
                     }
-                    else{APIHelper.PlanTrip(from, to, date, time);}
+                    //If there are only repeat days
+                    else if(price.equals("€")&&repeatSwitch.isChecked())
+                    {
+                        repeatDays[0] = mo;
+                        repeatDays[1] = tu;
+                        repeatDays[2] = we;
+                        repeatDays[3] = th;
+                        repeatDays[4] = fr;
+                        repeatDays[5] = sa;
+                        repeatDays[6] = su;
+                         APIHelper.PlanTrip(from.trim(), to.trim(), date, time, repeatDays);
+                    }
+                    //Both price and repeat days
+                    else if(!price.equals("€")&&repeatSwitch.isChecked())
+                    {
+                        repeatDays[0] = mo;
+                        repeatDays[1] = tu;
+                        repeatDays[2] = we;
+                        repeatDays[3] = th;
+                        repeatDays[4] = fr;
+                        repeatDays[5] = sa;
+                        repeatDays[6] = su;
+                        APIHelper.PlanTrip(from.trim(), to.trim(), date, time, price.trim(), repeatDays);
+                    }
+                    else
+                    {
+                        APIHelper.PlanTrip(from.trim(), to.trim(), date, time);
+                    }
                 }
             }
         });

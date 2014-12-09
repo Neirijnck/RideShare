@@ -1,40 +1,39 @@
 package nmct.howest.be.rideshare.Activities.Fragments;
 
-import android.content.Intent;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
+        import android.content.Intent;
+        import android.support.v4.app.LoaderManager;
+        import android.support.v4.content.Loader;
+        import android.os.Bundle;
+        import android.support.v4.app.Fragment;
+        import android.text.TextUtils;
+        import android.util.Log;
+        import android.view.LayoutInflater;
+        import android.view.Menu;
+        import android.view.MenuInflater;
+        import android.view.MenuItem;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.widget.ArrayAdapter;
+        import android.widget.LinearLayout;
+        import android.widget.ScrollView;
+        import android.widget.TextView;
+        import android.widget.Toast;
 
-import com.facebook.widget.ProfilePictureView;
+        import com.facebook.widget.ProfilePictureView;
 
-import org.w3c.dom.Text;
+        import java.text.ParseException;
+        import java.text.SimpleDateFormat;
+        import java.util.ArrayList;
+        import java.util.Date;
+        import java.util.List;
+        import java.util.TimeZone;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
-
-import nmct.howest.be.rideshare.Activities.Adapters.ReviewAdapter;
-import nmct.howest.be.rideshare.Activities.Adapters.TripRequestedAdapter;
-import nmct.howest.be.rideshare.Activities.Helpers.Utils;
-import nmct.howest.be.rideshare.Activities.Loaders.Json.ProfileLoader;
-import nmct.howest.be.rideshare.Activities.Models.Review;
-import nmct.howest.be.rideshare.Activities.Models.User;
-import nmct.howest.be.rideshare.Activities.ProfileActivity;
-import nmct.howest.be.rideshare.R;
+        import nmct.howest.be.rideshare.Activities.Adapters.ReviewAdapter;
+        import nmct.howest.be.rideshare.Activities.Loaders.Json.ProfileLoader;
+        import nmct.howest.be.rideshare.Activities.Models.Review;
+        import nmct.howest.be.rideshare.Activities.Models.User;
+        import nmct.howest.be.rideshare.Activities.ProfileActivity;
+        import nmct.howest.be.rideshare.R;
 
 public class MyProfileFragment extends Fragment implements LoaderManager.LoaderCallbacks<User>
 {
@@ -45,9 +44,9 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
     private TextView txtGenderAge;
     private TextView txtCar;
     private TextView txtUserName;
-    private ListView lstReviews;
-    private ArrayAdapter mAdapterReview;
-    private List<Review> reviews;
+    private LinearLayout lstReviews;
+    private ArrayAdapter<Review> mAdapterReview;
+    private ArrayList<Review> reviews;
 
     public MyProfileFragment() {}
 
@@ -65,11 +64,11 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_profile, container, false);
 
-        lstReviews = (ListView) view.findViewById(R.id.lstBeoordelingen);
+        lstReviews = (LinearLayout) view.findViewById(R.id.lstBeoordelingen);
 
         mAdapterReview = new ReviewAdapter(getActivity(), R.layout.card_review, R.id.txbBeoordelingNaam);
 
-        lstReviews.setAdapter(mAdapterReview);
+        //lstReviews.setAdapter(mAdapterReview);
 
         return view;
     }
@@ -119,22 +118,41 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
         mUser = user;
         fillData(user);
 
-        if(reviews.isEmpty())
-        {
-            lstReviews.setVisibility(View.INVISIBLE);
+        reviews = new ArrayList<Review>();
 
-            TextView txbNoReviews = (TextView) getActivity().findViewById(R.id.txbNoReviews);
-            txbNoReviews.setVisibility(View.VISIBLE);
+        if(user.getReviews()!=null) {
+            reviews = (ArrayList) user.getReviews();
+            mAdapterReview.addAll(reviews);
         }
-        else {
-            Utils.setListViewHeightBasedOnChildren(lstReviews);
+
+        //If list isnt empty, show the list
+        if(!reviews.isEmpty())
+        {
+            TextView txbNoReviews = (TextView) getActivity().findViewById(R.id.txbNoReviews);
+            txbNoReviews.setVisibility(View.INVISIBLE);
+
+            LinearLayout layoutReviews = (LinearLayout) getActivity().findViewById(R.id.lstBeoordelingen);
+            layoutReviews.setVisibility(View.VISIBLE);
+        }
+
+        //Adding items to linear layouts
+        int adaptercountReviews = mAdapterReview.getCount();
+        for(int i =0; i < adaptercountReviews; i++)
+        {
+            View item = mAdapterReview.getView(i, null, null);
+            item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Get info from the item
+                }
+            });
+            lstReviews.addView(item);
         }
     }
 
     @Override
     public void onLoaderReset(Loader<User> Loader)
     {
-        lstReviews.setAdapter(null);
         reviews.clear();
         mAdapterReview.notifyDataSetChanged();
     }
@@ -181,9 +199,6 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
             txtCar.setText("Auto niet bekend");
         }
         profilePictureView.setCropped(true);
-
-        reviews = user.getReviews();
-        mAdapterReview.addAll(reviews);
 
     }
 
