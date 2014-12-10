@@ -138,6 +138,7 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
                 @Override
                 public void onClick(View v) {
                     //Get info from item
+
                 }
             });
             listMyTrips.addView(item);

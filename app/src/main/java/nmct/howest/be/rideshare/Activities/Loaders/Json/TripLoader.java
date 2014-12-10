@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nmct.howest.be.rideshare.Activities.Helpers.APIHelper;
+import nmct.howest.be.rideshare.Activities.Helpers.Utils;
 import nmct.howest.be.rideshare.Activities.Models.Match;
 import nmct.howest.be.rideshare.Activities.Models.Message;
 import nmct.howest.be.rideshare.Activities.Models.Trip;
@@ -51,9 +52,6 @@ public class TripLoader extends AsyncTaskLoader<List<Trip>>
 
     private void loadTrips() throws IOException
     {
-        //Met raw json
-        //InputStream in = getContext().getResources().openRawResource(R.raw.trip);
-
         //Met url json
         HttpClient client = new DefaultHttpClient();
         HttpGet httpGet = new HttpGet(mUrl);
@@ -62,7 +60,7 @@ public class TripLoader extends AsyncTaskLoader<List<Trip>>
         HttpEntity entity = response.getEntity();
         InputStream in = entity.getContent();
 
-        String JSONbody = APIHelper.convertStreamToString(in);
+        String JSONbody = Utils.convertStreamToString(in);
         Reader stringReader = new StringReader(JSONbody);
 
         JsonReader reader = new JsonReader(stringReader);

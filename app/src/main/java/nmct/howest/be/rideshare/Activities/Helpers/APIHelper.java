@@ -165,20 +165,8 @@ public class APIHelper {
     //Minimum parameters
     public static void PlanTrip(String from, String to, String date, String time)
     {
-        StringBuilder sb = new StringBuilder().append(date).append("T").append(time).append(":00Z");
-        String dateTime =sb.toString();
-
         try {
-            Date dateObject = new Date();
-
-            try {
-                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy'T'HH:mm:ssZ");
-                sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-                dateObject = sdf.parse(dateTime);
-
-            }catch (ParseException ex){
-                Log.e("ParseException Date", ex.getMessage());}
-
+            String dateTime = Utils.parseDateToISOString(date, time);
 
             HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/trips");
             httppost.addHeader("Authorization", "000");
@@ -187,8 +175,8 @@ public class APIHelper {
             parameters.add(new BasicNameValuePair("from", from));
             parameters.add(new BasicNameValuePair("to", to));
 
-//            if(!datetime.isEmpty())
-//                parameters.add(new BasicNameValuePair("datetime", datetime));
+            if(!dateTime.isEmpty())
+                parameters.add(new BasicNameValuePair("datetime", dateTime));
 
             httppost.setEntity(new UrlEncodedFormEntity(parameters));
 
@@ -203,7 +191,7 @@ public class APIHelper {
     //With price
     public static void PlanTrip(String from, String to, String date, String time, String price) {
         try {
-            String datetime = "";
+            String dateTime = Utils.parseDateToISOString(date, time);
 
             price = TextUtils.substring(price, 1, price.length());
 
@@ -214,11 +202,11 @@ public class APIHelper {
             parameters.add(new BasicNameValuePair("from", from));
             parameters.add(new BasicNameValuePair("to", to));
 
-            if(!datetime.isEmpty())
-                parameters.add(new BasicNameValuePair("datetime", datetime));
+            if(!dateTime.isEmpty())
+                parameters.add(new BasicNameValuePair("datetime", dateTime));
 
             if(!price.isEmpty())
-                parameters.add(new BasicNameValuePair("price", price));
+                parameters.add(new BasicNameValuePair("payment", price));
 
             httppost.setEntity(new UrlEncodedFormEntity(parameters));
 
@@ -234,7 +222,7 @@ public class APIHelper {
     public static void PlanTrip(String from, String to, String date, String time, boolean[] repeat)
     {
         try {
-            String datetime = "";
+            String dateTime = Utils.parseDateToISOString(date, time);
 
 
             HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/trips");
@@ -244,10 +232,16 @@ public class APIHelper {
             parameters.add(new BasicNameValuePair("from", from));
             parameters.add(new BasicNameValuePair("to", to));
 
-            if(!datetime.isEmpty())
-                parameters.add(new BasicNameValuePair("datetime", datetime));
+            if(!dateTime.isEmpty())
+                parameters.add(new BasicNameValuePair("datetime", dateTime));
 
-                //parameters.add(new BasicNameValuePair("repeat", repeat));
+            parameters.add(new BasicNameValuePair("repeat.mo", ""+repeat[0]));
+            parameters.add(new BasicNameValuePair("repeat.tu", ""+repeat[1]));
+            parameters.add(new BasicNameValuePair("repeat.we", ""+repeat[2]));
+            parameters.add(new BasicNameValuePair("repeat.th", ""+repeat[3]));
+            parameters.add(new BasicNameValuePair("repeat.fr", ""+repeat[4]));
+            parameters.add(new BasicNameValuePair("repeat.sa", ""+repeat[5]));
+            parameters.add(new BasicNameValuePair("repeat.su", ""+repeat[6]));
 
             httppost.setEntity(new UrlEncodedFormEntity(parameters));
 
@@ -263,7 +257,7 @@ public class APIHelper {
     public static void PlanTrip(String from, String to, String date, String time, String price, boolean[] repeat)
     {
         try {
-            String datetime = "";
+            String dateTime = Utils.parseDateToISOString(date, time);
 
             price = TextUtils.substring(price, 1, price.length());
 
@@ -274,13 +268,19 @@ public class APIHelper {
             parameters.add(new BasicNameValuePair("from", from));
             parameters.add(new BasicNameValuePair("to", to));
 
-            if(!datetime.isEmpty())
-                parameters.add(new BasicNameValuePair("datetime", datetime));
+            if(!dateTime.isEmpty())
+                parameters.add(new BasicNameValuePair("datetime", dateTime));
 
             if(!price.isEmpty())
-                parameters.add(new BasicNameValuePair("price", price));
+                parameters.add(new BasicNameValuePair("payment", price));
 
-            //parameters.add(new BasicNameValuePair("repeat", repeat));
+            parameters.add(new BasicNameValuePair("repeat.mo", ""+repeat[0]));
+            parameters.add(new BasicNameValuePair("repeat.tu", ""+repeat[1]));
+            parameters.add(new BasicNameValuePair("repeat.we", ""+repeat[2]));
+            parameters.add(new BasicNameValuePair("repeat.th", ""+repeat[3]));
+            parameters.add(new BasicNameValuePair("repeat.fr", ""+repeat[4]));
+            parameters.add(new BasicNameValuePair("repeat.sa", ""+repeat[5]));
+            parameters.add(new BasicNameValuePair("repeat.su", ""+repeat[6]));
 
             httppost.setEntity(new UrlEncodedFormEntity(parameters));
 
@@ -306,7 +306,7 @@ public class APIHelper {
                 HttpResponse response = httpclient.execute(httppost);
 
                 HttpEntity entity = response.getEntity();
-                String result = convertStreamToString(entity.getContent());
+                String result = Utils.convertStreamToString(entity.getContent());
 
 
                 return new String(result);
@@ -323,8 +323,8 @@ public class APIHelper {
         {
             //Parse json for status code
             //if 200 = Toast for success
-            String statusCode = ParseJsonStatusCode(result);
-            if(statusCode=="200"||statusCode=="201")
+            String statusCode = Utils.ParseJsonStatusCode(result);
+            if(statusCode.equals("200")||statusCode.equals("201"))
             {
                 Toast.makeText(RideshareApp.getAppContext(), "Succesvol opgeslagen in database", Toast.LENGTH_SHORT).show();
             }
@@ -348,7 +348,7 @@ public class APIHelper {
                 HttpResponse response = httpClient.execute(httpput);
 
                 HttpEntity entity = response.getEntity();
-                String result = convertStreamToString(entity.getContent());
+                String result = Utils.convertStreamToString(entity.getContent());
 
                 return new String(result);
             }
@@ -363,10 +363,10 @@ public class APIHelper {
         {
             //Parse json for status code
             //if 200 = Toast for success
-            String statusCode = ParseJsonStatusCode(result);
-            if(statusCode=="200"||statusCode=="201")
+            String statusCode = Utils.ParseJsonStatusCode(result);
+            if(statusCode.equals("200")||statusCode.equals("201"))
             {
-                    Toast.makeText(RideshareApp.getAppContext(), "Succesvol aangepast in database", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RideshareApp.getAppContext(), "Succesvol aangepast in database", Toast.LENGTH_SHORT).show();
             }
             else
             {
@@ -375,65 +375,5 @@ public class APIHelper {
         }
     }
 
-    public static String ParseJsonStatusCode(String json)
-    {
-        String statusCode="";
-        String message="";
-
-        Reader stringReader = new StringReader(json);
-        JsonReader reader = new JsonReader(stringReader);
-        try
-        {
-            reader.beginObject();
-            while (reader.hasNext())
-            {
-                while (reader.hasNext())
-                {
-                    String key = reader.nextName();
-                    if (key.equals("status")) {
-                        statusCode = reader.nextString();
-                    } else if (key.equals("message")) {
-                        message = reader.nextString();
-                    }
-                    else{
-                        reader.skipValue();
-                    }
-                }
-            }
-            reader.endObject();
-        }
-        catch(IOException ex)
-        {
-            Log.e("IOException", ex.getMessage());
-        }
-        finally
-        {
-            try{reader.close();}catch(IOException e){}
-        }
-
-        return statusCode;
-    }
-
-    public static String convertStreamToString(InputStream is) {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-        StringBuilder sb = new StringBuilder();
-
-        String line = null;
-        try {
-            while ((line = reader.readLine()) != null) {
-                sb.append(line + "\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                is.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return sb.toString();
-
-    }
 
 }

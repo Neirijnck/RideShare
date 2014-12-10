@@ -31,6 +31,7 @@ import java.util.List;
 import nmct.howest.be.rideshare.Activities.Adapters.SearchResultAdapter;
 import nmct.howest.be.rideshare.Activities.Fragments.SearchResultsFragment;
 import nmct.howest.be.rideshare.Activities.Helpers.APIHelper;
+import nmct.howest.be.rideshare.Activities.Helpers.Utils;
 import nmct.howest.be.rideshare.Activities.Models.Match;
 import nmct.howest.be.rideshare.Activities.Models.Message;
 import nmct.howest.be.rideshare.Activities.Models.Trip;
@@ -70,7 +71,7 @@ public class SearchResultsTask extends AsyncTask<Bundle, Void, List<Trip>>
         boolean share = b.getBoolean("share");
 
         //TEST
-        String datetime="2014-12-02T23:27:41.389Z";
+        String datetime="2014-12-02T20:17:20.125Z";
 
         //Search trips from api with these parameters
         try {
@@ -80,8 +81,8 @@ public class SearchResultsTask extends AsyncTask<Bundle, Void, List<Trip>>
             httppost.addHeader("Authorization", "000");
 
             List<NameValuePair> parameters = new ArrayList<NameValuePair>();
-            parameters.add(new BasicNameValuePair("from", fromCity));
-            parameters.add(new BasicNameValuePair("to", toCity));
+            parameters.add(new BasicNameValuePair("from", fromCity.trim()));
+            parameters.add(new BasicNameValuePair("to", toCity.trim()));
 
             if(!datetime.isEmpty())
                 parameters.add(new BasicNameValuePair("datetime", datetime));
@@ -91,7 +92,7 @@ public class SearchResultsTask extends AsyncTask<Bundle, Void, List<Trip>>
             HttpResponse response = httpclient.execute(httppost);
 
             HttpEntity entity = response.getEntity();
-            String result = APIHelper.convertStreamToString(entity.getContent());
+            String result = Utils.convertStreamToString(entity.getContent());
             Reader stringReader = new StringReader(result);
             JsonReader reader = new JsonReader(stringReader);
 

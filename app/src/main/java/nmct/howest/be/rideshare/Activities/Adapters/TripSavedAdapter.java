@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+import nmct.howest.be.rideshare.Activities.Helpers.Utils;
 import nmct.howest.be.rideshare.Activities.Models.Trip;
 import nmct.howest.be.rideshare.R;
 
@@ -53,15 +54,55 @@ public class TripSavedAdapter extends ArrayAdapter<Trip>
 
         holder.txtTripInfoDate.setText(dateString);
 
-
-        holder.txtTripInfo.setText("Herhaald: ?");
-
-        if(trip.getPayment()!="") {
-            holder.txtTripPrice.setText("Kost: €" + trip.getPayment());
+        boolean[] repeat = trip.getRepeat();
+        if(Utils.areAllFalse(repeat)==true)
+        {
+            holder.txtTripInfo.setText("Herhaald: nooit");
         }
         else
         {
+            String repeatString="";
+            for(int i = 0; i < 7; i++)
+            {
+                if(repeat[i]==true)
+                {
+                    //Add day to full string
+                    switch(i)
+                    {
+                        case 0:
+                            repeatString += "ma, ";
+                            break;
+                        case 1:
+                            repeatString += "di, ";
+                            break;
+                        case 2:
+                            repeatString += "woe, ";
+                            break;
+                        case 3:
+                            repeatString += "don, ";
+                            break;
+                        case 4:
+                            repeatString += "vrij, ";
+                            break;
+                        case 5:
+                            repeatString += "za, ";
+                            break;
+                        case 6:
+                            repeatString += "zon ";
+                            break;
+                    }
+                }
+            }
+            holder.txtTripInfo.setText("Herhaald: " + repeatString);
+        }
+
+
+        if(trip.getPayment().equals("") || trip.getPayment().equals("0")) {
             holder.txtTripPrice.setText("Kost: Gratis");
+        }
+        else
+        {
+            holder.txtTripPrice.setText("Kost: €" + trip.getPayment());
         }
 
 

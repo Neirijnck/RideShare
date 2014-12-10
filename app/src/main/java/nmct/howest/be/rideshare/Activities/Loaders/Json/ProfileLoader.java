@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nmct.howest.be.rideshare.Activities.Helpers.APIHelper;
+import nmct.howest.be.rideshare.Activities.Helpers.Utils;
 import nmct.howest.be.rideshare.Activities.Models.Review;
 import nmct.howest.be.rideshare.Activities.Models.User;
 
@@ -57,7 +58,7 @@ public class ProfileLoader extends AsyncTaskLoader<User>
         HttpEntity entity = response.getEntity();
         InputStream in = entity.getContent();
 
-        String JSONbody = APIHelper.convertStreamToString(in);
+        String JSONbody = Utils.convertStreamToString(in);
         Reader stringReader = new StringReader(JSONbody);
 
         JsonReader reader = new JsonReader(stringReader);
