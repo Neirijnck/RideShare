@@ -26,6 +26,7 @@ import com.facebook.model.GraphUser;
 import com.facebook.widget.LoginButton;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import nmct.howest.be.rideshare.Activities.Helpers.APIHelper;
@@ -111,14 +112,26 @@ public class LoginFragment extends Fragment
                                 public void onCompleted(GraphUser user, Response response) {
                                     if (user != null) {
                                         String location = "";
+                                        String gender = "";
+                                        Date birthday = new Date();
+                                        if(user.getBirthday() != null){
+
+                                        }
                                         if(user.getLocation() != null){
                                             location = user.getLocation().toString();
                                         }
+                                        if(user.asMap().get("gender").toString() != null){
+                                           if(user.asMap().get("gender").toString() == "male")
+                                               gender = "M";
+                                           else if(user.asMap().get("gender").toString() == "female")
+                                               gender = "V";
+                                        }
+
 
                                         APIHelper.AddUser(user.getName(), user.getFirstName(),
                                                 user.getLastName(), user.asMap().get("email").toString(),
                                                 session.getAccessToken().toString(), user.getLink(), user.getId(), location,
-                                                user.asMap().get("gender").toString(), "", "https://graph.facebook.com/" + user.getId() + "/picture?type=large");
+                                                gender, "", "https://graph.facebook.com/" + user.getId() + "/picture?type=large");
                                         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
                                         SharedPreferences.Editor edt = pref.edit();
 
