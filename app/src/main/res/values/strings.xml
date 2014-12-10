@@ -74,6 +74,7 @@
     <string name="OR_Repeat">Herhaald:</string>
     <string name="OR_Price">Prijs:</string>
     <string name="OR_Travelers">Medereizigers:</string>
+    <string name="Button_Match">Ik wil meerijden!</string>
 
     <!-- Facebook login and admin -->
     <string name="app_id">551430101654024</string>
@@ -86,5 +87,6 @@
     <string name="API_Profile">http://188.226.154.228:8080/api/v1/profile</string>
     <string name="API_Trips">http://188.226.154.228:8080/api/v1/trips</string>
     <string name="API_Trips_Search">http://188.226.154.228:8080/api/v1/trips/search</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

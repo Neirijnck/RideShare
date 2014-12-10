@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="185dp"
+        android:id="@+id/imgDetailMatch"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Voornaam Naam"
+        android:id="@+id/txbMatchNaam"
+        android:layout_below="@+id/imgDetailMatch"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"  />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Van: straat"
+        android:id="@+id/txbMatchVan"
+        android:layout_below="@+id/txbMatchNaam"
+        android:layout_alignLeft="@+id/txbMatchNaam"
+        android:layout_alignStart="@+id/txbMatchNaam"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Naar: straat"
+        android:id="@+id/txbMatchNaar"
+        android:layout_below="@+id/txbMatchVan"
+        android:layout_alignLeft="@+id/txbMatchVan"
+        android:layout_alignStart="@+id/txbMatchVan"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Dag: datum"
+        android:id="@+id/txbMatchDag"
+        android:layout_below="@+id/txbMatchNaar"
+        android:layout_alignLeft="@+id/txbMatchNaar"
+        android:layout_alignStart="@+id/txbMatchNaar"
+        android:layout_marginTop="10dp"  />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Uur: uur"
+        android:id="@+id/txbMatchUur"
+        android:layout_below="@+id/txbMatchDag"
+        android:layout_alignLeft="@+id/txbMatchDag"
+        android:layout_alignStart="@+id/txbMatchDag"
+        android:layout_marginTop="10dp"  />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/Answer_Message"
+        android:id="@+id/txbMatchBericht"
+        android:layout_below="@+id/txbMatchUur"
+        android:layout_alignLeft="@+id/txbMatchUur"
+        android:layout_alignStart="@+id/txbMatchUur"
+        android:layout_marginTop="10dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/txtMatchBijgevoegd"
+        android:layout_below="@+id/txbMatchBericht"
+        android:layout_marginTop="7dp"
+        android:layout_marginRight="20dp"
+        android:layout_alignLeft="@+id/txbMatchBericht"
+        android:layout_alignStart="@+id/txbMatchBericht"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:text="@string/Button_Match"
+        android:id="@+id/btnMatchAccept"
+        android:layout_below="@+id/txtMatchBijgevoegd"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="20dp"
+        android:drawableLeft="@drawable/ic_check_white_36dp"
+        android:textColor="@color/rideshare_secondary"
+        android:textAllCaps="true"
+        android:background="@drawable/button_selector"
+        android:elevation="2dp"
+        android:width="280dp" />
+
+
+
+
+</RelativeLayout>

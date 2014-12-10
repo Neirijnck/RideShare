@@ -159,6 +159,10 @@ public class LoginFragment extends Fragment
         super.onAttach(activity);
     }
 
+    //facebook loggedInCheck
+
+
+
     private void slideUpFragment()
     {
         transaction = context.getSupportFragmentManager().beginTransaction();
