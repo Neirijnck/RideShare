@@ -5,7 +5,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -24,9 +26,10 @@ import com.facebook.model.GraphUser;
 import com.facebook.widget.LoginButton;
 
 import java.util.Arrays;
-import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
+import nmct.howest.be.rideshare.Activities.Helpers.APIHelper;
 import nmct.howest.be.rideshare.Activities.Helpers.ConnectivityHelper;
 import nmct.howest.be.rideshare.Activities.MainActivity;
 import nmct.howest.be.rideshare.R;
@@ -38,8 +41,6 @@ public class LoginFragment extends Fragment
     private FragmentTransaction transaction;
     private LearnMoreFragment learnMoreFragment;
     private String TAG = "LoginActivity";
-    private static final List<String> PERMISSIONS = Arrays.asList("publish_actions", "email");
-    private boolean isPermissionsGiven = false;
 
     public LoginFragment() {}
 
@@ -53,7 +54,6 @@ public class LoginFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-
         //Has internet?
         Context c = getActivity();
         if(!ConnectivityHelper.isNetworkAvailable(c)) {
@@ -64,13 +64,17 @@ public class LoginFragment extends Fragment
 
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
+                    //dialog.dismiss();
+                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.addCategory(Intent.CATEGORY_HOME);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
                 }
             });
             builder.show();
         }
-
         learnMore = (TextView) view.findViewById(R.id.txbLearnMore);
+        //Set click listener for "Learn more" textview
         learnMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,8 +82,6 @@ public class LoginFragment extends Fragment
                 slideUpFragment();
             }
         });
-
-
 
         //Facebook Login
         LoginButton authButton = (LoginButton) view.findViewById(R.id.btnLogin);
@@ -89,7 +91,10 @@ public class LoginFragment extends Fragment
                 Log.i(TAG, "Error " + error.getMessage());
             }
         });
-        authButton.setReadPermissions(Arrays.asList("public_profile", "email"));
+
+
+        authButton.setReadPermissions(Arrays.asList("email", "user_birthday", "public_profile"));
+
         authButton.setSessionStatusCallback(new Session.StatusCallback() {
             @Override
             public void call(final Session session, SessionState state, Exception exception) {
@@ -97,9 +102,8 @@ public class LoginFragment extends Fragment
                 if (session.isOpened()) {
 
                     List<String> permissions = session.getPermissions();
-                    Log.d("permissions", permissions.toString());
-                    if (isSubsetOf(PERMISSIONS, permissions))
-                        isPermissionsGiven = true;
+                    Log.d("permissies", permissions.toString());
+
 
                     Log.i(TAG, "Access Token" + session.getAccessToken());
                     Request.executeMeRequestAsync(session,
@@ -107,9 +111,32 @@ public class LoginFragment extends Fragment
                                 @Override
                                 public void onCompleted(GraphUser user, Response response) {
                                     if (user != null) {
-                                        Log.i(TAG, "token: " + session.getAccessToken());
-                                        Log.i(TAG, "Email " + user.asMap().get("email"));
+                                        String location = "";
+                                        String gender = "";
+                                        Date birthday = new Date();
+                                        if(user.getBirthday() != null){
 
+                                        }
+                                        if(user.getLocation() != null){
+                                            location = user.getLocation().toString();
+                                        }
+                                        if(user.asMap().get("gender").toString() != null){
+                                           if(user.asMap().get("gender").toString() == "male")
+                                               gender = "M";
+                                           else if(user.asMap().get("gender").toString() == "female")
+                                               gender = "V";
+                                        }
+
+
+                                        APIHelper.AddUser(user.getName(), user.getFirstName(),
+                                                user.getLastName(), user.asMap().get("email").toString(),
+                                                session.getAccessToken().toString(), user.getLink(), user.getId(), location,
+                                                gender, "", "https://graph.facebook.com/" + user.getId() + "/picture?type=large");
+                                        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                                        SharedPreferences.Editor edt = pref.edit();
+
+                                        edt.putString("accessToken", session.getAccessToken().toString());
+                                        edt.commit();
 
                                         Intent intent = new Intent(getActivity(), MainActivity.class);
                                         getActivity().startActivity(intent);
@@ -119,6 +146,8 @@ public class LoginFragment extends Fragment
                 }
             }
         });
+
+        //End Facebook Login
 
         return view;
     }
@@ -131,19 +160,8 @@ public class LoginFragment extends Fragment
     }
 
     //facebook loggedInCheck
-    public boolean isLoggedIn() {
-        Session session = Session.getActiveSession();
-        return (session != null && session.isOpened());
-    }
 
-    private boolean isSubsetOf(Collection<String> subset, Collection<String> superset) {
-        for (String string : subset) {
-            if (!superset.contains(string)) {
-                return false;
-            }
-        }
-        return true;
-    }
+
 
     private void slideUpFragment()
     {
@@ -158,7 +176,4 @@ public class LoginFragment extends Fragment
         // Commit the transaction
         transaction.commit();
     }
-
-
-
 }

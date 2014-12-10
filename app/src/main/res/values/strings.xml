@@ -77,7 +77,6 @@
 
     <!-- Facebook login and admin -->
     <string name="app_id">551430101654024</string>
-
     <!-- Settings -->
     <string name="title_activity_settings">Instellingen</string>
 

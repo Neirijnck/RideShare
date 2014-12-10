@@ -20,6 +20,7 @@ import java.io.IOException;
 import nmct.howest.be.rideshare.Activities.Fragments.LoginFragment;
 import nmct.howest.be.rideshare.R;
 
+
 public class LoginActivity extends FragmentActivity {
 
     //GCM
@@ -44,18 +45,18 @@ public class LoginActivity extends FragmentActivity {
 
 
         // Check device for Play Services APK.
-        /*if (checkPlayServices()) {
+        if (checkPlayServices()) {
             gcm = GoogleCloudMessaging.getInstance(this);
             regid = getRegistrationId(context);
 
             if (regid.isEmpty()) {
                 registerInBackground();
             }
-        }*/
+        }
 
 
         //Check de facebook keyhash
-        /*try {
+       /* try {
             PackageInfo info = getPackageManager().getPackageInfo(
                     this.getPackageName(),
                     PackageManager.GET_SIGNATURES);
@@ -97,7 +98,7 @@ public class LoginActivity extends FragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        //checkPlayServices();
+        checkPlayServices();
     }
 
     @Override

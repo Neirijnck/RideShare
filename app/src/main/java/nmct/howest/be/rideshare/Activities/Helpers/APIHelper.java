@@ -1,11 +1,9 @@
 package nmct.howest.be.rideshare.Activities.Helpers;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.JsonReader;
 import android.util.Log;
-import android.view.TextureView;
 import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
@@ -24,21 +22,18 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
-import java.sql.Time;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.TimeZone;
 
 import nmct.howest.be.rideshare.RideshareApp;
 
 public class APIHelper {
 
-    public static void AddUser(String userName, String firstName, String lastName, String email, String fbToken, String fbLink, String fbID, String location, String gender, String regID) {
+    public static void AddUser(String userName, String firstName, String lastName, String email, String fbToken, String fbLink, String fbID, String location, String gender, String regID, String fbImg) {
         try {
             HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/profile");
             httppost.addHeader("Authorization", fbToken);
@@ -53,6 +48,8 @@ public class APIHelper {
             parameters.add(new BasicNameValuePair("location", location));
             parameters.add(new BasicNameValuePair("gender", gender));
             parameters.add(new BasicNameValuePair("notifications", regID));
+            parameters.add(new BasicNameValuePair("registrationIDs", "666"));
+            parameters.add(new BasicNameValuePair("facebookImg", fbImg));
             httppost.setEntity(new UrlEncodedFormEntity(parameters));
 
             PostAsync task = new PostAsync();

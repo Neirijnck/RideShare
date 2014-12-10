@@ -17,6 +17,7 @@ public class User {
     private String location = "";
     private String carType = "";
     private String amountOfSeats ="";
+
     private List<Review> reviews;
 
 
