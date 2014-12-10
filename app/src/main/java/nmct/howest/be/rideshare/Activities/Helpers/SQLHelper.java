@@ -3,8 +3,11 @@ package nmct.howest.be.rideshare.Activities.Helpers;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
-class SQLHelper extends SQLiteOpenHelper {
+import nmct.howest.be.rideshare.Activities.Loaders.Database.Contract;
+
+public class SQLHelper extends SQLiteOpenHelper {
 
     private static SQLHelper INSTANCE;
     private static Object lock = new Object();
@@ -18,77 +21,67 @@ class SQLHelper extends SQLiteOpenHelper {
     //Database Name
     private static final String DB_NAME = "sharemyride.db";
 
-    //Table Names
-    private static final String TABLE_USER = "User";
-    private static final String TABLE_REVIEW = "Review";
-    private static final String TABLE_TRIP = "Trip";
-    private static final String TABLE_MATCH = "Match";
-    private static final String TABLE_MESSAGE = "Message";
-
-    // Common column names
-    private static final String KEY_ID = "ID";
-    private static final String KEY_USERID = "UserID";
-    private static final String KEY_USER_ID = "User_ID";
-    private static final String KEY_DATE_TIME = "DateTime";
-    private static final String KEY_FROM = "From";
-    private static final String KEY_TO = "To";
-    private static final String KEY_TEXT = "Text";
-
-    // USER Table - column names
-    private static final String KEY_FACEBOOK_TOKEN = "FacebookToken";
-    private static final String KEY_FACEBOOK_ID = "FacebookID";
-    private static final String KEY_FACEBOOK_URL = "FacebookURL";
-    private static final String KEY_FIRSTNAME = "FirstName";
-    private static final String KEY_LASTNAME = "LastName";
-    private static final String KEY_EMAIL = "Email";
-    private static final String KEY_GENDER = "Gender";
-    private static final String KEY_BIRTHDAY = "Birthday";
-    private static final String KEY_LOCATION = "Location";
-    private static final String KEY_CARTYPE = "Cartype";
-    private static final String KEY_AMOUNT_OF_SEATS = "AmountOfSeats";
-
-    // REVIEW Table - column names
-    private static final String KEY_SCORE = "Score";
-
-    // TRIP Table - column names
-    private static final String KEY_TRIPID = "TripID";
-    private static final String KEY_PAYMENT = "Payment";
-    private static final String KEY_REPEAT= "Repeat";
-
-    // MATCH Table - column names
-    private static final String KEY_STATUS = "Status";
-    private static final String KEY_TRIP_ID = "Trip_ID";
-
-    // MESSAGE Table - column names
-    private static final String KEY_MATCH_ID = "Match_ID";
-
 
     // Table Create Statements
     private static final String CREATE_TABLE_USER = "CREATE TABLE "
-            + TABLE_USER + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_USERID
-            + " TEXT," + KEY_FACEBOOK_TOKEN + " TEXT," + KEY_FACEBOOK_ID + " TEXT" + KEY_FACEBOOK_URL + " TEXT,"
-            + KEY_FIRSTNAME + " TEXT,"+ KEY_LASTNAME + " TEXT,"+ KEY_EMAIL + " TEXT,"+ KEY_GENDER + " TEXT,"
-            + KEY_BIRTHDAY + " TEXT,"+ KEY_LOCATION + " TEXT,"+ KEY_CARTYPE + " TEXT,"+ KEY_AMOUNT_OF_SEATS + " TEXT,"
+            + Contract.User.CONTENT_DIRECTORY + "("
+            + Contract.UserColumns._ID + " INTEGER PRIMARY KEY,"
+            + Contract.UserColumns.KEY_USERID + " TEXT,"
+            + Contract.UserColumns.KEY_FACEBOOK_TOKEN + " TEXT,"
+            + Contract.UserColumns.KEY_FACEBOOK_ID + " TEXT,"
+            + Contract.UserColumns.KEY_FACEBOOK_URL + " TEXT,"
+            + Contract.UserColumns.KEY_FIRSTNAME + " TEXT,"
+            + Contract.UserColumns.KEY_LASTNAME + " TEXT,"
+            + Contract.UserColumns.KEY_USERNAME + " TEXT,"
+            + Contract.UserColumns.KEY_EMAIL + " TEXT,"
+            + Contract.UserColumns.KEY_GENDER + " TEXT,"
+            + Contract.UserColumns.KEY_BIRTHDAY + " TEXT,"
+            + Contract.UserColumns.KEY_LOCATION + " TEXT,"
+            + Contract.UserColumns.KEY_CARTYPE + " TEXT,"
+            + Contract.UserColumns.KEY_AMOUNT_OF_SEATS + " TEXT"
             + ")";
 
     private static final String CREATE_TABLE_REVIEW ="CREATE TABLE "
-            + TABLE_REVIEW + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_USERID
-            + " TEXT," + KEY_DATE_TIME + " DATETIME," + KEY_SCORE + " INTEGER" + KEY_TEXT + " TEXT" + KEY_USER_ID + " INTEGER"+ ")";
+            + Contract.Review.CONTENT_DIRECTORY + "("
+            + Contract.ReviewColumns._ID + " INTEGER PRIMARY KEY,"
+            + Contract.ReviewColumns.KEY_USERID+ " TEXT,"
+            + Contract.ReviewColumns.KEY_CREATED_ON + " DATETIME,"
+            + Contract.ReviewColumns.KEY_LAST_EDITED_ON + " DATETIME,"
+            + Contract.ReviewColumns.KEY_SCORE + " INTEGER,"
+            + Contract.ReviewColumns.KEY_TEXT + " TEXT,"
+            + Contract.ReviewColumns.KEY_USER_ID + " INTEGER"
+            + ")";
 
     private static final String CREATE_TABLE_TRIP ="CREATE TABLE "
-            + TABLE_TRIP + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_TRIP_ID + " TEXT," + KEY_USERID + " TEXT,"
-            + KEY_FROM + " TEXT" + KEY_TO + " TEXT"+ KEY_DATE_TIME + " DATETIME"+ KEY_PAYMENT + " TEXT"
-            + KEY_REPEAT + " TEXT"+ KEY_USER_ID + " INTEGER"
+            + Contract.Trip.CONTENT_DIRECTORY + "("
+            + Contract.TripColumns._ID + " INTEGER PRIMARY KEY,"
+            + Contract.TripColumns.KEY_USERID + " TEXT,"
+            + Contract.TripColumns.KEY_FROM + " TEXT,"
+            + Contract.TripColumns.KEY_TO + " TEXT,"
+            + Contract.TripColumns.KEY_DATE_TIME + " DATETIME,"
+            + Contract.TripColumns.KEY_PAYMENT + " TEXT,"
+            + Contract.TripColumns.KEY_REPEAT + " TEXT,"
+            + Contract.TripColumns.KEY_USER_ID + " INTEGER"
             + ")";
 
     private static final String CREATE_TABLE_MATCH ="CREATE TABLE "
-            + TABLE_MATCH + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_USERID + " TEXT," + KEY_FROM + " TEXT,"
-            + KEY_TO + " TEXT" + KEY_DATE_TIME + " DATETIME"+ KEY_STATUS + " INTEGER"+ KEY_TRIP_ID + " INTEGER"
+            + Contract.Match.CONTENT_DIRECTORY + "("
+            + Contract.MatchColumns._ID + " INTEGER PRIMARY KEY,"
+            + Contract.MatchColumns.KEY_USERID + " TEXT,"
+            + Contract.MatchColumns.KEY_FROM + " TEXT,"
+            + Contract.MatchColumns.KEY_TO + " TEXT,"
+            + Contract.MatchColumns.KEY_DATE_TIME + " DATETIME,"
+            + Contract.MatchColumns.KEY_STATUS + " INTEGER,"
+            + Contract.MatchColumns.KEY_TRIP_ID + " INTEGER"
             + ")";
 
     private static final String CREATE_TABLE_MESSAGE ="CREATE TABLE "
-            + TABLE_MESSAGE + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_USERID + " TEXT,"
-            + KEY_TEXT + " TEXT," + KEY_DATE_TIME + " DATETIME" + KEY_MATCH_ID + " INTEGER,"
+            + Contract.Message.CONTENT_DIRECTORY + "("
+            + Contract.MessageColumns._ID + " INTEGER PRIMARY KEY,"
+            + Contract.MessageColumns.KEY_USERID + " TEXT,"
+            + Contract.MessageColumns.KEY_TEXT + " TEXT,"
+            + Contract.MessageColumns.KEY_DATE_TIME + " DATETIME,"
+            + Contract.MessageColumns.KEY_MATCH_ID + " INTEGER"
             + ")";
 
 
@@ -115,11 +108,14 @@ class SQLHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE " + TABLE_USER);
-        db.execSQL("DROP TABLE " + TABLE_REVIEW);
-        db.execSQL("DROP TABLE " + TABLE_TRIP);
-        db.execSQL("DROP TABLE " + TABLE_MATCH);
-        db.execSQL("DROP TABLE " + TABLE_MESSAGE);
+        Log.e(LOG, "Upgrading database from version " + oldVersion + " to "
+                + newVersion + ", which will destroy all old data");
+
+        db.execSQL("DROP TABLE " + Contract.User.CONTENT_DIRECTORY);
+        db.execSQL("DROP TABLE " + Contract.Review.CONTENT_DIRECTORY);
+        db.execSQL("DROP TABLE " + Contract.Trip.CONTENT_DIRECTORY);
+        db.execSQL("DROP TABLE " + Contract.Match.CONTENT_DIRECTORY);
+        db.execSQL("DROP TABLE " + Contract.Message.CONTENT_DIRECTORY);
 
         db.execSQL(CREATE_TABLE_USER);
         db.execSQL(CREATE_TABLE_REVIEW);

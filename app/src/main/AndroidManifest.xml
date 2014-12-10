@@ -6,7 +6,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS"/>
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <permission
         android:name="com.example.gcm.permission.C2D_MESSAGE"
@@ -98,8 +100,8 @@
         <service
             android:name=".services.SyncService"
             android:enabled="true"
-            android:exported="true">
-            <!--android:process=":sync"-->
+            android:exported="true"
+            android:process=":sync">
             <intent-filter>
                 <action android:name="android.content.SyncAdapter" />
             </intent-filter>
@@ -109,6 +111,15 @@
                 android:resource="@xml/sync_adapter" />
 
         </service>
+
+        <!--PROVIDER-->
+        <provider
+            android:name=".Activities.Loaders.Database.Provider"
+            android:authorities="nmct.howest.be.rideshare.contentprovider"
+            android:enabled="true"
+            android:exported="true"
+            android:syncable="true">
+        </provider>
 
         <!--META DATA-->
         <meta-data

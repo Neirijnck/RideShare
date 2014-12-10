@@ -1,14 +1,23 @@
 package nmct.howest.be.rideshare.Activities.Fragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import nmct.howest.be.rideshare.Activities.Adapters.SearchResultAdapter;
+import nmct.howest.be.rideshare.Activities.Adapters.TripSavedAdapter;
 import nmct.howest.be.rideshare.Activities.Loaders.Tasks.SearchResultsTask;
+import nmct.howest.be.rideshare.Activities.Models.Trip;
 import nmct.howest.be.rideshare.R;
 
 /**
@@ -17,6 +26,9 @@ import nmct.howest.be.rideshare.R;
 public class SearchResultsFragment extends Fragment
 {
     private ProgressBar mProgressBar;
+    private LinearLayout lstSearchResults;
+    private TextView mTxtNoResults;
+    private ScrollView layout_search_results;
 
     public SearchResultsFragment() { }
 
@@ -38,9 +50,12 @@ public class SearchResultsFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_search_results, container, false);
 
         mProgressBar = (ProgressBar) view.findViewById(R.id.progressBarSearch);
+        lstSearchResults = (LinearLayout) view.findViewById(R.id.lstSearchResults);
+        mTxtNoResults = (TextView) view.findViewById(R.id.txtNoSearchResults);
+        layout_search_results = (ScrollView) view.findViewById(R.id.layout_search_results);
 
         Bundle b = getArguments();
-        SearchResultsTask task = new SearchResultsTask(mProgressBar);
+        SearchResultsTask task = new SearchResultsTask(mProgressBar, lstSearchResults, mTxtNoResults, layout_search_results);
         task.execute(b);
 
         return view;
