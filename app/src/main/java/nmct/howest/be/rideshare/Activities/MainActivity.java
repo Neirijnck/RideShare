@@ -1,9 +1,12 @@
 package nmct.howest.be.rideshare.Activities;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.view.ViewPager;
@@ -30,7 +33,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        checkAppCount();
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
         String token = pref.getString("accessToken", "");
 
@@ -158,6 +161,44 @@ public class MainActivity extends ActionBarActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+
+    private void checkAppCount(){
+        super.onStart();
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+        SharedPreferences.Editor edt = pref.edit();
+        int count = pref.getInt("count", 0);
+        count ++;
+        if(count == 5)
+        {
+
+
+            new AlertDialog.Builder(this)
+                    .setTitle("Please donate!")
+                    .setMessage("Do you find this application useful? Support it's development by sending donation to the developer.")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://188.226.154.228:8080/"));
+                            startActivity(browserIntent);
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+
+
+            count = 0;
+        }
+        edt.putInt("count", count );
+        edt.commit();
+        Log.d("count",""+count);
+
+        //Other pause stuff.
     }
 
 

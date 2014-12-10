@@ -93,7 +93,7 @@ public class LoginFragment extends Fragment
         });
 
 
-        authButton.setReadPermissions(Arrays.asList("email", "user_birthday", "public_profile"));
+        authButton.setReadPermissions(Arrays.asList("email", "user_birthday", "public_profile", "user_location"));
 
         authButton.setSessionStatusCallback(new Session.StatusCallback() {
             @Override
@@ -118,12 +118,12 @@ public class LoginFragment extends Fragment
 
                                         }
                                         if(user.getLocation() != null){
-                                            location = user.getLocation().toString();
+                                            location = user.getLocation().getName();
                                         }
                                         if(user.asMap().get("gender").toString() != null){
-                                           if(user.asMap().get("gender").toString() == "male")
+                                           if(user.asMap().get("gender").toString().equals("male"))
                                                gender = "M";
-                                           else if(user.asMap().get("gender").toString() == "female")
+                                           else if(user.asMap().get("gender").toString() .equals("female"))
                                                gender = "V";
                                         }
 
