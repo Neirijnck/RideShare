@@ -258,6 +258,7 @@ public class SearchResultsTask extends AsyncTask<Bundle, Void, List<Trip>>
         return trips;
     }
 
+
     @Override
     protected void onPostExecute(List<Trip> result)
     {
