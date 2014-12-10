@@ -36,18 +36,17 @@ public class APIHelper {
     public static void AddUser(String userName, String firstName, String lastName, String email, String fbToken, String fbLink, String fbID, String location, String gender, String regID, String fbImg) {
         try {
             HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/profile");
-            httppost.addHeader("Authorization", fbToken);
 
             List<NameValuePair> parameters = new ArrayList<NameValuePair>();
             parameters.add(new BasicNameValuePair("userName", userName));
             parameters.add(new BasicNameValuePair("firstName", firstName));
             parameters.add(new BasicNameValuePair("lastName", lastName));
             parameters.add(new BasicNameValuePair("email", email));
-            parameters.add(new BasicNameValuePair("fbLink", fbLink));
-            parameters.add(new BasicNameValuePair("fbID", fbID));
+            parameters.add(new BasicNameValuePair("facebookToken", fbToken));
+            parameters.add(new BasicNameValuePair("facebookLink", fbLink));
+            parameters.add(new BasicNameValuePair("facebookID", fbID));
             parameters.add(new BasicNameValuePair("location", location));
             parameters.add(new BasicNameValuePair("gender", gender));
-            parameters.add(new BasicNameValuePair("notifications", regID));
             parameters.add(new BasicNameValuePair("registrationIDs", "666"));
             parameters.add(new BasicNameValuePair("facebookImg", fbImg));
             httppost.setEntity(new UrlEncodedFormEntity(parameters));
