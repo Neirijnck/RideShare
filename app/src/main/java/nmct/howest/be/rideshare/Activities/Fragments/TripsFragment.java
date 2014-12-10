@@ -1,6 +1,8 @@
 package nmct.howest.be.rideshare.Activities.Fragments;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.os.Bundle;
@@ -29,6 +31,7 @@ import nmct.howest.be.rideshare.Activities.Models.Review;
 import nmct.howest.be.rideshare.Activities.Models.Trip;
 import nmct.howest.be.rideshare.Activities.SearchActivity;
 import nmct.howest.be.rideshare.R;
+import nmct.howest.be.rideshare.RideshareApp;
 
 public class TripsFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<Trip>>
 {

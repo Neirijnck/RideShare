@@ -41,17 +41,7 @@ public class TripSavedAdapter extends ArrayAdapter<Trip>
 
         holder.txtTripTitle.setText(trip.getFrom() + " naar " + trip.getTo());
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        sdf.setTimeZone(TimeZone.getDefault());
-        String dateString="";
-        try {
-            Date date = sdf.parse(trip.getDatetime());
-
-            SimpleDateFormat fmtOut = new SimpleDateFormat("dd-MM-yyyy");
-            dateString = fmtOut.format(date);
-        }catch (ParseException ex){
-            Log.e("ParseException Date", ex.getMessage());}
-
+        String dateString= Utils.parseISOStringToDate(trip.getDatetime());
         holder.txtTripInfoDate.setText(dateString);
 
         boolean[] repeat = trip.getRepeat();
@@ -61,38 +51,7 @@ public class TripSavedAdapter extends ArrayAdapter<Trip>
         }
         else
         {
-            String repeatString="";
-            for(int i = 0; i < 7; i++)
-            {
-                if(repeat[i]==true)
-                {
-                    //Add day to full string
-                    switch(i)
-                    {
-                        case 0:
-                            repeatString += "ma, ";
-                            break;
-                        case 1:
-                            repeatString += "di, ";
-                            break;
-                        case 2:
-                            repeatString += "woe, ";
-                            break;
-                        case 3:
-                            repeatString += "don, ";
-                            break;
-                        case 4:
-                            repeatString += "vrij, ";
-                            break;
-                        case 5:
-                            repeatString += "za, ";
-                            break;
-                        case 6:
-                            repeatString += "zon ";
-                            break;
-                    }
-                }
-            }
+            String repeatString= Utils.parseBoolArrayToDays(repeat);
             holder.txtTripInfo.setText("Herhaald: " + repeatString);
         }
 

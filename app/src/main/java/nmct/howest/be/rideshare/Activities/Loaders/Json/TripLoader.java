@@ -1,6 +1,8 @@
 package nmct.howest.be.rideshare.Activities.Loaders.Json;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.JsonReader;
 import android.util.Log;
@@ -31,10 +33,12 @@ public class TripLoader extends AsyncTaskLoader<List<Trip>>
 {
     private final String mUrl;
     private List<Trip> trips = new ArrayList<Trip>();
+    private Context mContext;
 
     public TripLoader(Context context, String url) {
         super(context);
         mUrl = url;
+        this.mContext = context;
     }
 
     @Override
@@ -55,7 +59,10 @@ public class TripLoader extends AsyncTaskLoader<List<Trip>>
         //Met url json
         HttpClient client = new DefaultHttpClient();
         HttpGet httpGet = new HttpGet(mUrl);
-        httpGet.addHeader("Authorization", "000");
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(mContext);
+        String token = pref.getString("accessToken", "");
+
+        httpGet.addHeader("Authorization", token);
         HttpResponse response = client.execute(httpGet);
         HttpEntity entity = response.getEntity();
         InputStream in = entity.getContent();

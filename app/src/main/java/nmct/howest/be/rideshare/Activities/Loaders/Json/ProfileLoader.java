@@ -50,15 +50,13 @@ public class ProfileLoader extends AsyncTaskLoader<User>
     }
 
     private void loadUser() throws IOException {
-        //Met raw json
-        //InputStream in = getContext().getResources().openRawResource(R.raw.preben);
 
         //Met url json
         HttpClient client = new DefaultHttpClient();
         HttpGet httpGet = new HttpGet(mUrl);
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
         String token = pref.getString("accessToken", "");
-        httpGet.addHeader("auth", "000");
+        httpGet.addHeader("Authorization", token);
         HttpResponse response = client.execute(httpGet);
         HttpEntity entity = response.getEntity();
         InputStream in = entity.getContent();
@@ -74,6 +72,7 @@ public class ProfileLoader extends AsyncTaskLoader<User>
                 String ID = "";
                 String userName = "";
                 String facebookLink = "";
+                String facebookID="";
                 String firstName = "";
                 String lastName = "";
                 String email = "";
@@ -99,6 +98,11 @@ public class ProfileLoader extends AsyncTaskLoader<User>
                     {
                         facebookLink = reader.nextString();
                         user.setFacebookLink(facebookLink);
+                    }
+                    else if(key.equals("facebookID"))
+                    {
+                        facebookID = reader.nextString();
+                        user.setFacebookID(facebookID);
                     }
                     else if (key.equals("firstName"))
                     {

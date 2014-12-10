@@ -1,6 +1,8 @@
 package nmct.howest.be.rideshare.Activities.Helpers;
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.JsonReader;
 import android.util.Log;
@@ -159,13 +161,13 @@ public class APIHelper {
     }
 
     //Minimum parameters
-    public static void PlanTrip(String from, String to, String date, String time)
+    public static void PlanTrip(String fbToken, String from, String to, String date, String time)
     {
         try {
             String dateTime = Utils.parseDateToISOString(date, time);
 
             HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/trips");
-            httppost.addHeader("Authorization", "000");
+            httppost.addHeader("Authorization", fbToken);
 
             List<NameValuePair> parameters = new ArrayList<NameValuePair>();
             parameters.add(new BasicNameValuePair("from", from));
@@ -185,14 +187,14 @@ public class APIHelper {
     }
 
     //With price
-    public static void PlanTrip(String from, String to, String date, String time, String price) {
+    public static void PlanTrip(String fbToken, String from, String to, String date, String time, String price) {
         try {
             String dateTime = Utils.parseDateToISOString(date, time);
 
             price = TextUtils.substring(price, 1, price.length());
 
             HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/trips");
-            httppost.addHeader("Authorization", "000");
+            httppost.addHeader("Authorization", fbToken);
 
             List<NameValuePair> parameters = new ArrayList<NameValuePair>();
             parameters.add(new BasicNameValuePair("from", from));
@@ -215,14 +217,14 @@ public class APIHelper {
     }
 
     //With repeat
-    public static void PlanTrip(String from, String to, String date, String time, boolean[] repeat)
+    public static void PlanTrip(String fbToken, String from, String to, String date, String time, boolean[] repeat)
     {
         try {
             String dateTime = Utils.parseDateToISOString(date, time);
 
 
             HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/trips");
-            httppost.addHeader("Authorization", "000");
+            httppost.addHeader("Authorization", fbToken);
 
             List<NameValuePair> parameters = new ArrayList<NameValuePair>();
             parameters.add(new BasicNameValuePair("from", from));
@@ -250,7 +252,7 @@ public class APIHelper {
     }
 
     //With everything filled in
-    public static void PlanTrip(String from, String to, String date, String time, String price, boolean[] repeat)
+    public static void PlanTrip(String fbToken, String from, String to, String date, String time, String price, boolean[] repeat)
     {
         try {
             String dateTime = Utils.parseDateToISOString(date, time);
@@ -258,7 +260,7 @@ public class APIHelper {
             price = TextUtils.substring(price, 1, price.length());
 
             HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/trips");
-            httppost.addHeader("Authorization", "000");
+            httppost.addHeader("Authorization", fbToken);
 
             List<NameValuePair> parameters = new ArrayList<NameValuePair>();
             parameters.add(new BasicNameValuePair("from", from));

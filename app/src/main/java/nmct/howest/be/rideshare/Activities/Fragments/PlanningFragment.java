@@ -4,7 +4,9 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.SwitchCompat;
@@ -36,6 +38,7 @@ import java.util.Calendar;
 import nmct.howest.be.rideshare.Activities.Helpers.APIHelper;
 import nmct.howest.be.rideshare.Activities.SearchActivity;
 import nmct.howest.be.rideshare.R;
+import nmct.howest.be.rideshare.RideshareApp;
 
 public class PlanningFragment extends Fragment{
 
@@ -56,6 +59,9 @@ public class PlanningFragment extends Fragment{
     private ToggleButton tglSa;
     private ToggleButton tglSu;
 
+
+    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(RideshareApp.getAppContext());
+    String token = pref.getString("accessToken", "");
 
     //Ctor
     public PlanningFragment() {}
@@ -171,7 +177,7 @@ public class PlanningFragment extends Fragment{
                     //If there is only a price
                     if(!price.equals("€")&&!repeatSwitch.isChecked())
                     {
-                        APIHelper.PlanTrip(from.trim(), to.trim(), date, time, price.trim());
+                        APIHelper.PlanTrip(token, from.trim(), to.trim(), date, time, price.trim());
                     }
                     //If there are only repeat days
                     else if(price.equals("€")&&repeatSwitch.isChecked())
@@ -183,7 +189,7 @@ public class PlanningFragment extends Fragment{
                         repeatDays[4] = fr;
                         repeatDays[5] = sa;
                         repeatDays[6] = su;
-                         APIHelper.PlanTrip(from.trim(), to.trim(), date, time, repeatDays);
+                         APIHelper.PlanTrip(token, from.trim(), to.trim(), date, time, repeatDays);
                     }
                     //Both price and repeat days
                     else if(!price.equals("€")&&repeatSwitch.isChecked())
@@ -195,11 +201,11 @@ public class PlanningFragment extends Fragment{
                         repeatDays[4] = fr;
                         repeatDays[5] = sa;
                         repeatDays[6] = su;
-                        APIHelper.PlanTrip(from.trim(), to.trim(), date, time, price.trim(), repeatDays);
+                        APIHelper.PlanTrip(token, from.trim(), to.trim(), date, time, price.trim(), repeatDays);
                     }
                     else
                     {
-                        APIHelper.PlanTrip(from.trim(), to.trim(), date, time);
+                        APIHelper.PlanTrip(token, from.trim(), to.trim(), date, time);
                     }
                 }
             }

@@ -1,9 +1,11 @@
 package nmct.howest.be.rideshare.Activities.Fragments;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 import nmct.howest.be.rideshare.Activities.Helpers.APIHelper;
 import nmct.howest.be.rideshare.Activities.MainActivity;
 import nmct.howest.be.rideshare.R;
+import nmct.howest.be.rideshare.RideshareApp;
 
 public class EditProfileFragment extends Fragment
 {
@@ -35,6 +38,9 @@ public class EditProfileFragment extends Fragment
     private EditText txtPlaces;
 
     private Button btnSaveProfile;
+
+    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(RideshareApp.getAppContext());
+    String token = pref.getString("accessToken", "");
 
     public EditProfileFragment() {
 
@@ -100,11 +106,11 @@ public class EditProfileFragment extends Fragment
                     //Cartype and amount of seats are not empty
                     if(TextUtils.isEmpty(carType)&&TextUtils.isEmpty(places))
                     {
-                        APIHelper.EditUser(userName.trim(), firstName.trim(), lastName.trim(), "000", location.trim());
+                        APIHelper.EditUser(userName.trim(), firstName.trim(), lastName.trim(), token, location.trim());
                     }
                     else if(TextUtils.isEmpty(places)&&!TextUtils.isEmpty(carType))
                     {
-                        APIHelper.EditUser(userName.trim(), firstName.trim(), lastName.trim(), "000", location.trim(), carType.trim());
+                        APIHelper.EditUser(userName.trim(), firstName.trim(), lastName.trim(), token, location.trim(), carType.trim());
                     }
                     else if(!TextUtils.isEmpty(places)&&TextUtils.isEmpty(carType))
                     {
@@ -112,9 +118,9 @@ public class EditProfileFragment extends Fragment
                         try{ amount = Integer.parseInt(places);}
                         catch (NumberFormatException  ex){Toast.makeText(getActivity(), "Aantal plaatsen moet een getal zijn", Toast.LENGTH_SHORT).show();}
 
-                        APIHelper.EditUser(userName.trim(), firstName.trim(), lastName.trim(), "000", location.trim(), amount);
+                        APIHelper.EditUser(userName.trim(), firstName.trim(), lastName.trim(), token, location.trim(), amount);
                     }
-                    else{APIHelper.EditUser(userName.trim(), firstName.trim(), lastName.trim(), "000", location.trim(), carType.trim(), places.trim());}
+                    else{APIHelper.EditUser(userName.trim(), firstName.trim(), lastName.trim(), token, location.trim(), carType.trim(), places.trim());}
 
                     getActivity().finish();
                     MainActivity.pager.setCurrentItem(3, true);

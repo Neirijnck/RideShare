@@ -164,7 +164,15 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
         profilePictureView = (ProfilePictureView) getView().findViewById(R.id.imgProfilePicture);
 
         txtName.setText(user.getFirstName() + " " + user.getLastName());
-        txtPlace.setText(user.getLocation());
+
+        if(TextUtils.isEmpty(user.getLocation()))
+        {
+            txtPlace.setText("Locatie niet bekend");
+        }
+        else
+        {
+            txtPlace.setText(user.getLocation());
+        }
         txtUserName.setText(user.getUserName());
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -177,7 +185,23 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
             birthday = fmtOut.format(date);
         }catch (ParseException ex){
             Log.e("ParseException Date", ex.getMessage());}
-        txtGenderAge.setText(user.getGender() + ", " + birthday);
+
+
+        if(!TextUtils.isEmpty(user.getGender())&&!TextUtils.isEmpty(user.getBirthday())) {
+            txtGenderAge.setText(user.getGender() + ", " + birthday);
+        }
+        else if(TextUtils.isEmpty(user.getGender())&&!TextUtils.isEmpty(user.getBirthday()))
+        {
+            txtGenderAge.setText(user.getBirthday());
+        }
+        else if(!TextUtils.isEmpty(user.getGender())&&TextUtils.isEmpty(user.getBirthday()))
+        {
+            txtGenderAge.setText(user.getGender());
+        }
+        else
+        {
+            txtGenderAge.setText("Verjaardag niet bekend");
+        }
 
 
         if(!TextUtils.isEmpty(user.getCarType())&&!TextUtils.isEmpty(user.getAmountOfSeats())) {
@@ -195,12 +219,15 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
         {
             txtCar.setText("Auto niet bekend");
         }
-        if(TextUtils.isEmpty(user.getFacebookID()))
-            profilePictureView.setProfileId(user.getFacebookID());
 
+        if(!TextUtils.isEmpty(user.getFacebookID())) {
 
-        profilePictureView.setCropped(true);
+            String facebookID = user.getFacebookID();
 
+            profilePictureView.setProfileId(facebookID);
+
+            profilePictureView.setCropped(true);
+        }
 
     }
 

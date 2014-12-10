@@ -34,10 +34,9 @@ public class MainActivity extends ActionBarActivity {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
         String token = pref.getString("accessToken", "");
 
-        if(token == null || token == "") {
-            Log.d("deToken", "is leeg");
+        if(token == null || token.equals("")) {
+            Log.d("De token", "is leeg");
             Intent intent = new Intent(this, LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             this.startActivity(intent);
         }
 

@@ -121,9 +121,9 @@ public class LoginFragment extends Fragment
                                             location = user.getLocation().toString();
                                         }
                                         if(user.asMap().get("gender").toString() != null){
-                                           if(user.asMap().get("gender").toString() == "male")
+                                           if(user.asMap().get("gender").toString().equals("male"))
                                                gender = "M";
-                                           else if(user.asMap().get("gender").toString() == "female")
+                                           else if(user.asMap().get("gender").toString().equals("female"))
                                                gender = "V";
                                         }
 
@@ -158,10 +158,6 @@ public class LoginFragment extends Fragment
         context=(FragmentActivity) activity;
         super.onAttach(activity);
     }
-
-    //facebook loggedInCheck
-
-
 
     private void slideUpFragment()
     {

@@ -48,13 +48,15 @@ public class SearchResultsTask extends AsyncTask<Bundle, Void, List<Trip>>
     private ArrayAdapter<Trip> mAdapterSearchResults;
     private TextView mTxtNoResults;
     private ScrollView mLayoutSearchResults;
+    private String token;
 
-    public SearchResultsTask(final ProgressBar progress, LinearLayout listSearchResults, TextView txtNoResults, ScrollView layout_search_results)
+    public SearchResultsTask(String fbToken, final ProgressBar progress, LinearLayout listSearchResults, TextView txtNoResults, ScrollView layout_search_results)
     {
         this.mProgress = progress;
         this.lstSearchResults = listSearchResults;
         this.mTxtNoResults = txtNoResults;
         this.mLayoutSearchResults = layout_search_results;
+        this.token = fbToken;
     }
 
     @Override
@@ -70,15 +72,14 @@ public class SearchResultsTask extends AsyncTask<Bundle, Void, List<Trip>>
         String time = b.getString("time");
         boolean share = b.getBoolean("share");
 
-        //TEST
-        String datetime="2014-12-02T20:17:20.125Z";
+        String datetime= Utils.parseDateToISOString(date, time);
 
         //Search trips from api with these parameters
         try {
             HttpClient httpclient = new DefaultHttpClient();
 
             HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/trips/search");
-            httppost.addHeader("Authorization", "000");
+            httppost.addHeader("Authorization", token);
 
             List<NameValuePair> parameters = new ArrayList<NameValuePair>();
             parameters.add(new BasicNameValuePair("from", fromCity.trim()));

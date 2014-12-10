@@ -12,6 +12,7 @@ import java.io.StringReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * Created by Preben on 10/12/2014.
@@ -108,6 +109,59 @@ public class Utils
             }
         }
         return sb.toString();
+    }
+
+    public static String parseBoolArrayToDays(boolean[] array)
+    {
+        String repeatString="";
+        for(int i = 0; i < 7; i++)
+        {
+            if(array[i]==true)
+            {
+                //Add day to full string
+                switch(i)
+                {
+                    case 0:
+                        repeatString += "ma, ";
+                        break;
+                    case 1:
+                        repeatString += "di, ";
+                        break;
+                    case 2:
+                        repeatString += "woe, ";
+                        break;
+                    case 3:
+                        repeatString += "don, ";
+                        break;
+                    case 4:
+                        repeatString += "vrij, ";
+                        break;
+                    case 5:
+                        repeatString += "za, ";
+                        break;
+                    case 6:
+                        repeatString += "zon, ";
+                        break;
+                }
+            }
+        }
+        repeatString = repeatString.substring(0, repeatString.length()-2);
+        return repeatString;
+    }
+
+    public static String parseISOStringToDate(String ISODate)
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setTimeZone(TimeZone.getDefault());
+        String dateString="";
+        try {
+            Date date = sdf.parse(ISODate);
+
+            SimpleDateFormat fmtOut = new SimpleDateFormat("dd-MM-yyyy");
+            dateString = fmtOut.format(date);
+        }catch (ParseException ex){
+            Log.e("ParseException Date", ex.getMessage());}
+        return dateString;
     }
 
 }
