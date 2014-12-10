@@ -128,7 +128,7 @@ public class LoginFragment extends Fragment
                                         }
 
 
-                                        APIHelper.AddUser(user.getName(), user.getFirstName(),
+                                        APIHelper.AddUser(user.getUsername(), user.getFirstName(),
                                                 user.getLastName(), user.asMap().get("email").toString(),
                                                 session.getAccessToken().toString(), user.getLink(), user.getId(), location,
                                                 gender, "", "https://graph.facebook.com/" + user.getId() + "/picture?type=large");
