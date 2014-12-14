@@ -30,6 +30,8 @@ public class TripRequestedAdapter extends ArrayAdapter<Trip>
 
         Trip trip = getItem(position);
 
+        card.setTag(position);
+
         holder.txtTripInfoDate.setText("Requested to");
         holder.txtTripInfo.setText(trip.getTo());
 

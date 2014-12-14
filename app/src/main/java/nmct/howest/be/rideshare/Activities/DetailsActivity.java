@@ -1,14 +1,20 @@
 package nmct.howest.be.rideshare.Activities;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import nmct.howest.be.rideshare.Activities.Fragments.DetailRequestFragment;
+import nmct.howest.be.rideshare.Activities.Fragments.DetailRequestTripFragment;
+import nmct.howest.be.rideshare.Activities.Fragments.DetailRequestedTripFragment;
+import nmct.howest.be.rideshare.Activities.Fragments.DetailSavedTripFragment;
 import nmct.howest.be.rideshare.R;
 
 public class DetailsActivity extends ActionBarActivity {
+
+    private String id = "";
+    private Integer type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,17 +26,35 @@ public class DetailsActivity extends ActionBarActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        Bundle b = getIntent().getExtras();
+        id = b.getString("id");
+        type = b.getInt("type");
+
         // Check that the activity is using the layout version with
         // the fragment_container_details FrameLayout
         if (findViewById(R.id.fragment_container_details) != null)
         {
-            //Get the correct Details fragment
-            DetailRequestFragment detailFragment = new DetailRequestFragment();
-
             // Add the fragment to the 'fragment_container_details' Layout
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container_details, detailFragment).commit();
-        }
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
+            //Get the correct Details fragment
+            switch(type) {
+                case 0:
+                    DetailRequestedTripFragment detailRequestedTripFragment = new DetailRequestedTripFragment().newInstance(id);
+                    ft.add(R.id.fragment_container_details, detailRequestedTripFragment);
+                    break;
+                case 1:
+                    DetailRequestTripFragment detailRequestsTripsFragment = new DetailRequestTripFragment().newInstance(id);
+                    ft.add(R.id.fragment_container_details, detailRequestsTripsFragment);
+                    break;
+                case 2:
+                    DetailSavedTripFragment detailSavedTripFragment = new DetailSavedTripFragment().newInstance(id);
+                    ft.add(R.id.fragment_container_details, detailSavedTripFragment);
+                    break;
+            }
+
+            ft.commit();
+        }
     }
 
     @Override

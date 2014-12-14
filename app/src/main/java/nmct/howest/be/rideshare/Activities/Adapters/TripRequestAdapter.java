@@ -1,9 +1,6 @@
 package nmct.howest.be.rideshare.Activities.Adapters;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.support.v4.widget.CursorAdapter;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -29,6 +26,8 @@ public class TripRequestAdapter extends ArrayAdapter<Trip>
         }
 
         Trip trip = getItem(position);
+
+        card.setTag(position);
 
         holder.txtTripInfoDate.setText("Request to");
         holder.txtTripInfo.setText(trip.getTo());

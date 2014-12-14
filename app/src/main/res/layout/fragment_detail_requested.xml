@@ -67,45 +67,21 @@
         android:layout_alignStart="@+id/txbVerzoekDag"
         android:layout_marginTop="10dp"  />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/Answer_Message"
-        android:id="@+id/txbVerzoekBericht"
-        android:layout_below="@+id/txbVerzoekUur"
-        android:layout_alignLeft="@+id/txbVerzoekUur"
-        android:layout_alignStart="@+id/txbVerzoekUur"
-        android:layout_marginTop="10dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/txtVerzoekBijgevoegd"
-        android:layout_below="@+id/txbVerzoekBericht"
-        android:layout_marginTop="7dp"
-        android:layout_marginRight="20dp"
-        android:layout_alignLeft="@+id/txbVerzoekBericht"
-        android:layout_alignStart="@+id/txbVerzoekBericht"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="36dp"
         android:text="@string/Button_Accept"
         android:id="@+id/btnVerzoekAccept"
-        android:layout_below="@+id/txtVerzoekBijgevoegd"
-        android:layout_alignLeft="@+id/txtVerzoekBijgevoegd"
-        android:layout_alignStart="@+id/txtVerzoekBijgevoegd"
         android:layout_marginTop="20dp"
         android:drawableLeft="@drawable/ic_check_white_36dp"
         android:textColor="@color/rideshare_secondary"
         android:textAllCaps="true"
         android:background="@drawable/button_selector"
         android:elevation="2dp"
-        android:width="140dp" />
+        android:width="140dp"
+        android:layout_below="@+id/txbVerzoekUur"
+        android:layout_alignLeft="@+id/txbVerzoekUur"
+        android:layout_alignStart="@+id/txbVerzoekUur" />
 
     <Button
         android:layout_width="wrap_content"

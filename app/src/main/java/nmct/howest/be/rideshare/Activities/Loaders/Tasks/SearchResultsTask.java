@@ -23,14 +23,10 @@ import org.apache.http.message.BasicNameValuePair;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import nmct.howest.be.rideshare.Activities.Adapters.SearchResultAdapter;
-import nmct.howest.be.rideshare.Activities.Fragments.SearchResultsFragment;
-import nmct.howest.be.rideshare.Activities.Helpers.APIHelper;
 import nmct.howest.be.rideshare.Activities.Helpers.Utils;
 import nmct.howest.be.rideshare.Activities.Models.Match;
 import nmct.howest.be.rideshare.Activities.Models.Message;

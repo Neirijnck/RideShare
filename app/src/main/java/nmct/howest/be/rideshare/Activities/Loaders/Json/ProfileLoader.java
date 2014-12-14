@@ -20,7 +20,6 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import nmct.howest.be.rideshare.Activities.Helpers.APIHelper;
 import nmct.howest.be.rideshare.Activities.Helpers.Utils;
 import nmct.howest.be.rideshare.Activities.Models.Review;
 import nmct.howest.be.rideshare.Activities.Models.User;

@@ -113,6 +113,8 @@ public class Utils
 
     public static String parseBoolArrayToDays(boolean[] array)
     {
+
+
         String repeatString="";
         for(int i = 0; i < 7; i++)
         {
@@ -145,7 +147,14 @@ public class Utils
                 }
             }
         }
-        repeatString = repeatString.substring(0, repeatString.length()-2);
+
+        if(repeatString.isEmpty()) {
+            repeatString = "Nooit";
+        }
+        else {
+            repeatString = repeatString.substring(0, repeatString.length() - 2);
+        }
+
         return repeatString;
     }
 
@@ -164,4 +173,35 @@ public class Utils
         return dateString;
     }
 
+    public static String parseISOStringToTime(String ISODate)
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        String timeString = "";
+        try {
+            Date date = sdf.parse(ISODate);
+            long millis = date.getTime();
+
+            //long second = (millis / 1000) % 60;
+            long minute = (millis / (1000 * 60)) % 60;
+            long hour = (millis / (1000 * 60 * 60)) % 24;
+
+            timeString = String.format("%02d:%02d", hour, minute);
+        }
+        catch (ParseException ex){
+            Log.e("ParseException Date", ex.getMessage());
+        }
+        return timeString;
+    }
+
+    public static String setPayment(String Payment)
+    {
+        Log.d("Payment", Payment);
+
+        if(Payment.isEmpty()) {
+            return "Geen bedrag opgegeven.";
+        }
+        else {
+            return Payment;
+        }
+    }
 }

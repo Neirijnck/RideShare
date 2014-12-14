@@ -7,25 +7,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import nmct.howest.be.rideshare.Activities.Adapters.SearchResultAdapter;
-import nmct.howest.be.rideshare.Activities.Adapters.TripSavedAdapter;
 import nmct.howest.be.rideshare.Activities.Loaders.Tasks.SearchResultsTask;
-import nmct.howest.be.rideshare.Activities.Models.Trip;
 import nmct.howest.be.rideshare.R;
 import nmct.howest.be.rideshare.RideshareApp;
 
-/**
- * Created by Preben on 4/12/2014.
- */
 public class SearchResultsFragment extends Fragment
 {
     private ProgressBar mProgressBar;

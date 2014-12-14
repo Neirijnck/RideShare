@@ -6,8 +6,8 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import nmct.howest.be.rideshare.Activities.Fragments.MyProfileFragment;
 import nmct.howest.be.rideshare.Activities.Fragments.PlanningFragment;
-import nmct.howest.be.rideshare.Activities.Fragments.TripsFragment;
 import nmct.howest.be.rideshare.Activities.Fragments.SearchFragment;
+import nmct.howest.be.rideshare.Activities.Fragments.TripsFragment;
 
 public class TabPagerAdapter extends FragmentStatePagerAdapter
 {

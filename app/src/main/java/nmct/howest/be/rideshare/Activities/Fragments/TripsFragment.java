@@ -1,12 +1,10 @@
 package nmct.howest.be.rideshare.Activities.Fragments;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,13 +23,12 @@ import java.util.List;
 import nmct.howest.be.rideshare.Activities.Adapters.TripRequestAdapter;
 import nmct.howest.be.rideshare.Activities.Adapters.TripRequestedAdapter;
 import nmct.howest.be.rideshare.Activities.Adapters.TripSavedAdapter;
-import nmct.howest.be.rideshare.Activities.Loaders.Json.TripLoader;
+import nmct.howest.be.rideshare.Activities.DetailsActivity;
+import nmct.howest.be.rideshare.Activities.Loaders.Json.TripsLoader;
 import nmct.howest.be.rideshare.Activities.MainActivity;
-import nmct.howest.be.rideshare.Activities.Models.Review;
 import nmct.howest.be.rideshare.Activities.Models.Trip;
 import nmct.howest.be.rideshare.Activities.SearchActivity;
 import nmct.howest.be.rideshare.R;
-import nmct.howest.be.rideshare.RideshareApp;
 
 public class TripsFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<Trip>>
 {
@@ -104,11 +101,11 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
         return super.onOptionsItemSelected(item);
     }
 
-    //Implementation of the triploader
+    //Implementation of the tripsloader
     @Override
     public Loader<List<Trip>> onCreateLoader(int i, Bundle bundle)
     {
-        return new TripLoader(getActivity(), getResources().getString(R.string.API_Trips));
+        return new TripsLoader(getActivity(), getResources().getString(R.string.API_Trips));
     }
 
     @Override
@@ -140,8 +137,14 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
             item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //Get info from item
-
+                    Intent intent = new Intent(getActivity(), DetailsActivity.class);
+                    Bundle b = new Bundle();
+                    int pos = (int)v.getTag();
+                    String id = mTrips.get(pos).getID();
+                    b.putString("id", id);
+                    b.putInt("type", 2);
+                    intent.putExtras(b);
+                    startActivity(intent);
                 }
             });
             listMyTrips.addView(item);
@@ -154,7 +157,14 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
             item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //Get info from item
+                    Intent intent = new Intent(getActivity(), DetailsActivity.class);
+                    Bundle b = new Bundle();
+                    int pos = (int)v.getTag();
+                    String id = mTrips.get(pos).getID();
+                    b.putString("id", id);
+                    b.putInt("type", 1);
+                    intent.putExtras(b);
+                    startActivity(intent);
                 }
             });
             listRequestTrips.addView(item);
@@ -167,7 +177,14 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
             item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //Get info from item
+                    Intent intent = new Intent(getActivity(), DetailsActivity.class);
+                    Bundle b = new Bundle();
+                    int pos = (int)v.getTag();
+                    String id = mTrips.get(pos).getID();
+                    b.putString("id", id);
+                    b.putInt("type", 0);
+                    intent.putExtras(b);
+                    startActivity(intent);
                 }
             });
             listRequestedTrips.addView(item);

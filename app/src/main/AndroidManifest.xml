@@ -29,18 +29,12 @@
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
-<!--            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
         </activity>
         <activity
             android:name="nmct.howest.be.rideshare.Activities.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -81,24 +75,23 @@
 
         <!--RECEIVER-->
         <receiver
-            android:name="nmct.howest.be.rideshare.services.GcmBroadcastReceiver"
+            android:name="nmct.howest.be.rideshare.Services.GcmBroadcastReceiver"
             android:enabled="true"
             android:exported="true"
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-
                 <category android:name="com.example.gcm" />
             </intent-filter>
         </receiver>
 
         <!--SERVICES-->
         <service
-            android:name="nmct.howest.be.rideshare.services.GcmIntentService"
+            android:name="nmct.howest.be.rideshare.Services.GcmIntentService"
             android:exported="false" />
 
         <service
-            android:name=".services.SyncService"
+            android:name=".Services.SyncService"
             android:enabled="true"
             android:exported="true"
             android:process=":sync">

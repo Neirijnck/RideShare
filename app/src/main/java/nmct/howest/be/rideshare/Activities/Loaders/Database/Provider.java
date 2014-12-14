@@ -7,18 +7,13 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
-import android.text.TextUtils;
 
 import java.util.HashMap;
 
 import nmct.howest.be.rideshare.Activities.Helpers.SQLHelper;
 
-/**
- * Created by Preben on 7/12/2014.
- */
 public class Provider extends ContentProvider
 {
 

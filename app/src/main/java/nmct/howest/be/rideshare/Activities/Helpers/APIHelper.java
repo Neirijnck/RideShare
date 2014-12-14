@@ -1,10 +1,7 @@
 package nmct.howest.be.rideshare.Activities.Helpers;
 
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.preference.PreferenceManager;
 import android.text.TextUtils;
-import android.util.JsonReader;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -18,18 +15,9 @@ import org.apache.http.client.methods.HttpPut;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.StringReader;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 import nmct.howest.be.rideshare.RideshareApp;
 

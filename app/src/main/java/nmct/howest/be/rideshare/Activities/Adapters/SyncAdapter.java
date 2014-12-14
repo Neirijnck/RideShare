@@ -1,7 +1,6 @@
 package nmct.howest.be.rideshare.Activities.Adapters;
 
 import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.content.AbstractThreadedSyncAdapter;
 import android.content.ContentProviderClient;
 import android.content.ContentResolver;
