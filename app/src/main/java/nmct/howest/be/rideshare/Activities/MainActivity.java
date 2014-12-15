@@ -162,17 +162,30 @@ public class MainActivity extends ActionBarActivity {
             new AlertDialog.Builder(this)
                     .setTitle("Please donate!")
                     .setMessage("Do you find this application useful? Support it's development by sending donation to the developer.")
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    .setPositiveButton("Donate", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://188.226.154.228:8080/"));
                             startActivity(browserIntent);
                         }
                     })
-                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    .setNeutralButton("Rate", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
+                            try {
+                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + getPackageName())));
+                            } catch (android.content.ActivityNotFoundException anfe) {
+                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + getPackageName())));
+                            }
                         }
                     })
+                    .setNegativeButton("Email", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                            Uri data = Uri.parse("mailto:shareride@gmail.com");
+                            intent.setData(data);
+                            startActivity(intent);
+                        }
+                    })
+
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
 

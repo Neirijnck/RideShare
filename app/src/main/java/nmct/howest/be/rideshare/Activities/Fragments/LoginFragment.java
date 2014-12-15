@@ -119,7 +119,7 @@ public class LoginFragment extends Fragment
                                             date = date.replace("/","-");
                                             birthday =  Utils.parseDateToISOString(date,"00:00");
                                         }
-<<<<<<< Updated upstream
+
                                         if(user.getLocation() != null){
                                             location = user.getLocation().toString();
                                         }
@@ -131,7 +131,6 @@ public class LoginFragment extends Fragment
                                         }
 
 
-=======
                                         if (user.getLocation() != null) {
                                             location = user.getLocation().getName().substring(0, user.getLocation().getName().indexOf(","));
 
@@ -142,8 +141,6 @@ public class LoginFragment extends Fragment
                                             else if (user.asMap().get("gender").toString().equals("female"))
                                                 gender = "V";
                                         }
-
->>>>>>> Stashed changes
                                         APIHelper.AddUser(user.getName(), user.getFirstName(),
                                                 user.getLastName(), user.asMap().get("email").toString(),
                                                 session.getAccessToken().toString(), user.getLink(), user.getId(), location,

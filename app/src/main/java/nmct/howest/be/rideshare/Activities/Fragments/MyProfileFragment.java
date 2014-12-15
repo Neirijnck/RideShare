@@ -204,7 +204,7 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
         {
             txtCar.setText("Auto niet bekend");
         }
-        if(TextUtils.isEmpty(user.getFacebookID()))
+        if(!TextUtils.isEmpty(user.getFacebookID()))
             profilePictureView.setProfileId(user.getFacebookID());
 
 
