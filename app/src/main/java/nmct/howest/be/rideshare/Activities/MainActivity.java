@@ -164,7 +164,7 @@ public class MainActivity extends ActionBarActivity {
                     .setMessage("Do you find this application useful? Support it's development by sending donation to the developer.")
                     .setPositiveButton("Donate", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://188.226.154.228:8080/"));
+                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://188.226.154.228:8080/donate"));
                             startActivity(browserIntent);
                         }
                     })
@@ -196,7 +196,7 @@ public class MainActivity extends ActionBarActivity {
         edt.commit();
         Log.d("count",""+count);
 
-        //Other pause stuff.
+
     }
 
 
