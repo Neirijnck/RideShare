@@ -26,11 +26,11 @@ import com.facebook.model.GraphUser;
 import com.facebook.widget.LoginButton;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import nmct.howest.be.rideshare.Activities.Helpers.APIHelper;
 import nmct.howest.be.rideshare.Activities.Helpers.ConnectivityHelper;
+import nmct.howest.be.rideshare.Activities.Helpers.Utils;
 import nmct.howest.be.rideshare.Activities.MainActivity;
 import nmct.howest.be.rideshare.R;
 
@@ -113,10 +113,13 @@ public class LoginFragment extends Fragment
                                     if (user != null) {
                                         String location = "";
                                         String gender = "";
-                                        Date birthday = new Date();
-                                        if(user.getBirthday() != null){
-
+                                        String birthday = "";
+                                        if (user.getBirthday() != null) {
+                                            String date = user.getBirthday();
+                                            date = date.replace("/","-");
+                                            birthday =  Utils.parseDateToISOString(date,"00:00");
                                         }
+<<<<<<< Updated upstream
                                         if(user.getLocation() != null){
                                             location = user.getLocation().toString();
                                         }
@@ -128,10 +131,23 @@ public class LoginFragment extends Fragment
                                         }
 
 
+=======
+                                        if (user.getLocation() != null) {
+                                            location = user.getLocation().getName().substring(0, user.getLocation().getName().indexOf(","));
+
+                                        }
+                                        if (user.asMap().get("gender").toString() != null) {
+                                            if (user.asMap().get("gender").toString().equals("male"))
+                                                gender = "M";
+                                            else if (user.asMap().get("gender").toString().equals("female"))
+                                                gender = "V";
+                                        }
+
+>>>>>>> Stashed changes
                                         APIHelper.AddUser(user.getName(), user.getFirstName(),
                                                 user.getLastName(), user.asMap().get("email").toString(),
                                                 session.getAccessToken().toString(), user.getLink(), user.getId(), location,
-                                                gender, "", "https://graph.facebook.com/" + user.getId() + "/picture?type=large");
+                                                gender, "", "https://graph.facebook.com/" + user.getId() + "/picture?type=large", birthday);
                                         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
                                         SharedPreferences.Editor edt = pref.edit();
 

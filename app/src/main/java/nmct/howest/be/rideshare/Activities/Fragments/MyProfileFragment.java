@@ -93,6 +93,7 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
                     b.putString("location", mUser.getLocation());
                     b.putString("carType", mUser.getCarType());
                     b.putString("places", mUser.getAmountOfSeats());
+                    b.putString("facebookID", mUser.getFacebookID());
                 }
                 intent.putExtras(b);
                 startActivity(intent);
@@ -185,23 +186,7 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
             birthday = fmtOut.format(date);
         }catch (ParseException ex){
             Log.e("ParseException Date", ex.getMessage());}
-
-
-        if(!TextUtils.isEmpty(user.getGender())&&!TextUtils.isEmpty(user.getBirthday())) {
-            txtGenderAge.setText(user.getGender() + ", " + birthday);
-        }
-        else if(TextUtils.isEmpty(user.getGender())&&!TextUtils.isEmpty(user.getBirthday()))
-        {
-            txtGenderAge.setText(user.getBirthday());
-        }
-        else if(!TextUtils.isEmpty(user.getGender())&&TextUtils.isEmpty(user.getBirthday()))
-        {
-            txtGenderAge.setText(user.getGender());
-        }
-        else
-        {
-            txtGenderAge.setText("Verjaardag niet bekend");
-        }
+        txtGenderAge.setText(user.getGender() + ", " + birthday);
 
 
         if(!TextUtils.isEmpty(user.getCarType())&&!TextUtils.isEmpty(user.getAmountOfSeats())) {
@@ -219,15 +204,12 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
         {
             txtCar.setText("Auto niet bekend");
         }
+        if(TextUtils.isEmpty(user.getFacebookID()))
+            profilePictureView.setProfileId(user.getFacebookID());
 
-        if(!TextUtils.isEmpty(user.getFacebookID())) {
 
-            String facebookID = user.getFacebookID();
+        profilePictureView.setCropped(true);
 
-            profilePictureView.setProfileId(facebookID);
-
-            profilePictureView.setCropped(true);
-        }
 
     }
 

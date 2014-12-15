@@ -37,9 +37,9 @@ public class MainActivity extends ActionBarActivity {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
         String token = pref.getString("accessToken", "");
 
-        if(token == null || token.equals("")) {
-            Log.d("De token", "is leeg");
+        if(token == null || token == "") {
             Intent intent = new Intent(this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             this.startActivity(intent);
         }
 
@@ -123,30 +123,16 @@ public class MainActivity extends ActionBarActivity {
     /**
      * Logout From Facebook
      */
-    public static void callFacebookLogout(Context context) {
+    private void callFacebookLogout(Context context) {
         Session session = Session.getActiveSession();
         if (session != null) {
             if (!session.isClosed()) {
                 session.closeAndClearTokenInformation();
-                Intent intent = new Intent(context, LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
-                //clear your preferences if saved
             }
-            else{
-                Intent intent = new Intent(context, LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
-            }
-        } else {
-
-            Intent intent = new Intent(context, LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
-            //clear your preferences if saved
         }
-
-    }
+            Intent intent = new Intent(this.getApplicationContext(), LoginActivity.class);
+            this.startActivity(intent);
+                }
 
     //Close app on back button
 

@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.facebook.widget.ProfilePictureView;
+
 import nmct.howest.be.rideshare.Activities.Helpers.APIHelper;
 import nmct.howest.be.rideshare.Activities.MainActivity;
 import nmct.howest.be.rideshare.R;
@@ -26,6 +28,7 @@ public class EditProfileFragment extends Fragment
     private String location;
     private String carType;
     private String places;
+    private String facebookID;
 
     private EditText txtFirstName;
     private EditText txtLastName;
@@ -35,6 +38,7 @@ public class EditProfileFragment extends Fragment
     private EditText txtPlaces;
 
     private Button btnSaveProfile;
+    private ProfilePictureView imgEditProfilePic;
 
     SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(RideshareApp.getAppContext());
     String token = pref.getString("accessToken", "");
@@ -53,6 +57,7 @@ public class EditProfileFragment extends Fragment
         location = b.getString("location");
         carType = b.getString("carType");
         places = b.getString("places");
+        facebookID = b.getString("facebookID");
     }
 
     @Override
@@ -72,6 +77,7 @@ public class EditProfileFragment extends Fragment
         txtLocation = (EditText) v.findViewById(R.id.txtEditPlace);
         txtCarType = (EditText) v.findViewById(R.id.txtEditCarType);
         txtPlaces = (EditText) v.findViewById(R.id.txtEditPlaces);
+        imgEditProfilePic = (ProfilePictureView) v.findViewById(R.id.imgEditProfilePic);
 
         txtFirstName.setText(firstName);
         txtLastName.setText(lastName);
@@ -79,6 +85,7 @@ public class EditProfileFragment extends Fragment
         txtLocation.setText(location);
         txtCarType.setText(carType);
         txtPlaces.setText(places);
+        imgEditProfilePic.setProfileId(facebookID);
 
         btnSaveProfile = (Button) v.findViewById(R.id.btnEditSaveProfile);
         btnSaveProfile.setOnClickListener(new View.OnClickListener() {

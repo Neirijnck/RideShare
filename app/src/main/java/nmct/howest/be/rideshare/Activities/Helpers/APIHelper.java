@@ -23,7 +23,7 @@ import nmct.howest.be.rideshare.RideshareApp;
 
 public class APIHelper {
 
-    public static void AddUser(String userName, String firstName, String lastName, String email, String fbToken, String fbLink, String fbID, String location, String gender, String regID, String fbImg) {
+    public static void AddUser(String userName, String firstName, String lastName, String email, String fbToken, String fbLink, String fbID, String location, String gender, String regID, String fbImg, String birthday) {
         try {
             HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/profile");
 
@@ -39,6 +39,7 @@ public class APIHelper {
             parameters.add(new BasicNameValuePair("gender", gender));
             parameters.add(new BasicNameValuePair("registrationIDs", "666"));
             parameters.add(new BasicNameValuePair("facebookImg", fbImg));
+            parameters.add(new BasicNameValuePair("birthday", birthday));
             httppost.setEntity(new UrlEncodedFormEntity(parameters));
 
             PostAsync task = new PostAsync();
