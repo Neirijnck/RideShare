@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <ImageView
+    <com.facebook.widget.ProfilePictureView
         android:layout_width="wrap_content"
         android:layout_height="185dp"
         android:id="@+id/imgDetailMatch"
@@ -71,7 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/Answer_Message"
+        android:text="Stuur Naam een bericht:"
         android:id="@+id/txbMatchBericht"
         android:layout_below="@+id/txbMatchUur"
         android:layout_alignLeft="@+id/txbMatchUur"
@@ -94,7 +94,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="36dp"
-        android:text="@string/Button_Match"
+        android:text="Ik wil meerijden!"
         android:id="@+id/btnMatchAccept"
         android:layout_below="@+id/txtMatchBijgevoegd"
         android:layout_centerHorizontal="true"

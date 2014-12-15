@@ -1,5 +1,6 @@
 package nmct.howest.be.rideshare.Activities.Loaders.Tasks;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.JsonReader;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nmct.howest.be.rideshare.Activities.Adapters.SearchResultAdapter;
+import nmct.howest.be.rideshare.Activities.DetailsActivity;
 import nmct.howest.be.rideshare.Activities.Helpers.Utils;
 import nmct.howest.be.rideshare.Activities.Models.Match;
 import nmct.howest.be.rideshare.Activities.Models.Message;
@@ -263,18 +265,27 @@ public class SearchResultsTask extends AsyncTask<Bundle, Void, List<Trip>>
 
         mAdapterSearchResults = new SearchResultAdapter(RideshareApp.getAppContext(), R.layout.card_search_result, R.id.txtSearchResultName);
         mAdapterSearchResults.addAll(result);
-
+        final List<Trip> mTrips = result;
         //Adding items to linear layouts
         int adaptercountSearchResults = mAdapterSearchResults.getCount();
         for(int i =0; i < adaptercountSearchResults; i++)
         {
-            View item = mAdapterSearchResults.getView(i, null, null);
+            final View item = mAdapterSearchResults.getView(i, null, null);
+            final int pos = i;
             item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //Get info from item
+                    Intent intent = new Intent(item.getContext(), DetailsActivity.class);
+                    Bundle b = new Bundle();
+                    String id = mTrips.get(pos).getID();
+                    b.putString("id", id);
+                    b.putInt("type", 3);
+                    intent.putExtras(b);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    item.getContext().startActivity(intent);
                 }
             });
+
             lstSearchResults.addView(item);
         }
 

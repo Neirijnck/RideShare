@@ -103,8 +103,6 @@ public class LoginFragment extends Fragment
 
                     List<String> permissions = session.getPermissions();
                     Log.d("permissies", permissions.toString());
-
-
                     Log.i(TAG, "Access Token" + session.getAccessToken());
                     Request.executeMeRequestAsync(session,
                             new Request.GraphUserCallback() {
@@ -119,21 +117,8 @@ public class LoginFragment extends Fragment
                                             date = date.replace("/","-");
                                             birthday =  Utils.parseDateToISOString(date,"00:00");
                                         }
-
-                                        if(user.getLocation() != null){
-                                            location = user.getLocation().toString();
-                                        }
-                                        if(user.asMap().get("gender").toString() != null){
-                                           if(user.asMap().get("gender").toString().equals("male"))
-                                               gender = "M";
-                                           else if(user.asMap().get("gender").toString().equals("female"))
-                                               gender = "V";
-                                        }
-
-
                                         if (user.getLocation() != null) {
                                             location = user.getLocation().getName().substring(0, user.getLocation().getName().indexOf(","));
-
                                         }
                                         if (user.asMap().get("gender").toString() != null) {
                                             if (user.asMap().get("gender").toString().equals("male"))
@@ -147,10 +132,8 @@ public class LoginFragment extends Fragment
                                                 gender, "", "https://graph.facebook.com/" + user.getId() + "/picture?type=large", birthday);
                                         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
                                         SharedPreferences.Editor edt = pref.edit();
-
                                         edt.putString("accessToken", session.getAccessToken().toString());
                                         edt.commit();
-
                                         Intent intent = new Intent(getActivity(), MainActivity.class);
                                         getActivity().startActivity(intent);
                                     }
@@ -159,9 +142,7 @@ public class LoginFragment extends Fragment
                 }
             }
         });
-
         //End Facebook Login
-
         return view;
     }
 
@@ -171,11 +152,6 @@ public class LoginFragment extends Fragment
         context=(FragmentActivity) activity;
         super.onAttach(activity);
     }
-
-    //facebook loggedInCheck
-
-
-
     private void slideUpFragment()
     {
         transaction = context.getSupportFragmentManager().beginTransaction();

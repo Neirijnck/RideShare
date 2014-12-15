@@ -101,14 +101,14 @@ public class SearchFragment extends Fragment
         });
 
         //Time picker
-        /*txbTimePlan.setOnClickListener(new View.OnClickListener() {
+        txbTimePlan.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 DialogFragment newFragment = new TimePickerFragment();
                 newFragment.show(getFragmentManager(), "timePicker");
             }
-        });*/
+        });
 
         return view;
     }

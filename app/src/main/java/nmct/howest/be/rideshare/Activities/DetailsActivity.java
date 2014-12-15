@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import nmct.howest.be.rideshare.Activities.Fragments.DetailMatchFragment;
 import nmct.howest.be.rideshare.Activities.Fragments.DetailRequestTripFragment;
 import nmct.howest.be.rideshare.Activities.Fragments.DetailRequestedTripFragment;
 import nmct.howest.be.rideshare.Activities.Fragments.DetailSavedTripFragment;
@@ -50,6 +51,10 @@ public class DetailsActivity extends ActionBarActivity {
                 case 2:
                     DetailSavedTripFragment detailSavedTripFragment = new DetailSavedTripFragment().newInstance(id);
                     ft.add(R.id.fragment_container_details, detailSavedTripFragment);
+                    break;
+                case 3:
+                    DetailMatchFragment detailMatchFragment = new DetailMatchFragment().newInstance(id);
+                    ft.add(R.id.fragment_container_details, detailMatchFragment);
                     break;
             }
 
