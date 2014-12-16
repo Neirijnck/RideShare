@@ -126,8 +126,9 @@ public class EditProfileFragment extends Fragment
                     }
                     else{APIHelper.EditUser(userName.trim(), firstName.trim(), lastName.trim(), token, location.trim(), carType.trim(), places.trim());}
 
-                    getActivity().finish();
                     MainActivity.pager.setCurrentItem(3, true);
+                    getActivity().finish();
+
                 }
             }
         });

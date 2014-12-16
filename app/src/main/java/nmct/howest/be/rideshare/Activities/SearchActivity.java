@@ -51,7 +51,10 @@ public class SearchActivity extends ActionBarActivity
         switch (id)
         {
             case R.id.home:
+                return true;
+            case 16908332:
                 MainActivity.pager.setCurrentItem(1, true);
+                this.finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);

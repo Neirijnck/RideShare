@@ -69,6 +69,10 @@ public class DetailsActivity extends ActionBarActivity {
         {
             case R.id.home:
                 return true;
+            case 16908332:
+                MainActivity.pager.setCurrentItem(2, true);
+                this.finish();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

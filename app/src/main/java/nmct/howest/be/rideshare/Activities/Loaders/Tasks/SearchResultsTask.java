@@ -270,20 +270,21 @@ public class SearchResultsTask extends AsyncTask<Bundle, Void, List<Trip>>
         int adaptercountSearchResults = mAdapterSearchResults.getCount();
         for(int i =0; i < adaptercountSearchResults; i++)
         {
-            final View item = mAdapterSearchResults.getView(i, null, null);
+            View item = mAdapterSearchResults.getView(i, null, null);
 
             item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(item.getContext(), DetailsActivity.class);
+                    Intent intent = new Intent(RideshareApp.getAppContext(), DetailsActivity.class);
                     Bundle b = new Bundle();
-                   int pos = (int) v.getTag();
+                    int pos = (int) v.getTag();
                     String id = mTrips.get(pos).getID();
+                    Log.d("id",""+ id);
                     b.putString("id", id);
                     b.putInt("type", 3);
                     intent.putExtras(b);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    item.getContext().startActivity(intent);
+                    RideshareApp.getAppContext().startActivity(intent);
                 }
             });
 

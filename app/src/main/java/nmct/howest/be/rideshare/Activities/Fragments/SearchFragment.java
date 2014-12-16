@@ -75,7 +75,6 @@ public class SearchFragment extends Fragment
                 {
                     Intent intent = new Intent(getActivity(), SearchActivity.class);
                     Bundle b = new Bundle();
-
                     //Enter all parameters
                     b.putString("from", txtFrom.getText().toString());
                     b.putString("to", txtTo.getText().toString());
