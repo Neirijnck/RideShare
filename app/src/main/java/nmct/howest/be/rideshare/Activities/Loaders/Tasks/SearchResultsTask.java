@@ -271,12 +271,13 @@ public class SearchResultsTask extends AsyncTask<Bundle, Void, List<Trip>>
         for(int i =0; i < adaptercountSearchResults; i++)
         {
             final View item = mAdapterSearchResults.getView(i, null, null);
-            final int pos = i;
+
             item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(item.getContext(), DetailsActivity.class);
                     Bundle b = new Bundle();
+                   int pos = (int) v.getTag();
                     String id = mTrips.get(pos).getID();
                     b.putString("id", id);
                     b.putInt("type", 3);

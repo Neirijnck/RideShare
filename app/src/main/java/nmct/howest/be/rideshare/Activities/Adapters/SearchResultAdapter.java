@@ -34,6 +34,7 @@ public class SearchResultAdapter extends ArrayAdapter<Trip>
         if(holder == null){
             holder = new ViewHolderItem(card);
             card.setTag(holder);
+            card.setTag(position);
         }
 
         Trip trip = getItem(position);

@@ -140,7 +140,6 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
                     Intent intent = new Intent(getActivity(), DetailsActivity.class);
                     Bundle b = new Bundle();
                     int pos = (int)v.getTag();
-
                     String id = mTrips.get(pos).getID();
                     b.putString("id", id);
                     b.putInt("type", 2);
