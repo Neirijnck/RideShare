@@ -15,6 +15,7 @@ import nmct.howest.be.rideshare.R;
 public class DetailsActivity extends ActionBarActivity {
 
     private String id = "";
+    private String matchID="";
     private Integer type;
 
     @Override
@@ -29,6 +30,7 @@ public class DetailsActivity extends ActionBarActivity {
 
         Bundle b = getIntent().getExtras();
         id = b.getString("id");
+        matchID = b.getString("matchID");
         type = b.getInt("type");
 
         // Check that the activity is using the layout version with
@@ -45,7 +47,7 @@ public class DetailsActivity extends ActionBarActivity {
                     ft.add(R.id.fragment_container_details, detailRequestedTripFragment);
                     break;
                 case 1:
-                    DetailRequestTripFragment detailRequestsTripsFragment = new DetailRequestTripFragment().newInstance(id);
+                    DetailRequestTripFragment detailRequestsTripsFragment = new DetailRequestTripFragment().newInstance(id, matchID);
                     ft.add(R.id.fragment_container_details, detailRequestsTripsFragment);
                     break;
                 case 2:

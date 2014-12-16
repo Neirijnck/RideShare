@@ -9,6 +9,7 @@ public class User {
     private String facebookToken  ="";
     private String facebookID = "";
     private String facebookLink  ="";
+    private String facebookImg="";
     private String firstName = "";
     private String lastName = "";
     private String email = "";
@@ -134,6 +135,13 @@ public class User {
         this.reviews = reviews;
     }
 
+    public String getFacebookImg() {
+        return facebookImg;
+    }
+
+    public void setFacebookImg(String facebookImg) {
+        this.facebookImg = facebookImg;
+    }
 
     //Ctor
     public User(String ID, String userName, String facebookToken, String facebookID, String facebookLink, String firstName, String lastName, String email, String gender, String birthday, String location, String carType, String amountOfSeats, List<Review> reviews) {

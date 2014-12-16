@@ -1,6 +1,8 @@
 package nmct.howest.be.rideshare.Activities.Loaders.Json;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.JsonReader;
 import android.util.Log;
@@ -27,10 +29,12 @@ public class TripLoader extends AsyncTaskLoader<Trip>
 {
     private final String mUrl;
     private Trip mTrip;
+    private Context context;
 
     public TripLoader(Context context, String url) {
         super(context);
         mUrl = url;
+        this.context = context;
     }
 
     @Override
@@ -51,7 +55,9 @@ public class TripLoader extends AsyncTaskLoader<Trip>
         //Met url json
         HttpClient client = new DefaultHttpClient();
         HttpGet httpGet = new HttpGet(mUrl);
-        httpGet.addHeader("Authorization", "000");
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+        String token = pref.getString("accessToken", "");
+        httpGet.addHeader("Authorization", token);
         HttpResponse response = client.execute(httpGet);
         HttpEntity entity = response.getEntity();
         InputStream in = entity.getContent();
@@ -72,6 +78,7 @@ public class TripLoader extends AsyncTaskLoader<Trip>
                 String to = "";
                 String dateTime = "";
                 String payment = "";
+                String matchID="";
                 String matchUserID = "";
                 String matchFrom = "";
                 String matchTo = "";
@@ -148,6 +155,9 @@ public class TripLoader extends AsyncTaskLoader<Trip>
                                 if (key_third.equals("userID")) {
                                     matchUserID = reader.nextString();
                                     match.setUserID(matchUserID);
+                                }else if (key_third.equals("_id")) {
+                                    matchID = reader.nextString();
+                                    match.setId(matchID);
                                 } else if (key_third.equals("from")) {
                                     matchFrom = reader.nextString();
                                     match.setFrom(matchFrom);
@@ -180,7 +190,7 @@ public class TripLoader extends AsyncTaskLoader<Trip>
                                     }
                                     reader.endArray();
                                     match.setMessages(messages);
-                                } else if (key.equals("status")) {
+                                } else if (key_third.equals("status")) {
                                     matchStatus = reader.nextInt();
                                     match.setStatus(matchStatus);
                                 } else {

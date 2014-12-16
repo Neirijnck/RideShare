@@ -2,6 +2,7 @@
 <sync-adapter
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:contentAuthority="nmct.howest.be.rideshare.contentprovider"
+    android:accountType="nmct.howest.be"
     android:userVisible="true"
     android:supportsUploading="false"
     android:allowParallelSyncs="false"

@@ -1,8 +1,11 @@
 package nmct.howest.be.rideshare.Activities.Fragments;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -36,6 +39,7 @@ import android.widget.ToggleButton;
 import java.util.Calendar;
 
 import nmct.howest.be.rideshare.Activities.Helpers.APIHelper;
+import nmct.howest.be.rideshare.Activities.Helpers.ConnectivityHelper;
 import nmct.howest.be.rideshare.Activities.SearchActivity;
 import nmct.howest.be.rideshare.R;
 import nmct.howest.be.rideshare.RideshareApp;
@@ -170,42 +174,53 @@ public class PlanningFragment extends Fragment{
                 {
                     Toast.makeText(getActivity(), "Vul alle verplichte velden in", Toast.LENGTH_SHORT).show();
                 }
-                else
-                {
+                else {
                     //Post info to database
 
-                    //If there is only a price
-                    if(!price.equals("€")&&!repeatSwitch.isChecked())
-                    {
-                        APIHelper.PlanTrip(token, from.trim(), to.trim(), date, time, price.trim());
-                    }
-                    //If there are only repeat days
-                    else if(price.equals("€")&&repeatSwitch.isChecked())
-                    {
-                        repeatDays[0] = mo;
-                        repeatDays[1] = tu;
-                        repeatDays[2] = we;
-                        repeatDays[3] = th;
-                        repeatDays[4] = fr;
-                        repeatDays[5] = sa;
-                        repeatDays[6] = su;
-                         APIHelper.PlanTrip(token, from.trim(), to.trim(), date, time, repeatDays);
-                    }
-                    //Both price and repeat days
-                    else if(!price.equals("€")&&repeatSwitch.isChecked())
-                    {
-                        repeatDays[0] = mo;
-                        repeatDays[1] = tu;
-                        repeatDays[2] = we;
-                        repeatDays[3] = th;
-                        repeatDays[4] = fr;
-                        repeatDays[5] = sa;
-                        repeatDays[6] = su;
-                        APIHelper.PlanTrip(token, from.trim(), to.trim(), date, time, price.trim(), repeatDays);
-                    }
-                    else
-                    {
-                        APIHelper.PlanTrip(token, from.trim(), to.trim(), date, time);
+                    //Has internet?
+                    Context c = getActivity();
+                    if (!ConnectivityHelper.isNetworkAvailable(c)) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(c);
+                        builder.setTitle("No Internet connection.");
+                        builder.setMessage("You have no internet connection");
+                        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        builder.show();
+                    } else {
+
+                        //If there is only a price
+                        if (!price.equals("€") && !repeatSwitch.isChecked()) {
+                            APIHelper.PlanTrip(token, from.trim(), to.trim(), date, time, price.trim());
+                        }
+                        //If there are only repeat days
+                        else if (price.equals("€") && repeatSwitch.isChecked()) {
+                            repeatDays[0] = mo;
+                            repeatDays[1] = tu;
+                            repeatDays[2] = we;
+                            repeatDays[3] = th;
+                            repeatDays[4] = fr;
+                            repeatDays[5] = sa;
+                            repeatDays[6] = su;
+                            APIHelper.PlanTrip(token, from.trim(), to.trim(), date, time, repeatDays);
+                        }
+                        //Both price and repeat days
+                        else if (!price.equals("€") && repeatSwitch.isChecked()) {
+                            repeatDays[0] = mo;
+                            repeatDays[1] = tu;
+                            repeatDays[2] = we;
+                            repeatDays[3] = th;
+                            repeatDays[4] = fr;
+                            repeatDays[5] = sa;
+                            repeatDays[6] = su;
+                            APIHelper.PlanTrip(token, from.trim(), to.trim(), date, time, price.trim(), repeatDays);
+                        } else {
+                            APIHelper.PlanTrip(token, from.trim(), to.trim(), date, time);
+                        }
                     }
                 }
             }
@@ -253,7 +268,7 @@ public class PlanningFragment extends Fragment{
         } else {
             AlphaAnimation fade_out = new AlphaAnimation(1, 0);
             fade_out.setDuration(500);
-                fade_out.setAnimationListener(new Animation.AnimationListener() {
+            fade_out.setAnimationListener(new Animation.AnimationListener() {
                 public void onAnimationStart(Animation arg0)
                 {
                 }

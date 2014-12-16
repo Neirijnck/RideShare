@@ -24,8 +24,10 @@ import nmct.howest.be.rideshare.Activities.Adapters.TripRequestAdapter;
 import nmct.howest.be.rideshare.Activities.Adapters.TripRequestedAdapter;
 import nmct.howest.be.rideshare.Activities.Adapters.TripSavedAdapter;
 import nmct.howest.be.rideshare.Activities.DetailsActivity;
+import nmct.howest.be.rideshare.Activities.Loaders.Json.SpecialTripsLoader;
 import nmct.howest.be.rideshare.Activities.Loaders.Json.TripsLoader;
 import nmct.howest.be.rideshare.Activities.MainActivity;
+import nmct.howest.be.rideshare.Activities.Models.Match;
 import nmct.howest.be.rideshare.Activities.Models.Trip;
 import nmct.howest.be.rideshare.Activities.SearchActivity;
 import nmct.howest.be.rideshare.R;
@@ -33,6 +35,8 @@ import nmct.howest.be.rideshare.R;
 public class TripsFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<Trip>>
 {
     private List<Trip> mTrips;
+    private List<Trip> mTripsRequests;
+    private List<Trip> mTripsRequested;
 
     private ArrayAdapter mAdapterTripSaved;
     private LinearLayout listMyTrips;
@@ -50,8 +54,10 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-        //Init loader to get data
+        //Init loaders to get data
         getLoaderManager().initLoader(0, null, this).forceLoad();
+        getLoaderManager().initLoader(10, null, this).forceLoad();
+        getLoaderManager().initLoader(20, null, this).forceLoad();
     }
 
     @Override
@@ -101,93 +107,131 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
         return super.onOptionsItemSelected(item);
     }
 
-    //Implementation of the tripsloader
+    //Implementation of the tripsloader(s)
     @Override
-    public Loader<List<Trip>> onCreateLoader(int i, Bundle bundle)
+    public Loader<List<Trip>> onCreateLoader(int id, Bundle bundle)
     {
-        return new TripsLoader(getActivity(), getResources().getString(R.string.API_Trips));
+        switch (id)
+        {
+            case 0:
+                return new TripsLoader(getActivity(), getResources().getString(R.string.API_Trips));
+            case 10:
+                return new SpecialTripsLoader(getActivity(), getResources().getString(R.string.API_Trips_Requests));
+            case 20:
+                return new SpecialTripsLoader(getActivity(), getResources().getString(R.string.API_Trips_Requested));
+            default:
+                return null;
+        }
     }
 
     @Override
-    public void onLoadFinished(Loader<List<Trip>> cursorLoader, List<Trip> trips)
+    public void onLoadFinished(Loader<List<Trip>> loader, List<Trip> trips)
     {
-        mTrips = trips;
-        if(mTrips!=null)
+
+        if(loader.getId()==0)
         {
-            mAdapterTripSaved.addAll(mTrips);
+            mTrips = trips;
+            if(mTrips!=null)
+            {
+                mAdapterTripSaved.addAll(mTrips);
+            }
+
+            //Adding items to linear layouts
+            int adaptercountSavedTrips = mAdapterTripSaved.getCount();
+            for(int i =0; i < adaptercountSavedTrips; i++)
+            {
+                View item = mAdapterTripSaved.getView(i, null, null);
+                item.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(), DetailsActivity.class);
+                        Bundle b = new Bundle();
+                        int pos = (int)v.getTag();
+                        String id = mTrips.get(pos).getID();
+                        b.putString("id", id);
+                        b.putInt("type", 2);
+                        intent.putExtras(b);
+                        startActivity(intent);
+                    }
+                });
+                listMyTrips.addView(item);
+            }
+        }
+        else if(loader.getId()==10)
+        {
+            mTripsRequests = trips;
+            if(mTripsRequests!=null)
+            {
+                mAdapterTripRequest.addAll(mTripsRequests);
+            }
+
+            //Adding items to linear layouts
+            int adaptercountRequests = mAdapterTripRequest.getCount();
+            for(int i =0; i < adaptercountRequests; i++)
+            {
+                View item = mAdapterTripRequest.getView(i, null, null);
+                item.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(), DetailsActivity.class);
+                        Bundle b = new Bundle();
+                        int pos = (int)v.getTag();
+                        Trip trip = mTripsRequests.get(pos);
+                        String id = trip.getID();
+                        String matchID = "";
+                        for(Match match : trip.getMatches()){matchID = match.getId();}
+
+                        b.putString("id", id);
+                        b.putInt("type", 1);
+                        b.putString("matchID", matchID);
+                        intent.putExtras(b);
+                        startActivity(intent);
+                    }
+                });
+                listRequestTrips.addView(item);
+            }
+        }
+        else if(loader.getId()==20)
+        {
+            mTripsRequested = trips;
+            if(mTripsRequested!=null)
+            {
+                mAdapterTripRequested.addAll(mTripsRequested);
+            }
+
+            //Adding items to linear layouts
+            int adaptercountRequested = mAdapterTripRequested.getCount();
+            for(int i=0; i < adaptercountRequested; i++)
+            {
+                View item = mAdapterTripRequested.getView(i, null, null);
+                item.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(), DetailsActivity.class);
+                        Bundle b = new Bundle();
+                        int pos = (int)v.getTag();
+                        String id = mTripsRequested.get(pos).getID();
+                        b.putString("id", id);
+                        b.putInt("type", 0);
+                        intent.putExtras(b);
+                        startActivity(intent);
+                    }
+                });
+                listRequestedTrips.addView(item);
+            }
         }
 
         //Check if lists are not empty
-        if(!mTrips.isEmpty())    //         || !mRequests.isEmpty()||!mRequested.isEmpty()
-        {
-            //Hide textview
-            TextView txbNoTrips = (TextView) getActivity().findViewById(R.id.txbNoTrips);
-            txbNoTrips.setVisibility(View.INVISIBLE);
+        if(mTrips!=null&&mTripsRequests!=null&&mTripsRequested!=null) {
+            if (!mTrips.isEmpty() || !mTripsRequests.isEmpty() || !mTripsRequested.isEmpty()) {
+                //Hide textview
+                TextView txbNoTrips = (TextView) getActivity().findViewById(R.id.txbNoTrips);
+                txbNoTrips.setVisibility(View.INVISIBLE);
 
-            //Show lists
-            ScrollView layoutTrips = (ScrollView) getActivity().findViewById(R.id.layout_trip_lists);
-            layoutTrips.setVisibility(View.VISIBLE);
-        }
-
-        //Adding items to linear layouts
-        int adaptercountSavedTrips = mAdapterTripSaved.getCount();
-        for(int i =0; i < adaptercountSavedTrips; i++)
-        {
-            View item = mAdapterTripSaved.getView(i, null, null);
-            item.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), DetailsActivity.class);
-                    Bundle b = new Bundle();
-                    int pos = (int)v.getTag();
-                    String id = mTrips.get(pos).getID();
-                    b.putString("id", id);
-                    b.putInt("type", 2);
-                    intent.putExtras(b);
-                    startActivity(intent);
-                }
-            });
-            listMyTrips.addView(item);
-        }
-
-        int adaptercountRequests = mAdapterTripRequest.getCount();
-        for(int i =0; i < adaptercountRequests; i++)
-        {
-            View item = mAdapterTripRequest.getView(i, null, null);
-            item.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), DetailsActivity.class);
-                    Bundle b = new Bundle();
-                    int pos = (int)v.getTag();
-                    String id = mTrips.get(pos).getID();
-                    b.putString("id", id);
-                    b.putInt("type", 1);
-                    intent.putExtras(b);
-                    startActivity(intent);
-                }
-            });
-            listRequestTrips.addView(item);
-        }
-
-        int adaptercountRequested = mAdapterTripRequested.getCount();
-        for(int i=0; i < adaptercountRequested; i++)
-        {
-            View item = mAdapterTripRequested.getView(i, null, null);
-            item.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), DetailsActivity.class);
-                    Bundle b = new Bundle();
-                    int pos = (int)v.getTag();
-                    String id = mTrips.get(pos).getID();
-                    b.putString("id", id);
-                    b.putInt("type", 0);
-                    intent.putExtras(b);
-                    startActivity(intent);
-                }
-            });
-            listRequestedTrips.addView(item);
+                //Show lists
+                ScrollView layoutTrips = (ScrollView) getActivity().findViewById(R.id.layout_trip_lists);
+                layoutTrips.setVisibility(View.VISIBLE);
+            }
         }
 
     }
@@ -197,6 +241,12 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
     {
         mTrips.clear();
         mAdapterTripSaved.notifyDataSetChanged();
+
+        mTripsRequests.clear();
+        mAdapterTripRequest.notifyDataSetChanged();
+
+        mTripsRequested.clear();
+        mAdapterTripRequested.notifyDataSetChanged();
     }
 
 }

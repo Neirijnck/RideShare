@@ -10,6 +10,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -75,6 +76,7 @@ public class APIHelper {
         }
     }
 
+    //With cartype
     public static void EditUser(String userName, String firstName, String lastName, String fbToken, String location, String carType)
     {
         try {
@@ -99,6 +101,7 @@ public class APIHelper {
         }
     }
 
+    //With amount of seats
     public static void EditUser(String userName, String firstName, String lastName, String fbToken, String location, int amountOfSeats)
     {
         try {
@@ -125,6 +128,7 @@ public class APIHelper {
         }
     }
 
+    //With everything filled in
     public static void EditUser(String userName, String firstName, String lastName, String fbToken, String location, String carType, String amountOfSeats)
     {
         try {
@@ -279,6 +283,53 @@ public class APIHelper {
         }
     }
 
+    public static void DeleteTrip(String fbToken, String tripID)
+    {
+        HttpDelete httpDelete = new HttpDelete("http://188.226.154.228:8080/api/v1/trips/" + tripID);
+        httpDelete.addHeader("Authorization", fbToken);
+
+        DeleteAsync task = new DeleteAsync();
+        task.execute(httpDelete);
+    }
+
+    //Helper Delete
+    public static class DeleteAsync extends AsyncTask<HttpDelete, Void, String>
+    {
+        @Override
+        protected String doInBackground(HttpDelete... params) {
+            try
+            {
+                HttpClient httpClient = new DefaultHttpClient();
+                HttpDelete httpDelete = params[0];
+                HttpResponse response = httpClient.execute(httpDelete);
+
+                HttpEntity entity = response.getEntity();
+                String result = Utils.convertStreamToString(entity.getContent());
+
+                return new String(result);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result)
+        {
+            //Parse json for status code
+            //if 200 = Toast for success
+            String statusCode = Utils.ParseJsonStatusCode(result);
+            if(statusCode.equals("200")||statusCode.equals("201"))
+            {
+                Toast.makeText(RideshareApp.getAppContext(), "Succesvol verwijderd", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                Toast.makeText(RideshareApp.getAppContext(), "Er is iets misgelopen", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
     //Helper Post
     public static class PostAsync extends AsyncTask<HttpPost, Void, String>

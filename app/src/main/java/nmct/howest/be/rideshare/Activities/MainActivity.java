@@ -1,6 +1,9 @@
 package nmct.howest.be.rideshare.Activities;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.AlertDialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,6 +26,15 @@ import nmct.howest.be.rideshare.Activities.Adapters.TabPagerAdapter;
 import nmct.howest.be.rideshare.R;
 
 public class MainActivity extends ActionBarActivity {
+
+    // An account type, in the form of a domain name
+    public static final String ACCOUNT_TYPE = "nmct.howest.be.rideshare.account";
+    // The account name
+    public static final String ACCOUNT = "RideShareAccount";
+    // Instance fields
+    Account mAccount;
+    // A content resolver for accessing the provider
+    ContentResolver mResolver;
 
     //Tab variables
     public static ViewPager pager;
@@ -56,45 +68,33 @@ public class MainActivity extends ActionBarActivity {
         tabs.setViewPager(pager);
         tabs.setTextColor(getResources().getColor(R.color.rideshare_secondary));
 
+        // Create the dummy account
+        mAccount = CreateSyncAccount(this);
 
-        //Not necessary with our pagerslidingtabstrip
-/*
-        tabs.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-                actionBar = getActionBar();
-                actionBar.setSelectedNavigationItem(position);
-            }
-        });
+        mResolver = getContentResolver();
 
+    }
 
-       //Enable tabs as navigation
-        actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-            ActionBar.TabListener tabListener = new ActionBar.TabListener() {
-                @Override
-                public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-                    pager.setCurrentItem(tab.getPosition());
-                }
+    public static Account CreateSyncAccount(Context context)
+    {
+        // Create the account type and default account
+        Account newAccount = new Account(
+                ACCOUNT, ACCOUNT_TYPE);
 
-                @Override
-                public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+        // Get an instance of the Android account manager
+        AccountManager accountManager =
+                (AccountManager) context.getSystemService(
+                        ACCOUNT_SERVICE);
 
-                }
-
-                @Override
-                public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-
-                }
-            };
-
-            //Add our tabs
-            actionBar.addTab(actionBar.newTab().setText(getString(R.string.Plan)).setTabListener(tabListener));
-            actionBar.addTab(actionBar.newTab().setText(getString(R.string.Search)).setTabListener(tabListener));
-            actionBar.addTab(actionBar.newTab().setText(getString(R.string.Trips)).setTabListener(tabListener));
-            actionBar.addTab(actionBar.newTab().setText(getString(R.string.Profile)).setTabListener(tabListener));
-        }*/
+        if (accountManager.addAccountExplicitly(newAccount, null, null))
+        {
+            return newAccount;
+        }
+        else
+        {
+            Log.e("Account", "Already exists or error");
+            return null;
+        }
 
     }
 

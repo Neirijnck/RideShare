@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Naam Voornaam wil met je meerijden!"
-        android:id="@+id/txbVerzoekNaam"
+        android:id="@+id/txbRequestedNaam"
         android:layout_below="@+id/imgDetailVerzoek"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -28,10 +28,10 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Van: straat"
-        android:id="@+id/txbVerzoekVan"
-        android:layout_below="@+id/txbVerzoekNaam"
-        android:layout_alignLeft="@+id/txbVerzoekNaam"
-        android:layout_alignStart="@+id/txbVerzoekNaam"
+        android:id="@+id/txbRequestedFrom"
+        android:layout_below="@+id/txbRequestedNaam"
+        android:layout_alignLeft="@+id/txbRequestedNaam"
+        android:layout_alignStart="@+id/txbRequestedNaam"
         android:layout_marginTop="10dp" />
 
     <TextView
@@ -39,10 +39,10 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Naar: straat"
-        android:id="@+id/txbVerzoekNaar"
-        android:layout_below="@+id/txbVerzoekVan"
-        android:layout_alignLeft="@+id/txbVerzoekVan"
-        android:layout_alignStart="@+id/txbVerzoekVan"
+        android:id="@+id/txbRequestedTo"
+        android:layout_below="@+id/txbRequestedFrom"
+        android:layout_alignLeft="@+id/txbRequestedFrom"
+        android:layout_alignStart="@+id/txbRequestedFrom"
         android:layout_marginTop="10dp" />
 
     <TextView
@@ -50,10 +50,10 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Dag: datum"
-        android:id="@+id/txbVerzoekDag"
-        android:layout_below="@+id/txbVerzoekNaar"
-        android:layout_alignLeft="@+id/txbVerzoekNaar"
-        android:layout_alignStart="@+id/txbVerzoekNaar"
+        android:id="@+id/txbRequestedDate"
+        android:layout_below="@+id/txbRequestedTo"
+        android:layout_alignLeft="@+id/txbRequestedTo"
+        android:layout_alignStart="@+id/txbRequestedTo"
         android:layout_marginTop="10dp"  />
 
     <TextView
@@ -61,10 +61,10 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Uur: uur"
-        android:id="@+id/txbVerzoekUur"
-        android:layout_below="@+id/txbVerzoekDag"
-        android:layout_alignLeft="@+id/txbVerzoekDag"
-        android:layout_alignStart="@+id/txbVerzoekDag"
+        android:id="@+id/txbRequestedHour"
+        android:layout_below="@+id/txbRequestedDate"
+        android:layout_alignLeft="@+id/txbRequestedDate"
+        android:layout_alignStart="@+id/txbRequestedDate"
         android:layout_marginTop="10dp"  />
 
     <TextView
@@ -73,9 +73,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/Answer_Message"
         android:id="@+id/txbVerzoekBericht"
-        android:layout_below="@+id/txbVerzoekUur"
-        android:layout_alignLeft="@+id/txbVerzoekUur"
-        android:layout_alignStart="@+id/txbVerzoekUur"
+        android:layout_below="@+id/txbRequestedHour"
+        android:layout_alignLeft="@+id/txbRequestedHour"
+        android:layout_alignStart="@+id/txbRequestedHour"
         android:layout_marginTop="10dp" />
 
     <EditText
@@ -95,7 +95,7 @@
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:text="@string/Button_Accept"
-        android:id="@+id/btnVerzoekAccept"
+        android:id="@+id/btnRequestedAccept"
         android:layout_below="@+id/txtVerzoekBijgevoegd"
         android:layout_alignLeft="@+id/txtVerzoekBijgevoegd"
         android:layout_alignStart="@+id/txtVerzoekBijgevoegd"
@@ -118,8 +118,8 @@
         android:textAllCaps="true"
         android:elevation="2dp"
         android:stateListAnimator="@anim/button_elevation"
-        android:layout_alignTop="@+id/btnVerzoekAccept"
-        android:layout_toEndOf="@+id/btnVerzoekAccept"
+        android:layout_alignTop="@+id/btnRequestedAccept"
+        android:layout_toEndOf="@+id/btnRequestedAccept"
         android:layout_marginLeft="10dp" />
 
 

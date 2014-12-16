@@ -12,7 +12,7 @@ public class Trip {
     private String payment ="";
     private boolean[] repeat =  new boolean[7]; //mo, tu, we, th, fr, sa, su
     private List<Match> matches;
-
+    private String facebookID="";
 
     //Getters en setters
     public String getID() {
@@ -79,6 +79,13 @@ public class Trip {
         this.matches = matches;
     }
 
+    public String getFacebookID() {
+        return facebookID;
+    }
+
+    public void setFacebookID(String facebookID) {
+        this.facebookID = facebookID;
+    }
 
     //Ctor
     public Trip(String ID, String userID, String from, String to, String datetime, String payment, boolean[] repeat, List<Match> matches) {

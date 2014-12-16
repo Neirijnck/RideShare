@@ -5,10 +5,13 @@ import android.content.AbstractThreadedSyncAdapter;
 import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.SyncResult;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 
 import nmct.howest.be.rideshare.Activities.Helpers.SyncUtils;
+import nmct.howest.be.rideshare.RideshareApp;
 
 /**
  * Created by Preben on 7/12/2014.
@@ -32,11 +35,16 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter
     {
         try {
             //Get accesstoken from sharedPreferences
-            String accessToken = "";
+            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(RideshareApp.getAppContext());
+            String token = pref.getString("accessToken", "");
 
             SyncUtils utils = new SyncUtils(getContext());
-            utils.syncUser(accessToken, provider);
-            utils.syncTrips(accessToken, provider);
+            utils.syncUser(token, provider);
+            utils.syncTrips(token, provider);
+            utils.syncReviews(token, provider);
+            utils.syncMatches(token, provider);
+           //utils.syncMessages(token, provider);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

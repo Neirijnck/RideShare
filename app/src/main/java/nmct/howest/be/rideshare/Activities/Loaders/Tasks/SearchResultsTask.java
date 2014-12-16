@@ -236,6 +236,11 @@ public class SearchResultsTask extends AsyncTask<Bundle, Void, List<Trip>>
                         }
                     }
                     reader.endObject();
+
+                    //Get facebookID for picture
+                    String facebookID = Utils.getUserFacebookIDFromUserID(token, trip.getUserID());
+                    trip.setFacebookID(facebookID);
+
                     trips.add(trip);
                 }
                 reader.endArray();

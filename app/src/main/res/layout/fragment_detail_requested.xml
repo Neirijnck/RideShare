@@ -5,7 +5,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="185dp"
-        android:id="@+id/imgDetailVerzoek"
+        android:id="@+id/imgDetailRequested"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
@@ -15,63 +15,74 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Naam Voornaam wil met je meerijden!"
-        android:id="@+id/txbVerzoekNaam"
-        android:layout_below="@+id/imgDetailVerzoek"
+        android:text="Naam Voornaam wil meerijden!"
+        android:id="@+id/txbRequestedNaam"
+        android:layout_below="@+id/imgDetailRequested"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"  />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Van: straat"
-        android:id="@+id/txbVerzoekVan"
-        android:layout_below="@+id/txbVerzoekNaam"
-        android:layout_alignLeft="@+id/txbVerzoekNaam"
-        android:layout_alignStart="@+id/txbVerzoekNaam"
+        android:text="@string/OR_From"
+        android:id="@+id/txbRequestedFrom"
+        android:layout_below="@+id/txbRequestedNaam"
+        android:layout_alignLeft="@+id/txbRequestedNaam"
+        android:layout_alignStart="@+id/txbRequestedNaam"
         android:layout_marginTop="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Naar: straat"
-        android:id="@+id/txbVerzoekNaar"
-        android:layout_below="@+id/txbVerzoekVan"
-        android:layout_alignLeft="@+id/txbVerzoekVan"
-        android:layout_alignStart="@+id/txbVerzoekVan"
+        android:text="@string/OR_To"
+        android:id="@+id/txbRequestedTo"
+        android:layout_below="@+id/txbRequestedFrom"
+        android:layout_alignLeft="@+id/txbRequestedFrom"
+        android:layout_alignStart="@+id/txbRequestedFrom"
         android:layout_marginTop="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Dag: datum"
-        android:id="@+id/txbVerzoekDag"
-        android:layout_below="@+id/txbVerzoekNaar"
-        android:layout_alignLeft="@+id/txbVerzoekNaar"
-        android:layout_alignStart="@+id/txbVerzoekNaar"
+        android:text="@string/OR_Date"
+        android:id="@+id/txbRequestedDate"
+        android:layout_below="@+id/txbRequestedTo"
+        android:layout_alignLeft="@+id/txbRequestedTo"
+        android:layout_alignStart="@+id/txbRequestedTo"
         android:layout_marginTop="10dp"  />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Uur: uur"
-        android:id="@+id/txbVerzoekUur"
-        android:layout_below="@+id/txbVerzoekDag"
-        android:layout_alignLeft="@+id/txbVerzoekDag"
-        android:layout_alignStart="@+id/txbVerzoekDag"
+        android:text="@string/OR_Hour"
+        android:id="@+id/txbRequestedHour"
+        android:layout_below="@+id/txbRequestedDate"
+        android:layout_alignLeft="@+id/txbRequestedDate"
+        android:layout_alignStart="@+id/txbRequestedDate"
+        android:layout_marginTop="10dp"  />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/OR_Price"
+        android:id="@+id/txbRequestedPayment"
+        android:layout_below="@+id/txbRequestedHour"
+        android:layout_alignLeft="@+id/txbRequestedHour"
+        android:layout_alignStart="@+id/txbRequestedHour"
         android:layout_marginTop="10dp"  />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="36dp"
+        android:layout_width="160dp"
+        android:layout_height="43dp"
         android:text="@string/Button_Accept"
-        android:id="@+id/btnVerzoekAccept"
+        android:id="@+id/btnRequestedAccept"
         android:layout_marginTop="20dp"
         android:drawableLeft="@drawable/ic_check_white_36dp"
         android:textColor="@color/rideshare_secondary"
@@ -79,24 +90,76 @@
         android:background="@drawable/button_selector"
         android:elevation="2dp"
         android:width="140dp"
-        android:layout_below="@+id/txbVerzoekUur"
-        android:layout_alignLeft="@+id/txbVerzoekUur"
-        android:layout_alignStart="@+id/txbVerzoekUur" />
+        android:layout_below="@+id/txbRequestedPayment"
+        android:layout_alignLeft="@+id/txbRequestedPayment"
+        android:layout_alignStart="@+id/txbRequestedPayment" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="36dp"
+        android:layout_width="160dp"
+        android:layout_height="43dp"
         android:text="@string/Button_Decline"
-        android:id="@+id/btnVerzoekWeiger"
+        android:id="@+id/btnRequestedDecline"
         android:width="140dp"
         android:drawableLeft="@drawable/ic_close_white_36dp"
         android:textColor="@color/rideshare_secondary"
         android:textAllCaps="true"
         android:background="@drawable/button_selector"
         android:elevation="2dp"
-        android:layout_alignTop="@+id/btnVerzoekAccept"
-        android:layout_toEndOf="@+id/btnVerzoekAccept"
-        android:layout_marginLeft="15dp" />
+        android:layout_alignTop="@+id/btnRequestedAccept"
+        android:layout_toEndOf="@+id/btnRequestedAccept"
+        android:layout_marginLeft="12dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:id="@+id/txtRequestedFrom"
+        android:layout_alignTop="@+id/txbRequestedFrom"
+        android:layout_toRightOf="@+id/txbRequestedFrom"
+        android:layout_toEndOf="@+id/txbRequestedFrom"
+        android:layout_marginLeft="50dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:id="@+id/txtRequestedTo"
+        android:layout_alignTop="@+id/txbRequestedTo"
+        android:layout_alignLeft="@+id/txtRequestedFrom"
+        android:layout_alignStart="@+id/txtRequestedFrom" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:id="@+id/txtRequestedDate"
+        android:layout_alignTop="@+id/txbRequestedDate"
+        android:layout_alignLeft="@+id/txtRequestedTo"
+        android:layout_alignStart="@+id/txtRequestedTo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:id="@+id/txtRequestedHour"
+        android:layout_alignTop="@+id/txbRequestedHour"
+        android:layout_alignLeft="@+id/txtRequestedDate"
+        android:layout_alignStart="@+id/txtRequestedDate" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:id="@+id/txtRequestedPayment"
+        android:layout_alignTop="@+id/txbRequestedPayment"
+        android:layout_alignLeft="@+id/txtRequestedDate"
+        android:layout_alignStart="@+id/txtRequestedDate" />
 
 
 </RelativeLayout>

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import nmct.howest.be.rideshare.Activities.Helpers.Utils;
@@ -18,6 +19,12 @@ import nmct.howest.be.rideshare.R;
 public class DetailRequestedTripFragment extends Fragment implements LoaderManager.LoaderCallbacks<Trip> {
 
     private String url;
+    ImageView imgDetailRequested;
+    TextView txtRequestedFrom;
+    TextView txtRequestedTo;
+    TextView txtRequestedDate;
+    TextView txtRequestedHour;
+    TextView txtRequestedPayment;
 
     public static DetailRequestedTripFragment newInstance(String id) {
         DetailRequestedTripFragment fragment = new DetailRequestedTripFragment();
@@ -31,14 +38,22 @@ public class DetailRequestedTripFragment extends Fragment implements LoaderManag
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         url = getResources().getString(R.string.API_Trips) + getArguments().getString("id");
+
+        getLoaderManager().initLoader(1, null, this).forceLoad();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view =  inflater.inflate(R.layout.fragment_detail_requested, container, false);
 
-        getLoaderManager().initLoader(1, null, this).forceLoad();
+        imgDetailRequested = (ImageView) view.findViewById(R.id.imgDetailRequested);
+        txtRequestedFrom = (TextView) view.findViewById(R.id.txtRequestedFrom);
+        txtRequestedTo = (TextView) view.findViewById(R.id.txtRequestedTo);
+        txtRequestedDate = (TextView) view.findViewById(R.id.txtRequestedDate);
+        txtRequestedHour = (TextView) view.findViewById(R.id.txtRequestedHour);
+        txtRequestedPayment = (TextView) view.findViewById(R.id.txtRequestedPayment);
 
-        return  inflater.inflate(R.layout.fragment_detail_requested, container, false);
+        return view;
     }
 
     @Override
@@ -58,19 +73,10 @@ public class DetailRequestedTripFragment extends Fragment implements LoaderManag
 
     private void fillData(Trip trip)
     {
-        ImageView imgDetailRequest = (ImageView) getView().findViewById(R.id.imgDetailRequest);
-        TextView txtDetailRequestFrom = (TextView) getView().findViewById(R.id.txtDetailRequestFrom);
-        TextView txtDetailRequestTo = (TextView) getView().findViewById(R.id.txtDetailRequestTo);
-        TextView txtDetailRequestDate = (TextView) getView().findViewById(R.id.txtDetailRequestDate);
-        TextView txtDetailRequestTime = (TextView) getView().findViewById(R.id.txtDetailRequestTime);
-        TextView txtDetailRequestPrice = (TextView) getView().findViewById(R.id.txtDetailRequestPayment);
-        //ListView lstDetailRequestMessages = (ListView) getView().findViewById(R.id.lstDetailRequestMessages);
-
-        txtDetailRequestFrom.setText(trip.getFrom());
-        txtDetailRequestTo.setText(trip.getTo());
-        txtDetailRequestDate.setText(Utils.parseISOStringToDate(trip.getDatetime()));
-        txtDetailRequestTime.setText(Utils.parseISOStringToTime(trip.getDatetime()));
-        txtDetailRequestPrice.setText(Utils.setPayment(trip.getPayment()));
-
+        txtRequestedFrom.setText(trip.getFrom());
+        txtRequestedTo.setText(trip.getTo());
+        txtRequestedDate.setText(Utils.parseISOStringToDate(trip.getDatetime()));
+        txtRequestedHour.setText(Utils.parseISOStringToTime(trip.getDatetime()));
+        txtRequestedPayment.setText(Utils.setPayment(trip.getPayment()));
     }
 }

@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.facebook.widget.ProfilePictureView;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -54,6 +56,10 @@ public class SearchResultAdapter extends ArrayAdapter<Trip>
 
         holder.txtSearchResultName.setText(dateString);
 
+        //Set picture of the person who planned the trip
+        String facebookID = trip.getFacebookID();
+        holder.imgPicturePlanner.setProfileId(facebookID);
+
         return card;
     }
 
@@ -61,11 +67,13 @@ public class SearchResultAdapter extends ArrayAdapter<Trip>
     {
         TextView txtSearchResultName;
         TextView txtSearchResultFromTo;
+        ProfilePictureView imgPicturePlanner;
 
         public ViewHolderItem(View row)
         {
             this.txtSearchResultName = (TextView) row.findViewById(R.id.txtSearchResultName);
             this.txtSearchResultFromTo = (TextView) row.findViewById(R.id.txtSearchResultFromTo);
+            this.imgPicturePlanner = (ProfilePictureView) row.findViewById(R.id.imgSearchResult);
         }
     }
 

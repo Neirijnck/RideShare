@@ -8,7 +8,7 @@
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="185dp"
+            android:layout_height="175dp"
             android:id="@+id/imgDetailRequest"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -24,8 +24,8 @@
             android:layout_below="@+id/imgDetailRequest"
             android:layout_alignLeft="@+id/imgDetailRequest"
             android:layout_alignStart="@+id/imgDetailRequest"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
             />
 
         <TextView
@@ -104,8 +104,8 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/Added_Message"
                 android:id="@+id/txbDetailRequestMatches"
-
-                android:layout_marginTop="20dp" />
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp" />
 
             <ListView
                 android:layout_width="wrap_content"
@@ -117,7 +117,6 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:choiceMode="none"
-                android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_alignParentBottom="true"
@@ -133,13 +132,14 @@
             android:layout_below="@+id/llMessages"
             android:layout_alignLeft="@+id/llMessages"
             android:layout_alignStart="@+id/llMessages"
-            android:layout_marginTop="30dp"  />
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="15dp"  />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Straat"
+            android:text=""
             android:id="@+id/txtDetailRequestFrom"
             android:layout_alignTop="@+id/txbDetailRequestFrom"
             android:layout_toRightOf="@+id/txbDetailRequestPayment"
@@ -151,7 +151,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Straat"
+            android:text=""
             android:id="@+id/txtDetailRequestTo"
             android:layout_alignTop="@+id/txbDetailRequestTo"
             android:layout_alignLeft="@+id/txtDetailRequestFrom"
@@ -161,7 +161,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="01/01/2015"
+            android:text=""
             android:id="@+id/txtDetailRequestDate"
             android:layout_alignTop="@+id/txbDetailRequestDate"
             android:layout_alignLeft="@+id/txtDetailRequestTo"
@@ -171,7 +171,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="15:00"
+            android:text=""
             android:id="@+id/txtDetailRequestTime"
             android:layout_alignTop="@+id/txbDetailRequestTime"
             android:layout_alignLeft="@+id/txtDetailRequestDate"
@@ -181,7 +181,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="€2"
+            android:text=""
             android:id="@+id/txtDetailRequestPayment"
             android:layout_alignTop="@+id/txbDetailRequestPayment"
             android:layout_alignLeft="@+id/txtDetailRequestTime"
@@ -192,16 +192,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/progDetailRequestStatus"
-            android:layout_below="@+id/txbDetailRequestStatus"
-            android:layout_alignBottom="@+id/txbDetailRequestStatus"
-            android:layout_toRightOf="@+id/txbDetailRequestStatus"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
             android:layout_marginRight="20dp"
-            android:progress="100"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="7dp"
+            android:progress="1"
             android:max="100"
             android:minHeight="5dp"
-            android:indeterminate="false" />
+            android:indeterminate="false"
+            android:layout_alignTop="@+id/txbDetailRequestStatus"
+            android:layout_toRightOf="@+id/txbDetailRequestDate"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:paddingBottom="20dp"
+            />
 
     </RelativeLayout>
 </ScrollView >

@@ -49,7 +49,7 @@
             android:layout_marginTop="25dp" />
 
         <EditText
-            android:layout_width="144dp"
+            android:layout_width="146dp"
             android:layout_height="wrap_content"
             android:inputType="date"
             android:ems="10"
@@ -62,17 +62,16 @@
             android:layout_marginTop="25dp" />
 
         <EditText
-            android:layout_width="144dp"
+            android:layout_width="146dp"
             android:layout_height="wrap_content"
             android:inputType="time"
             android:ems="10"
-            android:id="@+id/txtUurZoek"
+            android:id="@+id/txtTimeSearch"
             android:focusable="false"
             android:layout_toEndOf="@+id/txtDateSearch"
+            android:layout_toRightOf="@+id/txtDateSearch"
             android:hint="@string/Time"
-            android:layout_alignTop="@+id/txtDateSearch"
-            android:layout_alignRight="@+id/txtToSearch"
-            android:layout_alignEnd="@+id/txtToSearch" />
+            android:layout_alignTop="@+id/txtDateSearch" />
 
         <CheckBox
             android:layout_width="wrap_content"
@@ -96,8 +95,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginTop="20dp"
-            android:textColor="@color/rideshare_secondary"
             android:textAllCaps="true"
+            android:textColor="@color/rideshare_secondary"
             android:elevation="2dp"
             android:stateListAnimator="@anim/button_elevation"
             />

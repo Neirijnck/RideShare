@@ -72,6 +72,7 @@ public class ProfileLoader extends AsyncTaskLoader<User>
                 String userName = "";
                 String facebookLink = "";
                 String facebookID="";
+                String facebookImg="";
                 String firstName = "";
                 String lastName = "";
                 String email = "";
@@ -98,6 +99,11 @@ public class ProfileLoader extends AsyncTaskLoader<User>
                     {
                         facebookLink = reader.nextString();
                         user.setFacebookLink(facebookLink);
+                    }
+                    else if (key.equals("facebookImg"))
+                    {
+                        facebookImg = reader.nextString();
+                        user.setFacebookImg(facebookImg);
                     }
                     else if(key.equals("facebookID"))
                     {
@@ -179,7 +185,7 @@ public class ProfileLoader extends AsyncTaskLoader<User>
                     id++;
                 }
             }
-
+            reader.endObject();
         }catch(IOException e)
         {
             Log.e("IOException", e.getMessage());

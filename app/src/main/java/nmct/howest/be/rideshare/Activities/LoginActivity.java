@@ -3,8 +3,6 @@ package nmct.howest.be.rideshare.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -18,6 +16,7 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 import java.io.IOException;
 
 import nmct.howest.be.rideshare.Activities.Fragments.LoginFragment;
+import nmct.howest.be.rideshare.Activities.Helpers.Utils;
 import nmct.howest.be.rideshare.R;
 
 
@@ -108,12 +107,7 @@ public class LoginActivity extends FragmentActivity {
     }
 
 
-
-
-
-
-
-
+    //Notifications
     private boolean checkPlayServices() {
         int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
         if (resultCode != ConnectionResult.SUCCESS) {
@@ -140,7 +134,7 @@ public class LoginActivity extends FragmentActivity {
         // Check if app was updated; if so, it must clear the registration ID
         // since the existing regID is not guaranteed to work with the new version.
         int registeredVersion = prefs.getInt(PROPERTY_APP_VERSION, Integer.MIN_VALUE);
-        int currentVersion = getAppVersion(context);
+        int currentVersion = Utils.getAppVersion(context);
         if (registeredVersion != currentVersion) {
             Log.i("", "App version changed.");
             return "";
@@ -151,16 +145,6 @@ public class LoginActivity extends FragmentActivity {
     private SharedPreferences getGCMPreferences(Context context) {
         // This app persists the registration ID in shared preferences, but you can store it anywhere you like
         return getSharedPreferences(MainActivity.class.getSimpleName(), Context.MODE_PRIVATE);
-    }
-
-
-    private static int getAppVersion(Context context) {
-        try {
-            PackageInfo packageInfo = context.getPackageManager() .getPackageInfo(context.getPackageName(), 0);
-            return packageInfo.versionCode;
-        } catch (PackageManager.NameNotFoundException e) {
-            throw new RuntimeException("Could not get package name: " + e);
-        }
     }
 
 
@@ -205,7 +189,7 @@ public class LoginActivity extends FragmentActivity {
 
     private void storeRegistrationId(Context context, String regId) {
         final SharedPreferences prefs = getGCMPreferences(context);
-        int appVersion = getAppVersion(context);
+        int appVersion = Utils.getAppVersion(context);
         Log.i("", "Saving regId on app version " + appVersion);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(PROPERTY_REG_ID, regId);

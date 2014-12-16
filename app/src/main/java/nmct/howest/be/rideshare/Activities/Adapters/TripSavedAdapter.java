@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.facebook.widget.ProfilePictureView;
+
 import nmct.howest.be.rideshare.Activities.Helpers.Utils;
 import nmct.howest.be.rideshare.Activities.Models.Trip;
 import nmct.howest.be.rideshare.R;
@@ -37,15 +39,9 @@ public class TripSavedAdapter extends ArrayAdapter<Trip>
         holder.txtTripInfoDate.setText(dateString);
 
         boolean[] repeat = trip.getRepeat();
-        if(Utils.areAllFalse(repeat)==true)
-        {
-            holder.txtTripInfo.setText("Herhaald: nooit");
-        }
-        else
-        {
-            String repeatString= Utils.parseBoolArrayToDays(repeat);
-            holder.txtTripInfo.setText("Herhaald: " + repeatString);
-        }
+
+        String repeatString= Utils.parseBoolArrayToDays(repeat);
+        holder.txtTripInfo.setText("Herhaald: " + repeatString);
 
 
         if(trip.getPayment().equals("") || trip.getPayment().equals("0")) {
@@ -56,6 +52,8 @@ public class TripSavedAdapter extends ArrayAdapter<Trip>
             holder.txtTripPrice.setText("Kost: €" + trip.getPayment());
         }
 
+        //Set picture of the person who planned the trip
+        //holder.imgProfilePicture.setProfileId();
 
         return card;
     }
@@ -66,6 +64,7 @@ public class TripSavedAdapter extends ArrayAdapter<Trip>
         TextView txtTripInfoDate;
         TextView txtTripInfo;
         TextView txtTripPrice;
+        ProfilePictureView imgProfilePicture;
 
         public ViewHolderItem(View row)
         {
@@ -73,6 +72,7 @@ public class TripSavedAdapter extends ArrayAdapter<Trip>
             this.txtTripInfo = (TextView) row.findViewById(R.id.txtTripInfo);
             this.txtTripPrice = (TextView) row.findViewById(R.id.txtTripPrice);
             this.txtTripTitle = (TextView) row.findViewById(R.id.txtTripTitle);
+            this.imgProfilePicture = (ProfilePictureView) row.findViewById(R.id.imgTripPicture);
         }
     }
 

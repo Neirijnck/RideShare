@@ -54,6 +54,7 @@ public class LoginFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
+
         //Has internet?
         Context c = getActivity();
         if(!ConnectivityHelper.isNetworkAvailable(c)) {

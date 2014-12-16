@@ -1,9 +1,9 @@
 package nmct.howest.be.rideshare.Activities.Loaders.Json;
 
+import android.support.v4.content.AsyncTaskLoader;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.v4.content.AsyncTaskLoader;
 import android.util.JsonReader;
 import android.util.Log;
 
@@ -24,15 +24,17 @@ import nmct.howest.be.rideshare.Activities.Helpers.Utils;
 import nmct.howest.be.rideshare.Activities.Models.Match;
 import nmct.howest.be.rideshare.Activities.Models.Message;
 import nmct.howest.be.rideshare.Activities.Models.Trip;
-import nmct.howest.be.rideshare.RideshareApp;
 
-public class TripsLoader extends AsyncTaskLoader<List<Trip>>
+/**
+ * Created by Preben on 15/12/2014.
+ */
+public class SpecialTripsLoader extends AsyncTaskLoader<List<Trip>>
 {
     private final String mUrl;
     private List<Trip> trips = new ArrayList<Trip>();
     private Context context;
 
-    public TripsLoader(Context context, String url) {
+    public SpecialTripsLoader(Context context, String url) {
         super(context);
         this.mUrl = url;
         this.context = context;
@@ -70,84 +72,26 @@ public class TripsLoader extends AsyncTaskLoader<List<Trip>>
         try
         {
             reader.beginArray();
-            while(reader.hasNext()) {
+            while(reader.hasNext())
+            {
                 Trip trip = new Trip();
                 reader.beginObject();
                 while (reader.hasNext()) {
-                    int id = 1;
+
                     String ID = "";
-                    String userID = "";
-                    String from = "";
-                    String to = "";
-                    String dateTime = "";
-                    String payment = "";
                     String matchID="";
                     String matchUserID = "";
                     String matchFrom = "";
                     String matchTo = "";
                     String matchDateTime = "";
-                    int matchStatus = 0;
+                    int matchStatus=0;
 
                     while (reader.hasNext()) {
                         String key = reader.nextName();
                         if (key.equals("_id")) {
                             ID = reader.nextString();
                             trip.setID(ID);
-                        } else if (key.equals("userID")) {
-                            userID = reader.nextString();
-                            trip.setUserID(userID);
-                        } else if (key.equals("from")) {
-                            from = reader.nextString();
-                            trip.setFrom(from);
-                        } else if (key.equals("to")) {
-                            to = reader.nextString();
-                            trip.setTo(to);
-                        } else if (key.equals("datetime")) {
-                            dateTime = reader.nextString();
-                            trip.setDatetime(dateTime);
-                        } else if (key.equals("payment")) {
-                            payment = reader.nextString();
-                            trip.setPayment(payment);
-                        } else if (key.equals("repeat")) {
-                            boolean mo;
-                            boolean tu;
-                            boolean we;
-                            boolean th;
-                            boolean fr;
-                            boolean sa;
-                            boolean su;
-                            boolean[] repeats = new boolean[7];
-                            reader.beginObject();
-                            while (reader.hasNext()) {
-                                String key_second = reader.nextName();
-                                if (key_second.equals("mo")) {
-                                    mo = reader.nextBoolean();
-                                    repeats[0] = mo;
-                                } else if (key_second.equals("tu")) {
-                                    tu = reader.nextBoolean();
-                                    repeats[1] = tu;
-                                } else if (key_second.equals("we")) {
-                                    we = reader.nextBoolean();
-                                    repeats[2] = we;
-                                } else if (key_second.equals("th")) {
-                                    th = reader.nextBoolean();
-                                    repeats[3] = th;
-                                } else if (key_second.equals("fr")) {
-                                    fr = reader.nextBoolean();
-                                    repeats[4] = fr;
-                                } else if (key_second.equals("sa")) {
-                                    sa = reader.nextBoolean();
-                                    repeats[5] = sa;
-                                } else if (key_second.equals("su")) {
-                                    su = reader.nextBoolean();
-                                    repeats[6] = su;
-                                } else {
-                                    reader.skipValue();
-                                }
-                            }
-                            reader.endObject();
-                            trip.setRepeat(repeats);
-                        } else if (key.equals("matches")) {
+                        }else if (key.equals("matches")) {
                             List<Match> matches = new ArrayList<Match>();
                             reader.beginArray();
                             while (reader.hasNext()) {
@@ -208,14 +152,14 @@ public class TripsLoader extends AsyncTaskLoader<List<Trip>>
                         } else {
                             reader.skipValue();
                         }
-                        id++;
                     }
                 }
                 reader.endObject();
                 trips.add(trip);
             }
             reader.endArray();
-        }catch(IOException e)
+        }
+        catch(IOException e)
         {
             Log.e("IOException", e.getMessage());
         }finally

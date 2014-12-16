@@ -1,5 +1,8 @@
 package nmct.howest.be.rideshare.Activities.Fragments;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -12,10 +15,14 @@ import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import nmct.howest.be.rideshare.Activities.Helpers.ConnectivityHelper;
 import nmct.howest.be.rideshare.Activities.Loaders.Tasks.SearchResultsTask;
 import nmct.howest.be.rideshare.R;
 import nmct.howest.be.rideshare.RideshareApp;
 
+/**
+ * Created by Preben on 4/12/2014.
+ */
 public class SearchResultsFragment extends Fragment
 {
     private ProgressBar mProgressBar;
@@ -51,8 +58,26 @@ public class SearchResultsFragment extends Fragment
         layout_search_results = (ScrollView) view.findViewById(R.id.layout_search_results);
 
         Bundle b = getArguments();
-        SearchResultsTask task = new SearchResultsTask(token, mProgressBar, lstSearchResults, mTxtNoResults, layout_search_results);
-        task.execute(b);
+
+        //Has internet?
+        Context c = getActivity();
+        if(!ConnectivityHelper.isNetworkAvailable(c)) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(c);
+            builder.setTitle("No Internet connection.");
+            builder.setMessage("You have no internet connection");
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    getActivity().finish();
+                }
+            });
+            builder.show();
+        }
+        else {
+            SearchResultsTask task = new SearchResultsTask(token, mProgressBar, lstSearchResults, mTxtNoResults, layout_search_results);
+            task.execute(b);
+        }
 
         return view;
     }

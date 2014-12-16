@@ -8,6 +8,7 @@
     <string name="action_logout">Uitloggen</string>
     <string name="action_edit">Aanpassen</string>
     <string name="action_add">Toevoegen</string>
+    <string name="action_delete">Verwijderen</string>
     <string name="learn_more">Learn more</string>
 
     <!-- Components -->
@@ -90,5 +91,8 @@
     <string name="API_Profile">http://188.226.154.228:8080/api/v1/profile/</string>
     <string name="API_Trips">http://188.226.154.228:8080/api/v1/trips/</string>
     <string name="API_Trips_Search">http://188.226.154.228:8080/api/v1/trips/search/</string>
+    <string name="API_Trips_Requests">http://188.226.154.228:8080/api/v1/trips?show=requests</string>
+    <string name="API_Trips_Requested">http://188.226.154.228:8080/api/v1/trips?show=requested</string>
+    <string name="API_Trips_Accepted">http://188.226.154.228:8080/api/v1/trips?show=accepted</string>
 
 </resources>
