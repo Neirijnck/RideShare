@@ -135,7 +135,6 @@ public class MainActivity extends ActionBarActivity {
                 }
 
     //Close app on back button
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -157,12 +156,10 @@ public class MainActivity extends ActionBarActivity {
         count ++;
         if(count == 5)
         {
-
-
             new AlertDialog.Builder(this)
                     .setTitle("Please donate!")
-                    .setMessage("Do you find this application useful? Support it's development by sending donation to the developer.")
-                    .setPositiveButton("Donate", new DialogInterface.OnClickListener() {
+                    .setMessage("Vind je deze app nuttig? Steun de ontwikkeling ervan door te doneren aan de ontwikkelaars.")
+                    .setPositiveButton("Doneer", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://188.226.154.228:8080/donate"));
                             startActivity(browserIntent);
@@ -180,7 +177,7 @@ public class MainActivity extends ActionBarActivity {
                     .setNegativeButton("Email", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             Intent intent = new Intent(Intent.ACTION_VIEW);
-                            Uri data = Uri.parse("mailto:shareride@gmail.com");
+                            Uri data = Uri.parse("mailto:sharemyride@gmail.com");
                             intent.setData(data);
                             startActivity(intent);
                         }
@@ -188,7 +185,6 @@ public class MainActivity extends ActionBarActivity {
 
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
-
 
             count = 0;
         }

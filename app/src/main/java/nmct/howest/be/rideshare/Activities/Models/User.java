@@ -1,5 +1,7 @@
 package nmct.howest.be.rideshare.Activities.Models;
 
+import android.graphics.Bitmap;
+
 import java.util.List;
 
 public class User {
@@ -18,6 +20,7 @@ public class User {
     private String location = "";
     private String carType = "";
     private String amountOfSeats ="";
+    private Bitmap bitmapFb;
 
     private List<Review> reviews;
 
@@ -141,6 +144,14 @@ public class User {
 
     public void setFacebookImg(String facebookImg) {
         this.facebookImg = facebookImg;
+    }
+
+    public Bitmap getBitmapFb() {
+        return bitmapFb;
+    }
+
+    public void setBitmapFb(Bitmap bitmapFb) {
+        this.bitmapFb = bitmapFb;
     }
 
     //Ctor

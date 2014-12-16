@@ -1,5 +1,7 @@
 package nmct.howest.be.rideshare.Activities.Fragments;
 
+import android.graphics.Bitmap;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
@@ -8,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.widget.ProfilePictureView;
@@ -27,6 +30,15 @@ public class DetailMatchFragment extends Fragment {
     String Userid;
     private static final int USER_LOADER_ID = 2;
     private static final int TRIP_LOADER_ID = 1;
+    private TextView txtDetailMatchFrom;
+    private TextView txtDetailMatchTo;
+    private TextView txtDetailMatchDate;
+    private TextView txtDetailMatchTime;
+
+    //ProfilePictureView imgDetailMatch;
+    ImageView imgDetailMatch;
+    TextView txtDetailMatchName;
+    TextView txtDetailMatchBericht;
 
     public static DetailMatchFragment newInstance(String id) {
         DetailMatchFragment fragment = new DetailMatchFragment();
@@ -39,14 +51,25 @@ public class DetailMatchFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         urlTrip = getResources().getString(R.string.API_Trips) + getArguments().getString("id");
+
+        getLoaderManager().initLoader(TRIP_LOADER_ID, null, TripLoaderListener).forceLoad();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view =  inflater.inflate(R.layout.fragment_detail_match, container, false);
 
-        getLoaderManager().initLoader(TRIP_LOADER_ID, null, TripLoaderListener).forceLoad();
+        txtDetailMatchFrom = (TextView) view.findViewById(R.id.txtMatchFrom);
+        txtDetailMatchTo = (TextView) view.findViewById(R.id.txtMatchTo);
+        txtDetailMatchDate = (TextView) view.findViewById(R.id.txtMatchDate);
+        txtDetailMatchTime = (TextView) view.findViewById(R.id.txtMatchHour);
 
-        return  inflater.inflate(R.layout.fragment_detail_match, container, false);
+        //imgDetailMatch = (ProfilePictureView) view.findViewById(R.id.imgDetailMatch);
+        imgDetailMatch = (ImageView) view.findViewById(R.id.imgDetailMatch);
+        txtDetailMatchName = (TextView) view.findViewById(R.id.txtMatchName);
+        txtDetailMatchBericht = (TextView) view.findViewById(R.id.txbMatchMessage);
+
+        return view;
     }
 
     private LoaderManager.LoaderCallbacks<Trip> TripLoaderListener
@@ -70,6 +93,16 @@ public class DetailMatchFragment extends Fragment {
 
         }
     };
+
+    private void fillData(Trip trip)
+    {
+        txtDetailMatchFrom.setText(trip.getFrom());
+        txtDetailMatchTo.setText(trip.getTo());
+        txtDetailMatchDate.setText(Utils.parseISOStringToDate(trip.getDatetime()));
+        txtDetailMatchTime.setText(Utils.parseISOStringToTime(trip.getDatetime()));
+    }
+
+
     private LoaderManager.LoaderCallbacks<User> UserLoaderListener
             = new LoaderManager.LoaderCallbacks<User>() {
 
@@ -77,7 +110,6 @@ public class DetailMatchFragment extends Fragment {
         public Loader<User> onCreateLoader(int id, Bundle args) {
             return new ProfileLoader(getActivity(), urlUser);
         }
-
 
         @Override
         public void onLoadFinished(Loader<User> loader, User user) {
@@ -89,30 +121,14 @@ public class DetailMatchFragment extends Fragment {
 
         }
     };
-    private void fillData(Trip trip)
-    {
 
-        TextView txtDetailMatchFrom = (TextView) getView().findViewById(R.id.txbMatchVan);
-        TextView txtDetailMatchTo = (TextView) getView().findViewById(R.id.txbMatchNaar);
-        TextView txtDetailMatchDate = (TextView) getView().findViewById(R.id.txbMatchDag);
-        TextView txtDetailMatchTime = (TextView) getView().findViewById(R.id.txbMatchUur);
-
-        //ListView lstDetailMatchMessages = (ListView) getView().findViewById(R.id.lstDetailMatchMessages);
-
-        txtDetailMatchFrom.setText("Van: "+ trip.getFrom());
-        txtDetailMatchTo.setText("Naar: "+trip.getTo());
-        txtDetailMatchDate.setText("Dag: "+Utils.parseISOStringToDate(trip.getDatetime()));
-        txtDetailMatchTime.setText("Uur: "+Utils.parseISOStringToTime(trip.getDatetime()));
-
-
-    }
     private void LoadUser(User user)
     {
         Log.d("user", ""+ user.getFirstName());
-        ProfilePictureView imgDetailMatch = (ProfilePictureView) getView().findViewById(R.id.imgDetailMatch);
-        TextView txtDetailMatchName = (TextView) getView().findViewById(R.id.txbMatchNaam);
-        TextView txtDetailMatchBericht = (TextView) getView().findViewById(R.id.txbMatchBericht);
-        imgDetailMatch.setProfileId(user.getFacebookID());
+
+        //imgDetailMatch.setProfileId(user.getFacebookID());
+        imgDetailMatch.setImageBitmap(user.getBitmapFb());
+        imgDetailMatch.setScaleType(ImageView.ScaleType.FIT_XY);
         txtDetailMatchName.setText(user.getFirstName() + " " + user.getLastName());
         txtDetailMatchBericht.setText("Stuur "+user.getFirstName() + " een bericht:");
     }

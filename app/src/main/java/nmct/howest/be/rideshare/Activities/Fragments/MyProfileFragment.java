@@ -1,36 +1,36 @@
 package nmct.howest.be.rideshare.Activities.Fragments;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+        import android.content.Intent;
+        import android.os.Bundle;
+        import android.support.v4.app.Fragment;
+        import android.support.v4.app.LoaderManager;
+        import android.support.v4.content.Loader;
+        import android.text.TextUtils;
+        import android.util.Log;
+        import android.view.LayoutInflater;
+        import android.view.Menu;
+        import android.view.MenuInflater;
+        import android.view.MenuItem;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.widget.ArrayAdapter;
+        import android.widget.LinearLayout;
+        import android.widget.TextView;
 
-import com.facebook.widget.ProfilePictureView;
+        import com.facebook.widget.ProfilePictureView;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.TimeZone;
+        import java.text.ParseException;
+        import java.text.SimpleDateFormat;
+        import java.util.ArrayList;
+        import java.util.Date;
+        import java.util.TimeZone;
 
-import nmct.howest.be.rideshare.Activities.Adapters.ReviewAdapter;
-import nmct.howest.be.rideshare.Activities.Loaders.Json.ProfileLoader;
-import nmct.howest.be.rideshare.Activities.Models.Review;
-import nmct.howest.be.rideshare.Activities.Models.User;
-import nmct.howest.be.rideshare.Activities.ProfileActivity;
-import nmct.howest.be.rideshare.R;
+        import nmct.howest.be.rideshare.Activities.Adapters.ReviewAdapter;
+        import nmct.howest.be.rideshare.Activities.Loaders.Json.ProfileLoader;
+        import nmct.howest.be.rideshare.Activities.Models.Review;
+        import nmct.howest.be.rideshare.Activities.Models.User;
+        import nmct.howest.be.rideshare.Activities.ProfileActivity;
+        import nmct.howest.be.rideshare.R;
 
 public class MyProfileFragment extends Fragment implements LoaderManager.LoaderCallbacks<User> {
     private User mUser;
@@ -200,7 +200,7 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
         }
         if (!TextUtils.isEmpty(user.getFacebookID()))
             profilePictureView.setProfileId(user.getFacebookID());
-        profilePictureView.setCropped(true);
+            profilePictureView.setCropped(true);
     }
 
 }

@@ -59,6 +59,7 @@
 
     <!-- Match -->
     <string name="Button_Match">Match</string>
+    <string name="Button_Join">Ik wil meerijden!</string>
 
     <!-- Details Activity and fragments -->
     <string name="title_activity_details">Details</string>

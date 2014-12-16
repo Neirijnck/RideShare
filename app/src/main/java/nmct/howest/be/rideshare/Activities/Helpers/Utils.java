@@ -194,6 +194,54 @@ public class Utils
         }
     }
 
+    public static String getUserNameFromUserID(String token, String userID) throws IOException
+    {
+        String userName="";
+
+        String urlJsonUser = "http://188.226.154.228:8080/api/v1/profile/";
+        urlJsonUser += userID;
+
+        HttpClient client = new DefaultHttpClient();
+        HttpGet httpGet = new HttpGet(urlJsonUser);
+
+        httpGet.addHeader("Authorization", token);
+        HttpResponse response = client.execute(httpGet);
+        HttpEntity entity = response.getEntity();
+        InputStream in = entity.getContent();
+
+        String JSONbody = Utils.convertStreamToString(in);
+        Reader stringReader = new StringReader(JSONbody);
+
+        JsonReader reader = new JsonReader(stringReader);
+        try
+        {
+            reader.beginObject();
+            while (reader.hasNext())
+            {
+                while (reader.hasNext()) {
+                    String key = reader.nextName();
+                    if (key.equals("userName"))
+                    {
+                        userName = reader.nextString();
+                    }
+                    else
+                    {
+                        reader.skipValue();
+                    }
+                }
+            }
+        }
+        catch(IOException e)
+        {
+            Log.e("IOException", e.getMessage());
+        }finally
+        {
+            try{reader.close();}catch(IOException e){}
+            try{in.close();}catch(IOException e){}
+        }
+        return userName;
+    }
+
     public static String getUserFacebookIDFromUserID(String token, String userID) throws IOException
     {
         String facebookID="";

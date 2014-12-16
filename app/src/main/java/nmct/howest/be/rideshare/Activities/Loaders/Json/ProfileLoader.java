@@ -185,6 +185,7 @@ public class ProfileLoader extends AsyncTaskLoader<User>
                     id++;
                 }
             }
+            user.setBitmapFb(Utils.getBitmapFromUrl(user.getFacebookImg()));
             reader.endObject();
         }catch(IOException e)
         {

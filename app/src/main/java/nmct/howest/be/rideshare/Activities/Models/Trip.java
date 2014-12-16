@@ -13,6 +13,7 @@ public class Trip {
     private boolean[] repeat =  new boolean[7]; //mo, tu, we, th, fr, sa, su
     private List<Match> matches;
     private String facebookID="";
+    private String userName="";
 
     //Getters en setters
     public String getID() {
@@ -85,6 +86,14 @@ public class Trip {
 
     public void setFacebookID(String facebookID) {
         this.facebookID = facebookID;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     //Ctor
