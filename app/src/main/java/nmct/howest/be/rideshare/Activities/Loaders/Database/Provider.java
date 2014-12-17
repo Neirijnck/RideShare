@@ -53,6 +53,7 @@ public class Provider extends ContentProvider
 
         sUsersProjectionMap = new HashMap<String, String>();
         sUsersProjectionMap.put(Contract.User._ID, Contract.User._ID);
+        sUsersProjectionMap.put(Contract.User.KEY_API_ID, Contract.User.KEY_API_ID);
         sUsersProjectionMap.put(Contract.User.KEY_USERID, Contract.User.KEY_USERID);
         sUsersProjectionMap.put(Contract.User.KEY_FACEBOOK_TOKEN, Contract.User.KEY_FACEBOOK_TOKEN);
         sUsersProjectionMap.put(Contract.User.KEY_FACEBOOK_ID, Contract.User.KEY_FACEBOOK_ID);
@@ -69,6 +70,7 @@ public class Provider extends ContentProvider
 
         sReviewsProjectionMap = new HashMap<String, String>();
         sReviewsProjectionMap.put(Contract.Review._ID, Contract.Review._ID);
+        sUsersProjectionMap.put(Contract.Review.KEY_API_ID, Contract.Review.KEY_API_ID);
         sReviewsProjectionMap.put(Contract.Review.KEY_USERID, Contract.Review.KEY_USERID);
         sReviewsProjectionMap.put(Contract.Review.KEY_CREATED_ON, Contract.Review.KEY_CREATED_ON);
         sReviewsProjectionMap.put(Contract.Review.KEY_LAST_EDITED_ON, Contract.Review.KEY_LAST_EDITED_ON);
@@ -78,6 +80,7 @@ public class Provider extends ContentProvider
 
         sTripsProjectionMap = new HashMap<String, String>();
         sTripsProjectionMap.put(Contract.Trip._ID, Contract.Trip._ID);
+        sUsersProjectionMap.put(Contract.Trip.KEY_API_ID, Contract.Trip.KEY_API_ID);
         sTripsProjectionMap.put(Contract.Trip.KEY_USERID, Contract.Trip.KEY_USERID);
         sTripsProjectionMap.put(Contract.Trip.KEY_DATE_TIME, Contract.Trip.KEY_DATE_TIME);
         sTripsProjectionMap.put(Contract.Trip.KEY_FROM, Contract.Trip.KEY_FROM);
@@ -88,6 +91,7 @@ public class Provider extends ContentProvider
 
         sMatchesProjectionMap = new HashMap<String, String>();
         sMatchesProjectionMap.put(Contract.Match._ID, Contract.Match._ID);
+        sUsersProjectionMap.put(Contract.Match.KEY_API_ID, Contract.Match.KEY_API_ID);
         sMatchesProjectionMap.put(Contract.Match.KEY_USERID, Contract.Match.KEY_USERID);
         sMatchesProjectionMap.put(Contract.Match.KEY_DATE_TIME, Contract.Match.KEY_DATE_TIME);
         sMatchesProjectionMap.put(Contract.Match.KEY_FROM, Contract.Match.KEY_FROM);
@@ -97,6 +101,7 @@ public class Provider extends ContentProvider
 
         sMessagesProjectionMap = new HashMap<String, String>();
         sMessagesProjectionMap.put(Contract.Message._ID, Contract.Message._ID);
+        sUsersProjectionMap.put(Contract.Message.KEY_API_ID, Contract.Message.KEY_API_ID);
         sMessagesProjectionMap.put(Contract.Message.KEY_USERID, Contract.Message.KEY_USERID);
         sMessagesProjectionMap.put(Contract.Message.KEY_TEXT, Contract.Message.KEY_TEXT);
         sMessagesProjectionMap.put(Contract.Message.KEY_DATE_TIME , Contract.Message.KEY_DATE_TIME);
@@ -127,7 +132,7 @@ public class Provider extends ContentProvider
                 qb.setTables(Contract.User.CONTENT_DIRECTORY);
                 qb.setProjectionMap(sUsersProjectionMap);
                 qb.appendWhere(
-                        "(" + Contract.User._ID + "=" + uri.getPathSegments().get(Contract.User.USER_ID_PATH_POSITION) + ")"
+                        "(" + Contract.User.KEY_API_ID + "=" + uri.getPathSegments().get(Contract.User.USER_ID_PATH_POSITION) + ")"
                 );
                 break;
             case REVIEWS:
@@ -138,7 +143,7 @@ public class Provider extends ContentProvider
                 qb.setTables(Contract.Review.CONTENT_DIRECTORY);
                 qb.setProjectionMap(sReviewsProjectionMap);
                 qb.appendWhere(
-                        "(" + Contract.Review._ID + "=" + uri.getPathSegments().get(Contract.Review.REVIEW_ID_PATH_POSITION) + ")"
+                        "(" + Contract.Review.KEY_API_ID + "=" + uri.getPathSegments().get(Contract.Review.REVIEW_ID_PATH_POSITION) + ")"
                 );
                 break;
             case TRIPS:
@@ -149,7 +154,7 @@ public class Provider extends ContentProvider
                 qb.setTables(Contract.Trip.CONTENT_DIRECTORY);
                 qb.setProjectionMap(sTripsProjectionMap);
                 qb.appendWhere(
-                        "(" + Contract.Trip._ID + "=" + uri.getPathSegments().get(Contract.Trip.TRIP_ID_PATH_POSITION) + ")"
+                        "(" + Contract.Trip.KEY_API_ID + "=" + uri.getPathSegments().get(Contract.Trip.TRIP_ID_PATH_POSITION) + ")"
                 );
                 break;
             case MATCHES:
@@ -160,7 +165,7 @@ public class Provider extends ContentProvider
                 qb.setTables(Contract.Match.CONTENT_DIRECTORY);
                 qb.setProjectionMap(sMatchesProjectionMap);
                 qb.appendWhere(
-                        "(" + Contract.Match._ID + "=" + uri.getPathSegments().get(Contract.Match.MATCH_ID_PATH_POSITION) + ")"
+                        "(" + Contract.Match.KEY_API_ID + "=" + uri.getPathSegments().get(Contract.Match.MATCH_ID_PATH_POSITION) + ")"
                 );
                 break;
             case MESSAGES:
@@ -171,7 +176,7 @@ public class Provider extends ContentProvider
                 qb.setTables(Contract.Message.CONTENT_DIRECTORY);
                 qb.setProjectionMap(sMessagesProjectionMap);
                 qb.appendWhere(
-                        "(" + Contract.Message._ID + "=" + uri.getPathSegments().get(Contract.Message.MESSAGE_ID_PATH_POSITION) + ")"
+                        "(" + Contract.Message.KEY_API_ID + "=" + uri.getPathSegments().get(Contract.Message.MESSAGE_ID_PATH_POSITION) + ")"
                 );
                 break;
             default:
@@ -396,7 +401,7 @@ public class Provider extends ContentProvider
                 break;
             case USER_ID:
                 String userId = uri.getPathSegments().get(Contract.User.USER_ID_PATH_POSITION);
-                finalWhere = Contract.User._ID + "=" + userId;
+                finalWhere = Contract.User.KEY_API_ID + "=" + userId;
                 if (where != null) {
                     finalWhere = DatabaseUtils.concatenateWhere(finalWhere, where);
                 }
@@ -418,7 +423,7 @@ public class Provider extends ContentProvider
                 break;
             case REVIEW_ID:
                 String reviewId = uri.getPathSegments().get(Contract.Review.REVIEW_ID_PATH_POSITION);
-                finalWhere = Contract.Review._ID + "=" + reviewId;
+                finalWhere = Contract.Review.KEY_API_ID + "=" + reviewId;
                 if (where != null) {
                     finalWhere = DatabaseUtils.concatenateWhere(finalWhere, where);
                 }
@@ -440,7 +445,7 @@ public class Provider extends ContentProvider
                 break;
             case TRIP_ID:
                 String tripId = uri.getPathSegments().get(Contract.Trip.TRIP_ID_PATH_POSITION);
-                finalWhere = Contract.Trip._ID + "=" + tripId;
+                finalWhere = Contract.Trip.KEY_API_ID + "=" + tripId;
                 if (where != null) {
                     finalWhere = DatabaseUtils.concatenateWhere(finalWhere, where);
                 }
@@ -462,7 +467,7 @@ public class Provider extends ContentProvider
                 break;
             case MATCH_ID:
                 String matchId = uri.getPathSegments().get(Contract.Match.MATCH_ID_PATH_POSITION);
-                finalWhere = Contract.Match._ID + "=" + matchId;
+                finalWhere = Contract.Match.KEY_API_ID + "=" + matchId;
                 if (where != null) {
                     finalWhere = DatabaseUtils.concatenateWhere(finalWhere, where);
                 }
@@ -484,7 +489,7 @@ public class Provider extends ContentProvider
                 break;
             case MESSAGE_ID:
                 String messageId = uri.getPathSegments().get(Contract.Message.MESSAGE_ID_PATH_POSITION);
-                finalWhere = Contract.Message._ID + "=" + messageId;
+                finalWhere = Contract.Message.KEY_API_ID + "=" + messageId;
                 if (where != null) {
                     finalWhere = DatabaseUtils.concatenateWhere(finalWhere, where);
                 }

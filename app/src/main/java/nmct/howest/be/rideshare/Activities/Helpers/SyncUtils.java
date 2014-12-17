@@ -67,7 +67,7 @@ public class SyncUtils
                             String key = reader.nextName();
                             if (key.equals("_id"))
                             {
-                                values.put(Contract.Trip._ID, reader.nextString());
+                                values.put(Contract.Trip.KEY_API_ID, reader.nextString());
                             }
                             else if (key.equals("userID"))
                             {
@@ -136,12 +136,10 @@ public class SyncUtils
                     }
                     reader.endObject();
 
-                    Uri uri = Contract.Trip.ITEM_CONTENT_URI.buildUpon().appendEncodedPath(values.getAsString(Contract.Trip._ID)).build();
-                    Cursor cursor = contentProviderClient.query(
-                            uri,
-                            new String[]{Contract.Trip._ID}, null, null, null);
+                    Uri uri = Contract.Trip.ITEM_CONTENT_URI.buildUpon().appendEncodedPath(values.getAsString(Contract.Trip.KEY_API_ID)).build();
+                    Cursor cursor = contentProviderClient.query(uri, new String[]{Contract.Trip.KEY_API_ID}, null, null, null);
                     if(cursor.getCount() > 0) {
-                        values.remove(Contract.Trip._ID);
+                        values.remove(Contract.Trip.KEY_API_ID);
                         contentProviderClient.update(uri, values, null, null);
                     } else {
                         contentProviderClient.insert(Contract.Trip.CONTENT_URI, values);
@@ -190,7 +188,10 @@ public class SyncUtils
                     while (reader.hasNext())
                     {
                         String key = reader.nextName();
-                        if (key.equals("userID")) {
+                        if (key.equals("_id")) {
+                            values.put(Contract.Match.KEY_API_ID, reader.nextString());
+                        }
+                        else if (key.equals("userID")) {
                             values.put(Contract.Match.KEY_USERID, reader.nextString());
                         } else if (key.equals("from")) {
                             values.put(Contract.Match.KEY_FROM, reader.nextString());
@@ -206,12 +207,12 @@ public class SyncUtils
                     }
                     reader.endObject();
 
-                    Uri uri = Contract.Match.ITEM_CONTENT_URI.buildUpon().appendEncodedPath(values.getAsString(Contract.Match._ID)).build();
+                    Uri uri = Contract.Match.ITEM_CONTENT_URI.buildUpon().appendEncodedPath(values.getAsString(Contract.Match.KEY_API_ID)).build();
                     Cursor cursor = contentProviderClient.query(
                             uri,
-                            new String[]{Contract.Match._ID}, null, null, null);
+                            new String[]{Contract.Match.KEY_API_ID}, null, null, null);
                     if(cursor.getCount() > 0) {
-                        values.remove(Contract.Match._ID);
+                        values.remove(Contract.Match.KEY_API_ID);
                         contentProviderClient.update(uri, values, null, null);
                     } else {
                         contentProviderClient.insert(Contract.Match.CONTENT_URI, values);
@@ -258,7 +259,7 @@ public class SyncUtils
                         String key = reader.nextName();
                         if (key.equals("_id"))
                         {
-                            values.put(Contract.User._ID, reader.nextString());
+                            values.put(Contract.User.KEY_API_ID, reader.nextString());
                         }
                         else if (key.equals("userName"))
                         {
@@ -312,12 +313,12 @@ public class SyncUtils
                 }
                 reader.endObject();
 
-                Uri uri = Contract.User.ITEM_CONTENT_URI.buildUpon().appendEncodedPath(values.getAsString(Contract.User._ID)).build();
+                Uri uri = Contract.User.ITEM_CONTENT_URI.buildUpon().appendEncodedPath(values.getAsString(Contract.User.KEY_API_ID)).build();
                 Cursor cursor = contentProviderClient.query(
                         uri,
-                        new String[]{Contract.User._ID}, null, null, null);
+                        new String[]{Contract.User.KEY_API_ID}, null, null, null);
                 if(cursor.getCount() > 0) {
-                    values.remove(Contract.User._ID);
+                    values.remove(Contract.User.KEY_API_ID);
                     contentProviderClient.update(uri, values, null, null);
                 } else {
                     contentProviderClient.insert(Contract.User.CONTENT_URI, values);
@@ -361,7 +362,11 @@ public class SyncUtils
                 while(reader.hasNext())
                 {
                     String key = reader.nextName();
-                    if(key.equals("userID"))
+                    if(key.equals("_id"))
+                    {
+                        values.put(Contract.Review.KEY_API_ID, reader.nextString());
+                    }
+                    else if(key.equals("userID"))
                     {
                         values.put(Contract.Review.KEY_USERID, reader.nextString());
                     }
@@ -381,12 +386,12 @@ public class SyncUtils
                 }
                 reader.endObject();
 
-                Uri uri = Contract.Review.ITEM_CONTENT_URI.buildUpon().appendEncodedPath(values.getAsString(Contract.Review._ID)).build();
+                Uri uri = Contract.Review.ITEM_CONTENT_URI.buildUpon().appendEncodedPath(values.getAsString(Contract.Review.KEY_API_ID)).build();
                 Cursor cursor = contentProviderClient.query(
                         uri,
-                        new String[]{Contract.Review._ID}, null, null, null);
+                        new String[]{Contract.Review.KEY_API_ID}, null, null, null);
                 if(cursor.getCount() > 0) {
-                    values.remove(Contract.Review._ID);
+                    values.remove(Contract.Review.KEY_API_ID);
                     contentProviderClient.update(uri, values, null, null);
                 } else {
                     contentProviderClient.insert(Contract.Review.CONTENT_URI, values);

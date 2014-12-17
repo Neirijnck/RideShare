@@ -40,7 +40,7 @@ public class SearchActivity extends ActionBarActivity
 
             // Add the fragment to the 'fragment_container' Layout
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.add(R.id.fragment_container_search, searchResultsFragment);
+            ft.replace(R.id.fragment_container_search, searchResultsFragment);
             ft.commit();
         }
     }

@@ -44,19 +44,19 @@ public class DetailsActivity extends ActionBarActivity {
             switch(type) {
                 case 0:
                     DetailRequestedTripFragment detailRequestedTripFragment = new DetailRequestedTripFragment().newInstance(id);
-                    ft.add(R.id.fragment_container_details, detailRequestedTripFragment);
+                    ft.replace(R.id.fragment_container_details, detailRequestedTripFragment);
                     break;
                 case 1:
                     DetailRequestTripFragment detailRequestsTripsFragment = new DetailRequestTripFragment().newInstance(id, matchID);
-                    ft.add(R.id.fragment_container_details, detailRequestsTripsFragment);
+                    ft.replace(R.id.fragment_container_details, detailRequestsTripsFragment);
                     break;
                 case 2:
                     DetailSavedTripFragment detailSavedTripFragment = new DetailSavedTripFragment().newInstance(id);
-                    ft.add(R.id.fragment_container_details, detailSavedTripFragment);
+                    ft.replace(R.id.fragment_container_details, detailSavedTripFragment);
                     break;
                 case 3:
                     DetailMatchFragment detailMatchFragment = new DetailMatchFragment().newInstance(id);
-                    ft.add(R.id.fragment_container_details, detailMatchFragment);
+                    ft.replace(R.id.fragment_container_details, detailMatchFragment);
                     break;
             }
 

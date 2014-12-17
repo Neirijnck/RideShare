@@ -29,7 +29,7 @@ public class SettingsActivity extends ActionBarActivity {
             // Add the fragment to the 'fragment_container' Layout
 
             FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.add(R.id.fragment_container_settings, settingsFragment);
+            ft.replace(R.id.fragment_container_settings, settingsFragment);
             ft.commit();
         }
     }

@@ -241,6 +241,7 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
     {
         mTrips.clear();
         mAdapterTripSaved.notifyDataSetChanged();
+        mAdapterTripSaved.clear();
 
         mTripsRequests.clear();
         mAdapterTripRequest.notifyDataSetChanged();
