@@ -128,7 +128,6 @@ public class DetailMatchFragment extends Fragment {
 
         //imgDetailMatch.setProfileId(user.getFacebookID());
         imgDetailMatch.setImageBitmap(user.getBitmapFb());
-        imgDetailMatch.setScaleType(ImageView.ScaleType.FIT_XY);
         txtDetailMatchName.setText(user.getFirstName() + " " + user.getLastName());
         txtDetailMatchBericht.setText("Stuur "+user.getFirstName() + " een bericht:");
     }

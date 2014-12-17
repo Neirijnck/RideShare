@@ -19,12 +19,12 @@ import nmct.howest.be.rideshare.R;
 public class DetailRequestedTripFragment extends Fragment implements LoaderManager.LoaderCallbacks<Trip> {
 
     private String url;
-    ImageView imgDetailRequested;
-    TextView txtRequestedFrom;
-    TextView txtRequestedTo;
-    TextView txtRequestedDate;
-    TextView txtRequestedHour;
-    TextView txtRequestedPayment;
+    private ImageView imgDetailRequested;
+    private TextView txtRequestedFrom;
+    private TextView txtRequestedTo;
+    private TextView txtRequestedDate;
+    private TextView txtRequestedHour;
+    private TextView txtRequestedPayment;
 
     public static DetailRequestedTripFragment newInstance(String id) {
         DetailRequestedTripFragment fragment = new DetailRequestedTripFragment();
