@@ -12,6 +12,8 @@
         android:id="@+id/other_profile_fragment"
         android:name="nmct.howest.be.rideshare.Activities.Fragments.ProfileFragment"
         tools:layout="@layout/fragment_other_profile"
-    />
+        android:layout_below="@+id/toolbarLayoutProfile"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

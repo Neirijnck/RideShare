@@ -64,6 +64,7 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
         setHasOptionsMenu(true);
         Bundle b = getActivity().getIntent().getExtras();
         UserId = b.getString("userID");
+
         //Init loader to get data
         getLoaderManager().initLoader(1, null, this).forceLoad();
 
@@ -90,6 +91,7 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
 
         return view;
     }
+
 
     private LoaderManager.LoaderCallbacks<User> CurrentUserLoader
             = new LoaderManager.LoaderCallbacks<User>() {
@@ -120,7 +122,7 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
     public void onLoadFinished(Loader<User> Loader, User user) {
 
         fillData(user);
-
+        getActivity().setTitle(user.getUserName());
         reviews = new ArrayList<Review>();
 
         if (user.getReviews() != null) {
@@ -179,7 +181,7 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
         sdf.setTimeZone(TimeZone.getDefault());
         String birthday = "";
         try {
-            Date date = sdf.parse(user.getBirthday());
+            Date date = sdf.parse(user.getBirthday().toString());
 
             SimpleDateFormat fmtOut = new SimpleDateFormat("dd-MM-yyyy");
             birthday = fmtOut.format(date);
