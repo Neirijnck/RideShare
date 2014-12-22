@@ -166,7 +166,8 @@ public class ProfileLoader extends AsyncTaskLoader<User>
                             {
                                 String key_second = reader.nextName();
                                 if(key_second.equals("userID")){review.setUserID(reader.nextString());}
-                                else if(key_second.equals("date")){review.setDate(reader.nextString());}
+                                else if(key_second.equals("userName")){review.setUserName(reader.nextString());}
+                                else if(key_second.equals("createdOn")){review.setDate(reader.nextString());}
                                 else if(key_second.equals("score")){review.setScore(reader.nextInt());}
                                 else if(key_second.equals("text")){review.setText(reader.nextString());}
                                 else{reader.skipValue();}

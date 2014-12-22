@@ -11,6 +11,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,29 +25,29 @@ import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.LoginButton;
+import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.Arrays;
 import java.util.List;
 
+import nmct.howest.be.rideshare.Activities.Adapters.ImagePagerAdapter;
 import nmct.howest.be.rideshare.Activities.Helpers.APIHelper;
 import nmct.howest.be.rideshare.Activities.Helpers.ConnectivityHelper;
 import nmct.howest.be.rideshare.Activities.Helpers.Utils;
 import nmct.howest.be.rideshare.Activities.MainActivity;
 import nmct.howest.be.rideshare.R;
 
-public class LoginFragment extends Fragment
-{
+public class LoginFragment extends Fragment {
     private FragmentActivity context;
-    private TextView learnMore;
-    private FragmentTransaction transaction;
-    private LearnMoreFragment learnMoreFragment;
     private String TAG = "LoginActivity";
 
-    public LoginFragment() {}
+    public LoginFragment() {
+    }
 
 
     @Override
-    public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
     }
 
@@ -57,7 +58,7 @@ public class LoginFragment extends Fragment
 
         //Has internet?
         Context c = getActivity();
-        if(!ConnectivityHelper.isNetworkAvailable(c)) {
+        if (!ConnectivityHelper.isNetworkAvailable(c)) {
             AlertDialog.Builder builder = new AlertDialog.Builder(c);
             builder.setTitle("No Internet connection.");
             builder.setMessage("You have no internet connection");
@@ -74,15 +75,14 @@ public class LoginFragment extends Fragment
             });
             builder.show();
         }
-        learnMore = (TextView) view.findViewById(R.id.txbLearnMore);
-        //Set click listener for "Learn more" textview
-        learnMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                learnMoreFragment = new LearnMoreFragment();
-                slideUpFragment();
-            }
-        });
+
+        //Set adapter to viewpager
+        ViewPager gallery = (ViewPager) view.findViewById(R.id.gallery_view);
+        gallery.setAdapter(new ImagePagerAdapter(getActivity().getSupportFragmentManager()));
+
+        //Bind indicators to pager
+        CirclePageIndicator indicator = (CirclePageIndicator) view.findViewById(R.id.indicator);
+        indicator.setViewPager(gallery);
 
         //Facebook Login
         LoginButton authButton = (LoginButton) view.findViewById(R.id.btnLogin);
@@ -115,8 +115,8 @@ public class LoginFragment extends Fragment
                                         String birthday = "";
                                         if (user.getBirthday() != null) {
                                             String date = user.getBirthday();
-                                            date = date.replace("/","-");
-                                            birthday =  Utils.parseDateToISOString(date,"00:00");
+                                            date = date.replace("/", "-");
+                                            birthday = Utils.parseDateToISOString(date, "00:00");
                                         }
                                         if (user.getLocation() != null) {
                                             location = user.getLocation().getName().substring(0, user.getLocation().getName().indexOf(","));
@@ -150,20 +150,7 @@ public class LoginFragment extends Fragment
 
     @Override
     public void onAttach(Activity activity) {
-        context=(FragmentActivity) activity;
+        context = (FragmentActivity) activity;
         super.onAttach(activity);
-    }
-    private void slideUpFragment()
-    {
-        transaction = context.getSupportFragmentManager().beginTransaction();
-
-        // Replace whatever is in the fragment_container view with this fragment,
-        // and add the transaction to the back stack so the user can navigate back
-        transaction.setCustomAnimations(R.anim.enter_from_bottom, R.anim.exit_out_top);
-        transaction.replace(R.id.fragment_container, learnMoreFragment);
-        transaction.addToBackStack(null);
-
-        // Commit the transaction
-        transaction.commit();
     }
 }

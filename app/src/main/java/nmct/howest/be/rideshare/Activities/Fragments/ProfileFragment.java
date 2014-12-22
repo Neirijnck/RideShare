@@ -68,8 +68,6 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
         //Init loader to get data
         getLoaderManager().initLoader(1, null, this).forceLoad();
 
-
-
     }
 
     @Override

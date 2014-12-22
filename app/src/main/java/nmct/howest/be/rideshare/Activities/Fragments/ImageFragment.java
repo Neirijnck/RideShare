@@ -1,11 +1,14 @@
 package nmct.howest.be.rideshare.Activities.Fragments;
 
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 import nmct.howest.be.rideshare.R;
 
@@ -29,7 +32,9 @@ public class ImageFragment extends Fragment
 
         //Get image from parambundle and assign it to the imageview from the layoutfile
         ImageView image = (ImageView) view.findViewById(R.id.imgWithIndicator);
-        image.setImageResource(getArguments().getInt("image"));
+
+        Picasso.with(getActivity()).load(getArguments().getInt("image")).into(image);
+        //image.setImageResource(getArguments().getInt("image"));
 
         return view;
     }

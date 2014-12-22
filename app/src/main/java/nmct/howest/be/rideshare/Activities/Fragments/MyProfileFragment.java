@@ -5,6 +5,8 @@ package nmct.howest.be.rideshare.Activities.Fragments;
         import android.support.v4.app.Fragment;
         import android.support.v4.app.LoaderManager;
         import android.support.v4.content.Loader;
+        import android.support.v7.widget.LinearLayoutManager;
+        import android.support.v7.widget.RecyclerView;
         import android.text.TextUtils;
         import android.util.Log;
         import android.view.LayoutInflater;
@@ -16,15 +18,19 @@ package nmct.howest.be.rideshare.Activities.Fragments;
         import android.widget.ArrayAdapter;
         import android.widget.LinearLayout;
         import android.widget.TextView;
+        import android.widget.Toast;
 
         import com.facebook.widget.ProfilePictureView;
 
         import java.text.ParseException;
         import java.text.SimpleDateFormat;
         import java.util.ArrayList;
+        import java.util.Collections;
         import java.util.Date;
+        import java.util.List;
         import java.util.TimeZone;
 
+        import nmct.howest.be.rideshare.Activities.Adapters.ReviewRecyclerAdapter;
         import nmct.howest.be.rideshare.Activities.Adapters.ReviewAdapter;
         import nmct.howest.be.rideshare.Activities.Loaders.Json.ProfileLoader;
         import nmct.howest.be.rideshare.Activities.Models.Review;
@@ -42,7 +48,13 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
     private TextView txtUserName;
     private LinearLayout lstReviews;
     private ArrayAdapter<Review> mAdapterReview;
-    private ArrayList<Review> reviews;
+    private List<Review> reviews = Collections.emptyList();
+    public LoaderManager loaderManager;
+    private static final int USER_LOADER_ID = 1;
+
+    private RecyclerView mReviewRecyclerView;
+    private ReviewRecyclerAdapter mReviewRecyclerAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     public MyProfileFragment() {
     }
@@ -51,19 +63,30 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+        loaderManager = getLoaderManager();
+
         //Init loader to get data
-        getLoaderManager().initLoader(1, null, this).forceLoad();
+        loaderManager.initLoader(USER_LOADER_ID, null, this).forceLoad();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        lstReviews = (LinearLayout) view.findViewById(R.id.lstBeoordelingen);
+        //lstReviews = (LinearLayout) view.findViewById(R.id.lstBeoordelingen);
+        mReviewRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerReviews);
+
+        // Setting the LayoutManager.
+        mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        mReviewRecyclerView.setLayoutManager(mLayoutManager);
+
+        // Setting the adapter.
+        mReviewRecyclerAdapter = new ReviewRecyclerAdapter(reviews);
+        mReviewRecyclerView.setAdapter(mReviewRecyclerAdapter);
+        mReviewRecyclerView.setHasFixedSize(true);
 
         mAdapterReview = new ReviewAdapter(getActivity(), R.layout.card_review, R.id.txbBeoordelingNaam);
-
-        //lstReviews.setAdapter(mAdapterReview);
 
         return view;
     }
@@ -117,13 +140,15 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
             mAdapterReview.addAll(reviews);
         }
 
+        mReviewRecyclerAdapter.updateList(reviews);
+
         //If list isnt empty, show the list
         if (!reviews.isEmpty()) {
             TextView txbNoReviews = (TextView) getActivity().findViewById(R.id.txbNoReviews);
             txbNoReviews.setVisibility(View.INVISIBLE);
 
-            LinearLayout layoutReviews = (LinearLayout) getActivity().findViewById(R.id.lstBeoordelingen);
-            layoutReviews.setVisibility(View.VISIBLE);
+//            LinearLayout layoutReviews = (LinearLayout) getActivity().findViewById(R.id.lstBeoordelingen);
+//            layoutReviews.setVisibility(View.VISIBLE);
         }
 
         //Adding items to linear layouts
@@ -136,14 +161,14 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
                     //Get info from the item
                 }
             });
-            lstReviews.addView(item);
+           // lstReviews.addView(item);
         }
     }
 
     @Override
     public void onLoaderReset(Loader<User> Loader) {
         reviews.clear();
-        mAdapterReview.notifyDataSetChanged();
+        //mAdapterReview.notifyDataSetChanged();
     }
 
     private void fillData(User user) {

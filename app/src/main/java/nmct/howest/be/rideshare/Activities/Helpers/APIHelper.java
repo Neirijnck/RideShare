@@ -44,7 +44,7 @@ public class APIHelper {
             parameters.add(new BasicNameValuePair("birthday", birthday));
             httppost.setEntity(new UrlEncodedFormEntity(parameters));
 
-            PostAsync task = new PostAsync();
+            PostNewUserAsync task = new PostNewUserAsync();
             task.execute(httppost);
         }
         catch (IOException e) {
@@ -77,26 +77,6 @@ public class APIHelper {
         }
     }
 
-    //Add Review
-    public static void AddReview(String fbToken, Review review, String reviewedId)
-    {
-        try {
-            HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/profile/"+ reviewedId +"/review");
-            httppost.addHeader("Authorization", fbToken);
-            List<NameValuePair> parameters = new ArrayList<NameValuePair>();
-            parameters.add(new BasicNameValuePair("text", review.getText()));
-            parameters.add(new BasicNameValuePair("score", review.getScore().toString()));
-            parameters.add(new BasicNameValuePair("createdOn", review.getDate()));
-            parameters.add(new BasicNameValuePair("userID", review.getUserID()));
-
-            httppost.setEntity(new UrlEncodedFormEntity(parameters));
-            PostAsync task = new PostAsync();
-            task.execute(httppost);
-        }
-        catch (IOException e) {
-            Log.d("", "Error in http connection " + e.toString());
-        }
-    }
     //With cartype
     public static void EditUser(String userName, String firstName, String lastName, String fbToken, String location, String carType)
     {
@@ -304,6 +284,7 @@ public class APIHelper {
         }
     }
 
+    //Delete Trip
     public static void DeleteTrip(String fbToken, String tripID)
     {
         HttpDelete httpDelete = new HttpDelete("http://188.226.154.228:8080/api/v1/trips/" + tripID);
@@ -311,6 +292,27 @@ public class APIHelper {
 
         DeleteAsync task = new DeleteAsync();
         task.execute(httpDelete);
+    }
+
+    //Add Review
+    public static void AddReview(String fbToken, Review review, String reviewedId)
+    {
+        try {
+            HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/profile/"+ reviewedId +"/review");
+            httppost.addHeader("Authorization", fbToken);
+            List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+            parameters.add(new BasicNameValuePair("text", review.getText()));
+            parameters.add(new BasicNameValuePair("score", review.getScore().toString()));
+            parameters.add(new BasicNameValuePair("createdOn", review.getDate()));
+            parameters.add(new BasicNameValuePair("userID", review.getUserID()));
+
+            httppost.setEntity(new UrlEncodedFormEntity(parameters));
+            PostAsync task = new PostAsync();
+            task.execute(httppost);
+        }
+        catch (IOException e) {
+            Log.d("", "Error in http connection " + e.toString());
+        }
     }
 
     //Helper Delete
@@ -348,6 +350,30 @@ public class APIHelper {
             else
             {
                 Toast.makeText(RideshareApp.getAppContext(), "Er is iets misgelopen", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    //Helper Post New User
+    public static class PostNewUserAsync extends AsyncTask<HttpPost, Void, String> {
+
+        @Override
+        protected String doInBackground(HttpPost... param) {
+            try {
+                HttpClient httpclient = new DefaultHttpClient();
+
+                HttpPost httppost = param[0];
+                HttpResponse response = httpclient.execute(httppost);
+
+                HttpEntity entity = response.getEntity();
+                String result = Utils.convertStreamToString(entity.getContent());
+
+
+                return new String(result);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
             }
         }
     }

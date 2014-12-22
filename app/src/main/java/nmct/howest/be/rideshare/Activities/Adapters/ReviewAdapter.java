@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+import nmct.howest.be.rideshare.Activities.Helpers.Utils;
 import nmct.howest.be.rideshare.Activities.Models.Review;
 import nmct.howest.be.rideshare.R;
 
@@ -40,19 +41,8 @@ public class ReviewAdapter extends ArrayAdapter<Review>
         holder.txtReviewName.setText(review.getUserName());
         holder.txtReview.setText(review.getText());
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        sdf.setTimeZone(TimeZone.getDefault());
-        String reviewDate="";
-        try {
-            Date date = sdf.parse(review.getDate());
-
-            SimpleDateFormat fmtOut = new SimpleDateFormat("dd-MM-yyyy");
-            reviewDate = fmtOut.format(date);
-        }catch (ParseException ex){
-            Log.e("ParseException Date", ex.getMessage());}
-
-        holder.txtReviewDate.setText(reviewDate);
-
+        String dateString= Utils.parseISOStringToDate(review.getDate());
+        holder.txtReviewDate.setText(dateString);
 
         ImageView star1 = (ImageView) card.findViewById(R.id.imgStar1);
         ImageView star2 = (ImageView) card.findViewById(R.id.imgStar2);
@@ -60,7 +50,9 @@ public class ReviewAdapter extends ArrayAdapter<Review>
         ImageView star4 = (ImageView) card.findViewById(R.id.imgStar4);
         ImageView star5 = (ImageView) card.findViewById(R.id.imgStar5);
 
-        setStars(review.getScore(), star1, star2, star3, star4, star5);
+        if(review.getScore()!=null) {
+            setStars(review.getScore(), star1, star2, star3, star4, star5);
+        }else{setStars(0, star1, star2, star3, star4, star5);}
 
         return card;
     }

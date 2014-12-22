@@ -3,13 +3,13 @@
 
     <!-- General -->
     <string name="app_name">Share My Ride</string>
-    <string name="app_description">The best carpool app out there!</string>
+    <string name="app_description">De beste carpool app die er is!</string>
     <string name="action_settings">Instellingen</string>
     <string name="action_logout">Uitloggen</string>
     <string name="action_edit">Aanpassen</string>
     <string name="action_add">Toevoegen</string>
     <string name="action_delete">Verwijderen</string>
-    <string name="learn_more">Learn more</string>
+    <string name="login">We plaatsen niets zonder jouw toestemming.</string>
 
     <!-- Components -->
     <string name="Plan">Plannen</string>
@@ -39,7 +39,7 @@
     <string name="Trip_Requests">Ritverzoeken</string>
     <string name="Trip_SavedTrips">Mijn opgeslagen ritten</string>
     <string name="Trip_MyRequests_title">Rit:</string>
-    <string name="Trip_NoTrips">You don\'t have any saved trips or requests.</string>
+    <string name="Trip_NoTrips">Je hebt nog geen opgeslagen trips.</string>
 
     <!-- Profile -->
     <string name="title_activity_profile">Profiel</string>
@@ -51,7 +51,8 @@
     <string name="Profile_Car">Type auto</string>
     <string name="Profile_Places">Aantal plaatsen</string>
     <string name="title_fragment_edit_profile">Profiel</string>
-    <string name="Profile_NoReviews">There aren\'t any reviews yet.</string>
+    <string name="Profile_NoReviews">Er zijn nog geen reviews.</string>
+    <string name="Profile_other_title">Profiel:</string>
 
     <!-- Search Results -->
     <string name="title_activity_zoek">Zoekresultaten</string>
@@ -83,6 +84,11 @@
     <string name="OR_Repeat">Herhaald:</string>
     <string name="OR_Price">Prijs:</string>
     <string name="OR_Travelers">Medereizigers:</string>
+
+    <!-- Dialog Review-->
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_review">Jouw mening:</string>
+    <string name="dialog_userRating">Rate gebruiker:</string>
 
     <!-- Facebook login and admin -->
     <string name="app_id">551430101654024</string>

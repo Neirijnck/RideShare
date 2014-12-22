@@ -89,19 +89,19 @@
             android:layout_alignStart="@+id/txtOtherGeslachtLeeftijd"
             android:layout_marginTop="2dp"
             android:textSize="17sp" />
-
+        
         <Button
             android:layout_width="match_parent"
-            android:layout_height="36dp"
+            android:layout_height="45dp"
             android:text="@string/Button_Review"
             android:id="@+id/btnOtherProfileReview"
             android:layout_marginTop="15dp"
             android:drawableLeft="@drawable/ic_mode_edit_white_24dp"
             android:paddingLeft="10dp"
-            android:textColor="@color/rideshare_secondary"
             android:textAllCaps="true"
-            android:background="@drawable/button_selector"
+            android:textColor="@color/rideshare_secondary"
             android:elevation="2dp"
+            android:stateListAnimator="@anim/button_elevation"
             android:width="280dp"
             android:layout_below="@+id/imgOtherProfilePicture"
             />
