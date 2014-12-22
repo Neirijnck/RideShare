@@ -43,6 +43,7 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         checkAppCount();
@@ -50,10 +51,9 @@ public class MainActivity extends ActionBarActivity {
         String token = pref.getString("accessToken", "");
 
         if(token == null || token == "") {
-            Intent intent = new Intent(this, LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            this.startActivity(intent);
+            callFacebookLogout(this);
         }
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -130,9 +130,11 @@ public class MainActivity extends ActionBarActivity {
                 session.closeAndClearTokenInformation();
             }
         }
-            Intent intent = new Intent(this.getApplicationContext(), LoginActivity.class);
-            this.startActivity(intent);
-                }
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+        prefs.edit().remove("accessToken").commit();
+        Intent intent = new Intent(this.getApplicationContext(), LoginActivity.class);
+        this.startActivity(intent);
+    }
 
     //Close app on back button
     @Override

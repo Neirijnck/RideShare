@@ -51,7 +51,6 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-
         //Init loader to get data
         getLoaderManager().initLoader(1, null, this).forceLoad();
     }

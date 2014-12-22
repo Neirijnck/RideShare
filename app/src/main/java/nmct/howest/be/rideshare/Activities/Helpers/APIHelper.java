@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import nmct.howest.be.rideshare.Activities.Models.Review;
 import nmct.howest.be.rideshare.RideshareApp;
 
 public class APIHelper {
@@ -76,6 +77,26 @@ public class APIHelper {
         }
     }
 
+    //Add Review
+    public static void AddReview(String fbToken, Review review, String reviewedId)
+    {
+        try {
+            HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/profile/"+ reviewedId +"/review");
+            httppost.addHeader("Authorization", fbToken);
+            List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+            parameters.add(new BasicNameValuePair("text", review.getText()));
+            parameters.add(new BasicNameValuePair("score", review.getScore().toString()));
+            parameters.add(new BasicNameValuePair("createdOn", review.getDate()));
+            parameters.add(new BasicNameValuePair("userID", review.getUserID()));
+
+            httppost.setEntity(new UrlEncodedFormEntity(parameters));
+            PostAsync task = new PostAsync();
+            task.execute(httppost);
+        }
+        catch (IOException e) {
+            Log.d("", "Error in http connection " + e.toString());
+        }
+    }
     //With cartype
     public static void EditUser(String userName, String firstName, String lastName, String fbToken, String location, String carType)
     {

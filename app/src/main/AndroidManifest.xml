@@ -74,6 +74,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="nmct.howest.be.rideshare.Activities.MainActivity" />
         </activity>
+        <activity
+            android:name="nmct.howest.be.rideshare.Activities.OtherProfileActivity"
+            android:label="@string/title_activity_other_profile" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="nmct.howest.be.rideshare.Activities.MainActivity" />
+        </activity>
 
         <!--RECEIVER-->
         <receiver

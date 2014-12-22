@@ -1,7 +1,6 @@
 package nmct.howest.be.rideshare.Activities.Fragments;
 
-import android.graphics.Bitmap;
-import android.media.Image;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
@@ -13,13 +12,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.facebook.widget.ProfilePictureView;
-
 import nmct.howest.be.rideshare.Activities.Helpers.Utils;
 import nmct.howest.be.rideshare.Activities.Loaders.Json.ProfileLoader;
 import nmct.howest.be.rideshare.Activities.Loaders.Json.TripLoader;
 import nmct.howest.be.rideshare.Activities.Models.Trip;
 import nmct.howest.be.rideshare.Activities.Models.User;
+import nmct.howest.be.rideshare.Activities.OtherProfileActivity;
 import nmct.howest.be.rideshare.R;
 
 
@@ -130,5 +128,13 @@ public class DetailMatchFragment extends Fragment {
         imgDetailMatch.setImageBitmap(user.getBitmapFb());
         txtDetailMatchName.setText(user.getFirstName() + " " + user.getLastName());
         txtDetailMatchBericht.setText("Stuur "+user.getFirstName() + " een bericht:");
+        final User mUser = user;
+        imgDetailMatch.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), OtherProfileActivity.class);
+                intent.putExtra("userID", mUser.getID() );
+                getActivity().startActivity(intent);
+            }
+        });
     }
 }

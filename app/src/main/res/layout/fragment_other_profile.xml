@@ -1,0 +1,126 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="false"
+  >
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:context="nmct.howest.be.rideshare.Activities.Fragments.MyProfileFragment"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:layout_marginTop="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Profiel:"
+            android:id="@+id/txtOtherTitle"
+            android:textStyle="bold"
+
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="15dp"
+            />
+
+        <com.facebook.widget.ProfilePictureView
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:id="@+id/imgOtherProfilePicture"
+            android:layout_below="@+id/txtOtherTitle"
+            ></com.facebook.widget.ProfilePictureView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Voornaam Naam"
+            android:id="@+id/txtOtherNaam"
+            android:layout_toEndOf="@+id/imgOtherProfilePicture"
+            android:textStyle="bold"
+            android:layout_toRightOf="@+id/imgOtherProfilePicture"
+            android:layout_marginLeft="16dp"
+            android:layout_below="@+id/txtOtherTitle"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Username"
+            android:id="@+id/txtOtherUserName"
+            android:layout_below="@+id/txtOtherNaam"
+            android:layout_alignLeft="@+id/txtOtherNaam"
+            android:layout_alignStart="@+id/txtOtherNaam"
+            android:layout_marginTop="0dp"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Plaats"
+            android:id="@+id/txtOtherPlaats"
+            android:layout_below="@+id/txtOtherUserName"
+            android:layout_alignLeft="@+id/txtOtherUserName"
+            android:layout_alignStart="@+id/txtOtherUserName"
+            android:layout_marginTop="4dp"
+            android:textSize="17sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Geslacht, Leeftijd"
+            android:id="@+id/txtOtherGeslachtLeeftijd"
+            android:layout_below="@+id/txtOtherPlaats"
+            android:layout_alignLeft="@+id/txtOtherPlaats"
+            android:layout_alignStart="@+id/txtOtherPlaats"
+            android:layout_marginTop="2dp"
+            android:textSize="17sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Auto (aantal plaatsen)"
+            android:id="@+id/txtOtherAuto"
+            android:layout_below="@+id/txtOtherGeslachtLeeftijd"
+            android:layout_alignLeft="@+id/txtOtherGeslachtLeeftijd"
+            android:layout_alignStart="@+id/txtOtherGeslachtLeeftijd"
+            android:layout_marginTop="2dp"
+            android:textSize="17sp" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:text="@string/Button_Review"
+            android:id="@+id/btnOtherProfileReview"
+            android:layout_marginTop="15dp"
+            android:drawableLeft="@drawable/ic_mode_edit_white_24dp"
+            android:paddingLeft="10dp"
+            android:textColor="@color/rideshare_secondary"
+            android:textAllCaps="true"
+            android:background="@drawable/button_selector"
+            android:elevation="2dp"
+            android:width="280dp"
+            android:layout_below="@+id/imgOtherProfilePicture"
+            />
+
+
+        <fragment
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:name="nmct.howest.be.rideshare.Activities.Fragments.ReviewsFragment"
+            tools:layout="@layout/fragment_reviews"
+            android:layout_below="@+id/btnOtherProfileReview"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="25dp"
+            android:layout_alignParentBottom="true">
+        </fragment>
+
+    </RelativeLayout>
+
+</ScrollView>

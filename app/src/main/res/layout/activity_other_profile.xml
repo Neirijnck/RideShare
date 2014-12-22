@@ -1,0 +1,17 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="nmct.howest.be.rideshare.Activities.ProfileActivity"
+    >
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbarLayoutProfile" />
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/other_profile_fragment"
+        android:name="nmct.howest.be.rideshare.Activities.Fragments.ProfileFragment"
+        tools:layout="@layout/fragment_other_profile"
+    />
+
+</RelativeLayout>
