@@ -12,7 +12,7 @@ import nmct.howest.be.rideshare.R;
 public class ImagePagerAdapter extends FragmentPagerAdapter implements IconPagerAdapter
 {
     //Different images to show
-    private int[] Images = new int[] { R.drawable.photo1, R.drawable.photo2};
+    private int[] Images = new int[] { R.drawable.plannen, R.drawable.zoeken};
 
     //Length of imagearray
     private int mCount = Images.length;

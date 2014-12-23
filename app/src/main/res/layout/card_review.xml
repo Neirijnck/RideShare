@@ -18,17 +18,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
+        <!--<ImageView-->
+            <!--android:layout_width="45dp"-->
+            <!--android:layout_height="45dp"-->
+            <!--android:id="@+id/imgBeoordelingFoto"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:src="@drawable/account"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--/>-->
+
+        <com.facebook.widget.ProfilePictureView
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:id="@+id/imgBeoordelingFoto"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:src="@drawable/account"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="5dp"
-            />
+            ></com.facebook.widget.ProfilePictureView>
 
         <TextView
             android:layout_width="wrap_content"
@@ -48,7 +59,8 @@
             android:text="Beoordeling"
             android:id="@+id/txbBeoordeling"
             android:layout_below="@+id/imgBeoordelingFoto"
-            android:layout_margin="8dp"/>
+            android:layout_margin="8dp"
+            android:textColor="@color/rideshare_text"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -59,6 +71,7 @@
             android:layout_alignLeft="@+id/txbBeoordelingNaam"
             android:layout_alignStart="@+id/txbBeoordelingNaam"
             android:textSize="10sp"
+            android:textColor="@color/rideshare_text"
             />
 
         <ImageView

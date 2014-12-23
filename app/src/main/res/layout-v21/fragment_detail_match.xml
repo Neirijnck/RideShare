@@ -105,7 +105,9 @@
         android:width="280dp"
         android:layout_below="@+id/txtMatchAdded"
         android:layout_alignLeft="@+id/txtMatchAdded"
-        android:layout_alignStart="@+id/txtMatchAdded" />
+        android:layout_alignStart="@+id/txtMatchAdded"
+        android:layout_marginBottom="15dp"
+        />
 
     <TextView
         android:layout_width="wrap_content"

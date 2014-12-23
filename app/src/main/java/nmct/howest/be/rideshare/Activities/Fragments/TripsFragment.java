@@ -34,6 +34,11 @@ import nmct.howest.be.rideshare.R;
 
 public class TripsFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<Trip>>
 {
+    private LoaderManager loaderManager;
+    private static final int TRIPS_SAVED_LOADER_ID = 0;
+    private static final int TRIPS_REQUESTS_LOADER_ID = 10;
+    private static final int TRIPS_REQUESTED_LOADER_ID = 20;
+
     private List<Trip> mTrips;
     private List<Trip> mTripsRequests;
     private List<Trip> mTripsRequested;
@@ -54,10 +59,12 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
+        loaderManager = getLoaderManager();
+
         //Init loaders to get data
-        getLoaderManager().initLoader(0, null, this).forceLoad();
-        getLoaderManager().initLoader(10, null, this).forceLoad();
-        getLoaderManager().initLoader(20, null, this).forceLoad();
+        loaderManager.initLoader(TRIPS_SAVED_LOADER_ID, null, this).forceLoad();
+        loaderManager.initLoader(TRIPS_REQUESTS_LOADER_ID, null, this).forceLoad();
+        loaderManager.initLoader(TRIPS_REQUESTED_LOADER_ID, null, this).forceLoad();
     }
 
     @Override

@@ -32,7 +32,6 @@ public class OtherProfileActivity extends ActionBarActivity {
                 Log.d("test","gedrukt");
                 return true;
             case 16908332:
-                Log.d("test","gedrukt ezufizhiuh");
                 this.finish();
                 return true;
         }
