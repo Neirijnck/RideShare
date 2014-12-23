@@ -141,6 +141,7 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
             for(int i =0; i < adaptercountSavedTrips; i++)
             {
                 View item = mAdapterTripSaved.getView(i, null, null);
+
                 item.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

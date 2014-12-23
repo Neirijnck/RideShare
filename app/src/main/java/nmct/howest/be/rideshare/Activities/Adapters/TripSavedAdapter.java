@@ -16,11 +16,14 @@ public class TripSavedAdapter extends ArrayAdapter<Trip>
 {
 
     public TripSavedAdapter(Context context, int resource, int textViewResourceId) {
+
         super(context, resource, textViewResourceId);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
+
         View card = super.getView(position, convertView, parent);
 
         ViewHolderItem holder = (ViewHolderItem) card.getTag();
@@ -52,10 +55,11 @@ public class TripSavedAdapter extends ArrayAdapter<Trip>
             holder.txtTripPrice.setText("Kost: €" + trip.getPayment());
         }
 
-        //Set picture of the person who planned the trip
-        //holder.imgProfilePicture.setProfileId();
+            //Set picture of the person who planned the trip
+            //holder.imgProfilePicture.setProfileId(fbId);
 
-        return card;
+            return card;
+
     }
 
     static class ViewHolderItem
@@ -75,5 +79,6 @@ public class TripSavedAdapter extends ArrayAdapter<Trip>
             this.imgProfilePicture = (ProfilePictureView) row.findViewById(R.id.imgTripPicture);
         }
     }
+
 
 }
