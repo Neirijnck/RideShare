@@ -73,6 +73,7 @@ public class SearchFragment extends Fragment
                 }
                 else
                 {
+
                     Intent intent = new Intent(getActivity(), SearchActivity.class);
                     Bundle b = new Bundle();
                     //Enter all parameters

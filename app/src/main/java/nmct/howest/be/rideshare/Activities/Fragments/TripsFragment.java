@@ -94,6 +94,7 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
             }
         });
 
+
         return view;
     }
 
