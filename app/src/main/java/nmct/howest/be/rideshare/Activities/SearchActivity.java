@@ -1,6 +1,5 @@
 package nmct.howest.be.rideshare.Activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
@@ -103,15 +102,6 @@ public class SearchActivity extends ActionBarActivity
 
 
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch(requestCode) {
-            default:
-                if(Session.getActiveSession() != null) //I need to check if this null just to sleep peacefully at night
-                    Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);
-                break;
-        }
-    }
+
 
 }
