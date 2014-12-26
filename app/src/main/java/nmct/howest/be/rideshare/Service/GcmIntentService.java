@@ -1,4 +1,4 @@
-package nmct.howest.be.rideshare.services;
+package nmct.howest.be.rideshare.Service;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -25,6 +25,7 @@ public class GcmIntentService extends IntentService {
         // at that point no longer be holding a wake lock since we are depending
         // on SimpleWakefulReceiver to that for us.  If this is a concern, you can
         // acquire a separate wake lock here.
+
         for (int i=0; i<5; i++) {
             Log.i("SimpleWakefulReceiver", "Running service " + (i+1)
                     + "/5 @ " + SystemClock.elapsedRealtime());

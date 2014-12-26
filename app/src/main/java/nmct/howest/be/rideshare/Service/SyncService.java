@@ -1,14 +1,10 @@
-package nmct.howest.be.rideshare.services;
+package nmct.howest.be.rideshare.Service;
 
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 
-import nmct.howest.be.rideshare.Activities.Adapters.SyncAdapter;
-
-/**
- * Created by Preben on 7/12/2014.
- */
+import nmct.howest.be.rideshare.Adapters.SyncAdapter;
 
 public class SyncService extends Service
 {
