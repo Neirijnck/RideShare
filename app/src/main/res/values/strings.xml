@@ -26,6 +26,7 @@
     <string name="Price">Prijs</string>
     <string name="Save">Opslaan</string>
     <string name="Searching">Zoeken</string>
+    <string name="learn_more">Leer meer</string>
 
     <!-- Plan -->
     <string name="Plan_Title">Plan een volgende rit:</string>
@@ -53,6 +54,7 @@
     <string name="title_fragment_edit_profile">Profiel</string>
     <string name="Profile_NoReviews">Er zijn nog geen reviews.</string>
     <string name="Profile_other_title">Profiel:</string>
+    <string name="Button_Review">Schrijf Review</string>
 
     <!-- Search Results -->
     <string name="title_activity_zoek">Zoekresultaten</string>
@@ -61,9 +63,6 @@
     <!-- Match -->
     <string name="Button_Match">Match</string>
     <string name="Button_Join">Ik wil meerijden!</string>
-
-    <!-- Profile -->
-    <string name="Button_Review">Schrijf Review</string>
 
     <!-- Details Activity and fragments -->
     <string name="title_activity_details">Details</string>
@@ -77,6 +76,7 @@
     <string name="Button_Decline">Weiger</string>
     <string name="Title_Saved">Mijn rit:</string>
     <string name="Title_Request">Jouw aanvraag: </string>
+    <string name="Title_Requested">Aangevraagd: </string>
     <string name="OR_From">Van:</string>
     <string name="OR_To">Naar:</string>
     <string name="OR_Date">Datum:</string>
@@ -92,6 +92,7 @@
 
     <!-- Facebook login and admin -->
     <string name="app_id">551430101654024</string>
+
     <!-- Settings -->
     <string name="title_activity_settings">Instellingen</string>
 
@@ -104,6 +105,7 @@
     <string name="API_Trips_Requests">http://188.226.154.228:8080/api/v1/trips?show=requests</string>
     <string name="API_Trips_Requested">http://188.226.154.228:8080/api/v1/trips?show=requested</string>
     <string name="API_Trips_Accepted">http://188.226.154.228:8080/api/v1/trips?show=accepted</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_other_profile">OtherProfileActivity</string>
     <string name="hello_world">Hello world!</string>

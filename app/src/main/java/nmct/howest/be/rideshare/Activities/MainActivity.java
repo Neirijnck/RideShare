@@ -22,7 +22,7 @@ import android.view.MenuItem;
 import com.astuetz.PagerSlidingTabStrip;
 import com.facebook.Session;
 
-import nmct.howest.be.rideshare.Activities.Adapters.TabPagerAdapter;
+import nmct.howest.be.rideshare.Adapters.TabPagerAdapter;
 import nmct.howest.be.rideshare.R;
 
 public class MainActivity extends ActionBarActivity {

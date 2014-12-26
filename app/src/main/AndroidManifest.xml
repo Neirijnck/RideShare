@@ -41,9 +41,7 @@
         <activity
             android:name="nmct.howest.be.rideshare.Activities.SearchActivity"
             android:label="@string/title_activity_zoek"
-            android:parentActivityName="nmct.howest.be.rideshare.Activities.MainActivity"
-            android:screenOrientation="portrait"
-            >
+            android:parentActivityName="nmct.howest.be.rideshare.Activities.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="nmct.howest.be.rideshare.Activities.MainActivity" />
@@ -126,7 +124,7 @@
 
         <!--PROVIDER-->
         <provider
-            android:name=".Activities.Loaders.Database.Provider"
+            android:name=".Loaders.Database.Provider"
             android:authorities="nmct.howest.be.rideshare.contentprovider"
             android:enabled="true"
             android:exported="true"

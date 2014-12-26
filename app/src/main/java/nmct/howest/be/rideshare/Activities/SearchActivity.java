@@ -11,7 +11,7 @@ import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.widget.WebDialog;
 
-import nmct.howest.be.rideshare.Activities.Fragments.SearchResultsFragment;
+import nmct.howest.be.rideshare.Fragments.SearchResultsFragment;
 import nmct.howest.be.rideshare.R;
 
 public class SearchActivity extends ActionBarActivity

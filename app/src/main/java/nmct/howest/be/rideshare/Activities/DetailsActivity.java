@@ -6,10 +6,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import nmct.howest.be.rideshare.Activities.Fragments.DetailMatchFragment;
-import nmct.howest.be.rideshare.Activities.Fragments.DetailRequestTripFragment;
-import nmct.howest.be.rideshare.Activities.Fragments.DetailRequestedTripFragment;
-import nmct.howest.be.rideshare.Activities.Fragments.DetailSavedTripFragment;
+import nmct.howest.be.rideshare.Fragments.DetailMatchFragment;
+import nmct.howest.be.rideshare.Fragments.DetailRequestTripFragment;
+import nmct.howest.be.rideshare.Fragments.DetailRequestedTripFragment;
+import nmct.howest.be.rideshare.Fragments.DetailSavedTripFragment;
 import nmct.howest.be.rideshare.R;
 
 public class DetailsActivity extends ActionBarActivity {
@@ -43,7 +43,7 @@ public class DetailsActivity extends ActionBarActivity {
             //Get the correct Details fragment
             switch(type) {
                 case 0:
-                    DetailRequestedTripFragment detailRequestedTripFragment = new DetailRequestedTripFragment().newInstance(id);
+                    DetailRequestedTripFragment detailRequestedTripFragment = new DetailRequestedTripFragment().newInstance(id, matchID);
                     ft.replace(R.id.fragment_container_details, detailRequestedTripFragment);
                     break;
                 case 1:

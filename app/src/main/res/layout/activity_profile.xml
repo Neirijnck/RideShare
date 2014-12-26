@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/edit_profile_fragment"
-        android:name="nmct.howest.be.rideshare.Activities.Fragments.EditProfileFragment"
+        android:name="nmct.howest.be.rideshare.Fragments.EditProfileFragment"
         tools:layout="@layout/fragment_edit_profile"
         android:layout_below="@+id/toolbarLayoutProfile" />
 

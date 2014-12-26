@@ -32,8 +32,13 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.facebook.android.R;
-import com.facebook.internal.*;
+import com.facebook.internal.AnalyticsEvents;
+import com.facebook.internal.LikeActionController;
+import com.facebook.internal.LikeBoxCountView;
+import com.facebook.internal.LikeButton;
+import com.facebook.internal.Utility;
 
 /**
  * This class provides the UI for displaying the Facebook Like button and its associated components.

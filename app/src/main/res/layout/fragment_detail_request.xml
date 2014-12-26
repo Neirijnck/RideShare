@@ -1,21 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="215dp"
-            android:id="@+id/imgDetailRequest"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:scaleType="centerCrop"
-            android:elevation="2dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/rlDetailRequest">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="175dp"
+                android:id="@+id/imgDetailRequest"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:id="@+id/txbDetailRequestName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/imgDetailRequest"
+                android:layout_alignBottom="@+id/imgDetailRequest"
+                android:layout_margin="10dp"
+                android:text="Hello"
+                android:textColor="#000000" />
+        </RelativeLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -23,9 +39,9 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/Title_Request"
             android:id="@+id/txbDetailRequestTitle"
-            android:layout_below="@+id/imgDetailRequest"
-            android:layout_alignLeft="@+id/imgDetailRequest"
-            android:layout_alignStart="@+id/imgDetailRequest"
+            android:layout_below="@+id/rlDetailRequest"
+            android:layout_alignLeft="@+id/rlDetailRequest"
+            android:layout_alignStart="@+id/rlDetailRequest"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="15dp"
             />
@@ -88,7 +104,7 @@
             android:layout_marginTop="20dp" />
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_below="@+id/txbDetailRequestPayment"
@@ -98,7 +114,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:minHeight="40dp"
-            android:id="@+id/llMessages">
+            android:id="@+id/llRequestMessages">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -113,16 +129,40 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/lstDetailRequestMessages"
-                android:layout_below="@+id/txbDetailRequestMatches"
-                android:layout_alignLeft="@+id/txbDetailRequestMatches"
-                android:layout_alignStart="@+id/txbDetailRequestMatches"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:choiceMode="none"
+                android:minHeight="200dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
+                android:layout_alignParentBottom="true" />
+
+            <RelativeLayout
+                android:id="@+id/form"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:visibility="gone"/>
+                android:layout_alignParentLeft="true"
+                android:orientation="vertical" >
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:ems="10"
+                    android:id="@+id/txtDetailRequestAddMessage"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_toLeftOf="@+id/btnDetailRequestAddMessage"
+                    android:imeOptions="actionSend" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Send"
+                    android:id="@+id/btnDetailRequestAddMessage"
+                    android:layout_alignBottom="@+id/txtDetailRequestAddMessage"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
         </LinearLayout>
 
         <TextView
@@ -131,9 +171,9 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/Status"
             android:id="@+id/txbDetailRequestStatus"
-            android:layout_below="@+id/llMessages"
-            android:layout_alignLeft="@+id/llMessages"
-            android:layout_alignStart="@+id/llMessages"
+            android:layout_below="@+id/llRequestMessages"
+            android:layout_alignLeft="@+id/llRequestMessages"
+            android:layout_alignStart="@+id/llRequestMessages"
             android:layout_marginTop="30dp"
             android:layout_marginLeft="15dp"  />
 

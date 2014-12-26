@@ -1,7 +1,7 @@
 package com.facebook.internal;
 
-import android.content.Context;
 import android.os.Bundle;
+
 import com.facebook.widget.FacebookDialog;
 
 import java.util.ArrayList;

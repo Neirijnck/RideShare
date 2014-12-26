@@ -1,19 +1,19 @@
-<!--<ScrollView-->
-    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:tools="http://schemas.android.com/tools"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent">-->
-
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    tools:context="nmct.howest.be.rideshare.Activities.Fragments.MyProfileFragment"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:context="nmct.howest.be.rideshare.Fragments.MyProfileFragment"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        >
 
         <com.facebook.widget.ProfilePictureView
             android:layout_width="130dp"
@@ -32,7 +32,6 @@
             android:id="@+id/txtNaam"
             android:layout_toEndOf="@+id/imgProfilePicture"
             android:textStyle="bold"
-            android:textAllCaps="true"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/imgProfilePicture"
             android:layout_marginLeft="16dp"
@@ -83,19 +82,17 @@
             android:textSize="17sp" />
 
         <fragment
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:name="nmct.howest.be.rideshare.Activities.Fragments.ReviewsFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:name="nmct.howest.be.rideshare.Fragments.ReviewsFragment"
             tools:layout="@layout/fragment_reviews"
             android:layout_below="@+id/imgProfilePicture"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="25dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true">
         </fragment>
 
     </RelativeLayout>
 
-    <!--</ScrollView>-->
+    </ScrollView>

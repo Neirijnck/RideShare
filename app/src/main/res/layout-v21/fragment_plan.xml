@@ -1,0 +1,232 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="nmct.howest.be.rideshare.Fragments.PlanFragment"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/listSeparatorTextViewStyle"
+            android:text="@string/Plan_Title"
+            android:id="@+id/txbPlannen"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:capitalize="sentences" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtVanPlan"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:hint="@string/From"
+            android:layout_toRightOf="@+id/imgIconPlanningFrom"
+            android:layout_toEndOf="@+id/imgIconPlanningFrom"
+            android:layout_below="@+id/txbPlannen"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="25dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtNaarPlan"
+            android:layout_alignRight="@+id/txtVanPlan"
+            android:layout_alignEnd="@+id/txtVanPlan"
+            android:hint="@string/To"
+            android:layout_below="@+id/txtVanPlan"
+            android:layout_alignLeft="@+id/txtVanPlan"
+            android:layout_marginTop="25dp" />
+
+        <EditText
+            android:layout_width="146dp"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:ems="10"
+            android:id="@+id/txtDatePlan"
+            android:focusable="false"
+            android:hint="@string/Date"
+            android:layout_below="@+id/txtNaarPlan"
+            android:layout_alignLeft="@+id/txtNaarPlan"
+            android:layout_marginTop="25dp" />
+
+        <EditText
+            android:layout_width="146dp"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:ems="10"
+            android:id="@+id/txtTimePlan"
+            android:focusable="false"
+            android:hint="@string/Time"
+            android:layout_toEndOf="@+id/txtDatePlan"
+            android:layout_alignTop="@+id/txtDatePlan"
+            android:layout_toRightOf="@+id/txtDatePlan" />
+
+         <android.support.v7.widget.SwitchCompat
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:text="@string/Repeat"
+             android:id="@+id/repeatSwitch"
+             android:layout_centerVertical="true"
+             android:layout_below="@+id/txtPrice"
+             android:layout_marginTop="22dp"
+             android:checked="false"
+             android:textColor="@color/rideshare_text"
+             android:layout_alignParentLeft="true"
+             android:layout_alignParentStart="true">
+         </android.support.v7.widget.SwitchCompat>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/repeatSwitch"
+            android:layout_marginTop="12dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/tglBtns"
+            android:visibility="gone">
+
+            <ToggleButton
+                android:layout_width="47dp"
+                android:layout_height="50dp"
+                android:text="M"
+                android:id="@+id/tglMaandag"
+                android:checked="false"
+                android:textOff="M"
+                android:textOn="M"
+                />
+
+            <ToggleButton
+                android:layout_width="47dp"
+                android:layout_height="50dp"
+                android:text="D"
+                android:id="@+id/tglDinsdag"
+                android:checked="false"
+                android:textOff="D"
+                android:textOn="D" />
+
+            <ToggleButton
+                android:layout_width="47dp"
+                android:layout_height="50dp"
+                android:text="W"
+                android:id="@+id/tglWoensdag"
+                android:checked="false"
+                android:textOff="W"
+                android:textOn="W"/>
+
+            <ToggleButton
+                android:layout_width="47dp"
+                android:layout_height="50dp"
+                android:text="D"
+                android:id="@+id/tglDonderdag"
+                android:checked="false"
+                android:textOff="D"
+                android:textOn="D" />
+
+            <ToggleButton
+                android:layout_width="47dp"
+                android:layout_height="50dp"
+                android:text="V"
+                android:id="@+id/tglVrijdag"
+                android:checked="false"
+                android:textOff="V"
+                android:textOn="V" />
+
+            <ToggleButton
+                android:layout_width="47dp"
+                android:layout_height="50dp"
+                android:text="Z"
+                android:id="@+id/tglZaterdag"
+                android:checked="false"
+                android:textOff="Z"
+                android:textOn="Z" />
+
+            <ToggleButton
+                android:layout_width="47dp"
+                android:layout_height="50dp"
+                android:text="Z"
+                android:id="@+id/tglZondag"
+                android:checked="false"
+                android:textOff="Z"
+                android:textOn="Z" />
+        </LinearLayout>
+
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/txtPrice"
+            android:hint="€0"
+            android:layout_toStartOf="@+id/txtTimePlan"
+            android:layout_below="@+id/txtDatePlan"
+            android:layout_alignLeft="@+id/txtDatePlan"
+            android:layout_alignStart="@+id/txtDatePlan"
+            android:layout_marginTop="25dp"/>
+
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="45dp"
+            android:text="@string/Save"
+            android:textAllCaps="true"
+            android:id="@+id/btnOpslaan"
+            android:layout_below="@+id/tglBtns"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/rideshare_secondary"
+            android:elevation="2dp"
+            android:stateListAnimator="@anim/button_elevation"
+            />
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgIconPlanningFrom"
+            android:src="@drawable/ic_place_grey600_36dp"
+            android:layout_alignBottom="@+id/txtVanPlan"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgIconPlanningTo"
+            android:layout_alignBottom="@+id/txtNaarPlan"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/ic_flag_grey600_36dp" />
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgIconPlanningTime"
+            android:layout_alignBottom="@+id/txtDatePlan"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/ic_access_time_grey600_36dp" />
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgIconPlanningMoney"
+            android:layout_alignBottom="@+id/txtPrice"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/ic_attach_money_grey600_36dp" />
+
+    </RelativeLayout>
+</ScrollView>
