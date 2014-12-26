@@ -82,7 +82,7 @@
 
         <!--RECEIVER-->
         <receiver
-            android:name="nmct.howest.be.rideshare.Service.GcmBroadcastReceiver"
+            android:name="nmct.howest.be.rideshare.Services.GcmBroadcastReceiver"
             android:enabled="true"
             android:exported="true"
             android:permission="com.google.android.c2dm.permission.SEND" >
@@ -94,11 +94,11 @@
 
         <!--SERVICES-->
         <service
-            android:name="nmct.howest.be.rideshare.Service.GcmIntentService"
+            android:name="nmct.howest.be.rideshare.Services.GcmIntentService"
             android:exported="false" />
 
         <service
-            android:name=".Service.SyncService"
+            android:name=".Services.SyncService"
             android:enabled="true"
             android:exported="true"
             android:process=":sync">
@@ -113,7 +113,7 @@
         </service>
 
         <service
-            android:name=".Service.AuthenticatorService">
+            android:name=".Services.AuthenticatorService">
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator"/>
             </intent-filter>

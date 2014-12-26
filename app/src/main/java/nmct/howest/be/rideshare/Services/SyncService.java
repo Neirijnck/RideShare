@@ -1,4 +1,4 @@
-package nmct.howest.be.rideshare.Service;
+package nmct.howest.be.rideshare.Services;
 
 import android.app.Service;
 import android.content.Intent;
