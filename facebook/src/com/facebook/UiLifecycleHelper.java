@@ -24,10 +24,10 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+
 import com.facebook.internal.LikeActionController;
 import com.facebook.internal.NativeProtocol;
 import com.facebook.internal.PendingCallStore;
-import com.facebook.internal.Utility;
 import com.facebook.widget.FacebookDialog;
 
 import java.util.UUID;

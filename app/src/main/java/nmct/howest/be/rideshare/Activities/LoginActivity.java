@@ -15,8 +15,8 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import java.io.IOException;
 
-import nmct.howest.be.rideshare.Activities.Fragments.LoginFragment;
-import nmct.howest.be.rideshare.Activities.Helpers.Utils;
+import nmct.howest.be.rideshare.Fragments.LoginFragment;
+import nmct.howest.be.rideshare.Helpers.Utils;
 import nmct.howest.be.rideshare.R;
 
 

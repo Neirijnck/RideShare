@@ -1,4 +1,4 @@
-package nmct.howest.be.rideshare.Activities.Loaders.Database;
+package nmct.howest.be.rideshare.Loaders.Database;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;
@@ -12,7 +12,7 @@ import android.net.Uri;
 
 import java.util.HashMap;
 
-import nmct.howest.be.rideshare.Activities.Helpers.SQLHelper;
+import nmct.howest.be.rideshare.Helpers.SQLHelper;
 
 public class Provider extends ContentProvider
 {

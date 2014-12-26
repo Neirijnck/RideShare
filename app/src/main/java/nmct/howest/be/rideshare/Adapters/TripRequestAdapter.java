@@ -1,4 +1,4 @@
-package nmct.howest.be.rideshare.Activities.Adapters;
+package nmct.howest.be.rideshare.Adapters;
 
 import android.content.Context;
 import android.view.View;
@@ -8,22 +8,25 @@ import android.widget.TextView;
 
 import com.facebook.widget.ProfilePictureView;
 
-import nmct.howest.be.rideshare.Activities.Helpers.Utils;
-import nmct.howest.be.rideshare.Activities.Models.Trip;
+import nmct.howest.be.rideshare.Helpers.Utils;
+import nmct.howest.be.rideshare.Models.Match;
+import nmct.howest.be.rideshare.Models.Trip;
 import nmct.howest.be.rideshare.R;
 
-public class TripSavedAdapter extends ArrayAdapter<Trip>
+public class TripRequestAdapter extends ArrayAdapter<Trip>
 {
+    private String from="";
+    private String to="";
+    private String date="";
+    private int status=0;
+    private String userID="";
 
-    public TripSavedAdapter(Context context, int resource, int textViewResourceId) {
-
+    public TripRequestAdapter(Context context, int resource, int textViewResourceId) {
         super(context, resource, textViewResourceId);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
-
         View card = super.getView(position, convertView, parent);
 
         ViewHolderItem holder = (ViewHolderItem) card.getTag();
@@ -33,38 +36,30 @@ public class TripSavedAdapter extends ArrayAdapter<Trip>
         }
 
         Trip trip = getItem(position);
+        for(Match match: trip.getMatches())
+        {
+            from = match.getFrom();
+            to = match.getTo();
+            date = Utils.parseISOStringToDate(match.getDatetime());
+            status = match.getStatus();
+            userID = match.getUserID();
+        }
 
         card.setTag(position);
 
-        holder.txtTripTitle.setText(trip.getFrom() + " naar " + trip.getTo());
-
-        String dateString= Utils.parseISOStringToDate(trip.getDatetime());
-        holder.txtTripInfoDate.setText(dateString);
-
-        boolean[] repeat = trip.getRepeat();
-
-        String repeatString= Utils.parseBoolArrayToDays(repeat);
-        holder.txtTripInfo.setText("Herhaald: " + repeatString);
+        holder.txtTripInfoDate.setText("Aanvraag naar " + to);
+        holder.txtTripInfo.setText("Status: " + Utils.convertStatus(status));
+        holder.txtTripPrice.setText(date);
 
 
-        if(trip.getPayment().equals("") || trip.getPayment().equals("0")) {
-            holder.txtTripPrice.setText("Kost: Gratis");
-        }
-        else
-        {
-            holder.txtTripPrice.setText("Kost: €" + trip.getPayment());
-        }
+        //Set picture of the person who planned the trip
+        //holder.imgProfilePicture.setProfileId();
 
-            //Set picture of the person who planned the trip
-            //holder.imgProfilePicture.setProfileId(fbId);
-
-            return card;
-
+        return card;
     }
 
     static class ViewHolderItem
     {
-        TextView txtTripTitle;
         TextView txtTripInfoDate;
         TextView txtTripInfo;
         TextView txtTripPrice;
@@ -75,10 +70,8 @@ public class TripSavedAdapter extends ArrayAdapter<Trip>
             this.txtTripInfoDate = (TextView) row.findViewById(R.id.txtTripInfoDate);
             this.txtTripInfo = (TextView) row.findViewById(R.id.txtTripInfo);
             this.txtTripPrice = (TextView) row.findViewById(R.id.txtTripPrice);
-            this.txtTripTitle = (TextView) row.findViewById(R.id.txtTripTitle);
             this.imgProfilePicture = (ProfilePictureView) row.findViewById(R.id.imgTripPicture);
         }
     }
-
 
 }

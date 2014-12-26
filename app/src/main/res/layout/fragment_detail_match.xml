@@ -4,9 +4,7 @@
     android:layout_height="wrap_content"
     >
 <RelativeLayout
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:focusable="true"
-    android:focusableInTouchMode="true">
+    android:layout_width="match_parent" android:layout_height="match_parent">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -99,7 +97,7 @@
         android:layout_alignStart="@+id/txbMatchMessage"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        />
+        android:focusable="false" />
 
     <Button
         android:layout_width="220dp"
@@ -115,9 +113,7 @@
         android:width="280dp"
         android:layout_below="@+id/txtMatchAdded"
         android:layout_alignLeft="@+id/txtMatchAdded"
-        android:layout_alignStart="@+id/txtMatchAdded"
-        android:layout_marginBottom="15dp"
-        />
+        android:layout_alignStart="@+id/txtMatchAdded" />
 
     <TextView
         android:layout_width="wrap_content"

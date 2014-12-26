@@ -1,4 +1,4 @@
-package nmct.howest.be.rideshare.Activities.Models;
+package nmct.howest.be.rideshare.Models;
 
 import java.util.List;
 
