@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nmct.howest.be.rideshare.Models.Match;
+import nmct.howest.be.rideshare.Models.Message;
 import nmct.howest.be.rideshare.Models.Review;
 import nmct.howest.be.rideshare.RideshareApp;
 
@@ -217,7 +218,6 @@ public class APIHelper {
         try {
             String dateTime = Utils.parseDateToISOString(date, time);
 
-
             HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/trips");
             httppost.addHeader("Authorization", fbToken);
 
@@ -326,6 +326,13 @@ public class APIHelper {
             parameters.add(new BasicNameValuePair("from", match.getFrom()));
             parameters.add(new BasicNameValuePair("to", match.getTo()));
 
+            if(!match.getMessages().isEmpty()) {
+                for (Message m : match.getMessages()) {
+                    parameters.add(new BasicNameValuePair("message", m.getText()));
+                    parameters.add(new BasicNameValuePair("messageDateTime", m.getDatetime()));
+                }
+            }
+
             httppost.setEntity(new UrlEncodedFormEntity(parameters));
             PostAsync task = new PostAsync();
             task.execute(httppost);
@@ -336,15 +343,32 @@ public class APIHelper {
     }
 
     //Update Match
-    public static void UpdateMatch(String fbToken, Match match, String tripId)
+    public static void UpdateMatch(String fbToken, String matchId, int status, String tripId)
     {
         try {
-            HttpPut httpput = new HttpPut("http://188.226.154.228:8080/api/v1/trip/"+ tripId +"/match/" + match.getId());
+            HttpPut httpput = new HttpPut("http://188.226.154.228:8080/api/v1/trip/"+ tripId +"/match/" + matchId);
             httpput.addHeader("Authorization", fbToken);
             List<NameValuePair> parameters = new ArrayList<NameValuePair>();
-            parameters.add(new BasicNameValuePair("from", match.getFrom()));
-            parameters.add(new BasicNameValuePair("to", match.getTo()));
-            parameters.add(new BasicNameValuePair("status", match.getStatus().toString()));
+            parameters.add(new BasicNameValuePair("status", Integer.toString(status)));
+
+            httpput.setEntity(new UrlEncodedFormEntity(parameters));
+            PutAsync task = new PutAsync();
+            task.execute(httpput);
+        }
+        catch (IOException e) {
+            Log.d("", "Error in http connection " + e.toString());
+        }
+    }
+
+    //Update Match
+    public static void AddMessageToMatch(String fbToken, String matchId, Message m, String tripId)
+    {
+        try {
+            HttpPut httpput = new HttpPut("http://188.226.154.228:8080/api/v1/trip/"+ tripId +"/match/" + matchId);
+            httpput.addHeader("Authorization", fbToken);
+            List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+            parameters.add(new BasicNameValuePair("message", m.getText()));
+            parameters.add(new BasicNameValuePair("messageDateTime", m.getDatetime()));
 
             httpput.setEntity(new UrlEncodedFormEntity(parameters));
             PutAsync task = new PutAsync();

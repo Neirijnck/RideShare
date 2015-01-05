@@ -21,7 +21,6 @@ import com.melnykov.fab.FloatingActionButton;
 import java.util.List;
 
 import nmct.howest.be.rideshare.Activities.DetailsActivity;
-import nmct.howest.be.rideshare.Activities.MainActivity;
 import nmct.howest.be.rideshare.Activities.SearchActivity;
 import nmct.howest.be.rideshare.Adapters.TripRequestAdapter;
 import nmct.howest.be.rideshare.Adapters.TripRequestedAdapter;
@@ -82,18 +81,13 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
         mAdapterTripRequest = new TripRequestAdapter(getActivity(), R.layout.card_trip, R.id.txtTripInfo);
         mAdapterTripRequested = new TripRequestedAdapter(getActivity(), R.layout.card_trip, R.id.txtTripInfo);
 
-        //listMyTrips.setAdapter(mAdapterTripSaved);
-       //listRequestTrips.setAdapter(mAdapterTripRequest);
-        //listRequestedTrips.setAdapter(mAdapterTripRequested);
-
         FloatingActionButton addButton = (FloatingActionButton) view.findViewById(R.id.add_button);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.pager.setCurrentItem(0);
+            //MainActivity.pager.setCurrentItem(0, true);
             }
         });
-
 
         return view;
     }

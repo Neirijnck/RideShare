@@ -37,12 +37,18 @@ public class MainActivity extends ActionBarActivity {
     ContentResolver mResolver;
 
     //Tab variables
-    public static ViewPager pager;
+    private ViewPager pager;
     private TabPagerAdapter TabAdapter;
     private PagerSlidingTabStrip tabs;
 
-    @Override
+        @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            Integer p = extras.getInt("PAGE");
+            pager.setCurrentItem(p, true);
+        }
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

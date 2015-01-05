@@ -25,6 +25,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -58,6 +59,13 @@ public class Utils
         StringBuilder sb = new StringBuilder().append(str).append("T").append(time).append(":00.000Z");
 
         return sb.toString();
+    }
+
+    public static String parseNowToISOString() {
+        Date date = Calendar.getInstance().getTime();
+        String formatted = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+                .format(date);
+        return formatted.substring(0, 22) + ":" + formatted.substring(22);
     }
 
     public static String ParseJsonStatusCode(String json)

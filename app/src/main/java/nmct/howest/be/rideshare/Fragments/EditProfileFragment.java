@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.facebook.widget.ProfilePictureView;
 
-import nmct.howest.be.rideshare.Activities.MainActivity;
 import nmct.howest.be.rideshare.Helpers.APIHelper;
 import nmct.howest.be.rideshare.R;
 import nmct.howest.be.rideshare.RideshareApp;
@@ -125,9 +124,7 @@ public class EditProfileFragment extends Fragment
                         APIHelper.EditUser(userName.trim(), firstName.trim(), lastName.trim(), token, location.trim(), amount);
                     }
                     else{APIHelper.EditUser(userName.trim(), firstName.trim(), lastName.trim(), token, location.trim(), carType.trim(), places.trim());}
-
-                    MainActivity.pager.setCurrentItem(3, true);
-
+                    //MainActivity.pager.setCurrentItem(3, true);
                     getActivity().finish();
 
                 }

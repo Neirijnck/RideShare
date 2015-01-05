@@ -79,6 +79,7 @@ public class SearchResultsTask extends AsyncTask<Bundle, Void, List<Trip>>
             List<NameValuePair> parameters = new ArrayList<NameValuePair>();
             parameters.add(new BasicNameValuePair("from", fromCity.trim()));
             parameters.add(new BasicNameValuePair("to", toCity.trim()));
+            parameters.add(new BasicNameValuePair("searchDistance", "5"));  //in KM
 
             if(!datetime.isEmpty())
                 parameters.add(new BasicNameValuePair("datetime", datetime));

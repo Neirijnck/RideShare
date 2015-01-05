@@ -1,10 +1,11 @@
 package nmct.howest.be.rideshare.Fragments;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import nmct.howest.be.rideshare.Adapters.MessagesAdapter;
+import nmct.howest.be.rideshare.Helpers.APIHelper;
 import nmct.howest.be.rideshare.Helpers.Utils;
 import nmct.howest.be.rideshare.Loaders.Json.ProfileLoader;
 import nmct.howest.be.rideshare.Loaders.Json.TripLoader;
@@ -50,6 +52,9 @@ public class DetailRequestedTripFragment extends Fragment {
     private TextView txbDetailRequestedName;
     private EditText txtDetailRequestedAddMessage;
     private Button btnDetailRequestedAddMessage;
+
+    private Button btnDetailRequestedAccept;
+    private Button btnDetailRequestedDecline;
 
     public static DetailRequestedTripFragment newInstance(String Id, String matchId) {
         DetailRequestedTripFragment fragment = new DetailRequestedTripFragment();
@@ -88,6 +93,9 @@ public class DetailRequestedTripFragment extends Fragment {
         txtDetailRequestedAddMessage = (EditText) view.findViewById(R.id.txtDetailRequestedAddMessage);
         btnDetailRequestedAddMessage = (Button) view.findViewById(R.id.btnDetailRequestedAddMessage);
 
+        btnDetailRequestedAccept = (Button) view.findViewById(R.id.btnDetailRequestedAccept);
+        btnDetailRequestedDecline = (Button) view.findViewById(R.id.btnDetailRequestedDecline);
+
         txtDetailRequestedAddMessage.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -107,11 +115,38 @@ public class DetailRequestedTripFragment extends Fragment {
             }
         });
 
+        btnDetailRequestedAccept.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //status 1
+                SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                String token = pref.getString("accessToken", "");
+                APIHelper.UpdateMatch(token, getArguments().getString("matchID"), 1, getArguments().getString("id"));
+            }
+        });
+
+        btnDetailRequestedDecline.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //status 2
+                SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                String token = pref.getString("accessToken", "");
+                APIHelper.UpdateMatch(token, getArguments().getString("matchID"), 2, getArguments().getString("id"));
+            }
+        });
+
         return view;
     }
 
     public void sendMessage() {
-        Log.d("send ", txtDetailRequestedAddMessage.getText().toString());
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String token = pref.getString("accessToken", "");
+
+        Message m = new Message();
+        m.setText(txtDetailRequestedAddMessage.getText().toString());
+        m.setDatetime(Utils.parseNowToISOString());
+
+        APIHelper.AddMessageToMatch(token, getArguments().getString("matchID"), m, getArguments().getString("id"));
     }
 
 

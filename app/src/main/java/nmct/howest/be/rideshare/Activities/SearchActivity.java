@@ -63,7 +63,7 @@ public class SearchActivity extends ActionBarActivity
             case R.id.home:
                 return true;
             case 16908332:
-                MainActivity.pager.setCurrentItem(1, true);
+                //MainActivity.pager.setCurrentItem(1, true);
                 this.finish();
                 return true;
         }
@@ -79,24 +79,21 @@ public class SearchActivity extends ActionBarActivity
 
             @Override
             public void call(Session session, SessionState state, Exception exception) {
-                if (session.isOpened()) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("caption", "The best carpool app out there.");
-                    bundle.putString("description", "Ik zoek een  rit van "+ van +" naar "+tot+" op "+datum+" om "+ tijd);
-                    bundle.putString("link", "http://188.226.154.228:8080/");
-                    bundle.putString("name", "Share My Ride");
-                    bundle.putString("picture", "http://188.226.154.228:8080/img/favicon.ico" );
-                    new WebDialog.FeedDialogBuilder(SearchActivity.this, Session.getActiveSession(), bundle).setOnCompleteListener(new WebDialog.OnCompleteListener()
-                    {
-                        @Override
-                        public void onComplete(Bundle values, FacebookException error)
-                        {
+            if (session.isOpened()) {
+                Bundle bundle = new Bundle();
+                bundle.putString("caption", "The best carpool app out there.");
+                bundle.putString("description", "Ik zoek een  rit van "+ van +" naar "+tot+" op "+datum+" om "+ tijd);
+                bundle.putString("link", "http://188.226.154.228:8080/");
+                bundle.putString("name", "Share My Ride");
+                bundle.putString("picture", "http://188.226.154.228:8080/img/favicon.ico" );
+                new WebDialog.FeedDialogBuilder(SearchActivity.this, Session.getActiveSession(), bundle).setOnCompleteListener(new WebDialog.OnCompleteListener()
+                {
+                    @Override
+                    public void onComplete(Bundle values, FacebookException error)
+                    { }
+                }).build().show();
 
-
-                        }
-                    }).build().show();
-
-                }
+            }
             }
         });
 
