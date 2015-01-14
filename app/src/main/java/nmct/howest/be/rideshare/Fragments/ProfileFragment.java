@@ -53,6 +53,8 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
     private LinearLayout lstReviews;
     private ArrayAdapter<Review> mAdapterReview;
     private ArrayList<Review> reviews;
+    private static final int USER_LOADER_ID = 1;
+    private static final int CURRENT_USER_LOADER_ID = 2;
 
     public ProfileFragment() {
 
@@ -66,7 +68,7 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
         UserId = b.getString("userID");
 
         //Init loader to get data
-        getLoaderManager().initLoader(1, null, this).forceLoad();
+        getLoaderManager().initLoader(USER_LOADER_ID, null, this).forceLoad();
 
     }
 
@@ -157,6 +159,7 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
         mAdapterReview.notifyDataSetChanged();
     }
 
+
     private void fillData(User user) {
 
         txtName = (TextView) getView().findViewById(R.id.txtOtherNaam);
@@ -213,8 +216,9 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
             profilePictureView.setProfileId(user.getFacebookID());
         profilePictureView.setCropped(true);
     }
-    private void itemRatingPopup() {
-        getLoaderManager().initLoader(2, null, CurrentUserLoader).forceLoad();
+    private void itemRatingPopup()
+    {
+        getLoaderManager().initLoader(CURRENT_USER_LOADER_ID, null, CurrentUserLoader).forceLoad();
         final Dialog popDialog = new Dialog(getActivity());
         popDialog.setContentView(R.layout.dialog_review);
         popDialog.setTitle("Review");
@@ -235,7 +239,7 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
                 int rating = (int)ratingBar.getRating();
 
                 EditText text = (EditText) popDialog.findViewById(R.id.editTextDialogUserInput);
-                Review review = new Review(CurrentUser.getID(), CurrentUser.getUserName(), date, rating, text.getText().toString());
+                Review review = new Review(CurrentUser.getID(), CurrentUser.getUserName(), date, rating, text.getText().toString().trim());
                 SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
                 String token = pref.getString("accessToken", "");
                 APIHelper.AddReview(token,review,UserId);
