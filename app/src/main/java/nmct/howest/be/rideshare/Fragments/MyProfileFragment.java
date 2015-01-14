@@ -15,7 +15,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,13 +23,11 @@ import com.facebook.widget.ProfilePictureView;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
 import nmct.howest.be.rideshare.Activities.ProfileActivity;
-import nmct.howest.be.rideshare.Adapters.ReviewAdapter;
 import nmct.howest.be.rideshare.Adapters.ReviewRecyclerAdapter;
 import nmct.howest.be.rideshare.Loaders.Json.ProfileLoader;
 import nmct.howest.be.rideshare.Models.Review;
@@ -46,8 +43,8 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
     private TextView txtCar;
     private TextView txtUserName;
     private LinearLayout lstReviews;
-    private ArrayAdapter<Review> mAdapterReview;
-    private List<Review> reviews = Collections.emptyList();
+    //private ArrayAdapter<Review> mAdapterReview;
+    private List<Review> reviews = new ArrayList<Review>();
     public LoaderManager loaderManager;
     private static final int USER_LOADER_ID = 1;
 
@@ -74,18 +71,18 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         //lstReviews = (LinearLayout) view.findViewById(R.id.lstBeoordelingen);
-        //mReviewRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerReviews);
+        mReviewRecyclerView = (RecyclerView) view.findViewById(R.id.lstReviews);
 
         // Setting the LayoutManager.
         mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        //mReviewRecyclerView.setLayoutManager(mLayoutManager);
+        mReviewRecyclerView.setLayoutManager(mLayoutManager);
 
         // Setting the adapter.
-        //mReviewRecyclerAdapter = new ReviewRecyclerAdapter(reviews);
-        //mReviewRecyclerView.setAdapter(mReviewRecyclerAdapter);
+        mReviewRecyclerAdapter = new ReviewRecyclerAdapter(reviews);
+        mReviewRecyclerView.setAdapter(mReviewRecyclerAdapter);
         //mReviewRecyclerView.setHasFixedSize(true);
 
-        mAdapterReview = new ReviewAdapter(getActivity(), R.layout.card_review, R.id.txbBeoordelingNaam);
+        //mAdapterReview = new ReviewAdapter(getActivity(), R.layout.card_review, R.id.txbBeoordelingNaam);
 
         return view;
     }
@@ -132,12 +129,19 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
         mUser = user;
         fillData(user);
 
-        reviews = new ArrayList<Review>();
+        //reviews = new ArrayList<Review>();
 
         if (user.getReviews() != null) {
-            reviews = (ArrayList) user.getReviews();
-            mAdapterReview.addAll(reviews);
+            reviews.clear();
+            reviews.addAll(user.getReviews());
+            //mAdapterReview.addAll(reviews);
+            mReviewRecyclerAdapter.notifyDataSetChanged();
+            //mReviewRecyclerAdapter.updateList(reviews);
+           // mLayoutManager.invalidate();
+            //mLayoutManager.requestLayout();
+
         }
+
 
         //mReviewRecyclerAdapter.updateList(reviews);
 
@@ -151,7 +155,7 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
         }
 
         //Adding items to linear layouts
-        int adaptercountReviews = mAdapterReview.getCount();
+        /*int adaptercountReviews = mAdapterReview.getCount();
         for (int i = 0; i < adaptercountReviews; i++) {
             View item = mAdapterReview.getView(i, null, null);
             item.setOnClickListener(new View.OnClickListener() {
@@ -161,12 +165,13 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
                 }
             });
            // lstReviews.addView(item);
-        }
+        }*/
     }
 
     @Override
     public void onLoaderReset(Loader<User> Loader) {
         reviews.clear();
+        //mReviewRecyclerAdapter.
         //mAdapterReview.notifyDataSetChanged();
     }
 

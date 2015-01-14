@@ -45,4 +45,5 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter
     public int getCount() {
         return TITLES.length;   //Number of tabs
     }
+
 }

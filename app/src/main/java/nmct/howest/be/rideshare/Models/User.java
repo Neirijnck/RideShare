@@ -20,7 +20,9 @@ public class User {
     private String location = "";
     private String carType = "";
     private String amountOfSeats ="";
+    private Boolean donated = false;
     private Bitmap bitmapFb;
+
 
     private List<Review> reviews;
 
@@ -146,6 +148,10 @@ public class User {
         this.facebookImg = facebookImg;
     }
 
+    public Boolean getDonated() { return donated; }
+
+    public void setDonated(Boolean donated) { this.donated = donated; }
+
     public Bitmap getBitmapFb() {
         return bitmapFb;
     }
@@ -155,7 +161,7 @@ public class User {
     }
 
     //Ctor
-    public User(String ID, String userName, String facebookToken, String facebookID, String facebookLink, String firstName, String lastName, String email, String gender, String birthday, String location, String carType, String amountOfSeats, List<Review> reviews) {
+    public User(String ID, String userName, String facebookToken, String facebookID, String facebookLink, String firstName, String lastName, String email, String gender, String birthday, String location, String carType, String amountOfSeats, Boolean donated, List<Review> reviews) {
         this.ID = ID;
         this.userName = userName;
         this.facebookToken = facebookToken;
@@ -170,6 +176,7 @@ public class User {
         this.carType = carType;
         this.amountOfSeats = amountOfSeats;
         this.reviews = reviews;
+        this.donated = donated;
     }
 
     public User() { }

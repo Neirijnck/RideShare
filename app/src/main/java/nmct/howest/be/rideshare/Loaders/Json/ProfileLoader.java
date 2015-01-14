@@ -81,6 +81,7 @@ public class ProfileLoader extends AsyncTaskLoader<User>
                 String location = "";
                 String carType = "";
                 String amountOfSeats="";
+                Boolean donated = false;
                 String fbID= "";
 
                 while (reader.hasNext()) {
@@ -154,6 +155,11 @@ public class ProfileLoader extends AsyncTaskLoader<User>
                     {
                         fbID = reader.nextString();
                         user.setFacebookID(fbID);
+                    }
+                    else if (key.equals("donated"))
+                    {
+                        donated = Boolean.parseBoolean(reader.nextString());
+                        user.setDonated(donated);
                     }
                     else if(key.equals("reviews"))
                     {

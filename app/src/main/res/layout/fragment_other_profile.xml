@@ -106,17 +106,43 @@
             android:layout_below="@+id/imgOtherProfilePicture"
             />
 
-        <fragment
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:name="nmct.howest.be.rideshare.Fragments.ReviewsFragment"
-            tools:layout="@layout/fragment_reviews"
-            android:layout_below="@+id/btnOtherProfileReview"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="25dp"
-            android:layout_alignParentBottom="true">
-        </fragment>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/btnOtherProfileReview">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Profile_Reviews"
+                android:id="@+id/txbProfileReviews"
+                android:textAppearance="?android:attr/listSeparatorTextViewStyle"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/lstProfileReviews"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:divider="@null"
+                android:dividerHeight="8dp"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true">
+            </android.support.v7.widget.RecyclerView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txbProfileNoReviews"
+                android:text="@string/Profile_NoReviews"
+                android:layout_below="@+id/txbProfileReviews"
+                android:layout_gravity="center"
+                android:paddingTop="25dp" />
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

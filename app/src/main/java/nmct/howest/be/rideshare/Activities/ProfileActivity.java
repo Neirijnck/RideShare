@@ -28,7 +28,7 @@ public class ProfileActivity extends ActionBarActivity {
             case R.id.home:
                 return true;
             case 16908332:
-                MainActivity.pager.setCurrentItem(3, true);
+                //MainActivity.pager.setCurrentItem(3, true);
                 this.finish();
                 return true;
         }
