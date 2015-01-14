@@ -46,7 +46,7 @@ public class APIHelper {
             parameters.add(new BasicNameValuePair("birthday", birthday));
             httppost.setEntity(new UrlEncodedFormEntity(parameters));
 
-            PostAsync task = new PostAsync();
+            PostAsyncLogin task = new PostAsyncLogin();
             task.execute(httppost);
         }
         catch (IOException e) {
@@ -379,9 +379,31 @@ public class APIHelper {
         }
     }
 
+    //Helper Post Login
+    public static class PostAsyncLogin extends AsyncTask<HttpPost, Void, String>
+    {
+        @Override
+        protected String doInBackground(HttpPost... params)
+        {
+            try {
+                HttpClient httpclient = new DefaultHttpClient();
+
+                HttpPost httppost = params[0];
+                HttpResponse response = httpclient.execute(httppost);
+
+                HttpEntity entity = response.getEntity();
+                String result = Utils.convertStreamToString(entity.getContent());
 
 
+                return new String(result);
 
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+    }
 
     //Helper Post
     public static class PostAsync extends AsyncTask<HttpPost, Void, String>

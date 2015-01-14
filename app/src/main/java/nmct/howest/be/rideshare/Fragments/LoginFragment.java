@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,11 +23,13 @@ import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.LoginButton;
+import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.Arrays;
 import java.util.List;
 
 import nmct.howest.be.rideshare.Activities.MainActivity;
+import nmct.howest.be.rideshare.Adapters.ImagePagerAdapter;
 import nmct.howest.be.rideshare.Helpers.APIHelper;
 import nmct.howest.be.rideshare.Helpers.ConnectivityHelper;
 import nmct.howest.be.rideshare.Helpers.Utils;
@@ -71,14 +74,14 @@ public class LoginFragment extends Fragment {
             builder.show();
         }
 
-/*        //Set adapter to viewpager
+        //Set adapter to viewpager
         ViewPager gallery = (ViewPager) view.findViewById(R.id.gallery_view);
         gallery.setAdapter(new ImagePagerAdapter(getActivity().getSupportFragmentManager()));
 
         //Bind indicators to pager
         CirclePageIndicator indicator = (CirclePageIndicator) view.findViewById(R.id.indicator);
         indicator.setViewPager(gallery);
-*/
+
 
         //Facebook Login
         LoginButton authButton = (LoginButton) view.findViewById(R.id.btnLogin);

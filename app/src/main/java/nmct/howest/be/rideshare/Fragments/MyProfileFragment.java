@@ -42,7 +42,7 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
     private TextView txtGenderAge;
     private TextView txtCar;
     private TextView txtUserName;
-    private LinearLayout lstReviews;
+    //private LinearLayout lstReviews;
     //private ArrayAdapter<Review> mAdapterReview;
     private List<Review> reviews = new ArrayList<Review>();
     public LoaderManager loaderManager;
@@ -80,7 +80,6 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
         // Setting the adapter.
         mReviewRecyclerAdapter = new ReviewRecyclerAdapter(reviews);
         mReviewRecyclerView.setAdapter(mReviewRecyclerAdapter);
-        //mReviewRecyclerView.setHasFixedSize(true);
 
         //mAdapterReview = new ReviewAdapter(getActivity(), R.layout.card_review, R.id.txbBeoordelingNaam);
 
@@ -139,7 +138,6 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
             //mReviewRecyclerAdapter.updateList(reviews);
            // mLayoutManager.invalidate();
             //mLayoutManager.requestLayout();
-
         }
 
 
@@ -171,7 +169,6 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
     @Override
     public void onLoaderReset(Loader<User> Loader) {
         reviews.clear();
-        //mReviewRecyclerAdapter.
         //mAdapterReview.notifyDataSetChanged();
     }
 

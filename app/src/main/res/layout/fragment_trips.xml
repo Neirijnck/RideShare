@@ -4,12 +4,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fab="http://schemas.android.com/apk/res-auto">
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/layout_trip_lists"
-        android:visibility="invisible"
-        >
+    <!--<ScrollView-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="fill_parent"-->
+        <!--android:id="@+id/layout_trip_lists"-->
+        <!--android:visibility="invisible"-->
+        <!-->-->
 
     <RelativeLayout
         xmlns:tools="http://schemas.android.com/tools"
@@ -40,7 +40,7 @@
             android:layout_marginTop="10dp"
             android:divider="@null"
             android:dividerHeight="8dp"
-            ></LinearLayout>
+            android:layout_alignBottom="@+id/txbRitAanvragen"></LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -61,7 +61,8 @@
             android:fastScrollEnabled="true"
             android:divider="@null"
             android:dividerHeight="8dp"
-            android:layout_marginTop="10dp"></LinearLayout>
+            android:layout_marginTop="10dp"
+            android:layout_alignBottom="@+id/txbRitVerzoeken"></LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -82,10 +83,22 @@
             android:divider="@null"
             android:dividerHeight="8dp"
             android:layout_weight="1"
-            android:fastScrollEnabled="true"></LinearLayout>
+            android:fastScrollEnabled="true"
+            android:layout_alignBottom="@+id/txbOpgeslagenRitten"></LinearLayout>
+
+        <ListView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/txbOpgeslagenRitten"
+            android:layout_marginTop="10dp"
+            android:divider="@null"
+            android:dividerHeight="8dp"
+            android:choiceMode="singleChoice"
+            android:id="@+id/savedTripsList"
+            android:layout_alignParentBottom="true"></ListView>
 
     </RelativeLayout>
-    </ScrollView>
+    <!--</ScrollView>-->
 
     <com.melnykov.fab.FloatingActionButton
         xmlns:fab="http://schemas.android.com/apk/res-auto"

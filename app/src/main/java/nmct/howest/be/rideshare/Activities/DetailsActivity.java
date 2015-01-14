@@ -14,6 +14,7 @@ import nmct.howest.be.rideshare.R;
 
 public class DetailsActivity extends ActionBarActivity {
 
+    //Variables
     private String id = "";
     private String matchID="";
     private Integer type;

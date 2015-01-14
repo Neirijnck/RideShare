@@ -39,7 +39,7 @@
     <Button
         android:id="@+id/dialogButtonOK"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="36dp"
         android:textColor="@color/rideshare_secondary"
         android:background="@drawable/button_selector"
         android:elevation="2dp"

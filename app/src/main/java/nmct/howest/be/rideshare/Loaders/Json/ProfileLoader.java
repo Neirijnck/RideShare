@@ -158,7 +158,8 @@ public class ProfileLoader extends AsyncTaskLoader<User>
                     }
                     else if (key.equals("donated"))
                     {
-                        donated = Boolean.parseBoolean(reader.nextString());
+//                        donated = Boolean.parseBoolean(reader.nextString());
+                        donated = reader.nextBoolean();
                         user.setDonated(donated);
                     }
                     else if(key.equals("reviews"))

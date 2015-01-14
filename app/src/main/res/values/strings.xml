@@ -74,6 +74,7 @@
     <string name="Answer_Message">Antwoord op bericht:</string>
     <string name="Button_Accept">Accepteer</string>
     <string name="Button_Decline">Weiger</string>
+    <string name="Button_Send">Stuur</string>
     <string name="Title_Saved">Mijn rit:</string>
     <string name="Title_Request">Jouw aanvraag: </string>
     <string name="Title_Requested">Aangevraagd: </string>

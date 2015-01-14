@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -43,7 +44,8 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
     private List<Trip> mTripsRequested;
 
     private ArrayAdapter mAdapterTripSaved;
-    private LinearLayout listMyTrips;
+    //private LinearLayout listMyTrips;
+    private ListView listMyTrips;
 
     private ArrayAdapter mAdapterTripRequest;
     private LinearLayout listRequestTrips;
@@ -72,7 +74,9 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
 
 
         //Lists ophalen en opvullen
-        listMyTrips = (LinearLayout) view.findViewById(R.id.lstOpgeslagenRitten);
+        //listMyTrips = (LinearLayout) view.findViewById(R.id.lstOpgeslagenRitten);
+        listMyTrips = (ListView) view.findViewById(R.id.savedTripsList);
+
         listRequestTrips = (LinearLayout) view.findViewById(R.id.lstRitAanvragen);
         listRequestedTrips = (LinearLayout) view.findViewById(R.id.lstRitVerzoeken);
 
@@ -138,27 +142,27 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
                 mAdapterTripSaved.addAll(mTrips);
             }
 
-            //Adding items to linear layouts
-            int adaptercountSavedTrips = mAdapterTripSaved.getCount();
-            for(int i =0; i < adaptercountSavedTrips; i++)
-            {
-                View item = mAdapterTripSaved.getView(i, null, null);
-
-                item.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(getActivity(), DetailsActivity.class);
-                        Bundle b = new Bundle();
-                        int pos = (int)v.getTag();
-                        String id = mTrips.get(pos).getID();
-                        b.putString("id", id);
-                        b.putInt("type", 2);
-                        intent.putExtras(b);
-                        startActivity(intent);
-                    }
-                });
-                listMyTrips.addView(item);
-            }
+//            //Adding items to linear layouts
+//            int adaptercountSavedTrips = mAdapterTripSaved.getCount();
+//            for(int i =0; i < adaptercountSavedTrips; i++)
+//            {
+//                View item = mAdapterTripSaved.getView(i, null, null);
+//
+//                item.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Intent intent = new Intent(getActivity(), DetailsActivity.class);
+//                        Bundle b = new Bundle();
+//                        int pos = (int)v.getTag();
+//                        String id = mTrips.get(pos).getID();
+//                        b.putString("id", id);
+//                        b.putInt("type", 2);
+//                        intent.putExtras(b);
+//                        startActivity(intent);
+//                    }
+//                });
+//                listMyTrips.addView(item);
+//            }
         }
         else if(loader.getId()==10)
         {
@@ -231,9 +235,9 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
                 TextView txbNoTrips = (TextView) getActivity().findViewById(R.id.txbNoTrips);
                 txbNoTrips.setVisibility(View.INVISIBLE);
 
-                //Show lists
-                ScrollView layoutTrips = (ScrollView) getActivity().findViewById(R.id.layout_trip_lists);
-                layoutTrips.setVisibility(View.VISIBLE);
+//                //Show lists
+//                ScrollView layoutTrips = (ScrollView) getActivity().findViewById(R.id.layout_trip_lists);
+//                layoutTrips.setVisibility(View.VISIBLE);
             }
         }
 

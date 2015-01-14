@@ -39,7 +39,6 @@ public class DetailRequestedTripFragment extends Fragment {
     private static final int TRIP_LOADER_ID = 1;
     private static final int USER_LOADER_ID = 2;
 
-
     private TextView txtRequestedFrom;
     private TextView txtRequestedTo;
     private TextView txtRequestedDate;

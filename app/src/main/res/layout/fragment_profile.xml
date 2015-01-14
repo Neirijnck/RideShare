@@ -83,7 +83,9 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
-            android:layout_below="@+id/imgProfilePicture">
+            android:layout_below="@+id/imgProfilePicture"
+            android:layout_marginTop="10dp"
+            >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -128,8 +130,8 @@
                 android:id="@+id/txbNoReviews"
                 android:text="@string/Profile_NoReviews"
                 android:layout_below="@+id/txbBeoordelingen"
-                android:layout_gravity="center"
-                android:paddingTop="25dp" />
+                android:paddingTop="10dp"
+                />
 
         </RelativeLayout>
 

@@ -60,7 +60,6 @@ public class MainActivity extends ActionBarActivity {
             callFacebookLogout(this);
         }
 
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -162,7 +161,7 @@ public class MainActivity extends ActionBarActivity {
         SharedPreferences.Editor edt = pref.edit();
         int count = pref.getInt("count", 0);
         count ++;
-        if(count == 5)
+        if(count == 10)
         {
             new AlertDialog.Builder(this)
                     .setTitle("Please donate!")
