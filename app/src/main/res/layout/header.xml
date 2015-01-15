@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:slm_isHeader="true"
+    app:slm_isSticky="true"
+    android:layout_width="match_parent" android:layout_height="25dp"
+    android:text="Header"
+    android:id="@+id/header"
+    android:textAppearance="?android:attr/listSeparatorTextViewStyle"
+    android:background="@color/rideshare_background">
+</TextView>

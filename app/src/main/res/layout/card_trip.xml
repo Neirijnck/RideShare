@@ -68,7 +68,7 @@
                 android:layout_below="@+id/txtTripPrice"
                 android:layout_toRightOf="@+id/imgTripPicture"
                 android:layout_toEndOf="@+id/imgTripPicture"
-                android:layout_margin="4dp"
+                android:layout_marginLeft="2dp"
                 />
 
             <TextView

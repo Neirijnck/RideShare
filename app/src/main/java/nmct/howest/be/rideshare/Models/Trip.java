@@ -14,6 +14,7 @@ public class Trip {
     private List<Match> matches;
     private String facebookID="";
     private String userName="";
+    private String type ="";
 
     //Getters en setters
     public String getID() {
@@ -95,6 +96,10 @@ public class Trip {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
+    public String getType() {return type;}
+
+    public void setType(String type) {this.type = type;}
 
     //Ctor
     public Trip(String ID, String userID, String from, String to, String datetime, String payment, boolean[] repeat, List<Match> matches) {

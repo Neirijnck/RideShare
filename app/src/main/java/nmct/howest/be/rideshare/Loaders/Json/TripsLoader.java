@@ -211,6 +211,7 @@ public class TripsLoader extends AsyncTaskLoader<List<Trip>>
                     }
                 }
                 reader.endObject();
+                trip.setType("Mijn opgeslagen ritten");
                 trips.add(trip);
             }
             reader.endArray();

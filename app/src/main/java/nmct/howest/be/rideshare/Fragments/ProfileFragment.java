@@ -17,10 +17,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -35,7 +33,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-import nmct.howest.be.rideshare.Adapters.ReviewAdapter;
 import nmct.howest.be.rideshare.Adapters.ReviewRecyclerAdapter;
 import nmct.howest.be.rideshare.Helpers.APIHelper;
 import nmct.howest.be.rideshare.Loaders.Json.ProfileLoader;

@@ -15,7 +15,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facebook.widget.ProfilePictureView;
@@ -64,6 +63,16 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
 
         //Init loader to get data
         loaderManager.initLoader(USER_LOADER_ID, null, this).forceLoad();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        reviews.clear();
+
+        //Restart loader to get data
+        loaderManager.restartLoader(USER_LOADER_ID, null, this).forceLoad();
     }
 
     @Override
