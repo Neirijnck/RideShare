@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 
 import com.facebook.Session;
 import com.google.android.gms.common.ConnectionResult;
@@ -35,6 +36,19 @@ public class LoginActivity extends FragmentActivity {
     String regid;
     //AtomicInteger msgId = new AtomicInteger();
 
+    //Close app on pushing button back
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +67,6 @@ public class LoginActivity extends FragmentActivity {
             }
         }
 
-
         //Check de facebook keyhash
        /* try {
             PackageInfo info = getPackageManager().getPackageInfo(
@@ -68,7 +81,6 @@ public class LoginActivity extends FragmentActivity {
             Log.d("erreur", "");
         } catch (NoSuchAlgorithmException e) {
         }*/
-
 
         //Facebook session check
         Session session = Session.getActiveSession();
@@ -146,7 +158,6 @@ public class LoginActivity extends FragmentActivity {
         // This app persists the registration ID in shared preferences, but you can store it anywhere you like
         return getSharedPreferences(MainActivity.class.getSimpleName(), Context.MODE_PRIVATE);
     }
-
 
     private void registerInBackground() {
         new AsyncTask<Void, Void, String>() {

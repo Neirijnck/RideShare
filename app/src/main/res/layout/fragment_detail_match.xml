@@ -94,7 +94,7 @@
         android:id="@+id/txtMatchAdded"
         android:layout_below="@+id/txbMatchMessage"
         android:layout_marginTop="7dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="15dp"
         android:layout_alignLeft="@+id/txbMatchMessage"
         android:layout_alignStart="@+id/txbMatchMessage"
         android:layout_alignParentRight="true"
@@ -112,6 +112,7 @@
         android:background="@drawable/button_selector"
         android:elevation="2dp"
         android:width="280dp"
+        android:layout_marginLeft="2dp"
         android:layout_below="@+id/txtMatchAdded"
         android:layout_alignLeft="@+id/txtMatchAdded"
         android:layout_alignStart="@+id/txtMatchAdded" />

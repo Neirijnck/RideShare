@@ -1,126 +1,272 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="185dp"
-        android:id="@+id/imgDetailVerzoek"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Naam Voornaam wil met je meerijden!"
-        android:id="@+id/txbRequestedNaam"
-        android:layout_below="@+id/imgDetailVerzoek"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"  />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/rlDetailRequested"
+            android:elevation="2dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Van: straat"
-        android:id="@+id/txbRequestedFrom"
-        android:layout_below="@+id/txbRequestedNaam"
-        android:layout_alignLeft="@+id/txbRequestedNaam"
-        android:layout_alignStart="@+id/txbRequestedNaam"
-        android:layout_marginTop="10dp" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="175dp"
+                android:id="@+id/imgDetailRequested"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:scaleType="centerCrop" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Naar: straat"
-        android:id="@+id/txbRequestedTo"
-        android:layout_below="@+id/txbRequestedFrom"
-        android:layout_alignLeft="@+id/txbRequestedFrom"
-        android:layout_alignStart="@+id/txbRequestedFrom"
-        android:layout_marginTop="10dp" />
+            <TextView
+                android:id="@+id/txbDetailRequestedName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/imgDetailRequested"
+                android:layout_alignBottom="@+id/imgDetailRequested"
+                android:layout_margin="10dp"
+                android:text="Hello"
+                android:textColor="@color/rideshare_primary"
+                android:textStyle="bold" />
+        </RelativeLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Dag: datum"
-        android:id="@+id/txbRequestedDate"
-        android:layout_below="@+id/txbRequestedTo"
-        android:layout_alignLeft="@+id/txbRequestedTo"
-        android:layout_alignStart="@+id/txbRequestedTo"
-        android:layout_marginTop="10dp"  />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/Title_Requested"
+            android:id="@+id/txbDetailRequestedTitle"
+            android:layout_below="@+id/rlDetailRequested"
+            android:layout_alignLeft="@+id/rlDetailRequested"
+            android:layout_alignStart="@+id/rlDetailRequested"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="15dp"
+            />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Uur: uur"
-        android:id="@+id/txbRequestedHour"
-        android:layout_below="@+id/txbRequestedDate"
-        android:layout_alignLeft="@+id/txbRequestedDate"
-        android:layout_alignStart="@+id/txbRequestedDate"
-        android:layout_marginTop="10dp"  />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/OR_From"
+            android:id="@+id/txbDetailRequestedFrom"
+            android:layout_below="@+id/txbDetailRequestedTitle"
+            android:layout_alignLeft="@+id/txbDetailRequestedTitle"
+            android:layout_alignStart="@+id/txbDetailRequestedTitle"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="5dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/Answer_Message"
-        android:id="@+id/txbVerzoekBericht"
-        android:layout_below="@+id/txbRequestedHour"
-        android:layout_alignLeft="@+id/txbRequestedHour"
-        android:layout_alignStart="@+id/txbRequestedHour"
-        android:layout_marginTop="10dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/OR_To"
+            android:id="@+id/txbDetailRequestedTo"
+            android:layout_below="@+id/txbDetailRequestedFrom"
+            android:layout_alignLeft="@+id/txbDetailRequestedFrom"
+            android:layout_alignStart="@+id/txbDetailRequestedFrom"
+            android:layout_marginTop="15dp" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/txtVerzoekBijgevoegd"
-        android:layout_below="@+id/txbVerzoekBericht"
-        android:layout_marginTop="7dp"
-        android:layout_marginRight="20dp"
-        android:layout_alignLeft="@+id/txbVerzoekBericht"
-        android:layout_alignStart="@+id/txbVerzoekBericht"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/OR_Date"
+            android:id="@+id/txbDetailRequestedDate"
+            android:layout_below="@+id/txbDetailRequestedTo"
+            android:layout_alignLeft="@+id/txbDetailRequestedTo"
+            android:layout_alignStart="@+id/txbDetailRequestedTo"
+            android:layout_marginTop="15dp"  />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:text="@string/Button_Accept"
-        android:id="@+id/btnRequestedAccept"
-        android:layout_below="@+id/txtVerzoekBijgevoegd"
-        android:layout_alignLeft="@+id/txtVerzoekBijgevoegd"
-        android:layout_alignStart="@+id/txtVerzoekBijgevoegd"
-        android:layout_marginTop="20dp"
-        android:drawableLeft="@drawable/ic_check_white_36dp"
-        android:textColor="@color/rideshare_secondary"
-        android:textAllCaps="true"
-        android:elevation="2dp"
-        android:stateListAnimator="@anim/button_elevation"
-        android:width="140dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/OR_Hour"
+            android:id="@+id/txbDetailRequestedTime"
+            android:layout_below="@+id/txbDetailRequestedDate"
+            android:layout_alignLeft="@+id/txbDetailRequestedDate"
+            android:layout_alignStart="@+id/txbDetailRequestedDate"
+            android:layout_marginTop="15dp"  />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:text="@string/Button_Decline"
-        android:id="@+id/btnVerzoekWeiger"
-        android:width="140dp"
-        android:drawableLeft="@drawable/ic_close_white_36dp"
-        android:textColor="@color/rideshare_secondary"
-        android:textAllCaps="true"
-        android:elevation="2dp"
-        android:stateListAnimator="@anim/button_elevation"
-        android:layout_alignTop="@+id/btnRequestedAccept"
-        android:layout_toEndOf="@+id/btnRequestedAccept"
-        android:layout_marginLeft="10dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/OR_Price"
+            android:id="@+id/txbDetailRequestedPrice"
+            android:layout_below="@+id/txbDetailRequestedTime"
+            android:layout_alignLeft="@+id/txbDetailRequestedTime"
+            android:layout_alignStart="@+id/txbDetailRequestedTime"
+            android:layout_marginTop="15dp"  />
 
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/txbDetailRequestedPrice"
+            android:layout_alignLeft="@+id/txbDetailRequestedPrice"
+            android:layout_alignStart="@+id/txbDetailRequestedPrice"
+            android:layout_marginTop="12dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:minHeight="40dp"
+            android:id="@+id/llDetailRequestedMessages">
 
-</RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/Added_Message"
+                android:id="@+id/txbDetailRequestedMatches"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp" />
+
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/lstDetailRequestedMessages"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_alignParentBottom="true" />
+
+            <RelativeLayout
+                android:id="@+id/form"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:orientation="vertical"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:ems="10"
+                    android:id="@+id/txtDetailRequestedAddMessage"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_toLeftOf="@+id/btnDetailRequestedAddMessage"
+                    android:imeOptions="actionSend"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:text="@string/Button_Send"
+                    android:id="@+id/btnDetailRequestedAddMessage"
+                    android:layout_alignBottom="@+id/txtDetailRequestedAddMessage"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="15dp"
+                    android:textColor="@color/rideshare_secondary"
+                    android:textAllCaps="true"
+                    android:elevation="2dp"
+                    android:stateListAnimator="@anim/button_elevation" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:layout_below="@+id/llDetailRequestedMessages"
+            android:layout_alignLeft="@+id/llDetailRequestedMessages"
+            android:layout_alignStart="@+id/llDetailRequestedMessages"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"
+            android:id="@+id/llDetailRequestedButtons">
+
+            <Button
+                android:layout_width="169dp"
+                android:layout_height="45dp"
+                android:text="@string/Button_Accept"
+                android:id="@+id/btnDetailRequestedAccept"
+                android:drawableLeft="@drawable/ic_check_white_36dp"
+                android:textColor="@color/rideshare_secondary"
+                android:textAllCaps="true"
+                android:elevation="2dp"
+                android:stateListAnimator="@anim/button_elevation"
+                android:layout_marginLeft="5dp"
+                />
+
+            <Button
+                android:layout_width="169dp"
+                android:layout_height="45dp"
+                android:text="@string/Button_Decline"
+                android:id="@+id/btnDetailRequestedDecline"
+                android:width="140dp"
+                android:drawableLeft="@drawable/ic_close_white_36dp"
+                android:textColor="@color/rideshare_secondary"
+                android:textAllCaps="true"
+                android:elevation="2dp"
+                android:stateListAnimator="@anim/button_elevation"
+                android:layout_marginLeft="10dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text=""
+            android:id="@+id/txtDetailRequestedFrom"
+            android:layout_alignTop="@+id/txbDetailRequestedFrom"
+            android:layout_toRightOf="@+id/txbDetailRequestedFrom"
+            android:layout_toEndOf="@+id/txbDetailRequestedFrom"
+            android:layout_marginLeft="50dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text=""
+            android:id="@+id/txtDetailRequestedTo"
+            android:layout_alignTop="@+id/txbDetailRequestedTo"
+            android:layout_alignLeft="@+id/txtDetailRequestedFrom"
+            android:layout_alignStart="@+id/txtDetailRequestedFrom" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text=""
+            android:id="@+id/txtDetailRequestedDate"
+            android:layout_alignTop="@+id/txbDetailRequestedDate"
+            android:layout_alignLeft="@+id/txtDetailRequestedTo"
+            android:layout_alignStart="@+id/txtDetailRequestedTo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text=""
+            android:id="@+id/txtDetailRequestedTime"
+            android:layout_alignTop="@+id/txbDetailRequestedTime"
+            android:layout_alignLeft="@+id/txtDetailRequestedDate"
+            android:layout_alignStart="@+id/txtDetailRequestedDate" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text=""
+            android:id="@+id/txtDetailRequestedPrice"
+            android:layout_alignTop="@+id/txbDetailRequestedPrice"
+            android:layout_alignLeft="@+id/txtDetailRequestedDate"
+            android:layout_alignStart="@+id/txtDetailRequestedDate" />
+
+    </RelativeLayout>
+</ScrollView>

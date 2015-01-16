@@ -77,7 +77,6 @@ public class MainActivity extends ActionBarActivity {
         mAccount = CreateSyncAccount(this);
 
         mResolver = getContentResolver();
-
     }
 
     public static Account CreateSyncAccount(Context context)

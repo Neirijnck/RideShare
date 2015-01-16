@@ -103,7 +103,7 @@ public class LoginFragment extends Fragment {
 
                     List<String> permissions = session.getPermissions();
                     Log.d("permissies", permissions.toString());
-                    Log.i(TAG, "Access Token" + session.getAccessToken());
+                    Log.i(TAG, "Access Token: " + session.getAccessToken());
                     Request.executeMeRequestAsync(session,
                             new Request.GraphUserCallback() {
                                 @Override

@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+<RelativeLayout
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    >
 
-    <com.facebook.widget.ProfilePictureView
+    <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="185dp"
+        android:layout_height="215dp"
         android:id="@+id/imgDetailMatch"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:scaleType="centerCrop"
+        android:elevation="2dp"
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -85,7 +94,7 @@
         android:id="@+id/txtMatchAdded"
         android:layout_below="@+id/txbMatchMessage"
         android:layout_marginTop="7dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="15dp"
         android:layout_alignLeft="@+id/txbMatchMessage"
         android:layout_alignStart="@+id/txbMatchMessage"
         android:layout_alignParentRight="true"
@@ -96,18 +105,16 @@
         android:layout_height="45dp"
         android:text="@string/Button_Join"
         android:id="@+id/btnMatchAccept"
-        android:layout_marginTop="26dp"
+        android:layout_marginTop="15dp"
         android:drawableLeft="@drawable/ic_check_white_36dp"
         android:textColor="@color/rideshare_secondary"
         android:textAllCaps="true"
         android:elevation="2dp"
         android:stateListAnimator="@anim/button_elevation"
-        android:width="280dp"
+        android:layout_marginLeft="2dp"
         android:layout_below="@+id/txtMatchAdded"
         android:layout_alignLeft="@+id/txtMatchAdded"
-        android:layout_alignStart="@+id/txtMatchAdded"
-        android:layout_marginBottom="15dp"
-        />
+        android:layout_alignStart="@+id/txtMatchAdded" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -153,3 +160,4 @@
 
 
 </RelativeLayout>
+</ScrollView>

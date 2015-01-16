@@ -90,8 +90,6 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
         mReviewRecyclerAdapter = new ReviewRecyclerAdapter(reviews);
         mReviewRecyclerView.setAdapter(mReviewRecyclerAdapter);
 
-        //mAdapterReview = new ReviewAdapter(getActivity(), R.layout.card_review, R.id.txbBeoordelingNaam);
-
         return view;
     }
 
@@ -137,48 +135,24 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
         mUser = user;
         fillData(user);
 
-        //reviews = new ArrayList<Review>();
-
         if (user.getReviews() != null) {
-            reviews.clear();
             reviews.addAll(user.getReviews());
-            //mAdapterReview.addAll(reviews);
-            mReviewRecyclerAdapter.notifyDataSetChanged();
-            //mReviewRecyclerAdapter.updateList(reviews);
-           // mLayoutManager.invalidate();
-            //mLayoutManager.requestLayout();
+            mReviewRecyclerAdapter.updateList(reviews);
         }
 
-
-        //mReviewRecyclerAdapter.updateList(reviews);
-
-        //If list isnt empty, show the list
+        //If list isn't empty, show the list
         if (!reviews.isEmpty()) {
             TextView txbNoReviews = (TextView) getActivity().findViewById(R.id.txbNoReviews);
             txbNoReviews.setVisibility(View.INVISIBLE);
 
-//            LinearLayout layoutReviews = (LinearLayout) getActivity().findViewById(R.id.lstBeoordelingen);
-//            layoutReviews.setVisibility(View.VISIBLE);
+            mReviewRecyclerView.setVisibility(View.VISIBLE);
         }
-
-        //Adding items to linear layouts
-        /*int adaptercountReviews = mAdapterReview.getCount();
-        for (int i = 0; i < adaptercountReviews; i++) {
-            View item = mAdapterReview.getView(i, null, null);
-            item.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //Get info from the item
-                }
-            });
-           // lstReviews.addView(item);
-        }*/
     }
 
     @Override
     public void onLoaderReset(Loader<User> Loader) {
         reviews.clear();
-        //mAdapterReview.notifyDataSetChanged();
+        mReviewRecyclerAdapter.updateList(reviews);
     }
 
     private void fillData(User user) {

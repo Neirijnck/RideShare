@@ -32,6 +32,7 @@ public class ImageFragment extends Fragment
         //Get image from parambundle and assign it to the imageview from the layoutfile
         ImageView image = (ImageView) view.findViewById(R.id.imgWithIndicator);
 
+        
         Picasso.with(getActivity()).load(getArguments().getInt("image")).into(image);
         //image.setImageResource(getArguments().getInt("image"));
 

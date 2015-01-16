@@ -28,7 +28,7 @@
             android:layout_below="@+id/txbDetailSavedTitle"
             android:layout_alignLeft="@+id/txbDetailSavedTitle"
             android:layout_alignStart="@+id/txbDetailSavedTitle"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:layout_marginLeft="5dp"
             />
 
@@ -41,7 +41,7 @@
             android:layout_below="@+id/txbDetailSavedFrom"
             android:layout_alignLeft="@+id/txbDetailSavedFrom"
             android:layout_alignStart="@+id/txbDetailSavedFrom"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="15dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -52,7 +52,7 @@
             android:layout_below="@+id/txbDetailSavedTo"
             android:layout_alignLeft="@+id/txbDetailSavedTo"
             android:layout_alignStart="@+id/txbDetailSavedTo"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="15dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -63,7 +63,7 @@
             android:layout_below="@+id/txbDetailSavedDate"
             android:layout_alignLeft="@+id/txbDetailSavedDate"
             android:layout_alignStart="@+id/txbDetailSavedDate"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="15dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -74,7 +74,7 @@
             android:layout_below="@+id/txbDetailSavedTime"
             android:layout_alignLeft="@+id/txbDetailSavedTime"
             android:layout_alignStart="@+id/txbDetailSavedTime"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="15dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -85,7 +85,7 @@
             android:layout_below="@+id/txbDetailSavedRepeat"
             android:layout_alignLeft="@+id/txbDetailSavedRepeat"
             android:layout_alignStart="@+id/txbDetailSavedRepeat"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="15dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -96,7 +96,7 @@
             android:layout_below="@+id/txbDetailSavedPayment"
             android:layout_alignLeft="@+id/txbDetailSavedPayment"
             android:layout_alignStart="@+id/txbDetailSavedPayment"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="15dp" />
 
         <ListView
             android:layout_width="wrap_content"
