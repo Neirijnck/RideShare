@@ -23,13 +23,14 @@ import java.util.List;
 import nmct.howest.be.rideshare.Models.Match;
 import nmct.howest.be.rideshare.Models.Message;
 import nmct.howest.be.rideshare.Models.Review;
+import nmct.howest.be.rideshare.R;
 import nmct.howest.be.rideshare.RideshareApp;
 
 public class APIHelper {
 
     public static void AddUser(String userName, String firstName, String lastName, String email, String fbToken, String fbLink, String fbID, String location, String gender, String regID, String fbImg, String birthday) {
         try {
-            HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/profile");
+            HttpPost httppost = new HttpPost(RideshareApp.getAppContext().getResources().getString(R.string.API_Profile));
 
             List<NameValuePair> parameters = new ArrayList<NameValuePair>();
             parameters.add(new BasicNameValuePair("userName", userName));
@@ -58,7 +59,7 @@ public class APIHelper {
     public static void EditUser(String userName, String firstName, String lastName, String fbToken, String location)
     {
         try {
-            HttpPut httpput = new HttpPut("http://188.226.154.228:8080/api/v1/profile");
+            HttpPut httpput = new HttpPut(RideshareApp.getAppContext().getResources().getString(R.string.API_Profile));
             httpput.addHeader("Authorization", fbToken);
 
 
@@ -83,7 +84,7 @@ public class APIHelper {
     public static void EditUser(String userName, String firstName, String lastName, String fbToken, String location, String carType)
     {
         try {
-            HttpPut httpput = new HttpPut("http://188.226.154.228:8080/api/v1/profile");
+            HttpPut httpput = new HttpPut(RideshareApp.getAppContext().getResources().getString(R.string.API_Profile));
             httpput.addHeader("Authorization", fbToken);
 
 
@@ -108,7 +109,7 @@ public class APIHelper {
     public static void EditUser(String userName, String firstName, String lastName, String fbToken, String location, int amountOfSeats)
     {
         try {
-            HttpPut httpput = new HttpPut("http://188.226.154.228:8080/api/v1/profile");
+            HttpPut httpput = new HttpPut(RideshareApp.getAppContext().getResources().getString(R.string.API_Profile));
             httpput.addHeader("Authorization", fbToken);
 
 
@@ -135,7 +136,7 @@ public class APIHelper {
     public static void EditUser(String userName, String firstName, String lastName, String fbToken, String location, String carType, String amountOfSeats)
     {
         try {
-            HttpPut httpput = new HttpPut("http://188.226.154.228:8080/api/v1/profile");
+            HttpPut httpput = new HttpPut(RideshareApp.getAppContext().getResources().getString(R.string.API_Profile));
             httpput.addHeader("Authorization", fbToken);
 
 
@@ -162,7 +163,7 @@ public class APIHelper {
         try {
             String dateTime = Utils.parseDateToISOString(date, time);
 
-            HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/trips");
+            HttpPost httppost = new HttpPost(RideshareApp.getAppContext().getResources().getString(R.string.API_Trips));
             httppost.addHeader("Authorization", fbToken);
 
             List<NameValuePair> parameters = new ArrayList<NameValuePair>();
@@ -189,7 +190,7 @@ public class APIHelper {
 
             price = TextUtils.substring(price, 1, price.length());
 
-            HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/trips");
+            HttpPost httppost = new HttpPost(RideshareApp.getAppContext().getResources().getString(R.string.API_Trips));
             httppost.addHeader("Authorization", fbToken);
 
             List<NameValuePair> parameters = new ArrayList<NameValuePair>();
@@ -218,7 +219,7 @@ public class APIHelper {
         try {
             String dateTime = Utils.parseDateToISOString(date, time);
 
-            HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/trips");
+            HttpPost httppost = new HttpPost(RideshareApp.getAppContext().getResources().getString(R.string.API_Trips));
             httppost.addHeader("Authorization", fbToken);
 
             List<NameValuePair> parameters = new ArrayList<NameValuePair>();
@@ -254,7 +255,7 @@ public class APIHelper {
 
             price = TextUtils.substring(price, 1, price.length());
 
-            HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/trips");
+            HttpPost httppost = new HttpPost(RideshareApp.getAppContext().getResources().getString(R.string.API_Trips));
             httppost.addHeader("Authorization", fbToken);
 
             List<NameValuePair> parameters = new ArrayList<NameValuePair>();
@@ -288,7 +289,7 @@ public class APIHelper {
     //Delete Trip
     public static void DeleteTrip(String fbToken, String tripID)
     {
-        HttpDelete httpDelete = new HttpDelete("http://188.226.154.228:8080/api/v1/trips/" + tripID);
+        HttpDelete httpDelete = new HttpDelete(RideshareApp.getAppContext().getResources().getString(R.string.API_Trips) + tripID);
         httpDelete.addHeader("Authorization", fbToken);
 
         DeleteAsync task = new DeleteAsync();
@@ -299,7 +300,7 @@ public class APIHelper {
     public static void AddReview(String fbToken, Review review, String profileId)
     {
         try {
-            HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/profile/"+ profileId +"/review");
+            HttpPost httppost = new HttpPost(RideshareApp.getAppContext().getResources().getString(R.string.API_Profile)+ profileId +"/review");
             httppost.addHeader("Authorization", fbToken);
             List<NameValuePair> parameters = new ArrayList<NameValuePair>();
             parameters.add(new BasicNameValuePair("text", review.getText()));
@@ -320,7 +321,7 @@ public class APIHelper {
     public static void AddMatch(String fbToken, Match match, String tripId)
     {
         try {
-            HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/trip/"+ tripId +"/match");
+            HttpPost httppost = new HttpPost(RideshareApp.getAppContext().getResources().getString(R.string.API_Trips)+ tripId +"/match");
             httppost.addHeader("Authorization", fbToken);
             List<NameValuePair> parameters = new ArrayList<NameValuePair>();
             parameters.add(new BasicNameValuePair("from", match.getFrom()));
@@ -346,7 +347,7 @@ public class APIHelper {
     public static void UpdateMatch(String fbToken, String matchId, int status, String tripId)
     {
         try {
-            HttpPut httpput = new HttpPut("http://188.226.154.228:8080/api/v1/trip/"+ tripId +"/match/" + matchId);
+            HttpPut httpput = new HttpPut(RideshareApp.getAppContext().getResources().getString(R.string.API_Trips)+ tripId +"/match/" + matchId);
             httpput.addHeader("Authorization", fbToken);
             List<NameValuePair> parameters = new ArrayList<NameValuePair>();
             parameters.add(new BasicNameValuePair("status", Integer.toString(status)));
@@ -364,7 +365,7 @@ public class APIHelper {
     public static void AddMessageToMatch(String fbToken, String matchId, Message m, String tripId)
     {
         try {
-            HttpPut httpput = new HttpPut("http://188.226.154.228:8080/api/v1/trip/"+ tripId +"/match/" + matchId);
+            HttpPut httpput = new HttpPut(RideshareApp.getAppContext().getResources().getString(R.string.API_Trips)+ tripId +"/match/" + matchId);
             httpput.addHeader("Authorization", fbToken);
             List<NameValuePair> parameters = new ArrayList<NameValuePair>();
             parameters.add(new BasicNameValuePair("message", m.getText()));

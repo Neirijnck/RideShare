@@ -168,7 +168,7 @@ public class MainActivity extends ActionBarActivity {
                     .setMessage("Vind je deze app nuttig? Steun de ontwikkeling ervan door te doneren aan de ontwikkelaars.")
                     .setPositiveButton("Doneer", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://188.226.154.228:8080/donate"));
+                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.API_Donate)));
                             startActivity(browserIntent);
                         }
                     })

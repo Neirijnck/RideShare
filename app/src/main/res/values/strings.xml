@@ -99,7 +99,9 @@
 
     <!-- API -->
     <string name="Site">http://188.226.154.228</string>
+    <string name="Site_Favicon">http://188.226.154.228/img/favicon.ico</string>
     <string name="API">http://188.226.154.228/api/v1/</string>
+    <string name="API_Donate">http://188.226.154.228/donate</string>
     <string name="API_Profile">http://188.226.154.228/api/v1/profile/</string>
     <string name="API_Trips">http://188.226.154.228/api/v1/trips/</string>
     <string name="API_Trips_Search">http://188.226.154.228/api/v1/trips/search/</string>

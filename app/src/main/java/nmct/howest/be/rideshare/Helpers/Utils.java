@@ -29,6 +29,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
+import nmct.howest.be.rideshare.R;
+import nmct.howest.be.rideshare.RideshareApp;
+
 public class Utils
 {
     public static boolean areAllFalse(boolean[] array)
@@ -204,7 +207,7 @@ public class Utils
     {
         String userName="";
 
-        String urlJsonUser = "http://188.226.154.228:8080/api/v1/profile/";
+        String urlJsonUser = RideshareApp.getAppContext().getResources().getString(R.string.API_Profile);
         urlJsonUser += userID;
 
         HttpClient client = new DefaultHttpClient();
@@ -252,7 +255,7 @@ public class Utils
     {
         String facebookID="";
 
-        String urlJsonUser = "http://188.226.154.228:8080/api/v1/profile/";
+        String urlJsonUser = RideshareApp.getAppContext().getResources().getString(R.string.API_Profile);
         urlJsonUser += userID;
 
         HttpClient client = new DefaultHttpClient();

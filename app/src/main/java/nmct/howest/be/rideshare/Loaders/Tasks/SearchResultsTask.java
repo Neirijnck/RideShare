@@ -73,7 +73,7 @@ public class SearchResultsTask extends AsyncTask<Bundle, Void, List<Trip>>
         try {
             HttpClient httpclient = new DefaultHttpClient();
 
-            HttpPost httppost = new HttpPost("http://188.226.154.228:8080/api/v1/trips/search");
+            HttpPost httppost = new HttpPost(RideshareApp.getAppContext().getResources().getString(R.string.API_Trips_Search));
             httppost.addHeader("Authorization", token);
 
             List<NameValuePair> parameters = new ArrayList<NameValuePair>();

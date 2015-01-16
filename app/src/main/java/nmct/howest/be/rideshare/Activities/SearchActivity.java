@@ -83,9 +83,9 @@ public class SearchActivity extends ActionBarActivity
                 Bundle bundle = new Bundle();
                 bundle.putString("caption", "The best carpool app out there.");
                 bundle.putString("description", "Ik zoek een  rit van "+ van +" naar "+tot+" op "+datum+" om "+ tijd);
-                bundle.putString("link", "http://188.226.154.228:8080/");
+                bundle.putString("link", getResources().getString(R.string.Site));
                 bundle.putString("name", "Share My Ride");
-                bundle.putString("picture", "http://188.226.154.228:8080/img/favicon.ico" );
+                bundle.putString("picture", getResources().getString(R.string.Site_Favicon));
                 new WebDialog.FeedDialogBuilder(SearchActivity.this, Session.getActiveSession(), bundle).setOnCompleteListener(new WebDialog.OnCompleteListener()
                 {
                     @Override

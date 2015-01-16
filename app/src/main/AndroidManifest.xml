@@ -134,7 +134,7 @@
         <!--META DATA-->
         <meta-data
             android:name="nmct.howest.be.rideshare.webservice.auth.location"
-            android:value="http://188.226.154.228:8080" />
+            android:value="http://188.226.154.228" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
