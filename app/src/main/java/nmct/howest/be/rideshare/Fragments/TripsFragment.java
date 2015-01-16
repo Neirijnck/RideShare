@@ -21,6 +21,7 @@ import com.tonicartos.superslim.LinearSectionLayoutManager;
 import com.tonicartos.superslim.SectionLayoutManager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import nmct.howest.be.rideshare.Activities.SearchActivity;
@@ -209,6 +210,9 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
                     mTripsRecyclerView.setVisibility(View.VISIBLE);
                 }
             }
+
+            //Sort trips so it's always same list
+            Collections.sort(mAllTrips, Collections.reverseOrder(new Trip.compareToType()));
 
             // Setting the adapter.
             mTripRecyclerAdapter = new TripRecyclerAdapter(getActivity(), mAllTrips);

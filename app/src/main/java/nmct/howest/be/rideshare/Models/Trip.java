@@ -1,5 +1,6 @@
 package nmct.howest.be.rideshare.Models;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class Trip {
@@ -113,6 +114,16 @@ public class Trip {
         this.matches = matches;
     }
 
-    public Trip() {
+    public Trip() {}
+
+    public static class compareToType implements Comparator
+    {
+        @Override
+        public int compare(Object lhs, Object rhs) {
+            Trip trip1 = (Trip) lhs;
+            Trip trip2 = (Trip) rhs;
+            return trip1.type.compareTo(trip2.type);
+        }
     }
+
 }
