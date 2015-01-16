@@ -1,5 +1,6 @@
 package nmct.howest.be.rideshare.Fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -33,6 +34,7 @@ import nmct.howest.be.rideshare.R;
 
 public class TripsFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<Trip>>
 {
+    //Variables
     private LoaderManager loaderManager;
     private static final int TRIPS_SAVED_LOADER_ID = 0;
     private static final int TRIPS_REQUESTS_LOADER_ID = 10;
@@ -44,10 +46,9 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
     private List<Trip> mRequestTrips = new ArrayList<Trip>();
     private List<Trip> mRequestedTrips = new ArrayList<Trip>();
 
-    private RecyclerView mTripsRecyclerView;
+    private ViewHolder mViews;
     private TripRecyclerAdapter mTripRecyclerAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-
     private GridSectionLayoutManager mGridSectionLayoutManager;
     private SectionLayoutManager mLinearSectionLayoutManager;
     private LayoutManager.SlmFactory mSlmFactory = new LayoutManager.SlmFactory() {
@@ -58,7 +59,6 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
             int sectionKind = section % 2;
             final SectionLayoutManager slm;
             if (sectionKind == 0) {
-                GridSectionLayoutManager grid = mGridSectionLayoutManager;
                 slm = mGridSectionLayoutManager;
             } else {
                 slm = mLinearSectionLayoutManager;
@@ -87,34 +87,6 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-
-        mAllTrips.clear();
-
-        //Restart loaders to get data
-        loaderManager.restartLoader(TRIPS_SAVED_LOADER_ID, null, this).forceLoad();
-        loaderManager.restartLoader(TRIPS_REQUESTS_LOADER_ID, null, this).forceLoad();
-        loaderManager.restartLoader(TRIPS_REQUESTED_LOADER_ID, null, this).forceLoad();
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState)
-    {
-        LayoutManager lm = new LayoutManager();
-        mGridSectionLayoutManager = new GridSectionLayoutManager(lm, getActivity());
-        mGridSectionLayoutManager.setColumnMinimumWidth((int) getResources()
-                .getDimension(R.dimen.grid_column_width));
-        mLinearSectionLayoutManager = new LinearSectionLayoutManager(lm);
-        lm.setSlmFactory(mSlmFactory);
-
-        mTripsRecyclerView = (RecyclerView) view.findViewById(R.id.AllTripsList);
-
-        // Setting the LayoutManager.
-        mTripsRecyclerView.setLayoutManager(lm);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_trips, container, false);
 
@@ -127,6 +99,33 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
         });
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState)
+    {
+        LayoutManager lm = new LayoutManager();
+        mGridSectionLayoutManager = new GridSectionLayoutManager(lm, getActivity());
+        mGridSectionLayoutManager.setColumnMinimumWidth((int) getResources()
+                .getDimension(R.dimen.grid_column_width));
+        mLinearSectionLayoutManager = new LinearSectionLayoutManager(lm);
+        lm.setSlmFactory(mSlmFactory);
+
+        //Get recyclerview and setting adapter
+        mViews = new ViewHolder(view);
+        mViews.initViews(getActivity(), lm);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        mAllTrips.clear();
+
+        //Restart loaders to get data
+        loaderManager.restartLoader(TRIPS_SAVED_LOADER_ID, null, this).forceLoad();
+        loaderManager.restartLoader(TRIPS_REQUESTS_LOADER_ID, null, this).forceLoad();
+        loaderManager.restartLoader(TRIPS_REQUESTED_LOADER_ID, null, this).forceLoad();
     }
 
     @Override
@@ -177,6 +176,7 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
         }
         else if(loader.getId()==TRIPS_REQUESTS_LOADER_ID)
         {
+            //This is a request trip
             for(Trip trip: trips){trip.setType("Ritaanvragen");}
             if(mRequestTrips!=null)
             {
@@ -187,6 +187,7 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
         }
         else if(loader.getId()==TRIPS_REQUESTED_LOADER_ID)
         {
+            //This is a requested trip
             for(Trip trip: trips){trip.setType("Ritverzoeken");}
             if(mRequestedTrips!=null)
             {
@@ -207,16 +208,16 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
                     txbNoTrips.setVisibility(View.INVISIBLE);
 
                     //Show list
-                    mTripsRecyclerView.setVisibility(View.VISIBLE);
+                    mViews.mRecyclerView.setVisibility(View.VISIBLE);
                 }
             }
 
             //Sort trips so it's always same list
             Collections.sort(mAllTrips, Collections.reverseOrder(new Trip.compareToType()));
 
-            // Setting the adapter.
+            //Setting the adapter with complete list
             mTripRecyclerAdapter = new TripRecyclerAdapter(getActivity(), mAllTrips);
-            mTripsRecyclerView.setAdapter(mTripRecyclerAdapter);
+            mViews.setAdapter(mTripRecyclerAdapter);
         }
     }
 
@@ -225,6 +226,23 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
     {
         mAllTrips.clear();
         mTripRecyclerAdapter.updateList(mAllTrips);
+    }
+
+    private static class ViewHolder {
+
+        private final RecyclerView mRecyclerView;
+
+        public ViewHolder(View view) {
+            mRecyclerView = (RecyclerView) view.findViewById(R.id.AllTripsList);
+        }
+
+        public void initViews(Context context, LayoutManager lm) {
+            mRecyclerView.setLayoutManager(lm);
+        }
+
+        public void setAdapter(RecyclerView.Adapter<?> adapter) {
+            mRecyclerView.setAdapter(adapter);
+        }
     }
 
 }

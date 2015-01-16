@@ -4,13 +4,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fab="http://schemas.android.com/apk/res-auto">
 
-    <!--<ScrollView-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="fill_parent"-->
-        <!--android:id="@+id/layout_trip_lists"-->
-        <!--android:visibility="invisible"-->
-        <!-->-->
-
     <RelativeLayout
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -21,98 +14,6 @@
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
         >
-
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:textAppearance="?android:attr/listSeparatorTextViewStyle"-->
-            <!--android:text="@string/Trip_MyRequests"-->
-            <!--android:id="@+id/txbRitAanvragen"/>-->
-
-        <!--<LinearLayout-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="fill_parent"-->
-            <!--android:orientation="vertical"-->
-            <!--android:id="@+id/lstRitAanvragen"-->
-            <!--android:layout_below="@+id/txbRitAanvragen"-->
-            <!--android:layout_weight="1"-->
-            <!--android:fastScrollEnabled="true"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:divider="@null"-->
-            <!--android:dividerHeight="8dp"-->
-            <!--android:layout_alignBottom="@+id/txbRitAanvragen"></LinearLayout>-->
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:textAppearance="?android:attr/listSeparatorTextViewStyle"-->
-            <!--android:text="@string/Trip_Requests"-->
-            <!--android:layout_below="@+id/lstRitAanvragen"-->
-            <!--android:id="@+id/txbRitVerzoeken"-->
-            <!--android:layout_marginTop="22dp" />-->
-
-        <!--<LinearLayout-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="fill_parent"-->
-            <!--android:orientation="vertical"-->
-            <!--android:layout_below="@+id/txbRitVerzoeken"-->
-            <!--android:id="@+id/lstRitVerzoeken"-->
-            <!--android:layout_weight="1"-->
-            <!--android:fastScrollEnabled="true"-->
-            <!--android:divider="@null"-->
-            <!--android:dividerHeight="8dp"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_alignBottom="@+id/txbRitVerzoeken"></LinearLayout>-->
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:textAppearance="?android:attr/listSeparatorTextViewStyle"-->
-            <!--android:text="@string/Trip_SavedTrips"-->
-            <!--android:layout_below="@+id/lstRitVerzoeken"-->
-            <!--android:id="@+id/txbOpgeslagenRitten"-->
-            <!--android:layout_marginTop="22dp"/>-->
-
-        <!--<LinearLayout-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="fill_parent"-->
-            <!--android:orientation="vertical"-->
-            <!--android:layout_below="@+id/txbOpgeslagenRitten"-->
-            <!--android:id="@+id/lstOpgeslagenRitten"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:divider="@null"-->
-            <!--android:dividerHeight="8dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:fastScrollEnabled="true"-->
-            <!--android:layout_alignBottom="@+id/txbOpgeslagenRitten"></LinearLayout>-->
-
-        <!--<ListView-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="fill_parent"-->
-            <!--android:layout_below="@+id/txbOpgeslagenRitten"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:divider="@null"-->
-            <!--android:dividerHeight="8dp"-->
-            <!--android:choiceMode="singleChoice"-->
-            <!--android:id="@+id/savedTripsList"-->
-            <!--android:layout_alignParentBottom="true"></ListView>-->
-
-        <!--<GridView xmlns:android="http://schemas.android.com/apk/res/android"-->
-            <!--android:id="@+id/savedTripsList"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:columnWidth="275dp"-->
-            <!--android:horizontalSpacing="8dp"-->
-            <!--android:numColumns="auto_fit"-->
-            <!--android:paddingTop="8dp"-->
-            <!--android:paddingRight="0dp"-->
-            <!--android:paddingBottom="8dp"-->
-            <!--android:paddingLeft="8dp"-->
-            <!--android:scrollbarStyle="outsideInset"-->
-            <!--android:fastScrollAlwaysVisible="true"-->
-            <!--android:stretchMode="columnWidth"-->
-            <!--android:verticalSpacing="5dp" />-->
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/AllTripsList"
@@ -128,7 +29,6 @@
         </android.support.v7.widget.RecyclerView>
 
     </RelativeLayout>
-    <!--</ScrollView>-->
 
     <com.melnykov.fab.FloatingActionButton
         xmlns:fab="http://schemas.android.com/apk/res-auto"
