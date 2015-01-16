@@ -36,6 +36,7 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
     private static final int TRIPS_SAVED_LOADER_ID = 0;
     private static final int TRIPS_REQUESTS_LOADER_ID = 10;
     private static final int TRIPS_REQUESTED_LOADER_ID = 20;
+    private boolean[] isFinished = {false, false, false};
 
     private List<Trip> mAllTrips = new ArrayList<Trip>();
     private List<Trip> mSavedTrips = new ArrayList<Trip>();
@@ -73,6 +74,10 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
         setHasOptionsMenu(true);
 
         loaderManager = getLoaderManager();
+
+        isFinished[0] = false;
+        isFinished[1] = false;
+        isFinished[2] = false;
 
         //Init loaders to get data
         loaderManager.initLoader(TRIPS_SAVED_LOADER_ID, null, this).forceLoad();
@@ -166,6 +171,7 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
             {
                 mSavedTrips = trips;
                 mAllTrips.addAll(mSavedTrips);
+                isFinished[0] = true;
             }
         }
         else if(loader.getId()==TRIPS_REQUESTS_LOADER_ID)
@@ -175,6 +181,7 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
             {
                 mRequestTrips = trips;
                 mAllTrips.addAll(mRequestTrips);
+                isFinished[1] = true;
             }
         }
         else if(loader.getId()==TRIPS_REQUESTED_LOADER_ID)
@@ -184,13 +191,12 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
             {
                 mRequestedTrips = trips;
                 mAllTrips.addAll(mRequestedTrips);
+                isFinished[2] = true;
             }
         }
 
         //Set adapter when all 3 loaders are ready
-        if(loaderManager.getLoader(TRIPS_SAVED_LOADER_ID).isStarted()
-                &&loaderManager.getLoader(TRIPS_REQUESTS_LOADER_ID).isStarted()
-                &&loaderManager.getLoader(TRIPS_REQUESTED_LOADER_ID).isStarted())
+        if(isFinished[0]==true&&isFinished[1]==true&&isFinished[2]==true)
         {
             //Check if list is not empty
             if(mAllTrips!=null) {

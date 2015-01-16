@@ -8,14 +8,10 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.widget.ProfilePictureView;
 import com.tonicartos.superslim.LayoutManager;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,13 +49,14 @@ public class TripRecyclerAdapter extends RecyclerView.Adapter<TripRecyclerAdapte
         {
             Trip trip = mTrips.get(i);
 
+            String header = trip.getType();
             //Make sections for requests, requested and saved trips
             //Make difference between type of trip
-            if(!TextUtils.equals(lastHeader, trip.getType()))
+            if(!TextUtils.equals(lastHeader, header))
             {
-                sectionFirstPosition = i + headerCount;
-                lastHeader = trip.getType();
                 sectionCount +=1;
+                sectionFirstPosition = i + headerCount;
+                lastHeader = header;
                 headerCount +=1;
                 //Add new header
                 mItems.add(new LineItemHeader(lastHeader, sectionCount, sectionFirstPosition, true));
@@ -98,7 +95,7 @@ public class TripRecyclerAdapter extends RecyclerView.Adapter<TripRecyclerAdapte
 
     @Override
     public int getItemCount() {
-        return mTrips.size();
+        return mItems.size();
     }
 
     @Override
