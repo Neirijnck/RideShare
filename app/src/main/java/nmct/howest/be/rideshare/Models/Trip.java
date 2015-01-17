@@ -126,4 +126,14 @@ public class Trip {
         }
     }
 
+    public static class compareToDate implements Comparator
+    {
+        @Override
+        public int compare(Object lhs, Object rhs) {
+            Trip trip1 = (Trip) lhs;
+            Trip trip2 = (Trip) rhs;
+            return trip1.datetime.compareTo(trip2.datetime);
+        }
+    }
+
 }

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.JsonReader;
+import android.util.JsonToken;
 import android.util.Log;
 
 import org.apache.http.HttpEntity;
@@ -115,23 +116,23 @@ public class SpecialTripsLoader extends AsyncTaskLoader<List<Trip>>
                                         List<Message> messages = new ArrayList<Message>();
                                         reader.beginArray();
                                         while (reader.hasNext()) {
-                                            Message message = new Message();
-                                            reader.beginObject();
-                                            while (reader.hasNext()) {
-                                                String key_four = reader.nextName();
-                                                if (key_four.equals("userID")) {
-                                                    message.setUserID(reader.nextString());
-                                                } else if (key_four.equals("datetime")) {
-                                                    message.setDatetime(reader.nextString());
-                                                } else if (key_four.equals("text")) {
-                                                    message.setText(reader.nextString());
-                                                } else {
-                                                    reader.skipValue();
+                                                Message message = new Message();
+                                                reader.beginObject();
+                                                while (reader.hasNext()) {
+                                                    String key_four = reader.nextName();
+                                                    if (key_four.equals("userID")) {
+                                                        message.setUserID(reader.nextString());
+                                                    } else if (key_four.equals("datetime")) {
+                                                        message.setDatetime(reader.nextString());
+                                                    } else if (key_four.equals("text")) {
+                                                        message.setText(reader.nextString());
+                                                    } else {
+                                                        reader.skipValue();
+                                                    }
                                                 }
+                                                reader.endObject();
+                                                messages.add(message);
                                             }
-                                            reader.endObject();
-                                            messages.add(message);
-                                        }
                                         reader.endArray();
                                         match.setMessages(messages);
                                     } else if (key_third.equals("status")) {
@@ -142,6 +143,7 @@ public class SpecialTripsLoader extends AsyncTaskLoader<List<Trip>>
                                     }
                                 }
                                 match.setFacebookID(Utils.getUserFacebookIDFromUserID(token,match.getUserID()));
+                                match.setUserName(Utils.getUserNameFromUserID(token, match.getUserID()));
                                 reader.endObject();
                                 matches.add(match);
                             }

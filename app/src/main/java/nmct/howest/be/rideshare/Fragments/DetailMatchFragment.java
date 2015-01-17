@@ -19,6 +19,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import nmct.howest.be.rideshare.Activities.MainActivity;
 import nmct.howest.be.rideshare.Activities.OtherProfileActivity;
 import nmct.howest.be.rideshare.Helpers.APIHelper;
 import nmct.howest.be.rideshare.Helpers.Utils;
@@ -171,7 +172,9 @@ public class DetailMatchFragment extends Fragment {
                 }
                 match.setMessages(messages);
                 APIHelper.AddMatch(token, match, mTrip.getID());
-                getActivity().finish();
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
     }

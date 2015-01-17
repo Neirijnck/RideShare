@@ -88,7 +88,7 @@ public class SearchActivity extends ActionBarActivity
                     bundle.putString("description", "Ik zoek een  rit van "+ van +" naar "+tot+" op "+datum+" om "+ tijd);
                     bundle.putString("link", getResources().getString(R.string.Site));
                     bundle.putString("name", "Share My Ride");
-                    bundle.putString("picture", getResources().getString(R.string.Site_Favicon));
+                    bundle.putString("picture", getResources().getString(R.string.Site_Icon));
                     new WebDialog.FeedDialogBuilder(SearchActivity.this, Session.getActiveSession(), bundle).setOnCompleteListener(new WebDialog.OnCompleteListener()
                     {
                         @Override

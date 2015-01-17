@@ -25,8 +25,9 @@
         android:layout_toEndOf="@+id/imgProfilePicture"
         android:textStyle="bold"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="-5dp"
         android:layout_toRightOf="@+id/imgProfilePicture"
-        android:layout_marginLeft="16dp" />
+        android:layout_marginLeft="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -70,6 +71,7 @@
         android:layout_alignLeft="@+id/txtGenderAge"
         android:layout_alignStart="@+id/txtGenderAge"
         android:layout_marginTop="2dp"
+        android:layout_marginBottom="5dp"
         android:textSize="17sp" />
 
     <RelativeLayout

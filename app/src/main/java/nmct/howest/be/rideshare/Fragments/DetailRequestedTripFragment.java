@@ -1,5 +1,6 @@
 package nmct.howest.be.rideshare.Fragments;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import nmct.howest.be.rideshare.Activities.OtherProfileActivity;
 import nmct.howest.be.rideshare.Adapters.MessagesAdapter;
 import nmct.howest.be.rideshare.Helpers.APIHelper;
 import nmct.howest.be.rideshare.Helpers.Utils;
@@ -157,7 +159,7 @@ public class DetailRequestedTripFragment extends Fragment {
 
         @Override
         public void onLoadFinished(Loader<Trip> loader, Trip trip) {
-            urlUser = getResources().getString(R.string.API_Profile) + trip.getUserID();
+            urlUser = getResources().getString(R.string.API_Profile) + trip.getMatches().get(0).getUserID();
             getLoaderManager().initLoader(USER_LOADER_ID, null, UserLoaderListener).forceLoad();
             fillData(trip);
         }
@@ -201,7 +203,16 @@ public class DetailRequestedTripFragment extends Fragment {
 
     private void LoadUser(User user)
     {
+        final String userID = user.getID();
         imgDetailRequested.setImageBitmap(user.getBitmapFb());
+        imgDetailRequested.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), OtherProfileActivity.class);
+                intent.putExtra("userID", userID);
+                getActivity().startActivity(intent);
+            }
+        });
         txbDetailRequestedName.setText(user.getFirstName() + " " + user.getLastName());
     }
 

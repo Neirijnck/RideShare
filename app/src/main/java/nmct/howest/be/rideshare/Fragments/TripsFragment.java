@@ -170,6 +170,10 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
             if(mSavedTrips!=null)
             {
                 mSavedTrips = trips;
+
+                //Sort trips on date
+                Collections.sort(mSavedTrips, Collections.reverseOrder(new Trip.compareToDate()));
+
                 mAllTrips.addAll(mSavedTrips);
                 isFinished[0] = true;
             }
@@ -181,6 +185,10 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
             if(mRequestTrips!=null)
             {
                 mRequestTrips = trips;
+
+                //Sort trips on date
+                Collections.sort(mRequestTrips, Collections.reverseOrder(new Trip.compareToDate()));
+
                 mAllTrips.addAll(mRequestTrips);
                 isFinished[1] = true;
             }
@@ -192,6 +200,10 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
             if(mRequestedTrips!=null)
             {
                 mRequestedTrips = trips;
+
+                //Sort trips on date
+                Collections.sort(mRequestedTrips, Collections.reverseOrder(new Trip.compareToDate()));
+
                 mAllTrips.addAll(mRequestedTrips);
                 isFinished[2] = true;
             }

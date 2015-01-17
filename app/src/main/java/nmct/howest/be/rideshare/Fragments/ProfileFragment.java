@@ -76,6 +76,16 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        reviews.clear();
+
+        //Restart loader to get data
+        getLoaderManager().restartLoader(USER_LOADER_ID, null, this).forceLoad();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_other_profile, container, false);
@@ -234,12 +244,17 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
                 int rating = (int)ratingBar.getRating();
 
                 EditText text = (EditText) popDialog.findViewById(R.id.editTextDialogUserInput);
-                Review review = new Review(CurrentUser.getID(), CurrentUser.getUserName(), date, rating, text.getText().toString().trim());
+                String reviewText = text.getText().toString().trim();
+                Review review = new Review(CurrentUser.getID(), CurrentUser.getUserName(), date, rating, reviewText);
                 SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
                 String token = pref.getString("accessToken", "");
                 APIHelper.AddReview(token,review,UserId);
                 Log.d("time", text.getText().toString()+ " " + rating);
                 popDialog.dismiss();
+
+                //Restart loader to get data
+                reviews.clear();
+                getLoaderManager().restartLoader(USER_LOADER_ID, null, ProfileFragment.this).forceLoad();
             }
         });
         popDialog.show();

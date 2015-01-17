@@ -1,12 +1,20 @@
 package nmct.howest.be.rideshare.Fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -21,7 +29,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import nmct.howest.be.rideshare.Activities.OtherProfileActivity;
 import nmct.howest.be.rideshare.Adapters.MessagesAdapter;
+import nmct.howest.be.rideshare.Helpers.APIHelper;
 import nmct.howest.be.rideshare.Helpers.Utils;
 import nmct.howest.be.rideshare.Loaders.Json.ProfileLoader;
 import nmct.howest.be.rideshare.Loaders.Json.TripLoader;
@@ -30,6 +40,7 @@ import nmct.howest.be.rideshare.Models.Message;
 import nmct.howest.be.rideshare.Models.Trip;
 import nmct.howest.be.rideshare.Models.User;
 import nmct.howest.be.rideshare.R;
+import nmct.howest.be.rideshare.RideshareApp;
 
 public class DetailRequestTripFragment extends Fragment {
 
@@ -56,6 +67,9 @@ public class DetailRequestTripFragment extends Fragment {
     private EditText txtDetailRequestAddMessage;
     private Button btnDetailRequestAddMessage;
 
+    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(RideshareApp.getAppContext());
+    String token = pref.getString("accessToken", "");
+
     public static DetailRequestTripFragment newInstance(String Id, String matchId) {
         DetailRequestTripFragment fragment = new DetailRequestTripFragment();
         Bundle args = new Bundle();
@@ -66,8 +80,47 @@ public class DetailRequestTripFragment extends Fragment {
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_detail, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id)
+        {
+            case R.id.action_delete:
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Verwijderen aanvraag");
+                builder.setMessage("Ben je zeker dat je deze aanvraag wilt verwijderen?");
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Delete trip request
+                        APIHelper.DeleteRequest(token, getArguments().getString("id"), getArguments().getString("matchID"));
+
+                        //Get back to tripsfragment
+                        getActivity().finish();
+                    }
+                });
+                builder.setNegativeButton("Annuleer", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Just dismiss the dialog
+                        dialog.dismiss();
+                    }
+                });
+                builder.show();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         urlTrip = getResources().getString(R.string.API_Trips) + getArguments().getString("id");
 
         getLoaderManager().initLoader(TRIP_LOADER_ID, null, TripLoaderListener).forceLoad();
@@ -192,7 +245,16 @@ public class DetailRequestTripFragment extends Fragment {
 
     private void LoadUser(User user)
     {
+        final String userID = user.getID();
         imgDetailRequest.setImageBitmap(user.getBitmapFb());
+        imgDetailRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), OtherProfileActivity.class);
+                intent.putExtra("userID", userID);
+                getActivity().startActivity(intent);
+            }
+        });
         txbDetailRequestName.setText(user.getFirstName() + " " + user.getLastName());
     }
 

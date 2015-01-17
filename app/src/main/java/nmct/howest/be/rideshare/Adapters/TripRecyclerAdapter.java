@@ -160,12 +160,14 @@ public class TripRecyclerAdapter extends RecyclerView.Adapter<TripRecyclerAdapte
                 final Match m = new Match();
                 for(Match match: trip.getMatches())
                 {
+                    m.setId(match.getId());
                     m.setFrom(match.getFrom());
                     m.setTo(match.getTo());
                     m.setDatetime(Utils.parseISOStringToDate(match.getDatetime()));
                     m.setStatus(match.getStatus());
                     m.setUserID(match.getUserID());
                     m.setFacebookID(match.getFacebookID());
+                    m.setUserName(match.getUserName());
                 }
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -174,13 +176,15 @@ public class TripRecyclerAdapter extends RecyclerView.Adapter<TripRecyclerAdapte
                         Intent intent = new Intent(mContext, DetailsActivity.class);
                         Bundle b = new Bundle();
                         b.putString("id", trip.getID());
+                        b.putString("matchID", m.getId());
                         b.putInt("type", 1);
                         intent.putExtras(b);
                         mContext.startActivity(intent);
                     }
                 });
 
-                holder.txtTripInfoDate.setText("Aanvraag naar " + m.getTo());
+                holder.txtTripTitle.setText(m.getUserName());
+                holder.txtTripInfoDate.setText("Deed aanvraag naar " + m.getTo());
                 holder.txtTripInfo.setText("Status: " + Utils.convertStatus(m.getStatus()));
                 holder.txtTripPrice.setText(m.getDatetime());
 
@@ -192,12 +196,14 @@ public class TripRecyclerAdapter extends RecyclerView.Adapter<TripRecyclerAdapte
                 final Match m = new Match();
                 for(Match match: trip.getMatches())
                 {
+                    m.setId(match.getId());
                     m.setFrom(match.getFrom());
                     m.setTo(match.getTo());
                     m.setDatetime(Utils.parseISOStringToDate(match.getDatetime()));
                     m.setStatus(match.getStatus());
                     m.setUserID(match.getUserID());
                     m.setFacebookID(match.getFacebookID());
+                    m.setUserName(match.getUserName());
                 }
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -206,12 +212,14 @@ public class TripRecyclerAdapter extends RecyclerView.Adapter<TripRecyclerAdapte
                         Intent intent = new Intent(mContext, DetailsActivity.class);
                         Bundle b = new Bundle();
                         b.putString("id", trip.getID());
+                        b.putString("matchID", m.getId());
                         b.putInt("type", 0);
                         intent.putExtras(b);
                         mContext.startActivity(intent);
                     }
                 });
 
+                holder.txtTripTitle.setText(m.getUserName());
                 holder.txtTripInfoDate.setText("Wil meerijden naar " + m.getTo());
                 holder.txtTripPrice.setText(m.getDatetime());
                 holder.txtTripInfo.setText("Status: " + Utils.convertStatus(m.getStatus()));

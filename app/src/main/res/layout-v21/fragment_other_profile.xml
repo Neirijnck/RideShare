@@ -17,7 +17,7 @@
         android:id="@+id/txtOtherTitle"
         android:textStyle="bold"
         android:layout_marginLeft="5dp"
-        android:layout_marginBottom="5dp"/>
+        android:layout_marginBottom="8dp"/>
 
     <com.facebook.widget.ProfilePictureView
         android:layout_width="130dp"
@@ -35,7 +35,8 @@
         android:layout_toEndOf="@+id/imgOtherProfilePicture"
         android:textStyle="bold"
         android:layout_toRightOf="@+id/imgOtherProfilePicture"
-        android:layout_marginLeft="16dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="-5dp"
         android:layout_below="@+id/txtOtherTitle" />
 
     <TextView
@@ -80,6 +81,7 @@
         android:layout_alignLeft="@+id/txtOtherGenderAge"
         android:layout_alignStart="@+id/txtOtherGenderAge"
         android:layout_marginTop="2dp"
+        android:layout_marginBottom="5dp"
         android:textSize="17sp" />
 
     <Button

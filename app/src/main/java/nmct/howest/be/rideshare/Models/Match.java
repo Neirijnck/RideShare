@@ -11,6 +11,7 @@ public class Match {
     private String datetime = "";
     private List<Message> messages;
     private Integer status;
+    private String userName="";
     private String facebookID="";
 
     //Getters en setters
@@ -77,6 +78,14 @@ public class Match {
 
     public void setFacebookID(String facebookID) {
         this.facebookID = facebookID;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     //Ctor
