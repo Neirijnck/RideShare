@@ -15,8 +15,7 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:focusable="true"
-        android:focusableInTouchMode="true"
-        >
+        android:focusableInTouchMode="true">
 
         <com.facebook.widget.ProfilePictureView
             android:layout_width="110dp"
@@ -37,8 +36,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="15dp"
-            />
+            android:layout_marginTop="15dp" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -84,8 +82,7 @@
             android:layout_toEndOf="@+id/imgIconProfileCar"
             android:layout_below="@+id/txtEditPlace"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="15dp"
-            />
+            android:layout_marginTop="15dp"/>
 
         <EditText
             android:layout_width="wrap_content"
@@ -138,16 +135,17 @@
         <Button
             android:id="@+id/btnEditSaveProfile"
             android:layout_width="120dp"
-            android:layout_height="36dp"
+            android:layout_height="38dp"
             android:text="@string/Save"
             android:textAllCaps="true"
             android:layout_below="@+id/txtEditPlaces"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:textColor="@color/rideshare_secondary"
             android:background="@drawable/button_selector"
             android:elevation="2dp"/>
 
     </RelativeLayout>
+
 </ScrollView>

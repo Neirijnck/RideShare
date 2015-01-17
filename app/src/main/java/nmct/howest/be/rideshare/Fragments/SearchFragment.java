@@ -61,7 +61,7 @@ public class SearchFragment extends Fragment
         chkShare = (CheckBox) view.findViewById(R.id.chkShareOnFacebook);
 
         //SearchActivity
-        btnSearch = (Button) view.findViewById(R.id.btnZoeken);
+        btnSearch = (Button) view.findViewById(R.id.btnSearch);
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)

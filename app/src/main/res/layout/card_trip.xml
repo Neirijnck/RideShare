@@ -13,15 +13,13 @@
         android:minWidth="300dp"
         android:layout_weight=".100"
         android.support.v7.cardview:cardElevation="1dp"
-        card_view:cardBackgroundColor="@color/rideshare_card"
-        >
+        card_view:cardBackgroundColor="@color/rideshare_card">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:minWidth="275dp"
-            android:layout_weight=".100"
-            >
+            android:layout_weight=".100">
 
         <com.facebook.widget.ProfilePictureView
             android:layout_width="85dp"
@@ -47,8 +45,7 @@
             android:layout_alignTop="@+id/imgTripPicture"
             android:layout_toRightOf="@+id/imgTripPicture"
             android:layout_marginTop="2dp"
-            android:layout_marginLeft="4dp"
-            />
+            android:layout_marginLeft="4dp"/>
 
 
         <TextView
@@ -61,8 +58,7 @@
             android:layout_below="@+id/txtTripTitle"
             android:layout_alignLeft="@+id/txtTripTitle"
             android:layout_alignStart="@+id/txtTripTitle"
-            android:textSize="12sp"
-            />
+            android:textSize="12sp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -72,8 +68,7 @@
                 android:layout_below="@+id/txtTripPrice"
                 android:layout_toRightOf="@+id/imgTripPicture"
                 android:layout_toEndOf="@+id/imgTripPicture"
-                android:layout_marginLeft="2dp"
-                />
+                android:layout_marginLeft="2dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -83,8 +78,7 @@
                 android:layout_below="@+id/txtTripInfoDate"
                 android:layout_alignLeft="@+id/txtTripInfoDate"
                 android:layout_alignStart="@+id/txtTripInfoDate"
-                android:id="@+id/txtTripPrice"
-                />
+                android:id="@+id/txtTripPrice"/>
 
         </RelativeLayout>
 

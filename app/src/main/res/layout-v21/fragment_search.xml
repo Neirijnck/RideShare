@@ -1,12 +1,12 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="wrap_content">
+
     <RelativeLayout
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="nmct.howest.be.rideshare.Activities.Fragments.SearchFragment"
+        tools:context="nmct.howest.be.rideshare.Fragments.SearchFragment"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
@@ -83,14 +83,13 @@
             android:checked="false"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:textColor="@color/rideshare_text"
-            />
+            android:textColor="@color/rideshare_text" />
 
         <Button
             android:layout_width="120dp"
             android:layout_height="45dp"
             android:text="@string/Searching"
-            android:id="@+id/btnZoeken"
+            android:id="@+id/btnSearch"
             android:layout_below="@+id/chkShareOnFacebook"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -98,8 +97,7 @@
             android:textAllCaps="true"
             android:textColor="@color/rideshare_secondary"
             android:elevation="2dp"
-            android:stateListAnimator="@anim/button_elevation"
-            />
+            android:stateListAnimator="@anim/button_elevation"/>
 
         <ImageView
             android:layout_width="28dp"
@@ -128,4 +126,5 @@
             android:layout_alignParentStart="true"
             android:src="@drawable/ic_access_time_grey600_36dp" />
     </RelativeLayout>
+
 </ScrollView>

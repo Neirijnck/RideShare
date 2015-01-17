@@ -22,6 +22,7 @@ import com.facebook.widget.ProfilePictureView;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
@@ -135,6 +136,10 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
 
         if (user.getReviews() != null) {
             reviews.addAll(user.getReviews());
+
+            //Sort list so it's always the same
+            Collections.sort(reviews, Collections.reverseOrder(new Review.compareToDate()));
+
             mReviewRecyclerAdapter.updateList(reviews);
         }
 
@@ -154,10 +159,10 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
     }
 
     private void fillData(User user) {
-        txtName = (TextView) getView().findViewById(R.id.txtNaam);
-        txtPlace = (TextView) getView().findViewById(R.id.txtPlaats);
-        txtGenderAge = (TextView) getView().findViewById(R.id.txtGeslachtLeeftijd);
-        txtCar = (TextView) getView().findViewById(R.id.txtAuto);
+        txtName = (TextView) getView().findViewById(R.id.txtName);
+        txtPlace = (TextView) getView().findViewById(R.id.txtPlace);
+        txtGenderAge = (TextView) getView().findViewById(R.id.txtGenderAge);
+        txtCar = (TextView) getView().findViewById(R.id.txtCar);
         txtUserName = (TextView) getView().findViewById(R.id.txtUserName);
         profilePictureView = (ProfilePictureView) getView().findViewById(R.id.imgProfilePicture);
 

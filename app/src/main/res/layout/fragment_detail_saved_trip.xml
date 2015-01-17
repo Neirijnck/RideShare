@@ -29,8 +29,7 @@
             android:layout_alignLeft="@+id/txbDetailSavedTitle"
             android:layout_alignStart="@+id/txbDetailSavedTitle"
             android:layout_marginTop="15dp"
-            android:layout_marginLeft="5dp"
-            />
+            android:layout_marginLeft="5dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -122,8 +121,7 @@
             android:layout_alignTop="@+id/txbDetailSavedFrom"
             android:layout_toRightOf="@+id/txbDetailSavedPayment"
             android:layout_toEndOf="@+id/txbDetailSavedPayment"
-            android:layout_marginLeft="60dp"
-            />
+            android:layout_marginLeft="60dp" />
 
         <TextView
             android:layout_width="wrap_content"

@@ -81,18 +81,18 @@ public class PlanFragment extends Fragment{
 
         repeatSwitch = (SwitchCompat) view.findViewById(R.id.repeatSwitch);
         tglBtns = (LinearLayout) view.findViewById(R.id.tglBtns);
-        txtPrice = (EditText) view.findViewById(R.id.txtPrice);
-        txtNaarPlan = (EditText) view.findViewById(R.id.txtNaarPlan);
-        txtVanPlan = (EditText) view.findViewById(R.id.txtVanPlan);
-        btnOpslaan = (Button) view.findViewById(R.id.btnOpslaan);
+        txtPrice = (EditText) view.findViewById(R.id.txtPlanPrice);
+        txtNaarPlan = (EditText) view.findViewById(R.id.txtPlanTo);
+        txtVanPlan = (EditText) view.findViewById(R.id.txtPlanFrom);
+        btnOpslaan = (Button) view.findViewById(R.id.btnPlanSave);
 
-        tglMo = (ToggleButton) view.findViewById(R.id.tglMaandag);
-        tglTu = (ToggleButton) view.findViewById(R.id.tglDinsdag);
-        tglWe = (ToggleButton) view.findViewById(R.id.tglWoensdag);
-        tglTh = (ToggleButton) view.findViewById(R.id.tglDonderdag);
-        tglFr = (ToggleButton) view.findViewById(R.id.tglVrijdag);
-        tglSa = (ToggleButton) view.findViewById(R.id.tglZaterdag);
-        tglSu = (ToggleButton) view.findViewById(R.id.tglZondag);
+        tglMo = (ToggleButton) view.findViewById(R.id.tglMonday);
+        tglTu = (ToggleButton) view.findViewById(R.id.tglTuesday);
+        tglWe = (ToggleButton) view.findViewById(R.id.tglWednesday);
+        tglTh = (ToggleButton) view.findViewById(R.id.tglThursday);
+        tglFr = (ToggleButton) view.findViewById(R.id.tglFriday);
+        tglSa = (ToggleButton) view.findViewById(R.id.tglSaturday);
+        tglSu = (ToggleButton) view.findViewById(R.id.tglSunday);
 
         //Enable togglebuttons when switch is on
         repeatSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -103,7 +103,7 @@ public class PlanFragment extends Fragment{
         });
 
         //Date picker
-        txbDatePlan = (EditText) view.findViewById(R.id.txtDatePlan);
+        txbDatePlan = (EditText) view.findViewById(R.id.txtPlanDate);
         txbDatePlan.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -114,7 +114,7 @@ public class PlanFragment extends Fragment{
         });
 
         //Time picker
-        txbTimePlan = (EditText) view.findViewById(R.id.txtTimePlan);
+        txbTimePlan = (EditText) view.findViewById(R.id.txtPlanTime);
         txbTimePlan.setOnClickListener(new View.OnClickListener() {
 
             @Override

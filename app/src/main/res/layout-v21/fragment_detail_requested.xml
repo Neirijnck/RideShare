@@ -45,8 +45,7 @@
             android:layout_alignLeft="@+id/rlDetailRequested"
             android:layout_alignStart="@+id/rlDetailRequested"
             android:layout_marginTop="8dp"
-            android:layout_marginLeft="15dp"
-            />
+            android:layout_marginLeft="15dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -123,7 +122,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/Added_Message"
                 android:id="@+id/txbDetailRequestedMatches"
-                android:layout_marginLeft="15dp"/>
+                android:layout_marginLeft="15dp" />
 
             <ListView
                 android:layout_width="wrap_content"
@@ -155,10 +154,10 @@
                     android:layout_toLeftOf="@+id/btnDetailRequestedAddMessage"
                     android:imeOptions="actionSend"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp" />
+                    android:layout_marginRight="10dp" />
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="98dp"
                     android:layout_height="45dp"
                     android:text="@string/Button_Send"
                     android:id="@+id/btnDetailRequestedAddMessage"
@@ -170,6 +169,7 @@
                     android:textAllCaps="true"
                     android:elevation="2dp"
                     android:stateListAnimator="@anim/button_elevation" />
+
             </RelativeLayout>
         </LinearLayout>
 
@@ -197,8 +197,7 @@
                 android:elevation="2dp"
                 android:stateListAnimator="@anim/button_elevation"
                 android:layout_marginLeft="15dp"
-                android:layout_marginBottom="10dp"
-                />
+                android:layout_marginBottom="10dp" />
 
             <Button
                 android:layout_width="165dp"
@@ -226,8 +225,7 @@
             android:layout_alignTop="@+id/txbDetailRequestedFrom"
             android:layout_toRightOf="@+id/txbDetailRequestedFrom"
             android:layout_toEndOf="@+id/txbDetailRequestedFrom"
-            android:layout_marginLeft="50dp"
-            />
+            android:layout_marginLeft="50dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -270,4 +268,5 @@
             android:layout_alignStart="@+id/txtDetailRequestedDate" />
 
     </RelativeLayout>
+
 </ScrollView>

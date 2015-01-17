@@ -29,6 +29,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
@@ -115,9 +116,7 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
         }
 
         @Override
-        public void onLoaderReset(Loader<User> loader) {
-
-        }
+        public void onLoaderReset(Loader<User> loader) {}
     };
 
     //Implementation of ProfileLoader
@@ -132,53 +131,36 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
         fillData(user);
         getActivity().setTitle(user.getUserName());
 
-        //reviews = new ArrayList<Review>();
-
         if (user.getReviews() != null) {
-            reviews.clear();
             reviews.addAll(user.getReviews());
-            //mAdapterReview.addAll(reviews);
-            mReviewRecyclerAdapter.notifyDataSetChanged();
-            //mReviewRecyclerAdapter.updateList(reviews);
-            // mLayoutManager.invalidate();
-            //mLayoutManager.requestLayout();
+
+            //Sort list so it's always the same
+            Collections.sort(reviews, Collections.reverseOrder(new Review.compareToDate()));
+
+            mReviewRecyclerAdapter.updateList(reviews);
         }
 
         //If list isnt empty, show the list
         if (!reviews.isEmpty()) {
-            TextView txbNoReviews = (TextView) getActivity().findViewById(R.id.txbNoReviews);
+            TextView txbNoReviews = (TextView) getActivity().findViewById(R.id.txbProfileNoReviews);
             txbNoReviews.setVisibility(View.INVISIBLE);
 
-//            LinearLayout layoutReviews = (LinearLayout) getActivity().findViewById(R.id.lstBeoordelingen);
-//            layoutReviews.setVisibility(View.VISIBLE);
+            mReviewRecyclerView.setVisibility(View.VISIBLE);
         }
-
-//        //Adding items to linear layouts
-//        int adaptercountReviews = mAdapterReview.getCount();
-//        for (int i = 0; i < adaptercountReviews; i++) {
-//            View item = mAdapterReview.getView(i, null, null);
-//            item.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    //Get info from the item
-//                }
-//            });
-//            lstReviews.addView(item);
-//        }
     }
 
     @Override
     public void onLoaderReset(Loader<User> Loader) {
         reviews.clear();
-        //mAdapterReview.notifyDataSetChanged();
+        mReviewRecyclerAdapter.updateList(reviews);
     }
 
     private void fillData(User user) {
 
-        txtName = (TextView) getView().findViewById(R.id.txtOtherNaam);
-        txtPlace = (TextView) getView().findViewById(R.id.txtOtherPlaats);
-        txtGenderAge = (TextView) getView().findViewById(R.id.txtOtherGeslachtLeeftijd);
-        txtCar = (TextView) getView().findViewById(R.id.txtOtherAuto);
+        txtName = (TextView) getView().findViewById(R.id.txtOtherName);
+        txtPlace = (TextView) getView().findViewById(R.id.txtOtherPlace);
+        txtGenderAge = (TextView) getView().findViewById(R.id.txtOtherGenderAge);
+        txtCar = (TextView) getView().findViewById(R.id.txtOtherCar);
         txtUserName = (TextView) getView().findViewById(R.id.txtOtherUserName);
         profilePictureView = (ProfilePictureView) getView().findViewById(R.id.imgOtherProfilePicture);
 
@@ -260,7 +242,6 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
                 popDialog.dismiss();
             }
         });
-
         popDialog.show();
     }
 

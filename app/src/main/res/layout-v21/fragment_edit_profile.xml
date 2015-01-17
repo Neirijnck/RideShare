@@ -3,20 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context="nmct.howest.be.rideshare.Activities.Fragments.EditProfileFragment">
+    tools:context="nmct.howest.be.rideshare.Fragments.EditProfileFragment">
 
     <RelativeLayout
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="nmct.howest.be.rideshare.Activities.Fragments.PlanningFragment"
+        tools:context="nmct.howest.be.rideshare.Fragments.PlanFragment"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:focusable="true"
-        android:focusableInTouchMode="true"
-        >
+        android:focusableInTouchMode="true">
 
         <com.facebook.widget.ProfilePictureView
             android:layout_width="110dp"
@@ -37,8 +36,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="25dp"
-            />
+            android:layout_marginTop="15dp" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -49,7 +47,18 @@
             android:layout_below="@+id/txtEditName"
             android:layout_alignLeft="@+id/txtEditPlace"
             android:layout_alignStart="@+id/txtEditPlace"
-            android:layout_marginTop="25dp" />
+            android:layout_marginTop="15dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtEditUserName"
+            android:layout_alignParentEnd="true"
+            android:hint="@string/Profile_UserName"
+            android:layout_below="@+id/txtEditFirstName"
+            android:layout_alignLeft="@+id/txtEditPlace"
+            android:layout_alignStart="@+id/txtEditPlace"
+            android:layout_marginTop="15dp" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -60,8 +69,8 @@
             android:layout_toRightOf="@+id/imgIconProfileCar"
             android:layout_toEndOf="@+id/imgIconProfileCar"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="25dp"
-            android:layout_below="@+id/txtEditFirstName" />
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/txtEditUserName" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -73,8 +82,7 @@
             android:layout_toEndOf="@+id/imgIconProfileCar"
             android:layout_below="@+id/txtEditPlace"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="25dp"
-            />
+            android:layout_marginTop="15dp"/>
 
         <EditText
             android:layout_width="wrap_content"
@@ -86,7 +94,7 @@
             android:layout_below="@+id/txtEditCarType"
             android:layout_alignLeft="@+id/txtEditCarType"
             android:layout_alignStart="@+id/txtEditCarType"
-            android:layout_marginTop="25dp" />
+            android:layout_marginTop="15dp" />
 
         <ImageView
             android:layout_width="28dp"
@@ -138,4 +146,5 @@
             android:stateListAnimator="@anim/button_elevation"/>
 
     </RelativeLayout>
+
 </ScrollView>

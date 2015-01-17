@@ -70,9 +70,9 @@ public class ReviewRecyclerAdapter extends RecyclerView.Adapter<ReviewRecyclerAd
         public RecyclerViewHolder(View card)
         {
             super(card);
-            this.txtReviewName = (TextView) card.findViewById(R.id.txbBeoordelingNaam);
-            this.txtReview = (TextView) card.findViewById(R.id.txbBeoordeling);
-            this.txtReviewDate = (TextView) card.findViewById(R.id.txbBeoordelingDate);
+            this.txtReviewName = (TextView) card.findViewById(R.id.txbReviewName);
+            this.txtReview = (TextView) card.findViewById(R.id.txbReview);
+            this.txtReviewDate = (TextView) card.findViewById(R.id.txbReviewDate);
             this.star1 = (ImageView) card.findViewById(R.id.imgStar1);
             this.star2 = (ImageView) card.findViewById(R.id.imgStar2);
             this.star3 = (ImageView) card.findViewById(R.id.imgStar3);

@@ -1,5 +1,7 @@
 package nmct.howest.be.rideshare.Models;
 
+import java.util.Comparator;
+
 public class Review {
     //Fields
     private String userID = "";
@@ -62,7 +64,16 @@ public class Review {
         this.text = text;
     }
 
-    public Review() {
+    public Review() {}
+
+    public static class compareToDate implements Comparator
+    {
+        @Override
+        public int compare(Object lhs, Object rhs) {
+            Review review1 = (Review) lhs;
+            Review review2 = (Review) rhs;
+            return review1.date.compareTo(review2.date);
+        }
     }
 
 }

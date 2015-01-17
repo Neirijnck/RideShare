@@ -127,7 +127,6 @@ public class EditProfileFragment extends Fragment
                 }
             }
         });
-
         return v;
     }
 

@@ -20,7 +20,7 @@
         <com.facebook.widget.ProfilePictureView
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:id="@+id/imgBeoordelingFoto"
+            android:id="@+id/imgReviewPic"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -32,20 +32,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Naam Voornaam"
-            android:id="@+id/txbBeoordelingNaam"
-            android:layout_toEndOf="@+id/imgBeoordelingFoto"
+            android:id="@+id/txbReviewName"
+            android:layout_toEndOf="@+id/imgReviewPic"
             android:textStyle="bold"
             android:textSize="15sp"
             android:layout_marginLeft="8dp"
-            android:layout_alignTop="@+id/imgBeoordelingFoto"
-            android:layout_toRightOf="@+id/imgBeoordelingFoto" />
+            android:layout_alignTop="@+id/imgReviewPic"
+            android:layout_toRightOf="@+id/imgReviewPic" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Beoordeling"
-            android:id="@+id/txbBeoordeling"
-            android:layout_below="@+id/imgBeoordelingFoto"
+            android:id="@+id/txbReview"
+            android:layout_below="@+id/imgReviewPic"
             android:layout_margin="8dp"
             android:textColor="@color/rideshare_text"/>
 
@@ -53,10 +53,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Date"
-            android:id="@+id/txbBeoordelingDate"
-            android:layout_below="@+id/txbBeoordelingNaam"
-            android:layout_alignLeft="@+id/txbBeoordelingNaam"
-            android:layout_alignStart="@+id/txbBeoordelingNaam"
+            android:id="@+id/txbReviewDate"
+            android:layout_below="@+id/txbReviewName"
+            android:layout_alignLeft="@+id/txbReviewName"
+            android:layout_alignStart="@+id/txbReviewName"
             android:textSize="10sp"
             android:textColor="@color/rideshare_text"
             />
