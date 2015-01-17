@@ -16,8 +16,8 @@
         android:text="@string/Profile_other_title"
         android:id="@+id/txtOtherTitle"
         android:textStyle="bold"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="15dp"/>
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="5dp"/>
 
     <com.facebook.widget.ProfilePictureView
         android:layout_width="130dp"

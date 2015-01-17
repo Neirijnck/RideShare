@@ -79,7 +79,6 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        //lstReviews = (LinearLayout) view.findViewById(R.id.lstBeoordelingen);
         mReviewRecyclerView = (RecyclerView) view.findViewById(R.id.lstReviews);
 
         // Setting the LayoutManager.

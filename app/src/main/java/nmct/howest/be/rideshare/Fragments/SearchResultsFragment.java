@@ -7,12 +7,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import nmct.howest.be.rideshare.Helpers.ConnectivityHelper;
@@ -24,9 +24,9 @@ public class SearchResultsFragment extends Fragment
 {
     //Variables
     private ProgressBar mProgressBar;
-    private LinearLayout lstSearchResults;
+    private RecyclerView lstSearchResults;
+    private RecyclerView.LayoutManager mLayoutManager;
     private TextView mTxtNoResults;
-    private ScrollView layout_search_results;
 
     SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(RideshareApp.getAppContext());
     String token = pref.getString("accessToken", "");
@@ -51,9 +51,12 @@ public class SearchResultsFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_search_results, container, false);
 
         mProgressBar = (ProgressBar) view.findViewById(R.id.progressBarSearch);
-        lstSearchResults = (LinearLayout) view.findViewById(R.id.lstSearchResults);
+        lstSearchResults = (RecyclerView) view.findViewById(R.id.lstSearchResults);
         mTxtNoResults = (TextView) view.findViewById(R.id.txtNoSearchResults);
-        layout_search_results = (ScrollView) view.findViewById(R.id.layout_search_results);
+
+        // Setting the LayoutManager.
+        mLayoutManager = new LinearLayoutManager(RideshareApp.getAppContext(), LinearLayoutManager.VERTICAL, false);
+        lstSearchResults.setLayoutManager(mLayoutManager);
 
         Bundle b = getArguments();
 
@@ -73,10 +76,9 @@ public class SearchResultsFragment extends Fragment
             builder.show();
         }
         else {
-            SearchResultsTask task = new SearchResultsTask(token, mProgressBar, lstSearchResults, mTxtNoResults, layout_search_results);
+            SearchResultsTask task = new SearchResultsTask(token, mProgressBar, lstSearchResults, mTxtNoResults);
             task.execute(b);
         }
-
         return view;
     }
 

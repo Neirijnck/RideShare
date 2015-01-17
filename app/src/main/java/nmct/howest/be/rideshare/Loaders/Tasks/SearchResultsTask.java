@@ -1,15 +1,13 @@
 package nmct.howest.be.rideshare.Loaders.Tasks;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.JsonReader;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import org.apache.http.HttpEntity;
@@ -27,8 +25,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import nmct.howest.be.rideshare.Activities.DetailsActivity;
-import nmct.howest.be.rideshare.Adapters.SearchResultAdapter;
+import nmct.howest.be.rideshare.Adapters.SearchResultRecyclerAdapter;
 import nmct.howest.be.rideshare.Helpers.Utils;
 import nmct.howest.be.rideshare.Models.Match;
 import nmct.howest.be.rideshare.Models.Message;
@@ -40,18 +37,18 @@ public class SearchResultsTask extends AsyncTask<Bundle, Void, List<Trip>>
 {
     //Variables
     private final ProgressBar mProgress;
-    private LinearLayout lstSearchResults;
-    private ArrayAdapter<Trip> mAdapterSearchResults;
     private TextView mTxtNoResults;
-    private ScrollView mLayoutSearchResults;
     private String token;
+    private List<Trip> mSearchResults = new ArrayList<Trip>();
 
-    public SearchResultsTask(String fbToken, final ProgressBar progress, LinearLayout listSearchResults, TextView txtNoResults, ScrollView layout_search_results)
+    private RecyclerView mSearchResultsRecyclerView;
+    private SearchResultRecyclerAdapter mSearchResultRecyclerAdapter;
+
+    public SearchResultsTask(String fbToken, final ProgressBar progress, RecyclerView listSearchResults, TextView txtNoResults)
     {
         this.mProgress = progress;
-        this.lstSearchResults = listSearchResults;
+        this.mSearchResultsRecyclerView = listSearchResults;
         this.mTxtNoResults = txtNoResults;
-        this.mLayoutSearchResults = layout_search_results;
         this.token = fbToken;
     }
 
@@ -59,7 +56,6 @@ public class SearchResultsTask extends AsyncTask<Bundle, Void, List<Trip>>
     protected List<Trip> doInBackground(Bundle... params)
     {
         List<Trip> trips = new ArrayList<>();
-        Trip trip = new Trip();
 
         Bundle b = params[0];
         String fromCity = b.getString("from");
@@ -100,6 +96,7 @@ public class SearchResultsTask extends AsyncTask<Bundle, Void, List<Trip>>
                 reader.beginArray();
                 while(reader.hasNext()) {
                     reader.beginObject();
+                    Trip trip = new Trip();
                     while (reader.hasNext()) {
                         int id = 1;
                         String ID = "";
@@ -233,14 +230,12 @@ public class SearchResultsTask extends AsyncTask<Bundle, Void, List<Trip>>
                             }
                             id++;
                         }
+                        //Get facebookpic and name
+                        String facebookID = Utils.getUserFacebookIDFromUserID(token, trip.getUserID());
+                        trip.setFacebookID(facebookID);
+                        trip.setUserName(Utils.getUserNameFromUserID(token, trip.getUserID()));
                     }
                     reader.endObject();
-
-                    //Get facebookID and name for picture
-                    String facebookID = Utils.getUserFacebookIDFromUserID(token, trip.getUserID());
-                    trip.setFacebookID(facebookID);
-                    trip.setUserName(Utils.getUserNameFromUserID(token, trip.getUserID()));
-
                     trips.add(trip);
                 }
                 reader.endArray();
@@ -265,41 +260,20 @@ public class SearchResultsTask extends AsyncTask<Bundle, Void, List<Trip>>
         //Hide the progressbar after loading
         mProgress.setVisibility(View.INVISIBLE);
 
-        mAdapterSearchResults = new SearchResultAdapter(RideshareApp.getAppContext(), R.layout.card_search_result, R.id.txtSearchResultName);
-        mAdapterSearchResults.addAll(result);
-        final List<Trip> mTrips = result;
-        //Adding items to linear layouts
-        int adaptercountSearchResults = mAdapterSearchResults.getCount();
-        for(int i =0; i < adaptercountSearchResults; i++)
-        {
-            View item = mAdapterSearchResults.getView(i, null, null);
+        mSearchResults = result;
 
-            item.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(RideshareApp.getAppContext(), DetailsActivity.class);
-                    Bundle b = new Bundle();
-                    int pos = (int) v.getTag();
-                    String id = mTrips.get(pos).getID();
-                    Log.d("id",""+ id);
-                    b.putString("id", id);
-                    b.putInt("type", 3);
-                    intent.putExtras(b);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    RideshareApp.getAppContext().startActivity(intent);
-                }
-            });
+        // Setting the adapter.
+        mSearchResultRecyclerAdapter = new SearchResultRecyclerAdapter(mSearchResults);
+        mSearchResultsRecyclerView.setAdapter(mSearchResultRecyclerAdapter);
 
-            lstSearchResults.addView(item);
-        }
         //Empty, no results
-        if(adaptercountSearchResults==0)
+        if(mSearchResults.isEmpty())
         {
             mTxtNoResults.setVisibility(View.VISIBLE);
         }
         else
         {
-            mLayoutSearchResults.setVisibility(View.VISIBLE);
+            mSearchResultsRecyclerView.setVisibility(View.VISIBLE);
         }
     }
 

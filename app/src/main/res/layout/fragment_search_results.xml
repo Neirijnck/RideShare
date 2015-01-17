@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="wrap_content"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ProgressBar
@@ -9,36 +9,30 @@
         android:id="@+id/progressBarSearch"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        />
+        android:layout_gravity="center" />
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/layout_search_results"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/lstSearchResults"
         android:visibility="invisible"
-        >
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"
+        android:dividerHeight="8dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true">
+    </android.support.v7.widget.RecyclerView>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="4dp"
-            >
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/lstSearchResults"
-            android:orientation="vertical"
-            android:divider="@null"
-            android:dividerHeight="8dp"
-            android:fastScrollEnabled="true"
-            ></LinearLayout>
-
-
-        </RelativeLayout>
-
-        </ScrollView>
+    </RelativeLayout>
 
     <TextView
         android:layout_width="wrap_content"
@@ -46,8 +40,7 @@
         android:text="@string/no_search_results"
         android:id="@+id/txtNoSearchResults"
         android:layout_gravity="center"
-        android:visibility="invisible"
-        />
+        android:visibility="invisible"/>
 
 
 </FrameLayout>

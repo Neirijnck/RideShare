@@ -5,10 +5,8 @@
     xmlns:fab="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="nmct.howest.be.rideshare.Activities.Fragments.TripsFragment"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="8dp"

@@ -247,6 +247,54 @@ public class Utils
         return userName;
     }
 
+    public static String getFacebookImgFromUserID(String token, String userID) throws IOException
+    {
+        String facebookImgUrl="";
+
+        String urlJsonUser = RideshareApp.getAppContext().getResources().getString(R.string.API_Profile);
+        urlJsonUser += userID;
+
+        HttpClient client = new DefaultHttpClient();
+        HttpGet httpGet = new HttpGet(urlJsonUser);
+
+        httpGet.addHeader("Authorization", token);
+        HttpResponse response = client.execute(httpGet);
+        HttpEntity entity = response.getEntity();
+        InputStream in = entity.getContent();
+
+        String JSONbody = Utils.convertStreamToString(in);
+        Reader stringReader = new StringReader(JSONbody);
+
+        JsonReader reader = new JsonReader(stringReader);
+        try
+        {
+            reader.beginObject();
+            while (reader.hasNext())
+            {
+                while (reader.hasNext()) {
+                    String key = reader.nextName();
+                    if (key.equals("facebookImg"))
+                    {
+                        facebookImgUrl = reader.nextString();
+                    }
+                    else
+                    {
+                        reader.skipValue();
+                    }
+                }
+            }
+        }
+        catch(IOException e)
+        {
+            Log.e("IOException", e.getMessage());
+        }finally
+        {
+            try{reader.close();}catch(IOException e){ Log.e("IOException", e.getMessage()); }
+            try{in.close();}catch(IOException e){ Log.e("IOException", e.getMessage()); }
+        }
+        return facebookImgUrl;
+    }
+
     public static String getUserFacebookIDFromUserID(String token, String userID) throws IOException
     {
         String facebookID="";

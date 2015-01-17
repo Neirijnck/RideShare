@@ -13,9 +13,9 @@ public class Trip {
     private String payment ="";
     private boolean[] repeat =  new boolean[7]; //mo, tu, we, th, fr, sa, su
     private List<Match> matches;
+    private String type ="";
     private String facebookID="";
     private String userName="";
-    private String type ="";
 
     //Getters en setters
     public String getID() {
@@ -82,6 +82,10 @@ public class Trip {
         this.matches = matches;
     }
 
+    public String getType() {return type;}
+
+    public void setType(String type) {this.type = type;}
+
     public String getFacebookID() {
         return facebookID;
     }
@@ -97,10 +101,6 @@ public class Trip {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-
-    public String getType() {return type;}
-
-    public void setType(String type) {this.type = type;}
 
     //Ctor
     public Trip(String ID, String userID, String from, String to, String datetime, String payment, boolean[] repeat, List<Match> matches) {

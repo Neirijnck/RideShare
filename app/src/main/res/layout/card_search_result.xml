@@ -10,6 +10,7 @@
     android:layout_alignParentStart="true"
     android:layout_width="match_parent"
     android.support.v7.cardview:cardElevation="1dp"
+    card_view:cardUseCompatPadding="true"
     card_view:cardBackgroundColor="@color/rideshare_card">
 
     <RelativeLayout
@@ -20,12 +21,11 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:id="@+id/imgSearchResult"
-            android:layout_marginLeft="5dp"
-            android:layout_marginBottom="15dp"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true">
+            android:padding="5dp">
             </com.facebook.widget.ProfilePictureView>
 
         <TextView
