@@ -27,6 +27,7 @@ import nmct.howest.be.rideshare.Models.Trip;
 
 public class SpecialTripsLoader extends AsyncTaskLoader<List<Trip>>
 {
+    //Variables
     private final String mUrl;
     private List<Trip> trips = new ArrayList<Trip>();
     private Context context;
@@ -46,7 +47,6 @@ public class SpecialTripsLoader extends AsyncTaskLoader<List<Trip>>
         {
             Log.e("IOException", ex.getMessage());
         }
-
         return trips;
     }
 
@@ -116,24 +116,24 @@ public class SpecialTripsLoader extends AsyncTaskLoader<List<Trip>>
                                         reader.beginArray();
                                         while (reader.hasNext()) {
                                             Message message = new Message();
-                                                reader.beginObject();
-                                                while (reader.hasNext()) {
-                                                    String key_four = reader.nextName();
-                                                    if (key_four.equals("userID")) {
-                                                        message.setUserID(reader.nextString());
-                                                    } else if (key_four.equals("datetime")) {
-                                                        message.setDatetime(reader.nextString());
-                                                    } else if (key_four.equals("text")) {
-                                                        message.setText(reader.nextString());
-                                                    } else {
-                                                        reader.skipValue();
-                                                    }
+                                            reader.beginObject();
+                                            while (reader.hasNext()) {
+                                                String key_four = reader.nextName();
+                                                if (key_four.equals("userID")) {
+                                                    message.setUserID(reader.nextString());
+                                                } else if (key_four.equals("datetime")) {
+                                                    message.setDatetime(reader.nextString());
+                                                } else if (key_four.equals("text")) {
+                                                    message.setText(reader.nextString());
+                                                } else {
+                                                    reader.skipValue();
                                                 }
-                                                reader.endObject();
-                                                messages.add(message);
                                             }
-                                            reader.endArray();
-                                            match.setMessages(messages);
+                                            reader.endObject();
+                                            messages.add(message);
+                                        }
+                                        reader.endArray();
+                                        match.setMessages(messages);
                                     } else if (key_third.equals("status")) {
                                         matchStatus = reader.nextInt();
                                         match.setStatus(matchStatus);

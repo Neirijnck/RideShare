@@ -21,6 +21,7 @@ import nmct.howest.be.rideshare.RideshareApp;
 
 public class EditProfileFragment extends Fragment
 {
+    //Variables
     private String firstName;
     private String lastName;
     private String userName;
@@ -41,10 +42,6 @@ public class EditProfileFragment extends Fragment
 
     SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(RideshareApp.getAppContext());
     String token = pref.getString("accessToken", "");
-
-    public EditProfileFragment() {
-
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -106,7 +103,7 @@ public class EditProfileFragment extends Fragment
                 }
                 else
                 {
-                    //Cartype and amount of seats are not empty
+                    //Cartype and amount of seats are empty
                     if(TextUtils.isEmpty(carType)&&TextUtils.isEmpty(places))
                     {
                         APIHelper.EditUser(userName.trim(), firstName.trim(), lastName.trim(), token, location.trim());
@@ -133,4 +130,5 @@ public class EditProfileFragment extends Fragment
 
         return v;
     }
+
 }

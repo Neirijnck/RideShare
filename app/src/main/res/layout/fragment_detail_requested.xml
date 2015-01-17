@@ -31,7 +31,6 @@
                 android:layout_alignLeft="@+id/imgDetailRequested"
                 android:layout_alignBottom="@+id/imgDetailRequested"
                 android:layout_margin="10dp"
-                android:text="Hello"
                 android:textColor="@color/rideshare_primary"
                 android:textStyle="bold" />
         </RelativeLayout>
@@ -124,8 +123,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/Added_Message"
                 android:id="@+id/txbDetailRequestedMatches"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="5dp" />
+                android:layout_marginLeft="15dp" />
 
             <ListView
                 android:layout_width="wrap_content"
@@ -189,7 +187,7 @@
             android:id="@+id/llDetailRequestedButtons">
 
             <Button
-                android:layout_width="169dp"
+                android:layout_width="165dp"
                 android:layout_height="45dp"
                 android:text="@string/Button_Accept"
                 android:id="@+id/btnDetailRequestedAccept"
@@ -198,11 +196,12 @@
                 android:textAllCaps="true"
                 android:background="@drawable/button_selector"
                 android:elevation="2dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp"
                 />
 
             <Button
-                android:layout_width="169dp"
+                android:layout_width="165dp"
                 android:layout_height="45dp"
                 android:text="@string/Button_Decline"
                 android:id="@+id/btnDetailRequestedDecline"
@@ -212,7 +211,9 @@
                 android:textAllCaps="true"
                 android:background="@drawable/button_selector"
                 android:elevation="2dp"
-                android:layout_marginLeft="15dp" />
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp" />
 
         </LinearLayout>
 

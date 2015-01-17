@@ -1,28 +1,43 @@
 package nmct.howest.be.rideshare.Fragments;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import nmct.howest.be.rideshare.Activities.OtherProfileActivity;
+import nmct.howest.be.rideshare.Helpers.APIHelper;
 import nmct.howest.be.rideshare.Helpers.Utils;
 import nmct.howest.be.rideshare.Loaders.Json.ProfileLoader;
 import nmct.howest.be.rideshare.Loaders.Json.TripLoader;
+import nmct.howest.be.rideshare.Models.Match;
+import nmct.howest.be.rideshare.Models.Message;
 import nmct.howest.be.rideshare.Models.Trip;
 import nmct.howest.be.rideshare.Models.User;
 import nmct.howest.be.rideshare.R;
+import nmct.howest.be.rideshare.RideshareApp;
 
 
 public class DetailMatchFragment extends Fragment {
 
-    private String Userid;
+    //Variables
+    private Trip mTrip;
 
     private String urlTrip;
     private String urlUser;
@@ -34,11 +49,14 @@ public class DetailMatchFragment extends Fragment {
     private TextView txtDetailMatchTo;
     private TextView txtDetailMatchDate;
     private TextView txtDetailMatchTime;
-
-    //ProfilePictureView imgDetailMatch;
     private ImageView imgDetailMatch;
     private TextView txtDetailMatchName;
     private TextView txtDetailMatchBericht;
+    private EditText txtMessage;
+    private Button btnJoinRide;
+
+    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(RideshareApp.getAppContext());
+    String token = pref.getString("accessToken", "");
 
     public static DetailMatchFragment newInstance(String id) {
         DetailMatchFragment fragment = new DetailMatchFragment();
@@ -47,6 +65,7 @@ public class DetailMatchFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,10 +83,12 @@ public class DetailMatchFragment extends Fragment {
         txtDetailMatchDate = (TextView) view.findViewById(R.id.txtMatchDate);
         txtDetailMatchTime = (TextView) view.findViewById(R.id.txtMatchHour);
 
-        //imgDetailMatch = (ProfilePictureView) view.findViewById(R.id.imgDetailMatch);
         imgDetailMatch = (ImageView) view.findViewById(R.id.imgDetailMatch);
         txtDetailMatchName = (TextView) view.findViewById(R.id.txtMatchName);
         txtDetailMatchBericht = (TextView) view.findViewById(R.id.txbMatchMessage);
+        txtMessage = (EditText) view.findViewById(R.id.txtMatchAdded);
+
+        btnJoinRide = (Button) view.findViewById(R.id.btnMatchAccept);
 
         return view;
     }
@@ -81,16 +102,14 @@ public class DetailMatchFragment extends Fragment {
 
         @Override
         public void onLoadFinished(Loader<Trip> loader, Trip trip) {
-            Userid = trip.getUserID();
             urlUser = getResources().getString(R.string.API_Profile) + trip.getUserID();
             getLoaderManager().initLoader(USER_LOADER_ID, null, UserLoaderListener).forceLoad();
-            fillData(trip);
+            mTrip = trip;
+            fillData(mTrip);
         }
 
         @Override
-        public void onLoaderReset(Loader<Trip> loader) {
-
-        }
+        public void onLoaderReset(Loader<Trip> loader) {}
     };
 
     private void fillData(Trip trip)
@@ -100,7 +119,6 @@ public class DetailMatchFragment extends Fragment {
         txtDetailMatchDate.setText(Utils.parseISOStringToDate(trip.getDatetime()));
         txtDetailMatchTime.setText(Utils.parseISOStringToTime(trip.getDatetime()));
     }
-
 
     private LoaderManager.LoaderCallbacks<User> UserLoaderListener
             = new LoaderManager.LoaderCallbacks<User>() {
@@ -112,7 +130,7 @@ public class DetailMatchFragment extends Fragment {
 
         @Override
         public void onLoadFinished(Loader<User> loader, User user) {
-                LoadUser(user);
+            LoadUser(user);
         }
 
         @Override
@@ -123,7 +141,6 @@ public class DetailMatchFragment extends Fragment {
 
     private void LoadUser(User user)
     {
-        //imgDetailMatch.setProfileId(user.getFacebookID());
         imgDetailMatch.setImageBitmap(user.getBitmapFb());
         txtDetailMatchName.setText(user.getFirstName() + " " + user.getLastName());
         txtDetailMatchBericht.setText("Stuur "+user.getFirstName() + " een bericht:");
@@ -135,5 +152,30 @@ public class DetailMatchFragment extends Fragment {
                 getActivity().startActivity(intent);
             }
         });
+
+        //Add this match
+        btnJoinRide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                //New match
+                Match match = new Match();
+                match.setFrom(mTrip.getFrom());
+                match.setTo(mTrip.getTo());
+                //With a message
+                List<Message> messages = new ArrayList<Message>();
+                if(!TextUtils.isEmpty(txtMessage.getText().toString()))
+                {
+                    Message message = new Message();
+                    message.setText(txtMessage.getText().toString().trim());
+                    message.setDatetime(Utils.parseNowToISOString());
+                    messages.add(message);
+                }
+                match.setMessages(messages);
+                APIHelper.AddMatch(token, match, mTrip.getID());
+                getActivity().finish();
+            }
+        });
     }
+
 }

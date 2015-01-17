@@ -10,4 +10,5 @@ public class ConnectivityHelper {
     {
         return ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
     }
+
 }

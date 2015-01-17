@@ -17,12 +17,12 @@ public class ImageFragment extends Fragment
 
     //New instance of this fragment with image as param
     public static ImageFragment newInstance(int image) {
-    ImageFragment fragment = new ImageFragment();
-    Bundle args = new Bundle();
-    args.putInt("image", image);
-    fragment.setArguments(args);
-    return fragment;
-}
+        ImageFragment fragment = new ImageFragment();
+        Bundle args = new Bundle();
+        args.putInt("image", image);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,10 +32,11 @@ public class ImageFragment extends Fragment
         //Get image from parambundle and assign it to the imageview from the layoutfile
         ImageView image = (ImageView) view.findViewById(R.id.imgWithIndicator);
 
-        
+
         Picasso.with(getActivity()).load(getArguments().getInt("image")).into(image);
         //image.setImageResource(getArguments().getInt("image"));
 
         return view;
     }
+
 }

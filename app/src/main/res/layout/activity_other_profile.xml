@@ -2,10 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="nmct.howest.be.rideshare.Activities.ProfileActivity"
-    >
+    tools:context="nmct.howest.be.rideshare.Activities.ProfileActivity">
+
     <include layout="@layout/toolbar"
         android:id="@+id/toolbarLayoutProfile" />
+
     <fragment
         android:layout_width="match_parent"
         android:layout_height="match_parent"

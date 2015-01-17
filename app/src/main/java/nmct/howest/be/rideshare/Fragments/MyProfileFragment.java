@@ -34,6 +34,11 @@ import nmct.howest.be.rideshare.Models.User;
 import nmct.howest.be.rideshare.R;
 
 public class MyProfileFragment extends Fragment implements LoaderManager.LoaderCallbacks<User> {
+
+    //Variables
+    public LoaderManager loaderManager;
+    private static final int USER_LOADER_ID = 1;
+
     private User mUser;
     private ProfilePictureView profilePictureView;
     private TextView txtName;
@@ -41,18 +46,12 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
     private TextView txtGenderAge;
     private TextView txtCar;
     private TextView txtUserName;
-    //private LinearLayout lstReviews;
-    //private ArrayAdapter<Review> mAdapterReview;
     private List<Review> reviews = new ArrayList<Review>();
-    public LoaderManager loaderManager;
-    private static final int USER_LOADER_ID = 1;
-
     private RecyclerView mReviewRecyclerView;
     private ReviewRecyclerAdapter mReviewRecyclerAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    public MyProfileFragment() {
-    }
+    public MyProfileFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -123,7 +122,6 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
         return super.onOptionsItemSelected(item);
     }
 
-
     //Implementation of ProfileLoader
     @Override
     public Loader<User> onCreateLoader(int i, Bundle bundle) {
@@ -185,7 +183,6 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
         }
         txtGenderAge.setText(user.getGender() + ", " + birthday);
 
-
         if (!TextUtils.isEmpty(user.getGender()) && !TextUtils.isEmpty(user.getBirthday())) {
             txtGenderAge.setText(user.getGender() + ", " + birthday);
         } else if (TextUtils.isEmpty(user.getGender()) && !TextUtils.isEmpty(user.getBirthday())) {
@@ -208,7 +205,7 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
         }
         if (!TextUtils.isEmpty(user.getFacebookID()))
             profilePictureView.setProfileId(user.getFacebookID());
-            profilePictureView.setCropped(true);
+        profilePictureView.setCropped(true);
     }
 
 }

@@ -38,6 +38,7 @@ import nmct.howest.be.rideshare.RideshareApp;
 
 public class SearchResultsTask extends AsyncTask<Bundle, Void, List<Trip>>
 {
+    //Variables
     private final ProgressBar mProgress;
     private LinearLayout lstSearchResults;
     private ArrayAdapter<Trip> mAdapterSearchResults;
@@ -255,11 +256,8 @@ public class SearchResultsTask extends AsyncTask<Bundle, Void, List<Trip>>
             e.printStackTrace();
             return null;
         }
-
-
         return trips;
     }
-
 
     @Override
     protected void onPostExecute(List<Trip> result)
@@ -294,16 +292,15 @@ public class SearchResultsTask extends AsyncTask<Bundle, Void, List<Trip>>
 
             lstSearchResults.addView(item);
         }
-
         //Empty, no results
         if(adaptercountSearchResults==0)
         {
-                mTxtNoResults.setVisibility(View.VISIBLE);
+            mTxtNoResults.setVisibility(View.VISIBLE);
         }
         else
         {
             mLayoutSearchResults.setVisibility(View.VISIBLE);
         }
-
     }
+
 }

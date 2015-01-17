@@ -22,6 +22,7 @@ import nmct.howest.be.rideshare.RideshareApp;
 
 public class SearchResultsFragment extends Fragment
 {
+    //Variables
     private ProgressBar mProgressBar;
     private LinearLayout lstSearchResults;
     private TextView mTxtNoResults;
@@ -30,7 +31,7 @@ public class SearchResultsFragment extends Fragment
     SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(RideshareApp.getAppContext());
     String token = pref.getString("accessToken", "");
 
-    public SearchResultsFragment() { }
+    public SearchResultsFragment() {}
 
     //New instance of this fragment with parameters
     public static SearchResultsFragment newInstance(String from, String to, String date, String time, boolean share) {

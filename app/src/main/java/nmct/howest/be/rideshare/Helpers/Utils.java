@@ -57,8 +57,6 @@ public class Utils
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-
         StringBuilder sb = new StringBuilder().append(str).append("T").append(time).append(":00.000Z");
 
         return sb.toString();
@@ -111,7 +109,6 @@ public class Utils
 
         return statusCode;
     }
-
 
     public static String convertStreamToString(InputStream is) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
@@ -168,7 +165,6 @@ public class Utils
                 }
             }
         }
-
         if(repeatString.isEmpty()) {
             repeatString = "Nooit";
         }
@@ -296,7 +292,6 @@ public class Utils
             try{reader.close();}catch(IOException e){ Log.e("IOException", e.getMessage()); }
             try{in.close();}catch(IOException e){ Log.e("IOException", e.getMessage()); }
         }
-
         return facebookID;
     }
 

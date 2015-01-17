@@ -27,13 +27,14 @@ import nmct.howest.be.rideshare.R;
 
 public class MainActivity extends ActionBarActivity {
 
-    // An account type, in the form of a domain name
+    //Variables
+    //An account type, in the form of a domain name
     public static final String ACCOUNT_TYPE = "nmct.howest.be.rideshare.account";
-    // The account name
+    //The account name
     public static final String ACCOUNT = "RideShareAccount";
-    // Instance fields
+    //Instance fields
     Account mAccount;
-    // A content resolver for accessing the provider
+    //A content resolver for accessing the provider
     ContentResolver mResolver;
 
     //Tab variables
@@ -41,7 +42,7 @@ public class MainActivity extends ActionBarActivity {
     private TabPagerAdapter TabAdapter;
     private PagerSlidingTabStrip tabs;
 
-        @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         Bundle extras = getIntent().getExtras();
@@ -51,14 +52,17 @@ public class MainActivity extends ActionBarActivity {
         }
 
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
-        checkAppCount();
+
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
         String token = pref.getString("accessToken", "");
 
         if(token == null || token == "") {
             callFacebookLogout(this);
         }
+
+        checkAppCount();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -69,11 +73,11 @@ public class MainActivity extends ActionBarActivity {
         pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(TabAdapter);
 
-        // Bind the tabs to the ViewPager
+        //Bind the tabs to the ViewPager
         tabs.setViewPager(pager);
         tabs.setTextColor(getResources().getColor(R.color.rideshare_secondary));
 
-        // Create the dummy account
+        //Create the dummy account
         mAccount = CreateSyncAccount(this);
 
         mResolver = getContentResolver();
@@ -99,14 +103,12 @@ public class MainActivity extends ActionBarActivity {
             Log.e("Account", "Already exists or error");
             return null;
         }
-
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -124,9 +126,7 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
-    /**
-     * Logout From Facebook
-     */
+    //Logout From Facebook
     private void callFacebookLogout(Context context) {
         Session session = Session.getActiveSession();
         if (session != null) {
@@ -153,7 +153,7 @@ public class MainActivity extends ActionBarActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-
+    //Check how many times the app was opened
     private void checkAppCount(){
         super.onStart();
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
@@ -197,9 +197,6 @@ public class MainActivity extends ActionBarActivity {
         edt.putInt("count", count );
         edt.commit();
         Log.d("count",""+count);
-
-
     }
-
 
 }

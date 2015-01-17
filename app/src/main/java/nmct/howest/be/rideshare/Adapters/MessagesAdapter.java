@@ -12,6 +12,7 @@ import nmct.howest.be.rideshare.R;
 
 public class MessagesAdapter extends ArrayAdapter<Message>
 {
+    //Variables
     private String userID = "";
     private String datetime = "";
     private String text = "";

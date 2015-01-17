@@ -19,6 +19,7 @@ import nmct.howest.be.rideshare.Loaders.Database.Contract;
 
 public class SyncUtils
 {
+    //Variables
     private final String mServer;
     private final Context mContext;
 
@@ -141,8 +142,6 @@ public class SyncUtils
                     } else {
                         contentProviderClient.insert(Contract.Trip.CONTENT_URI, values);
                     }
-
-
                 }
                 reader.endArray();
                 isr.close();

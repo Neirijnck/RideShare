@@ -19,7 +19,6 @@ import nmct.howest.be.rideshare.R;
 
 public class SearchResultAdapter extends ArrayAdapter<Trip>
 {
-
     public SearchResultAdapter(Context context, int resource, int textViewResourceId) {
         super(context, resource, textViewResourceId);
     }
@@ -27,7 +26,6 @@ public class SearchResultAdapter extends ArrayAdapter<Trip>
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View card =  super.getView(position, convertView, parent);
-
 
         ViewHolderItem holder = (ViewHolderItem) card.getTag();
         if(holder == null){

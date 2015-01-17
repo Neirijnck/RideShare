@@ -30,6 +30,7 @@ import nmct.howest.be.rideshare.R;
 
 public class SearchFragment extends Fragment
 {
+    //Variables
     private Button btnSearch;
     static EditText txbDatePlan;
     static EditText txbTimePlan;
@@ -51,7 +52,6 @@ public class SearchFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
-        //Widgets
         txtFrom = (EditText) view.findViewById(R.id.txtFromSearch);
         txtTo = (EditText) view.findViewById(R.id.txtToSearch);
         txbDatePlan = (EditText) view.findViewById(R.id.txtDateSearch);
@@ -73,7 +73,6 @@ public class SearchFragment extends Fragment
                 }
                 else
                 {
-
                     Intent intent = new Intent(getActivity(), SearchActivity.class);
                     Bundle b = new Bundle();
                     //Enter all parameters
@@ -126,9 +125,6 @@ public class SearchFragment extends Fragment
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-
 
     //Datepicker class
     public static class DatePickerFragment extends DialogFragment

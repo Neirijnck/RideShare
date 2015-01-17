@@ -15,6 +15,7 @@ import nmct.howest.be.rideshare.RideshareApp;
 
 public class SyncAdapter extends AbstractThreadedSyncAdapter
 {
+    //Variables
     ContentResolver mContentResolver;
 
     public SyncAdapter(Context context, boolean autoInitialize) {
@@ -31,7 +32,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter
     public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider, SyncResult syncResult)
     {
         try {
-            //Get accesstoken from sharedPreferences
+            //Get access token from sharedPreferences
             SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(RideshareApp.getAppContext());
             String token = pref.getString("accessToken", "");
 
@@ -40,7 +41,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter
             utils.syncTrips(token, provider);
             utils.syncReviews(token, provider);
             utils.syncMatches(token, provider);
-           //utils.syncMessages(token, provider);
+            //utils.syncMessages(token, provider);
 
         } catch (Exception e) {
             e.printStackTrace();

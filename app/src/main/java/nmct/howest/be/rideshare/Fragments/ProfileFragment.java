@@ -43,6 +43,7 @@ import nmct.howest.be.rideshare.R;
 
 public class ProfileFragment extends Fragment implements LoaderManager.LoaderCallbacks<User> {
 
+    //Variables
     private User CurrentUser;
     private String UserId;
     private ProfilePictureView profilePictureView;
@@ -51,8 +52,6 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
     private TextView txtGenderAge;
     private TextView txtCar;
     private TextView txtUserName;
-    //private LinearLayout lstReviews;
-    //private ArrayAdapter<Review> mAdapterReview;
     private List<Review> reviews = new ArrayList<Review>();
 
     private RecyclerView mReviewRecyclerView;
@@ -62,9 +61,7 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
     private static final int USER_LOADER_ID = 1;
     private static final int CURRENT_USER_LOADER_ID = 2;
 
-    public ProfileFragment() {
-
-    }
+    public ProfileFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,15 +72,12 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
 
         //Init loader to get data
         getLoaderManager().initLoader(USER_LOADER_ID, null, this).forceLoad();
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_other_profile, container, false);
-
-        //lstReviews = (LinearLayout) view.findViewById(R.id.lstBeoordelingen);
 
         mReviewRecyclerView = (RecyclerView) view.findViewById(R.id.lstProfileReviews);
 
@@ -94,8 +88,6 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
         // Setting the adapter.
         mReviewRecyclerAdapter = new ReviewRecyclerAdapter(reviews);
         mReviewRecyclerView.setAdapter(mReviewRecyclerAdapter);
-
-        //mAdapterReview = new ReviewAdapter(getActivity(), R.layout.card_review, R.id.txbBeoordelingNaam);
 
         Button btnGo=(Button) view.findViewById(R.id.btnOtherProfileReview);
         btnGo.setOnClickListener(new View.OnClickListener() {
@@ -108,7 +100,6 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
 
         return view;
     }
-
 
     private LoaderManager.LoaderCallbacks<User> CurrentUserLoader
             = new LoaderManager.LoaderCallbacks<User>() {
@@ -182,7 +173,6 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
         //mAdapterReview.notifyDataSetChanged();
     }
 
-
     private void fillData(User user) {
 
         txtName = (TextView) getView().findViewById(R.id.txtOtherNaam);
@@ -214,7 +204,6 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
         }
         txtGenderAge.setText(user.getGender() + ", " + birthday);
 
-
         if (!TextUtils.isEmpty(user.getGender()) && !TextUtils.isEmpty(user.getBirthday())) {
             txtGenderAge.setText(user.getGender() + ", " + birthday);
         } else if (TextUtils.isEmpty(user.getGender()) && !TextUtils.isEmpty(user.getBirthday())) {
@@ -225,7 +214,6 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
             txtGenderAge.setText("Verjaardag niet bekend");
         }
 
-
         if (!TextUtils.isEmpty(user.getCarType()) && !TextUtils.isEmpty(user.getAmountOfSeats())) {
             txtCar.setText(user.getCarType() + " (" + user.getAmountOfSeats() + " pl.)");
         } else if (!TextUtils.isEmpty(user.getCarType()) && TextUtils.isEmpty(user.getAmountOfSeats())) {
@@ -235,10 +223,12 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
         } else {
             txtCar.setText("Auto niet bekend");
         }
+
         if (!TextUtils.isEmpty(user.getFacebookID()))
             profilePictureView.setProfileId(user.getFacebookID());
         profilePictureView.setCropped(true);
     }
+
     private void itemRatingPopup()
     {
         getLoaderManager().initLoader(CURRENT_USER_LOADER_ID, null, CurrentUserLoader).forceLoad();

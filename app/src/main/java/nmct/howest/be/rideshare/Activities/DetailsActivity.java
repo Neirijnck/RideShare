@@ -60,11 +60,9 @@ public class DetailsActivity extends ActionBarActivity {
                     ft.replace(R.id.fragment_container_details, detailMatchFragment);
                     break;
             }
-
             ft.commit();
         }
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -80,4 +78,5 @@ public class DetailsActivity extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

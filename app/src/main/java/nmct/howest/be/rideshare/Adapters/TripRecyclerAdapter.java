@@ -28,6 +28,7 @@ import nmct.howest.be.rideshare.R;
  */
 public class TripRecyclerAdapter extends RecyclerView.Adapter<TripRecyclerAdapter.TripRecyclerViewHolder>
 {
+    //Variables
     private static final int VIEW_TYPE_HEADER = 0x01;
     private static final int VIEW_TYPE_CONTENT = 0x00;
 

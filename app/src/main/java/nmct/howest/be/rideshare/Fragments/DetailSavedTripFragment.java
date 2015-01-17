@@ -32,6 +32,7 @@ import nmct.howest.be.rideshare.RideshareApp;
 
 public class DetailSavedTripFragment extends Fragment implements LoaderManager.LoaderCallbacks<Trip> {
 
+    //Variables
     private String url;
 
     private TextView txtDetailSavedFrom;
@@ -126,9 +127,7 @@ public class DetailSavedTripFragment extends Fragment implements LoaderManager.L
     }
 
     @Override
-    public void onLoaderReset(Loader<Trip> Loader){
-
-    }
+    public void onLoaderReset(Loader<Trip> Loader){}
 
     private void fillData(Trip trip)
     {
@@ -165,4 +164,5 @@ public class DetailSavedTripFragment extends Fragment implements LoaderManager.L
                 android.R.layout.simple_list_item_2, from, to);
         lstDetailSavedTravelers.setAdapter(adapter);
     }
+
 }

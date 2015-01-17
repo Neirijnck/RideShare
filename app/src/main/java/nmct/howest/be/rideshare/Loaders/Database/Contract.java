@@ -38,7 +38,6 @@ public class Contract
         public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + CONTENT_PATH);
     }
 
-
     //REVIEW TABLE
     public interface ReviewColumns extends BaseColumns
     {
@@ -62,7 +61,6 @@ public class Contract
         public static final String CONTENT_PATH = "/" + CONTENT_DIRECTORY;
         public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + CONTENT_PATH);
     }
-
 
     //TRIP TABLE
     public interface TripColumns extends BaseColumns
@@ -89,7 +87,6 @@ public class Contract
         public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + CONTENT_PATH);
     }
 
-
     //MATCH TABLE
     public interface MatchColumns extends BaseColumns
     {
@@ -113,7 +110,6 @@ public class Contract
         public static final String CONTENT_PATH = "/" + CONTENT_DIRECTORY;
         public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + CONTENT_PATH);
     }
-
 
     //MESSAGE TABLE
     public interface MessageColumns extends BaseColumns

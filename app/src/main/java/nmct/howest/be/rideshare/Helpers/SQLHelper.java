@@ -9,6 +9,7 @@ import nmct.howest.be.rideshare.Loaders.Database.Contract;
 
 public class SQLHelper extends SQLiteOpenHelper {
 
+    //Variables
     private static SQLHelper INSTANCE;
     private static Object lock = new Object();
 
@@ -89,7 +90,6 @@ public class SQLHelper extends SQLiteOpenHelper {
             + Contract.MessageColumns.KEY_MATCH_ID + " INTEGER"
             + ")";
 
-
     public SQLHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
@@ -128,6 +128,5 @@ public class SQLHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_MATCH);
         db.execSQL(CREATE_TABLE_MESSAGE);
     }
-
 
 }

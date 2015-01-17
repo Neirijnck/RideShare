@@ -33,6 +33,7 @@ import nmct.howest.be.rideshare.R;
 
 public class DetailRequestTripFragment extends Fragment {
 
+    //Variables
     private ArrayAdapter<Message> mAdapterMessages;
 
     private String urlTrip;
@@ -54,7 +55,6 @@ public class DetailRequestTripFragment extends Fragment {
     private TextView txbDetailRequestName;
     private EditText txtDetailRequestAddMessage;
     private Button btnDetailRequestAddMessage;
-
 
     public static DetailRequestTripFragment newInstance(String Id, String matchId) {
         DetailRequestTripFragment fragment = new DetailRequestTripFragment();
@@ -116,23 +116,15 @@ public class DetailRequestTripFragment extends Fragment {
         return view;
     }
 
-
     public void sendMessage() {
         Log.d("send ", txtDetailRequestAddMessage.getText().toString());
     }
-
-
-
-
-
-
 
     private LoaderManager.LoaderCallbacks<Trip> TripLoaderListener = new LoaderManager.LoaderCallbacks<Trip>() {
         @Override
         public Loader<Trip> onCreateLoader(int id, Bundle args) {
             return new TripLoader(getActivity(), urlTrip);
         }
-
 
         @Override
         public void onLoadFinished(Loader<Trip> loader, Trip trip) {
@@ -142,9 +134,7 @@ public class DetailRequestTripFragment extends Fragment {
         }
 
         @Override
-        public void onLoaderReset(Loader<Trip> loader) {
-
-        }
+        public void onLoaderReset(Loader<Trip> loader) { }
     };
 
     private void fillData(Trip trip)
@@ -182,7 +172,6 @@ public class DetailRequestTripFragment extends Fragment {
         }
     }
 
-
     private LoaderManager.LoaderCallbacks<User> UserLoaderListener= new LoaderManager.LoaderCallbacks<User>() {
 
         @Override
@@ -206,4 +195,5 @@ public class DetailRequestTripFragment extends Fragment {
         imgDetailRequest.setImageBitmap(user.getBitmapFb());
         txbDetailRequestName.setText(user.getFirstName() + " " + user.getLastName());
     }
+
 }

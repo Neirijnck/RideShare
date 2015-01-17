@@ -16,6 +16,7 @@ import nmct.howest.be.rideshare.R;
 
 public class SearchActivity extends ActionBarActivity
 {
+    //Variables
     private String from="";
     private String to="";
     private String date="";
@@ -23,7 +24,7 @@ public class SearchActivity extends ActionBarActivity
     private boolean share;
 
     @Override
-     protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
@@ -69,6 +70,8 @@ public class SearchActivity extends ActionBarActivity
         }
         return super.onOptionsItemSelected(item);
     }
+
+    //If checked, share on facebook
     private void share(String from, String to, final String date, String time) {
 
         final String van = from;
@@ -79,26 +82,22 @@ public class SearchActivity extends ActionBarActivity
 
             @Override
             public void call(Session session, SessionState state, Exception exception) {
-            if (session.isOpened()) {
-                Bundle bundle = new Bundle();
-                bundle.putString("caption", "The best carpool app out there.");
-                bundle.putString("description", "Ik zoek een  rit van "+ van +" naar "+tot+" op "+datum+" om "+ tijd);
-                bundle.putString("link", getResources().getString(R.string.Site));
-                bundle.putString("name", "Share My Ride");
-                bundle.putString("picture", getResources().getString(R.string.Site_Favicon));
-                new WebDialog.FeedDialogBuilder(SearchActivity.this, Session.getActiveSession(), bundle).setOnCompleteListener(new WebDialog.OnCompleteListener()
-                {
-                    @Override
-                    public void onComplete(Bundle values, FacebookException error)
-                    { }
-                }).build().show();
-
-            }
+                if (session.isOpened()) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("caption", "The best carpool app out there.");
+                    bundle.putString("description", "Ik zoek een  rit van "+ van +" naar "+tot+" op "+datum+" om "+ tijd);
+                    bundle.putString("link", getResources().getString(R.string.Site));
+                    bundle.putString("name", "Share My Ride");
+                    bundle.putString("picture", getResources().getString(R.string.Site_Favicon));
+                    new WebDialog.FeedDialogBuilder(SearchActivity.this, Session.getActiveSession(), bundle).setOnCompleteListener(new WebDialog.OnCompleteListener()
+                    {
+                        @Override
+                        public void onComplete(Bundle values, FacebookException error)
+                        { }
+                    }).build().show();
+                }
             }
         });
-
-
     }
-
 
 }

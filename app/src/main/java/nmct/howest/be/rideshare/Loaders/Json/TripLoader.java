@@ -27,6 +27,7 @@ import nmct.howest.be.rideshare.Models.Trip;
 
 public class TripLoader extends AsyncTaskLoader<Trip>
 {
+    //Variables
     private final String mUrl;
     private Trip mTrip;
     private Context context;
@@ -46,7 +47,6 @@ public class TripLoader extends AsyncTaskLoader<Trip>
         {
             Log.e("IOException", ex.getMessage());
         }
-
         return mTrip;
     }
 

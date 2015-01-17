@@ -16,13 +16,11 @@ import nmct.howest.be.rideshare.Helpers.SQLHelper;
 
 public class Provider extends ContentProvider
 {
-
     private static HashMap<String, String> sUsersProjectionMap;
     private static HashMap<String, String> sReviewsProjectionMap;
     private static HashMap<String, String> sTripsProjectionMap;
     private static HashMap<String, String> sMatchesProjectionMap;
     private static HashMap<String, String> sMessagesProjectionMap;
-
 
     private static final UriMatcher sUriMatcher;
     private static final int USERS = 1;
@@ -108,8 +106,7 @@ public class Provider extends ContentProvider
         sMessagesProjectionMap.put(Contract.Message.KEY_MATCH_ID, Contract.Message.KEY_MATCH_ID);
     }
 
-    public Provider() {
-    }
+    public Provider() {}
 
     @Override
     public boolean onCreate() {
@@ -197,7 +194,6 @@ public class Provider extends ContentProvider
 
         c.setNotificationUri(getContext().getContentResolver(), uri);
         return c;
-
     }
 
     @Override
@@ -324,9 +320,7 @@ public class Provider extends ContentProvider
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }
-
         throw new IllegalArgumentException();
-
     }
 
     @Override
@@ -376,11 +370,9 @@ public class Provider extends ContentProvider
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }
-
         getContext().getContentResolver().notifyChange(uri, null);
 
         return count;
-
     }
 
     @Override
@@ -505,10 +497,9 @@ public class Provider extends ContentProvider
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }
-
         getContext().getContentResolver().notifyChange(uri, null);
 
         return count;
-
     }
+
 }

@@ -63,11 +63,9 @@ public class PlanFragment extends Fragment{
     private ToggleButton tglSa;
     private ToggleButton tglSu;
 
-
     SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(RideshareApp.getAppContext());
     String token = pref.getString("accessToken", "");
 
-    //Ctor
     public PlanFragment() {}
 
     @Override
@@ -81,8 +79,6 @@ public class PlanFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_plan, container, false);
 
-
-        //Get widgets
         repeatSwitch = (SwitchCompat) view.findViewById(R.id.repeatSwitch);
         tglBtns = (LinearLayout) view.findViewById(R.id.tglBtns);
         txtPrice = (EditText) view.findViewById(R.id.txtPrice);
@@ -245,8 +241,6 @@ public class PlanFragment extends Fragment{
         return super.onOptionsItemSelected(item);
     }
 
-
-
     public void checkToggleBtns (Boolean isChecked) {
         if (isChecked) {
             AlphaAnimation fade_in = new AlphaAnimation(0, 1);
@@ -283,8 +277,6 @@ public class PlanFragment extends Fragment{
             tglBtns.startAnimation(fade_out);
         }
     }
-
-
 
     //Datepicker class
     public static class DatePickerFragment extends DialogFragment
@@ -353,7 +345,6 @@ public class PlanFragment extends Fragment{
 
             txbTimePlan.setText(time);
         }
-
-
     }
+
 }

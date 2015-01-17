@@ -36,19 +36,17 @@ import nmct.howest.be.rideshare.Helpers.Utils;
 import nmct.howest.be.rideshare.R;
 
 public class LoginFragment extends Fragment {
+
+    //Variables
     private FragmentActivity context;
     private String TAG = "LoginActivity";
 
-    public LoginFragment() {
-    }
-
+    public LoginFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
@@ -82,7 +80,6 @@ public class LoginFragment extends Fragment {
         CirclePageIndicator indicator = (CirclePageIndicator) view.findViewById(R.id.indicator);
         indicator.setViewPager(gallery);
 
-
         //Facebook Login
         LoginButton authButton = (LoginButton) view.findViewById(R.id.btnLogin);
         authButton.setOnErrorListener(new LoginButton.OnErrorListener() {
@@ -92,13 +89,11 @@ public class LoginFragment extends Fragment {
             }
         });
 
-
         authButton.setReadPermissions(Arrays.asList("email", "user_birthday", "public_profile"));
 
         authButton.setSessionStatusCallback(new Session.StatusCallback() {
             @Override
             public void call(final Session session, SessionState state, Exception exception) {
-
                 if (session.isOpened()) {
 
                     List<String> permissions = session.getPermissions();
@@ -146,10 +141,10 @@ public class LoginFragment extends Fragment {
         return view;
     }
 
-
     @Override
     public void onAttach(Activity activity) {
         context = (FragmentActivity) activity;
         super.onAttach(activity);
     }
+
 }

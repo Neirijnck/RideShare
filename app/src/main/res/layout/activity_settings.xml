@@ -10,7 +10,6 @@
         android:layout_height="match_parent"
         android:id="@+id/fragment_container_settings"
         android:layout_below="@+id/toolbarLayoutSettings">
-
     </RelativeLayout>
 
 </RelativeLayout>

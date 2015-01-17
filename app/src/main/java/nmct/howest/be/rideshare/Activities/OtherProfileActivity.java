@@ -20,7 +20,6 @@ public class OtherProfileActivity extends ActionBarActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -28,7 +27,6 @@ public class OtherProfileActivity extends ActionBarActivity {
         {
             case R.id.home:
                 this.finish();
-                Log.d("test","gedrukt");
                 return true;
             case 16908332:
                 this.finish();
@@ -36,4 +34,5 @@ public class OtherProfileActivity extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

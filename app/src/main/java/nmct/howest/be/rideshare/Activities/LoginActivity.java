@@ -23,6 +23,7 @@ import nmct.howest.be.rideshare.R;
 
 public class LoginActivity extends FragmentActivity {
 
+    //Variables
     //GCM
     public static final String PROPERTY_REG_ID = "registration_id";
     private static final String PROPERTY_APP_VERSION = "appVersion";
@@ -35,19 +36,6 @@ public class LoginActivity extends FragmentActivity {
     Context context;
     String regid;
     //AtomicInteger msgId = new AtomicInteger();
-
-    //Close app on pushing button back
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +91,19 @@ public class LoginActivity extends FragmentActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, loginFragment).commit();
             }
         }
+    }
 
+    //Close app on pushing button back
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override
@@ -117,7 +117,6 @@ public class LoginActivity extends FragmentActivity {
         super.onActivityResult(requestCode, resultCode, data);
         Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);
     }
-
 
     //Notifications
     private boolean checkPlayServices() {
@@ -134,7 +133,6 @@ public class LoginActivity extends FragmentActivity {
         }
         return true;
     }
-
 
     private String getRegistrationId(Context context) {
         final SharedPreferences prefs = getGCMPreferences(context);
@@ -196,7 +194,6 @@ public class LoginActivity extends FragmentActivity {
     private void sendRegistrationIdToBackend() {
         // Your implementation here.
     }
-
 
     private void storeRegistrationId(Context context, String regId) {
         final SharedPreferences prefs = getGCMPreferences(context);

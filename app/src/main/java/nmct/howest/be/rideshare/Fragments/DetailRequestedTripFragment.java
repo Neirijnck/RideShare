@@ -31,6 +31,7 @@ import nmct.howest.be.rideshare.R;
 
 public class DetailRequestedTripFragment extends Fragment {
 
+    //Variables
     private ArrayAdapter<Message> mAdapterMessages;
 
     private String urlTrip;
@@ -148,8 +149,6 @@ public class DetailRequestedTripFragment extends Fragment {
         APIHelper.AddMessageToMatch(token, getArguments().getString("matchID"), m, getArguments().getString("id"));
     }
 
-
-
     private LoaderManager.LoaderCallbacks<Trip> TripLoaderListener = new LoaderManager.LoaderCallbacks<Trip>() {
         @Override
         public Loader<Trip> onCreateLoader(int id, Bundle args) {
@@ -164,9 +163,7 @@ public class DetailRequestedTripFragment extends Fragment {
         }
 
         @Override
-        public void onLoaderReset(Loader<Trip> loader) {
-
-        }
+        public void onLoaderReset(Loader<Trip> loader) {}
     };
 
     private void fillData(Trip trip)
@@ -183,10 +180,6 @@ public class DetailRequestedTripFragment extends Fragment {
             }
         }
     }
-
-
-
-
 
     private LoaderManager.LoaderCallbacks<User> UserLoaderListener= new LoaderManager.LoaderCallbacks<User>() {
 
@@ -211,4 +204,5 @@ public class DetailRequestedTripFragment extends Fragment {
         imgDetailRequested.setImageBitmap(user.getBitmapFb());
         txbDetailRequestedName.setText(user.getFirstName() + " " + user.getLastName());
     }
+
 }

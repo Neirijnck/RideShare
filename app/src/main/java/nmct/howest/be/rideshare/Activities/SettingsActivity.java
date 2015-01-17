@@ -9,8 +9,8 @@ import android.view.MenuItem;
 
 import nmct.howest.be.rideshare.R;
 
-public class SettingsActivity extends ActionBarActivity {
-
+public class SettingsActivity extends ActionBarActivity
+{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,13 +26,11 @@ public class SettingsActivity extends ActionBarActivity {
             SettingsFragment settingsFragment = new SettingsFragment();
 
             // Add the fragment to the 'fragment_container' Layout
-
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.fragment_container_settings, settingsFragment);
             ft.commit();
         }
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -52,8 +50,6 @@ public class SettingsActivity extends ActionBarActivity {
             super.onCreate(savedInstanceState);
 
             addPreferencesFromResource(R.xml.basic_preferences);
-
-
         }
     }
 

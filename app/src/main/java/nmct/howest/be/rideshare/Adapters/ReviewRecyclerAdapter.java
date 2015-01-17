@@ -16,6 +16,7 @@ import nmct.howest.be.rideshare.RideshareApp;
 
 public class ReviewRecyclerAdapter extends RecyclerView.Adapter<ReviewRecyclerAdapter.RecyclerViewHolder>
 {
+    //Variables
     private List<Review> mReviews;
 
     public ReviewRecyclerAdapter(List<Review> mData) {
@@ -133,9 +134,7 @@ public class ReviewRecyclerAdapter extends RecyclerView.Adapter<ReviewRecyclerAd
                 star4.setImageDrawable(RideshareApp.getAppContext().getResources().getDrawable(R.drawable.ic_star_outline_grey600_38dp));
                 star5.setImageDrawable(RideshareApp.getAppContext().getResources().getDrawable(R.drawable.ic_star_outline_grey600_38dp));
                 break;
-
         }
     }
-
 
 }

@@ -26,10 +26,12 @@ import nmct.howest.be.rideshare.Models.User;
 
 public class ProfileLoader extends AsyncTaskLoader<User>
 {
+    //Variables
     private final String mUrl;
     public User user = new User();
     private List<Review> reviews = new ArrayList<Review>();
     private Context context;
+
     public ProfileLoader(Context context, String mUrl) {
         super(context);
         this.mUrl = mUrl;
@@ -49,7 +51,6 @@ public class ProfileLoader extends AsyncTaskLoader<User>
     }
 
     private void loadUser() throws IOException {
-
         //Met url json
         HttpClient client = new DefaultHttpClient();
         HttpGet httpGet = new HttpGet(mUrl);
@@ -189,7 +190,6 @@ public class ProfileLoader extends AsyncTaskLoader<User>
                     {
                         reader.skipValue();
                     }
-
                     id++;
                 }
             }
@@ -204,4 +204,5 @@ public class ProfileLoader extends AsyncTaskLoader<User>
             try{in.close();}catch(IOException e){ Log.e("IOException", e.getMessage()); }
         }
     }
+
 }

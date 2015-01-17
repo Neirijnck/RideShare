@@ -14,7 +14,7 @@ public class ImagePagerAdapter extends FragmentPagerAdapter implements IconPager
     //Different images to show
     private int[] Images = new int[] { R.drawable.plannen, R.drawable.zoeken};
 
-    //Length of imagearray
+    //Length of image array
     private int mCount = Images.length;
 
     public ImagePagerAdapter(FragmentManager fm) {
@@ -36,4 +36,5 @@ public class ImagePagerAdapter extends FragmentPagerAdapter implements IconPager
     public int getCount() {
         return mCount;
     }
+
 }

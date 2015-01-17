@@ -31,7 +31,6 @@
                 android:layout_alignLeft="@+id/imgDetailRequest"
                 android:layout_alignBottom="@+id/imgDetailRequest"
                 android:layout_margin="10dp"
-                android:text="Hello"
                 android:textColor="@color/rideshare_primary"
                 android:textStyle="bold" />
         </RelativeLayout>
@@ -58,7 +57,7 @@
             android:layout_below="@+id/txbDetailRequestTitle"
             android:layout_alignLeft="@+id/txbDetailRequestTitle"
             android:layout_alignStart="@+id/txbDetailRequestTitle"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="5dp"
             />
 
@@ -125,8 +124,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/Added_Message"
                 android:id="@+id/txbDetailRequestMatches"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="5dp" />
+                android:layout_marginLeft="15dp"/>
 
             <ListView
                 android:layout_width="wrap_content"
@@ -186,7 +184,7 @@
             android:layout_below="@+id/llRequestMessages"
             android:layout_alignLeft="@+id/llRequestMessages"
             android:layout_alignStart="@+id/llRequestMessages"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             android:layout_marginLeft="15dp"  />
 
         <TextView
