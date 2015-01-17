@@ -68,7 +68,7 @@
             android:layout_below="@+id/txbDetailRequestFrom"
             android:layout_alignLeft="@+id/txbDetailRequestFrom"
             android:layout_alignStart="@+id/txbDetailRequestFrom"
-            android:layout_marginTop="15dp" />
+            android:layout_marginTop="10dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -79,7 +79,7 @@
             android:layout_below="@+id/txbDetailRequestTo"
             android:layout_alignLeft="@+id/txbDetailRequestTo"
             android:layout_alignStart="@+id/txbDetailRequestTo"
-            android:layout_marginTop="15dp"/>
+            android:layout_marginTop="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -90,7 +90,7 @@
             android:layout_below="@+id/txbDetailRequestDate"
             android:layout_alignLeft="@+id/txbDetailRequestDate"
             android:layout_alignStart="@+id/txbDetailRequestDate"
-            android:layout_marginTop="15dp" />
+            android:layout_marginTop="10dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -101,7 +101,7 @@
             android:layout_below="@+id/txbDetailRequestTime"
             android:layout_alignLeft="@+id/txbDetailRequestTime"
             android:layout_alignStart="@+id/txbDetailRequestTime"
-            android:layout_marginTop="15dp" />
+            android:layout_marginTop="10dp" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -110,7 +110,7 @@
             android:layout_below="@+id/txbDetailRequestPayment"
             android:layout_alignLeft="@+id/txbDetailRequestPayment"
             android:layout_alignStart="@+id/txbDetailRequestPayment"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:minHeight="40dp"
