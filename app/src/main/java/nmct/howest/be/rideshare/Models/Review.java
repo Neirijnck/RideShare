@@ -6,6 +6,7 @@ public class Review {
     //Fields
     private String userID = "";
     private String userName="";
+    private String facebookID="";
     private String date = "";
     private Integer score;
     private String text = "";
@@ -28,6 +29,14 @@ public class Review {
     public void setUserName(String userName)
     {
         this.userName = userName;
+    }
+
+    public String getFacebookID() {
+        return facebookID;
+    }
+
+    public void setFacebookID(String facebookID) {
+        this.facebookID = facebookID;
     }
 
     public String getDate() {

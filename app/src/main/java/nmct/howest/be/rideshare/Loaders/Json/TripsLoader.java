@@ -70,8 +70,8 @@ public class TripsLoader extends AsyncTaskLoader<List<Trip>>
         {
             reader.beginArray();
             while(reader.hasNext()) {
-                Trip trip = new Trip();
                 reader.beginObject();
+                Trip trip = new Trip();
                 while (reader.hasNext()) {
                     int id = 1;
                     String ID = "";
@@ -209,9 +209,10 @@ public class TripsLoader extends AsyncTaskLoader<List<Trip>>
                         }
                         id++;
                     }
+                    trip.setType("Mijn opgeslagen ritten");
+                    trip.setFacebookID(Utils.getUserFacebookIDFromUserID(token, trip.getUserID()));
                 }
                 reader.endObject();
-                trip.setType("Mijn opgeslagen ritten");
                 trips.add(trip);
             }
             reader.endArray();

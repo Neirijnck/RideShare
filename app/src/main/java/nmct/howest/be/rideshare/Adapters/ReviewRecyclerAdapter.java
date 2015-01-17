@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.widget.ProfilePictureView;
+
 import java.util.List;
 
 import nmct.howest.be.rideshare.Helpers.Utils;
@@ -39,7 +41,9 @@ public class ReviewRecyclerAdapter extends RecyclerView.Adapter<ReviewRecyclerAd
     public void onBindViewHolder(RecyclerViewHolder holder, int position)
     {
         Review review = mReviews.get(position);
+
         holder.txtReviewName.setText(review.getUserName());
+        holder.imgReviewPic.setProfileId(review.getFacebookID());
         holder.txtReview.setText(review.getText());
 
         String dateString= Utils.parseISOStringToDate(review.getDate());
@@ -66,6 +70,7 @@ public class ReviewRecyclerAdapter extends RecyclerView.Adapter<ReviewRecyclerAd
         ImageView star3;
         ImageView star4;
         ImageView star5;
+        ProfilePictureView imgReviewPic;
 
         public RecyclerViewHolder(View card)
         {
@@ -78,6 +83,7 @@ public class ReviewRecyclerAdapter extends RecyclerView.Adapter<ReviewRecyclerAd
             this.star3 = (ImageView) card.findViewById(R.id.imgStar3);
             this.star4 = (ImageView) card.findViewById(R.id.imgStar4);
             this.star5 = (ImageView) card.findViewById(R.id.imgStar5);
+            this.imgReviewPic = (ProfilePictureView) card.findViewById(R.id.imgReviewPic);
         }
     }
 

@@ -71,8 +71,8 @@ public class SpecialTripsLoader extends AsyncTaskLoader<List<Trip>>
             reader.beginArray();
             while(reader.hasNext())
             {
-                Trip trip = new Trip();
                 reader.beginObject();
+                Trip trip = new Trip();
                 while (reader.hasNext()) {
 
                     String ID = "";
@@ -141,6 +141,7 @@ public class SpecialTripsLoader extends AsyncTaskLoader<List<Trip>>
                                         reader.skipValue();
                                     }
                                 }
+                                match.setFacebookID(Utils.getUserFacebookIDFromUserID(token,match.getUserID()));
                                 reader.endObject();
                                 matches.add(match);
                             }

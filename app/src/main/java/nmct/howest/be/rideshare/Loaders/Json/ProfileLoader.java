@@ -168,8 +168,8 @@ public class ProfileLoader extends AsyncTaskLoader<User>
                         reader.beginArray();
                         while(reader.hasNext())
                         {
-                            Review review = new Review();
                             reader.beginObject();
+                            Review review = new Review();
                             while(reader.hasNext())
                             {
                                 String key_second = reader.nextName();
@@ -180,6 +180,7 @@ public class ProfileLoader extends AsyncTaskLoader<User>
                                 else if(key_second.equals("text")){review.setText(reader.nextString());}
                                 else{reader.skipValue();}
                             }
+                            review.setFacebookID(Utils.getUserFacebookIDFromUserID(token, review.getUserID()));
                             reader.endObject();
                             reviews.add(review);
                         }

@@ -9,6 +9,7 @@
     android:layout_alignParentLeft="true"
     android:layout_alignParentStart="true"
     android:layout_width="match_parent"
+    android:foreground="?android:attr/selectableItemBackground"
     android.support.v7.cardview:cardElevation="1dp"
     card_view:cardUseCompatPadding="true"
     card_view:cardBackgroundColor="@color/rideshare_card">

@@ -153,7 +153,7 @@ public class TripRecyclerAdapter extends RecyclerView.Adapter<TripRecyclerAdapte
                 }
 
                 //Set picture of the person who planned the trip
-                //holder.imgProfilePicture.setProfileId(fbId);
+                holder.imgProfilePicture.setProfileId(trip.getFacebookID());
             }
             else if(trip.getType().equals("Ritaanvragen"))
             {
@@ -165,6 +165,7 @@ public class TripRecyclerAdapter extends RecyclerView.Adapter<TripRecyclerAdapte
                     m.setDatetime(Utils.parseISOStringToDate(match.getDatetime()));
                     m.setStatus(match.getStatus());
                     m.setUserID(match.getUserID());
+                    m.setFacebookID(match.getFacebookID());
                 }
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -184,7 +185,7 @@ public class TripRecyclerAdapter extends RecyclerView.Adapter<TripRecyclerAdapte
                 holder.txtTripPrice.setText(m.getDatetime());
 
                 //Set picture of the person who planned the trip
-                //holder.imgProfilePicture.setProfileId();
+                holder.imgProfilePicture.setProfileId(m.getFacebookID());
             }
             else if(trip.getType().equals("Ritverzoeken"))
             {
@@ -196,6 +197,7 @@ public class TripRecyclerAdapter extends RecyclerView.Adapter<TripRecyclerAdapte
                     m.setDatetime(Utils.parseISOStringToDate(match.getDatetime()));
                     m.setStatus(match.getStatus());
                     m.setUserID(match.getUserID());
+                    m.setFacebookID(match.getFacebookID());
                 }
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -215,7 +217,7 @@ public class TripRecyclerAdapter extends RecyclerView.Adapter<TripRecyclerAdapte
                 holder.txtTripInfo.setText("Status: " + Utils.convertStatus(m.getStatus()));
 
                 //Set picture of the person who planned the trip
-                //holder.imgProfilePicture.setProfileId();
+                holder.imgProfilePicture.setProfileId(m.getFacebookID());
             }
         }
 
