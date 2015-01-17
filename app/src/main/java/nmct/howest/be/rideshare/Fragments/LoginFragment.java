@@ -112,6 +112,7 @@ public class LoginFragment extends Fragment {
                                             date = date.replace("/", "-");
                                             birthday = Utils.parseDateToISOString(date, "00:00");
                                         }
+                                        else{birthday=Utils.parseDateToISOString("00-00-00", "00:00");}
                                         if (user.getLocation() != null) {
                                             location = user.getLocation().getName().substring(0, user.getLocation().getName().indexOf(","));
                                         }

@@ -185,18 +185,13 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
         } catch (ParseException ex) {
             Log.e("ParseException Date", ex.getMessage());
         }
-        txtGenderAge.setText(user.getGender() + ", " + birthday);
-
-        if (!TextUtils.isEmpty(user.getGender()) && !TextUtils.isEmpty(user.getBirthday())) {
-            txtGenderAge.setText(user.getGender() + ", " + birthday);
-        } else if (TextUtils.isEmpty(user.getGender()) && !TextUtils.isEmpty(user.getBirthday())) {
-            txtGenderAge.setText(user.getBirthday());
-        } else if (!TextUtils.isEmpty(user.getGender()) && TextUtils.isEmpty(user.getBirthday())) {
-            txtGenderAge.setText(user.getGender());
-        } else {
-            txtGenderAge.setText("Verjaardag niet bekend");
+        if(birthday.equals("00-00-00")||TextUtils.isEmpty(birthday))
+        {
+            birthday="Leeftijd onbekend.";
         }
 
+        if(TextUtils.isEmpty(user.getGender())){txtGenderAge.setText(birthday);}
+        else{txtGenderAge.setText(user.getGender() + ", " + birthday);}
 
         if (!TextUtils.isEmpty(user.getCarType()) && !TextUtils.isEmpty(user.getAmountOfSeats())) {
             txtCar.setText(user.getCarType() + " (" + user.getAmountOfSeats() + " pl.)");

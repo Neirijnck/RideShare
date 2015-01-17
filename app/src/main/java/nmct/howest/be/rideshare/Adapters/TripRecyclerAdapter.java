@@ -232,8 +232,7 @@ public class TripRecyclerAdapter extends RecyclerView.Adapter<TripRecyclerAdapte
         final LayoutManager.LayoutParams lp = (LayoutManager.LayoutParams) itemView
                 .getLayoutParams();
 
-//        lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        lp.width = 975;
+        lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
         lp.section = item.section;
         lp.sectionFirstPosition = item.sectionFirstPosition;
         itemView.setLayoutParams(lp);

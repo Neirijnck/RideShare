@@ -108,21 +108,18 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_below="@+id/txbDetailRequestPayment"
-            android:layout_alignLeft="@+id/txbDetailRequestPayment"
-            android:layout_alignStart="@+id/txbDetailRequestPayment"
             android:layout_marginTop="10dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
             android:minHeight="40dp"
-            android:id="@+id/llRequestMessages">
+            android:id="@+id/llRequestMessages"
+            android:layout_alignLeft="@+id/txbDetailRequestTitle"
+            android:layout_alignStart="@+id/txbDetailRequestTitle">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/Added_Message"
-                android:id="@+id/txbDetailRequestMatches"
-                android:layout_marginLeft="15dp"/>
+                android:id="@+id/txbDetailRequestMatches"/>
 
             <ListView
                 android:layout_width="wrap_content"
@@ -152,7 +149,6 @@
                     android:layout_alignParentBottom="true"
                     android:layout_toLeftOf="@+id/btnDetailRequestAddMessage"
                     android:imeOptions="actionSend"
-                    android:layout_marginLeft="15dp"
                     android:layout_marginRight="10dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true" />
@@ -183,8 +179,7 @@
             android:layout_below="@+id/llRequestMessages"
             android:layout_alignLeft="@+id/llRequestMessages"
             android:layout_alignStart="@+id/llRequestMessages"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="15dp"  />
+            android:layout_marginTop="15dp"/>
 
         <TextView
             android:layout_width="wrap_content"

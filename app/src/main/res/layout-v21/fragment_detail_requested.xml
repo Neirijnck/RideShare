@@ -108,21 +108,18 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_below="@+id/txbDetailRequestedPrice"
-            android:layout_alignLeft="@+id/txbDetailRequestedPrice"
-            android:layout_alignStart="@+id/txbDetailRequestedPrice"
             android:layout_marginTop="10dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
             android:minHeight="40dp"
-            android:id="@+id/llDetailRequestedMessages">
+            android:id="@+id/llDetailRequestedMessages"
+            android:layout_alignLeft="@+id/txbDetailRequestedTitle"
+            android:layout_alignStart="@+id/txbDetailRequestedTitle">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/Added_Message"
-                android:id="@+id/txbDetailRequestedMatches"
-                android:layout_marginLeft="15dp" />
+                android:id="@+id/txbDetailRequestedMatches"/>
 
             <ListView
                 android:layout_width="wrap_content"
@@ -153,7 +150,6 @@
                     android:layout_alignParentStart="true"
                     android:layout_toLeftOf="@+id/btnDetailRequestedAddMessage"
                     android:imeOptions="actionSend"
-                    android:layout_marginLeft="15dp"
                     android:layout_marginRight="10dp" />
 
                 <Button

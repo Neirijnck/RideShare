@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="match_parent">
+<RelativeLayout
+    android:id="@+id/itemMessageContainer"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bubble_b"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:id="@+id/itemMessageContainer"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/bubble_b">
+        android:padding="5dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:text="Text"
             android:id="@+id/txbMessageText"
             android:textStyle="bold"
             android:textSize="15sp"
-            android:layout_margin="5dp"
-            android:layout_marginLeft="8dp"
-            android:textColor="@android:color/primary_text_light" />
+            android:textColor="@android:color/primary_text_light"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:text="Date"
             android:id="@+id/txbMessageDate"
             android:textSize="10sp"
-            android:layout_margin="5dp"
-            android:layout_alignParentEnd="true"
-            android:textColor="@android:color/primary_text_light" />
+            android:textColor="@android:color/primary_text_light"
+            android:layout_below="@+id/txbMessageText"
+            android:layout_alignLeft="@+id/txbMessageText"
+            android:layout_alignStart="@+id/txbMessageText" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

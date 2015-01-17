@@ -48,7 +48,6 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
 
     private ViewHolder mViews;
     private TripRecyclerAdapter mTripRecyclerAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
     private GridSectionLayoutManager mGridSectionLayoutManager;
     private SectionLayoutManager mLinearSectionLayoutManager;
     private LayoutManager.SlmFactory mSlmFactory = new LayoutManager.SlmFactory() {
@@ -58,11 +57,12 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
                                                             int section) {
             int sectionKind = section % 2;
             final SectionLayoutManager slm;
-            if (sectionKind == 0) {
-                slm = mGridSectionLayoutManager;
-            } else {
-                slm = mLinearSectionLayoutManager;
-            }
+//            if (sectionKind == 0) {
+//                slm = mGridSectionLayoutManager;
+//            } else {
+//                slm = mLinearSectionLayoutManager;
+//            }
+            slm = mLinearSectionLayoutManager;
             return slm;
         }
     };
