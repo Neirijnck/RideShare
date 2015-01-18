@@ -5,11 +5,20 @@
         android:title="Algemeen">
 
         <ListPreference
-            android:defaultValue="en"
+            android:defaultValue="nl"
             android:entries="@array/languages"
             android:entryValues="@array/languageData"
             android:key="language"
-            android:title="@string/pref_language" />
+            android:title="@string/pref_language"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Geavanceerd">
+
+    <Preference
+        android:title="@string/pref_delete_profile"
+        android:key="delete_profile"/>
 
     </PreferenceCategory>
 

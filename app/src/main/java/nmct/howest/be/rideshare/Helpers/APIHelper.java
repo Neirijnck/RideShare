@@ -306,6 +306,16 @@ public class APIHelper {
         task.execute(httpDelete);
     }
 
+    //Delete profile
+    public static void DeleteProfile(String fbToken)
+    {
+        HttpDelete httpDelete = new HttpDelete(RideshareApp.getAppContext().getResources().getString(R.string.API_Profile));
+        httpDelete.addHeader("Authorization", fbToken);
+
+        DeleteAsync task = new DeleteAsync();
+        task.execute(httpDelete);
+    }
+
     //Add Review
     public static void AddReview(String fbToken, Review review, String profileId)
     {

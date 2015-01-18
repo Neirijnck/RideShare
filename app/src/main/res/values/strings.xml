@@ -97,6 +97,7 @@
     <!-- Settings -->
     <string name="title_activity_settings">Instellingen</string>
     <string name="pref_language">Taal inhoud</string>
+    <string name="pref_delete_profile">Verwijder profiel</string>
 
     <!-- API -->
     <string name="Site">http://188.226.154.228</string>
