@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -18,25 +19,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import nmct.howest.be.rideshare.Activities.OtherProfileActivity;
-import nmct.howest.be.rideshare.Adapters.MessagesAdapter;
 import nmct.howest.be.rideshare.Helpers.APIHelper;
 import nmct.howest.be.rideshare.Helpers.Utils;
 import nmct.howest.be.rideshare.Loaders.Json.ProfileLoader;
 import nmct.howest.be.rideshare.Loaders.Json.TripLoader;
 import nmct.howest.be.rideshare.Models.Match;
-import nmct.howest.be.rideshare.Models.Message;
 import nmct.howest.be.rideshare.Models.Trip;
 import nmct.howest.be.rideshare.Models.User;
 import nmct.howest.be.rideshare.R;
@@ -45,8 +41,6 @@ import nmct.howest.be.rideshare.RideshareApp;
 public class DetailRequestTripFragment extends Fragment {
 
     //Variables
-    private ArrayAdapter<Message> mAdapterMessages;
-
     private String urlTrip;
     private String urlUser;
 
@@ -59,8 +53,10 @@ public class DetailRequestTripFragment extends Fragment {
     private TextView txtDetailRequestTime;
     private TextView txtDetailRequestPrice;
     private ProgressBar progStatus;
+    private ProgressBar progressRequest;
+    private ScrollView mLayoutRequest;
 
-    private ListView lstDetailRequestMessages;
+    private LinearLayout lstDetailRequestMessages;
 
     private ImageView imgDetailRequest;
     private TextView txbDetailRequestName;
@@ -69,6 +65,7 @@ public class DetailRequestTripFragment extends Fragment {
 
     SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(RideshareApp.getAppContext());
     String token = pref.getString("accessToken", "");
+    String myUserID = pref.getString("myUserID", "");
 
     public static DetailRequestTripFragment newInstance(String Id, String matchId) {
         DetailRequestTripFragment fragment = new DetailRequestTripFragment();
@@ -132,18 +129,16 @@ public class DetailRequestTripFragment extends Fragment {
 
         imgDetailRequest = (ImageView) view.findViewById(R.id.imgDetailRequest);
         txbDetailRequestName = (TextView) view.findViewById(R.id.txbDetailRequestName);
-
         txtDetailRequestFrom = (TextView) view.findViewById(R.id.txtDetailRequestFrom);
         txtDetailRequestTo = (TextView) view.findViewById(R.id.txtDetailRequestTo);
         txtDetailRequestDate = (TextView) view.findViewById(R.id.txtDetailRequestDate);
         txtDetailRequestTime = (TextView) view.findViewById(R.id.txtDetailRequestTime);
         txtDetailRequestPrice = (TextView) view.findViewById(R.id.txtDetailRequestPayment);
         progStatus = (ProgressBar) view.findViewById(R.id.progDetailRequestStatus);
+        progressRequest = (ProgressBar) view.findViewById(R.id.progressBarRequest);
+        mLayoutRequest = (ScrollView) view.findViewById(R.id.container_request);
 
-        lstDetailRequestMessages = (ListView) view.findViewById(R.id.lstDetailRequestMessages);
-        mAdapterMessages = new MessagesAdapter(getActivity(), R.layout.item_message, R.id.txbMessageDate);
-        lstDetailRequestMessages.setAdapter(mAdapterMessages);
-
+        lstDetailRequestMessages = (LinearLayout) view.findViewById(R.id.lstDetailRequestMessages);
         txtDetailRequestAddMessage = (EditText) view.findViewById(R.id.txtDetailRequestAddMessage);
         btnDetailRequestAddMessage = (Button) view.findViewById(R.id.btnDetailRequestAddMessage);
 
@@ -152,7 +147,8 @@ public class DetailRequestTripFragment extends Fragment {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 boolean handled = false;
                 if (actionId == EditorInfo.IME_ACTION_SEND) {
-                    sendMessage();
+                    Utils.sendMessage(token, txtDetailRequestAddMessage, getArguments().getString("matchID"), getArguments().getString("id"));
+                    getLoaderManager().restartLoader(TRIP_LOADER_ID, null, TripLoaderListener).forceLoad();
                     handled = true;
                 }
                 return handled;
@@ -162,15 +158,12 @@ public class DetailRequestTripFragment extends Fragment {
         btnDetailRequestAddMessage.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendMessage();
+                Utils.sendMessage(token, txtDetailRequestAddMessage, getArguments().getString("matchID"), getArguments().getString("id"));
+                getLoaderManager().restartLoader(TRIP_LOADER_ID, null, TripLoaderListener).forceLoad();
             }
         });
 
         return view;
-    }
-
-    public void sendMessage() {
-        Log.d("send ", txtDetailRequestAddMessage.getText().toString());
     }
 
     private LoaderManager.LoaderCallbacks<Trip> TripLoaderListener = new LoaderManager.LoaderCallbacks<Trip>() {
@@ -200,26 +193,7 @@ public class DetailRequestTripFragment extends Fragment {
 
         for(Match match : trip.getMatches()) {
             if(match.getId().equals(getArguments().getString("matchID"))) {
-
-                //messages
-                List<Message> lm = new ArrayList<Message>();
-
-                Message m = new Message();
-                m.setDatetime(match.getDatetime());
-                m.setText("test");
-                m.setUserID(match.getUserID());
-                lm.add(m);
-
-                Message n = new Message();
-                n.setDatetime(match.getDatetime());
-                n.setText("testje");
-                n.setUserID(match.getUserID());
-                lm.add(n);
-
-                match.setMessages(lm);
-
-                mAdapterMessages.addAll(match.getMessages());
-
+                Utils.populateMessages(getActivity().getLayoutInflater(), lstDetailRequestMessages , match.getMessages(), myUserID);
                 progStatus.setProgress(Utils.convertStatusToProgress(match.getStatus()));
             }
         }
@@ -238,13 +212,14 @@ public class DetailRequestTripFragment extends Fragment {
         }
 
         @Override
-        public void onLoaderReset(Loader<User> loader) {
-
-        }
+        public void onLoaderReset(Loader<User> loader) {}
     };
 
     private void LoadUser(User user)
     {
+        progressRequest.setVisibility(View.INVISIBLE);
+        mLayoutRequest.setVisibility(View.VISIBLE);
+
         final String userID = user.getID();
         imgDetailRequest.setImageBitmap(user.getBitmapFb());
         imgDetailRequest.setOnClickListener(new View.OnClickListener() {

@@ -19,7 +19,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.facebook.widget.ProfilePictureView;
@@ -54,6 +56,8 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
     private TextView txtCar;
     private TextView txtUserName;
     private List<Review> reviews = new ArrayList<Review>();
+    private ProgressBar mProgressBar;
+    private RelativeLayout mLayoutOtherProfile;
 
     private RecyclerView mReviewRecyclerView;
     private ReviewRecyclerAdapter mReviewRecyclerAdapter;
@@ -89,6 +93,9 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_other_profile, container, false);
+
+        mProgressBar = (ProgressBar) view.findViewById(R.id.progressBarOtherProfile);
+        mLayoutOtherProfile = (RelativeLayout) view.findViewById(R.id.container_other_profile);
 
         mReviewRecyclerView = (RecyclerView) view.findViewById(R.id.lstProfileReviews);
 
@@ -139,6 +146,11 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
     public void onLoadFinished(Loader<User> Loader, User user) {
 
         fillData(user);
+
+        //Make layout visible when loaded and remove progressbar
+        mProgressBar.setVisibility(View.INVISIBLE);
+        mLayoutOtherProfile.setVisibility(View.VISIBLE);
+
         getActivity().setTitle(user.getUserName());
 
         if (user.getReviews() != null) {

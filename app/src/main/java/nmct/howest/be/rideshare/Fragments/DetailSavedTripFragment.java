@@ -8,18 +8,24 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import nmct.howest.be.rideshare.Helpers.APIHelper;
@@ -27,6 +33,7 @@ import nmct.howest.be.rideshare.Helpers.Utils;
 import nmct.howest.be.rideshare.Loaders.Json.TripLoader;
 import nmct.howest.be.rideshare.Models.Match;
 import nmct.howest.be.rideshare.Models.Trip;
+import nmct.howest.be.rideshare.Models.User;
 import nmct.howest.be.rideshare.R;
 import nmct.howest.be.rideshare.RideshareApp;
 
@@ -41,7 +48,9 @@ public class DetailSavedTripFragment extends Fragment implements LoaderManager.L
     private TextView txtDetailSavedTime;
     private TextView txtDetailSavedRepeat;
     private TextView txtDetailSavedPrice;
-    private ListView lstDetailSavedTravelers;
+    private ProgressBar mProgressSavedTrip;
+    private ScrollView mLayoutSavedTrip;
+    private LinearLayout mLayoutTravelers;
 
     SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(RideshareApp.getAppContext());
     String token = pref.getString("accessToken", "");
@@ -73,7 +82,9 @@ public class DetailSavedTripFragment extends Fragment implements LoaderManager.L
         txtDetailSavedTime = (TextView) view.findViewById(R.id.txtDetailSavedTime);
         txtDetailSavedRepeat = (TextView) view.findViewById(R.id.txtDetailSavedRepeat);
         txtDetailSavedPrice = (TextView) view.findViewById(R.id.txtDetailSavedPayment);
-        lstDetailSavedTravelers = (ListView) view.findViewById(R.id.lstDetailSavedTravelers);
+        mProgressSavedTrip = (ProgressBar) view.findViewById(R.id.progressBarSavedTrip);
+        mLayoutSavedTrip = (ScrollView) view.findViewById(R.id.container_saved_trip);
+        mLayoutTravelers = (LinearLayout) view.findViewById(R.id.lstDetailSavedTravelers);
 
         return view;
     }
@@ -138,31 +149,25 @@ public class DetailSavedTripFragment extends Fragment implements LoaderManager.L
         txtDetailSavedRepeat.setText(Utils.parseBoolArrayToDays(trip.getRepeat()));
         txtDetailSavedPrice.setText(Utils.setPayment(trip.getPayment()));
 
-        ArrayList<Map<String, String>> matchesList = new ArrayList<Map<String, String>>();
+        List<User> travelers = new ArrayList<>();
         for (Match m : trip.getMatches()) {
-            String text = "";
-            /*try {
-                String token = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("accessToken", "");
-                String username = Utils.getUserNameFromUserID(m.getUserID().toString(), token);
-                text = username + ": from " + m.getFrom() + " to " + m.getTo() + ".";
+            if(m.getStatus()==1)
+            {
+                //Only when accepted, they travel too
+                User user = new User();
+                user.setFacebookID(m.getFacebookID());
+                user.setUserName(m.getUserName());
+                //Add user to travelers
+                travelers.add(user);
             }
-            catch (IOException e) {
-                text = "unkown user" + ": from " + m.getFrom() + " to " + m.getTo() + ".";
-            }*/
-            text = "Unkown user" + ": from " + m.getFrom() + " to " + m.getTo() + ".";
-            String status = "Status : " + Utils.convertStatus(m.getStatus());
-
-            HashMap<String, String> item = new HashMap<String, String>();
-            item.put("text", text);
-            item.put("status", status);
-            matchesList.add(item);
         }
 
-        String[] from = { "text", "status" };
-        int[] to = { android.R.id.text1, android.R.id.text2 };
-        SimpleAdapter adapter = new SimpleAdapter(getActivity(), matchesList,
-                android.R.layout.simple_list_item_2, from, to);
-        lstDetailSavedTravelers.setAdapter(adapter);
+        if(!travelers.isEmpty()) {
+            Utils.populateTravelers(getActivity().getLayoutInflater(), mLayoutTravelers, travelers);
+        }
+
+        mProgressSavedTrip.setVisibility(View.INVISIBLE);
+        mLayoutSavedTrip.setVisibility(View.VISIBLE);
     }
 
 }

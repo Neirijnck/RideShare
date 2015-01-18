@@ -12,30 +12,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import nmct.howest.be.rideshare.Activities.OtherProfileActivity;
-import nmct.howest.be.rideshare.Adapters.MessagesAdapter;
 import nmct.howest.be.rideshare.Helpers.APIHelper;
 import nmct.howest.be.rideshare.Helpers.Utils;
 import nmct.howest.be.rideshare.Loaders.Json.ProfileLoader;
 import nmct.howest.be.rideshare.Loaders.Json.TripLoader;
 import nmct.howest.be.rideshare.Models.Match;
-import nmct.howest.be.rideshare.Models.Message;
 import nmct.howest.be.rideshare.Models.Trip;
 import nmct.howest.be.rideshare.Models.User;
 import nmct.howest.be.rideshare.R;
+import nmct.howest.be.rideshare.RideshareApp;
 
 public class DetailRequestedTripFragment extends Fragment {
 
     //Variables
-    private ArrayAdapter<Message> mAdapterMessages;
-
     private String urlTrip;
     private String urlUser;
 
@@ -47,8 +45,10 @@ public class DetailRequestedTripFragment extends Fragment {
     private TextView txtRequestedDate;
     private TextView txtRequestedTime;
     private TextView txtRequestedPrice;
+    private ProgressBar mProgressRequested;
+    private ScrollView mLayoutRequested;
 
-    private ListView lstDetailRequestedMessages;
+    private LinearLayout lstDetailRequestedMessages;
 
     private ImageView imgDetailRequested;
     private TextView txbDetailRequestedName;
@@ -57,6 +57,10 @@ public class DetailRequestedTripFragment extends Fragment {
 
     private Button btnDetailRequestedAccept;
     private Button btnDetailRequestedDecline;
+
+    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(RideshareApp.getAppContext());
+    String token = pref.getString("accessToken", "");
+    String myUserID = pref.getString("myUserID", "");
 
     public static DetailRequestedTripFragment newInstance(String Id, String matchId) {
         DetailRequestedTripFragment fragment = new DetailRequestedTripFragment();
@@ -81,17 +85,15 @@ public class DetailRequestedTripFragment extends Fragment {
 
         imgDetailRequested = (ImageView) view.findViewById(R.id.imgDetailRequested);
         txbDetailRequestedName = (TextView) view.findViewById(R.id.txbDetailRequestedName);
-
         txtRequestedFrom = (TextView) view.findViewById(R.id.txtDetailRequestedFrom);
         txtRequestedTo = (TextView) view.findViewById(R.id.txtDetailRequestedTo);
         txtRequestedDate = (TextView) view.findViewById(R.id.txtDetailRequestedDate);
         txtRequestedTime = (TextView) view.findViewById(R.id.txtDetailRequestedTime);
         txtRequestedPrice = (TextView) view.findViewById(R.id.txtDetailRequestedPrice);
+        mProgressRequested = (ProgressBar) view.findViewById(R.id.progressBarRequested);
+        mLayoutRequested = (ScrollView) view.findViewById(R.id.container_requested);
 
-        lstDetailRequestedMessages = (ListView) view.findViewById(R.id.lstDetailRequestedMessages);
-        mAdapterMessages = new MessagesAdapter(getActivity(), R.layout.item_message, R.id.txbMessageDate);
-        lstDetailRequestedMessages.setAdapter(mAdapterMessages);
-
+        lstDetailRequestedMessages = (LinearLayout) view.findViewById(R.id.lstDetailRequestedMessages);
         txtDetailRequestedAddMessage = (EditText) view.findViewById(R.id.txtDetailRequestedAddMessage);
         btnDetailRequestedAddMessage = (Button) view.findViewById(R.id.btnDetailRequestedAddMessage);
 
@@ -103,7 +105,8 @@ public class DetailRequestedTripFragment extends Fragment {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 boolean handled = false;
                 if (actionId == EditorInfo.IME_ACTION_SEND) {
-                    sendMessage();
+                    Utils.sendMessage(token, txtDetailRequestedAddMessage, getArguments().getString("matchID"), getArguments().getString("id"));
+                    getLoaderManager().restartLoader(TRIP_LOADER_ID, null, TripLoaderListener).forceLoad();
                     handled = true;
                 }
                 return handled;
@@ -113,42 +116,30 @@ public class DetailRequestedTripFragment extends Fragment {
         btnDetailRequestedAddMessage.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendMessage();
+                Utils.sendMessage(token, txtDetailRequestedAddMessage, getArguments().getString("matchID"), getArguments().getString("id"));
+                getLoaderManager().restartLoader(TRIP_LOADER_ID, null, TripLoaderListener).forceLoad();
             }
         });
 
         btnDetailRequestedAccept.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //status 1
-                SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-                String token = pref.getString("accessToken", "");
+                //status 1 - Accepted
                 APIHelper.UpdateMatch(token, getArguments().getString("matchID"), 1, getArguments().getString("id"));
+                getActivity().finish();
             }
         });
 
         btnDetailRequestedDecline.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //status 2
-                SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-                String token = pref.getString("accessToken", "");
+                //status 2 - Declined
                 APIHelper.UpdateMatch(token, getArguments().getString("matchID"), 2, getArguments().getString("id"));
+                getActivity().finish();
             }
         });
 
         return view;
-    }
-
-    public void sendMessage() {
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String token = pref.getString("accessToken", "");
-
-        Message m = new Message();
-        m.setText(txtDetailRequestedAddMessage.getText().toString());
-        m.setDatetime(Utils.parseNowToISOString());
-
-        APIHelper.AddMessageToMatch(token, getArguments().getString("matchID"), m, getArguments().getString("id"));
     }
 
     private LoaderManager.LoaderCallbacks<Trip> TripLoaderListener = new LoaderManager.LoaderCallbacks<Trip>() {
@@ -178,7 +169,7 @@ public class DetailRequestedTripFragment extends Fragment {
 
         for(Match match : trip.getMatches()) {
             if(match.getId().equals(getArguments().getString("matchID"))) {
-                mAdapterMessages.addAll(match.getMessages());
+                Utils.populateMessages(getActivity().getLayoutInflater(), lstDetailRequestedMessages, match.getMessages(), myUserID);
             }
         }
     }
@@ -196,13 +187,14 @@ public class DetailRequestedTripFragment extends Fragment {
         }
 
         @Override
-        public void onLoaderReset(Loader<User> loader) {
-
-        }
+        public void onLoaderReset(Loader<User> loader) {}
     };
 
     private void LoadUser(User user)
     {
+        mProgressRequested.setVisibility(View.INVISIBLE);
+        mLayoutRequested.setVisibility(View.VISIBLE);
+
         final String userID = user.getID();
         imgDetailRequested.setImageBitmap(user.getBitmapFb());
         imgDetailRequested.setOnClickListener(new View.OnClickListener() {

@@ -5,8 +5,17 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.text.TextUtils;
 import android.util.JsonReader;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.facebook.widget.ProfilePictureView;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -27,8 +36,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
+import nmct.howest.be.rideshare.Models.Message;
+import nmct.howest.be.rideshare.Models.User;
 import nmct.howest.be.rideshare.R;
 import nmct.howest.be.rideshare.RideshareApp;
 
@@ -448,6 +460,88 @@ public class Utils
             default:
                 return 0;
         }
+    }
+
+    public static void sendMessage(String token, EditText txtMessage, String matchID, String tripID) {
+        String messageText = txtMessage.getText().toString().trim();
+        if(TextUtils.isEmpty(messageText))
+        {
+            Toast.makeText(RideshareApp.getAppContext(), "Vul een bericht in", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Message m = new Message();
+            m.setText(messageText);
+            m.setDatetime(Utils.parseNowToISOString());
+            APIHelper.AddMessageToMatch(token, matchID, m, tripID);
+        }
+    }
+
+    public static void populateTravelers(LayoutInflater inflater, ViewGroup travelerContainer, List<User> travelerList)
+    {
+        if(travelerContainer==null)
+        {
+            //Nothing we can do, view already gone
+            Log.e("Populate travelers", "Container reference gone");
+        }
+
+        travelerContainer.removeAllViews();
+
+        for(User user : travelerList)
+        {
+            View travelerView = createTravelerView(inflater, travelerContainer, user.getFacebookID(), user.getUserName());
+            travelerContainer.addView(travelerView);
+        }
+    }
+
+    public static void populateMessages(LayoutInflater inflater, ViewGroup messagesContainer, List<Message> messageList, String myUserID)
+    {
+        if(messagesContainer==null)
+        {
+            //Nothing we can do, view already gone
+            Log.e("Populate Messages", "Container reference gone");
+        }
+
+        messagesContainer.removeAllViews();
+
+        for(Message message : messageList)
+        {
+            View messageView = createMessageView(inflater, messagesContainer, message.getText(), message.getDatetime(), message.getUserID(), myUserID);
+            messagesContainer.addView(messageView);
+        }
+    }
+
+    public static View createTravelerView(LayoutInflater inflater, ViewGroup travelerContainer, String facebookID, String userName)
+    {
+        View travelerView = inflater.inflate(R.layout.item_traveler, travelerContainer, false);
+
+        ProfilePictureView imgTraveler = (ProfilePictureView) travelerView.findViewById(R.id.imgTraveler);
+        imgTraveler.setProfileId(facebookID);
+
+        TextView txtTravelerName = (TextView) travelerView.findViewById(R.id.txtTravelerName);
+        txtTravelerName.setText(userName);
+
+        return travelerView;
+    }
+
+    public static View createMessageView(LayoutInflater inflater, ViewGroup messagesContainer, String messageText, String messageDate, String messageUserID, String myUserID)
+    {
+        View messageView;
+        if(messageUserID.equals(myUserID)) {
+            messageView = inflater.inflate(R.layout.item_message_own, messagesContainer, false);
+        }
+        else
+        {
+            messageView = inflater.inflate(R.layout.item_message, messagesContainer, false);
+        }
+
+        TextView txtTextMessage = (TextView) messageView.findViewById(R.id.txbMessageText);
+        txtTextMessage.setText(messageText);
+
+        TextView txtDateMessage = (TextView) messageView.findViewById(R.id.txbMessageDate);
+        txtDateMessage.setText(Utils.parseISOStringToDate(messageDate));
+
+        return messageView;
     }
 
 }

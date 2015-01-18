@@ -197,6 +197,8 @@ public class TripLoader extends AsyncTaskLoader<Trip>
                                     reader.skipValue();
                                 }
                             }
+                            match.setFacebookID(Utils.getUserFacebookIDFromUserID(token,match.getUserID()));
+                            match.setUserName(Utils.getUserNameFromUserID(token, match.getUserID()));
                             reader.endObject();
                             matches.add(match);
                         }

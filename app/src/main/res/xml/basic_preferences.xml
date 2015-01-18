@@ -4,10 +4,12 @@
     <PreferenceCategory
         android:title="Algemeen">
 
-        <CheckBoxPreference
-            android:key="checkbox_preference"
-            android:title="test"
-            android:summary="test" />
+        <ListPreference
+            android:defaultValue="en"
+            android:entries="@array/languages"
+            android:entryValues="@array/languageData"
+            android:key="language"
+            android:title="@string/pref_language" />
 
     </PreferenceCategory>
 

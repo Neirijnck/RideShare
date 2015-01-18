@@ -45,12 +45,6 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            Integer p = extras.getInt("PAGE");
-            pager.setCurrentItem(p, true);
-        }
-
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
@@ -81,6 +75,17 @@ public class MainActivity extends ActionBarActivity {
         mAccount = CreateSyncAccount(this);
 
         mResolver = getContentResolver();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            Integer p = extras.getInt("PAGE");
+            pager.setCurrentItem(p, true);
+        }
     }
 
     public static Account CreateSyncAccount(Context context)

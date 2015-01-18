@@ -1,161 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBarMatch"
+        android:layout_gravity="center" />
 
-    <RelativeLayout
-        android:layout_width="match_parent" android:layout_height="match_parent"
-        android:focusableInTouchMode="true">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/container_match"
+        android:visibility="invisible">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="215dp"
-            android:id="@+id/imgDetailMatch"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:scaleType="centerCrop"
-            android:elevation="2dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent" android:layout_height="match_parent"
+            android:focusableInTouchMode="true">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Voornaam Naam"
-            android:id="@+id/txtMatchName"
-            android:layout_below="@+id/imgDetailMatch"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="215dp"
+                android:id="@+id/imgDetailMatch"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:scaleType="centerCrop"
+                android:elevation="2dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/OR_From"
-            android:id="@+id/txbMatchFrom"
-            android:layout_below="@+id/txtMatchName"
-            android:layout_alignLeft="@+id/txtMatchName"
-            android:layout_alignStart="@+id/txtMatchName"
-            android:layout_marginTop="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Voornaam Naam"
+                android:id="@+id/txtMatchName"
+                android:layout_below="@+id/imgDetailMatch"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/OR_To"
-            android:id="@+id/txbMatchTo"
-            android:layout_below="@+id/txbMatchFrom"
-            android:layout_alignLeft="@+id/txbMatchFrom"
-            android:layout_alignStart="@+id/txbMatchFrom"
-            android:layout_marginTop="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/OR_From"
+                android:id="@+id/txbMatchFrom"
+                android:layout_below="@+id/txtMatchName"
+                android:layout_alignLeft="@+id/txtMatchName"
+                android:layout_alignStart="@+id/txtMatchName"
+                android:layout_marginTop="10dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/OR_Date"
-            android:id="@+id/txbMatchDate"
-            android:layout_below="@+id/txbMatchTo"
-            android:layout_alignLeft="@+id/txbMatchTo"
-            android:layout_alignStart="@+id/txbMatchTo"
-            android:layout_marginTop="10dp"  />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/OR_To"
+                android:id="@+id/txbMatchTo"
+                android:layout_below="@+id/txbMatchFrom"
+                android:layout_alignLeft="@+id/txbMatchFrom"
+                android:layout_alignStart="@+id/txbMatchFrom"
+                android:layout_marginTop="10dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/OR_Hour"
-            android:id="@+id/txbMatchHour"
-            android:layout_below="@+id/txbMatchDate"
-            android:layout_alignLeft="@+id/txbMatchDate"
-            android:layout_alignStart="@+id/txbMatchDate"
-            android:layout_marginTop="10dp"  />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/OR_Date"
+                android:id="@+id/txbMatchDate"
+                android:layout_below="@+id/txbMatchTo"
+                android:layout_alignLeft="@+id/txbMatchTo"
+                android:layout_alignStart="@+id/txbMatchTo"
+                android:layout_marginTop="10dp"  />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Stuur Naam een bericht:"
-            android:id="@+id/txbMatchMessage"
-            android:layout_below="@+id/txbMatchHour"
-            android:layout_alignLeft="@+id/txbMatchHour"
-            android:layout_alignStart="@+id/txbMatchHour"
-            android:layout_marginTop="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/OR_Hour"
+                android:id="@+id/txbMatchHour"
+                android:layout_below="@+id/txbMatchDate"
+                android:layout_alignLeft="@+id/txbMatchDate"
+                android:layout_alignStart="@+id/txbMatchDate"
+                android:layout_marginTop="10dp"  />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/txtMatchAdded"
-            android:layout_below="@+id/txbMatchMessage"
-            android:layout_marginTop="7dp"
-            android:layout_marginRight="15dp"
-            android:layout_alignLeft="@+id/txbMatchMessage"
-            android:layout_alignStart="@+id/txbMatchMessage"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Stuur Naam een bericht:"
+                android:id="@+id/txbMatchMessage"
+                android:layout_below="@+id/txbMatchHour"
+                android:layout_alignLeft="@+id/txbMatchHour"
+                android:layout_alignStart="@+id/txbMatchHour"
+                android:layout_marginTop="10dp" />
 
-        <Button
-            android:layout_width="220dp"
-            android:layout_height="45dp"
-            android:text="@string/Button_Join"
-            android:id="@+id/btnMatchAccept"
-            android:layout_marginTop="15dp"
-            android:drawableLeft="@drawable/ic_check_white_36dp"
-            android:textColor="@color/rideshare_secondary"
-            android:textAllCaps="true"
-            android:elevation="2dp"
-            android:stateListAnimator="@anim/button_elevation"
-            android:layout_marginLeft="2dp"
-            android:layout_below="@+id/txtMatchAdded"
-            android:layout_alignLeft="@+id/txtMatchAdded"
-            android:layout_alignStart="@+id/txtMatchAdded" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/txtMatchAdded"
+                android:layout_below="@+id/txbMatchMessage"
+                android:layout_marginTop="7dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginLeft="10dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text=""
-            android:id="@+id/txtMatchFrom"
-            android:layout_alignTop="@+id/txbMatchFrom"
-            android:layout_toRightOf="@+id/txbMatchFrom"
-            android:layout_toEndOf="@+id/txbMatchFrom"
-            android:layout_marginLeft="50dp"/>
+            <Button
+                android:layout_width="220dp"
+                android:layout_height="45dp"
+                android:text="@string/Button_Join"
+                android:id="@+id/btnMatchAccept"
+                android:layout_marginTop="15dp"
+                android:drawableLeft="@drawable/ic_check_white_36dp"
+                android:textColor="@color/rideshare_secondary"
+                android:textAllCaps="true"
+                android:elevation="2dp"
+                android:stateListAnimator="@anim/button_elevation"
+                android:layout_below="@+id/txtMatchAdded"
+                android:layout_alignLeft="@+id/txbMatchMessage"
+                android:layout_alignStart="@+id/txbMatchMessage" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text=""
-            android:id="@+id/txtMatchTo"
-            android:layout_alignTop="@+id/txbMatchTo"
-            android:layout_alignLeft="@+id/txtMatchFrom"
-            android:layout_alignStart="@+id/txtMatchFrom" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text=""
+                android:id="@+id/txtMatchFrom"
+                android:layout_alignTop="@+id/txbMatchFrom"
+                android:layout_toRightOf="@+id/txbMatchFrom"
+                android:layout_toEndOf="@+id/txbMatchFrom"
+                android:layout_marginLeft="50dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text=""
-            android:id="@+id/txtMatchDate"
-            android:layout_alignTop="@+id/txbMatchDate"
-            android:layout_alignLeft="@+id/txtMatchTo"
-            android:layout_alignStart="@+id/txtMatchTo" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text=""
+                android:id="@+id/txtMatchTo"
+                android:layout_alignTop="@+id/txbMatchTo"
+                android:layout_alignLeft="@+id/txtMatchFrom"
+                android:layout_alignStart="@+id/txtMatchFrom" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text=""
-            android:id="@+id/txtMatchHour"
-            android:layout_alignTop="@+id/txbMatchHour"
-            android:layout_alignLeft="@+id/txtMatchDate"
-            android:layout_alignStart="@+id/txtMatchDate" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text=""
+                android:id="@+id/txtMatchDate"
+                android:layout_alignTop="@+id/txbMatchDate"
+                android:layout_alignLeft="@+id/txtMatchTo"
+                android:layout_alignStart="@+id/txtMatchTo" />
 
-    </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text=""
+                android:id="@+id/txtMatchHour"
+                android:layout_alignTop="@+id/txbMatchHour"
+                android:layout_alignLeft="@+id/txtMatchDate"
+                android:layout_alignStart="@+id/txtMatchDate" />
 
-</ScrollView>
+        </RelativeLayout>
+
+    </ScrollView>
+</FrameLayout>

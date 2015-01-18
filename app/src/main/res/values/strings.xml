@@ -96,6 +96,7 @@
 
     <!-- Settings -->
     <string name="title_activity_settings">Instellingen</string>
+    <string name="pref_language">Taal inhoud</string>
 
     <!-- API -->
     <string name="Site">http://188.226.154.228</string>

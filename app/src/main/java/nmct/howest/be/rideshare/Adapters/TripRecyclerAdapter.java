@@ -21,6 +21,7 @@ import nmct.howest.be.rideshare.Helpers.Utils;
 import nmct.howest.be.rideshare.Models.Match;
 import nmct.howest.be.rideshare.Models.Trip;
 import nmct.howest.be.rideshare.R;
+import nmct.howest.be.rideshare.RideshareApp;
 
 
 /**
@@ -184,8 +185,10 @@ public class TripRecyclerAdapter extends RecyclerView.Adapter<TripRecyclerAdapte
                 });
 
                 holder.txtTripTitle.setText(m.getUserName());
-                holder.txtTripInfoDate.setText("Deed aanvraag naar " + m.getTo());
+                holder.txtTripInfoDate.setText("Aanvraag naar " + m.getTo());
                 holder.txtTripInfo.setText("Status: " + Utils.convertStatus(m.getStatus()));
+                if(m.getStatus()==1){holder.txtTripInfo.setTextColor(RideshareApp.getAppContext().getResources().getColor(R.color.rideshare_text_green));}
+                else if(m.getStatus()==2)holder.txtTripInfo.setTextColor(RideshareApp.getAppContext().getResources().getColor(R.color.rideshare_text_red));{}
                 holder.txtTripPrice.setText(m.getDatetime());
 
                 //Set picture of the person who planned the trip
@@ -220,9 +223,11 @@ public class TripRecyclerAdapter extends RecyclerView.Adapter<TripRecyclerAdapte
                 });
 
                 holder.txtTripTitle.setText(m.getUserName());
-                holder.txtTripInfoDate.setText("Wil meerijden naar " + m.getTo());
+                holder.txtTripInfoDate.setText("Verzoek naar " + m.getTo());
                 holder.txtTripPrice.setText(m.getDatetime());
                 holder.txtTripInfo.setText("Status: " + Utils.convertStatus(m.getStatus()));
+                if(m.getStatus()==1){holder.txtTripInfo.setTextColor(RideshareApp.getAppContext().getResources().getColor(R.color.rideshare_text_green));}
+                else if(m.getStatus()==2)holder.txtTripInfo.setTextColor(RideshareApp.getAppContext().getResources().getColor(R.color.rideshare_text_red));{}
 
                 //Set picture of the person who planned the trip
                 holder.imgProfilePicture.setProfileId(m.getFacebookID());

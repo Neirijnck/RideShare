@@ -1,177 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBarSavedTrip"
+        android:layout_gravity="center" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/Title_Saved"
-            android:id="@+id/txbDetailSavedTitle"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:textStyle="bold"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp" />
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:id="@+id/container_saved_trip"
+        android:visibility="invisible">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/OR_From"
-            android:id="@+id/txbDetailSavedFrom"
-            android:layout_below="@+id/txbDetailSavedTitle"
-            android:layout_alignLeft="@+id/txbDetailSavedTitle"
-            android:layout_alignStart="@+id/txbDetailSavedTitle"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="5dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/OR_To"
-            android:id="@+id/txbDetailSavedTo"
-            android:layout_below="@+id/txbDetailSavedFrom"
-            android:layout_alignLeft="@+id/txbDetailSavedFrom"
-            android:layout_alignStart="@+id/txbDetailSavedFrom"
-            android:layout_marginTop="15dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/Title_Saved"
+                android:id="@+id/txbDetailSavedTitle"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/OR_Date"
-            android:id="@+id/txbDetailSavedDate"
-            android:layout_below="@+id/txbDetailSavedTo"
-            android:layout_alignLeft="@+id/txbDetailSavedTo"
-            android:layout_alignStart="@+id/txbDetailSavedTo"
-            android:layout_marginTop="15dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/OR_From"
+                android:id="@+id/txbDetailSavedFrom"
+                android:layout_below="@+id/txbDetailSavedTitle"
+                android:layout_alignLeft="@+id/txbDetailSavedTitle"
+                android:layout_alignStart="@+id/txbDetailSavedTitle"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="5dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/OR_Hour"
-            android:id="@+id/txbDetailSavedTime"
-            android:layout_below="@+id/txbDetailSavedDate"
-            android:layout_alignLeft="@+id/txbDetailSavedDate"
-            android:layout_alignStart="@+id/txbDetailSavedDate"
-            android:layout_marginTop="15dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/OR_To"
+                android:id="@+id/txbDetailSavedTo"
+                android:layout_below="@+id/txbDetailSavedFrom"
+                android:layout_alignLeft="@+id/txbDetailSavedFrom"
+                android:layout_alignStart="@+id/txbDetailSavedFrom"
+                android:layout_marginTop="15dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/OR_Repeat"
-            android:id="@+id/txbDetailSavedRepeat"
-            android:layout_below="@+id/txbDetailSavedTime"
-            android:layout_alignLeft="@+id/txbDetailSavedTime"
-            android:layout_alignStart="@+id/txbDetailSavedTime"
-            android:layout_marginTop="15dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/OR_Date"
+                android:id="@+id/txbDetailSavedDate"
+                android:layout_below="@+id/txbDetailSavedTo"
+                android:layout_alignLeft="@+id/txbDetailSavedTo"
+                android:layout_alignStart="@+id/txbDetailSavedTo"
+                android:layout_marginTop="15dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/OR_Price"
-            android:id="@+id/txbDetailSavedPayment"
-            android:layout_below="@+id/txbDetailSavedRepeat"
-            android:layout_alignLeft="@+id/txbDetailSavedRepeat"
-            android:layout_alignStart="@+id/txbDetailSavedRepeat"
-            android:layout_marginTop="15dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/OR_Hour"
+                android:id="@+id/txbDetailSavedTime"
+                android:layout_below="@+id/txbDetailSavedDate"
+                android:layout_alignLeft="@+id/txbDetailSavedDate"
+                android:layout_alignStart="@+id/txbDetailSavedDate"
+                android:layout_marginTop="15dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/OR_Travelers"
-            android:id="@+id/txbDetailSavedMatches"
-            android:layout_below="@+id/txbDetailSavedPayment"
-            android:layout_alignLeft="@+id/txbDetailSavedPayment"
-            android:layout_alignStart="@+id/txbDetailSavedPayment"
-            android:layout_marginTop="15dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/OR_Repeat"
+                android:id="@+id/txbDetailSavedRepeat"
+                android:layout_below="@+id/txbDetailSavedTime"
+                android:layout_alignLeft="@+id/txbDetailSavedTime"
+                android:layout_alignStart="@+id/txbDetailSavedTime"
+                android:layout_marginTop="15dp" />
 
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/lstDetailSavedTravelers"
-            android:layout_below="@+id/txbDetailSavedMatches"
-            android:layout_alignLeft="@+id/txbDetailSavedMatches"
-            android:layout_alignStart="@+id/txbDetailSavedMatches"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:choiceMode="none"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_alignParentBottom="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/OR_Price"
+                android:id="@+id/txbDetailSavedPayment"
+                android:layout_below="@+id/txbDetailSavedRepeat"
+                android:layout_alignLeft="@+id/txbDetailSavedRepeat"
+                android:layout_alignStart="@+id/txbDetailSavedRepeat"
+                android:layout_marginTop="15dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text=""
-            android:id="@+id/txtDetailSavedFrom"
-            android:layout_alignTop="@+id/txbDetailSavedFrom"
-            android:layout_toRightOf="@+id/txbDetailSavedPayment"
-            android:layout_toEndOf="@+id/txbDetailSavedPayment"
-            android:layout_marginLeft="60dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/OR_Travelers"
+                android:id="@+id/txbDetailSavedMatches"
+                android:layout_below="@+id/txbDetailSavedPayment"
+                android:layout_alignLeft="@+id/txbDetailSavedPayment"
+                android:layout_alignStart="@+id/txbDetailSavedPayment"
+                android:layout_marginTop="15dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text=""
-            android:id="@+id/txtDetailSavedTo"
-            android:layout_alignTop="@+id/txbDetailSavedTo"
-            android:layout_alignLeft="@+id/txtDetailSavedFrom"
-            android:layout_alignStart="@+id/txtDetailSavedFrom" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/lstDetailSavedTravelers"
+                android:layout_below="@+id/txbDetailSavedMatches"
+                android:layout_alignLeft="@+id/txbDetailSavedMatches"
+                android:layout_alignStart="@+id/txbDetailSavedMatches"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:choiceMode="none"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_alignParentBottom="true"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text=""
-            android:id="@+id/txtDetailSavedDate"
-            android:layout_alignTop="@+id/txbDetailSavedDate"
-            android:layout_alignLeft="@+id/txtDetailSavedTo"
-            android:layout_alignStart="@+id/txtDetailSavedTo" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text=""
+                android:id="@+id/txtDetailSavedFrom"
+                android:layout_alignTop="@+id/txbDetailSavedFrom"
+                android:layout_toRightOf="@+id/txbDetailSavedPayment"
+                android:layout_toEndOf="@+id/txbDetailSavedPayment"
+                android:layout_marginLeft="60dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text=""
-            android:id="@+id/txtDetailSavedTime"
-            android:layout_alignTop="@+id/txbDetailSavedTime"
-            android:layout_alignLeft="@+id/txtDetailSavedDate"
-            android:layout_alignStart="@+id/txtDetailSavedDate" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text=""
+                android:id="@+id/txtDetailSavedTo"
+                android:layout_alignTop="@+id/txbDetailSavedTo"
+                android:layout_alignLeft="@+id/txtDetailSavedFrom"
+                android:layout_alignStart="@+id/txtDetailSavedFrom" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text=""
-            android:id="@+id/txtDetailSavedRepeat"
-            android:layout_alignTop="@+id/txbDetailSavedRepeat"
-            android:layout_alignLeft="@+id/txtDetailSavedTime"
-            android:layout_alignStart="@+id/txtDetailSavedTime" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text=""
+                android:id="@+id/txtDetailSavedDate"
+                android:layout_alignTop="@+id/txbDetailSavedDate"
+                android:layout_alignLeft="@+id/txtDetailSavedTo"
+                android:layout_alignStart="@+id/txtDetailSavedTo" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text=""
-            android:id="@+id/txtDetailSavedPayment"
-            android:layout_alignTop="@+id/txbDetailSavedPayment"
-            android:layout_alignLeft="@+id/txtDetailSavedRepeat"
-            android:layout_alignStart="@+id/txtDetailSavedRepeat" />
-    </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text=""
+                android:id="@+id/txtDetailSavedTime"
+                android:layout_alignTop="@+id/txbDetailSavedTime"
+                android:layout_alignLeft="@+id/txtDetailSavedDate"
+                android:layout_alignStart="@+id/txtDetailSavedDate" />
 
-</ScrollView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text=""
+                android:id="@+id/txtDetailSavedRepeat"
+                android:layout_alignTop="@+id/txbDetailSavedRepeat"
+                android:layout_alignLeft="@+id/txtDetailSavedTime"
+                android:layout_alignStart="@+id/txtDetailSavedTime" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text=""
+                android:id="@+id/txtDetailSavedPayment"
+                android:layout_alignTop="@+id/txbDetailSavedPayment"
+                android:layout_alignLeft="@+id/txtDetailSavedRepeat"
+                android:layout_alignStart="@+id/txtDetailSavedRepeat" />
+        </RelativeLayout>
+
+    </ScrollView>
+</FrameLayout>

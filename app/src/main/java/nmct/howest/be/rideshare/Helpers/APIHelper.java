@@ -382,7 +382,7 @@ public class APIHelper {
             parameters.add(new BasicNameValuePair("messageDateTime", m.getDatetime()));
 
             httpput.setEntity(new UrlEncodedFormEntity(parameters));
-            PutAsync task = new PutAsync();
+            PutAsyncMessage task = new PutAsyncMessage();
             task.execute(httpput);
         }
         catch (IOException e) {
@@ -450,6 +450,46 @@ public class APIHelper {
             if(statusCode.equals("200")||statusCode.equals("201"))
             {
                 Toast.makeText(RideshareApp.getAppContext(), "Succesvol opgeslagen in database", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                Toast.makeText(RideshareApp.getAppContext(), "Er is iets misgelopen", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    //Helper Put Message
+    public static class PutAsyncMessage extends AsyncTask<HttpPut, Void, String>
+    {
+        @Override
+        protected String doInBackground(HttpPut... params) {
+            try
+            {
+                HttpClient httpClient = new DefaultHttpClient();
+
+                HttpPut httpput = params[0];
+                HttpResponse response = httpClient.execute(httpput);
+
+                HttpEntity entity = response.getEntity();
+                String result = Utils.convertStreamToString(entity.getContent());
+
+                return new String(result);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result)
+        {
+            //Parse json for status code
+            //if 200 = Toast for success
+            String statusCode = Utils.ParseJsonStatusCode(result);
+            if(statusCode.equals("200")||statusCode.equals("201"))
+            {
+                Toast.makeText(RideshareApp.getAppContext(), "Bericht verzonden", Toast.LENGTH_SHORT).show();
             }
             else
             {

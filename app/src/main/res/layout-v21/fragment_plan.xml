@@ -180,7 +180,7 @@
             android:layout_height="45dp"
             android:text="@string/Save"
             android:textAllCaps="true"
-            android:id="@+id/btnOpslaan"
+            android:id="@+id/btnPlanSave"
             android:layout_below="@+id/tglBtns"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"

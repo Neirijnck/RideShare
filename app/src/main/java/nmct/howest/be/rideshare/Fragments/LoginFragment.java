@@ -129,6 +129,7 @@ public class LoginFragment extends Fragment {
                                         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
                                         SharedPreferences.Editor edt = pref.edit();
                                         edt.putString("accessToken", session.getAccessToken());
+                                        edt.putString("myUserID", user.getId());
                                         edt.commit();
                                         Intent intent = new Intent(getActivity(), MainActivity.class);
                                         getActivity().startActivity(intent);

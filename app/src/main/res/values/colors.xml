@@ -11,6 +11,8 @@
     <color name="rideshare_background">#fafafa</color>
     <color name="rideshare_card">#fff4f4f4</color>
     <color name="rideshare_text">#87000000</color>
+    <color name="rideshare_text_green">#ff009688</color>
+    <color name="rideshare_text_red">#FFFF4444</color>
     <color name="rideshare_icon_color">#ff555555</color>
 
     <!--Indigo Theme-->

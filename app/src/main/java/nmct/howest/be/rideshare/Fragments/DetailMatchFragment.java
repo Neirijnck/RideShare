@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -53,6 +55,8 @@ public class DetailMatchFragment extends Fragment {
     private TextView txtDetailMatchBericht;
     private EditText txtMessage;
     private Button btnJoinRide;
+    private ProgressBar mProgressMatch;
+    private ScrollView mLayoutMatch;
 
     SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(RideshareApp.getAppContext());
     String token = pref.getString("accessToken", "");
@@ -76,6 +80,9 @@ public class DetailMatchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_detail_match, container, false);
+
+        mProgressMatch = (ProgressBar) view.findViewById(R.id.progressBarMatch);
+        mLayoutMatch = (ScrollView) view.findViewById(R.id.container_match);
 
         txtDetailMatchFrom = (TextView) view.findViewById(R.id.txtMatchFrom);
         txtDetailMatchTo = (TextView) view.findViewById(R.id.txtMatchTo);
@@ -143,6 +150,11 @@ public class DetailMatchFragment extends Fragment {
         imgDetailMatch.setImageBitmap(user.getBitmapFb());
         txtDetailMatchName.setText(user.getFirstName() + " " + user.getLastName());
         txtDetailMatchBericht.setText("Stuur "+user.getFirstName() + " een bericht:");
+
+        //Make layout visible when loaded and remove progressbar
+        mProgressMatch.setVisibility(View.INVISIBLE);
+        mLayoutMatch.setVisibility(View.VISIBLE);
+
         final User mUser = user;
         imgDetailMatch.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
