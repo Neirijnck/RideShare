@@ -28,7 +28,7 @@ import nmct.howest.be.rideshare.RideshareApp;
 
 public class APIHelper {
 
-    public static void AddUser(String userName, String firstName, String lastName, String email, String fbToken, String fbLink, String fbID, String location, String gender, String regID, String fbImg, String birthday) {
+    public static void AddUser(String userName, String firstName, String lastName, String email, String fbToken, String fbLink, String fbID, String location, String gender, String fbImg, String birthday, String regId) {
         try {
             HttpPost httppost = new HttpPost(RideshareApp.getAppContext().getResources().getString(R.string.API_Profile));
 
@@ -42,12 +42,12 @@ public class APIHelper {
             parameters.add(new BasicNameValuePair("facebookID", fbID));
             parameters.add(new BasicNameValuePair("location", location));
             parameters.add(new BasicNameValuePair("gender", gender));
-            parameters.add(new BasicNameValuePair("registrationIDs", "666"));
+            parameters.add(new BasicNameValuePair("registrationIDs", regId));
             parameters.add(new BasicNameValuePair("facebookImg", fbImg));
             parameters.add(new BasicNameValuePair("birthday", birthday));
             httppost.setEntity(new UrlEncodedFormEntity(parameters));
 
-            PostAsyncLogin task = new PostAsyncLogin();
+            PostAsync task = new PostAsync();
             task.execute(httppost);
         }
         catch (IOException e) {
@@ -118,7 +118,6 @@ public class APIHelper {
             parameters.add(new BasicNameValuePair("firstName", firstName));
             parameters.add(new BasicNameValuePair("lastName", lastName));
             parameters.add(new BasicNameValuePair("location", location));
-
             String amount = Integer.toString(amountOfSeats);
             parameters.add(new BasicNameValuePair("amountOfSeats", amount));
             parameters.add(new BasicNameValuePair("carType", ""));
@@ -390,31 +389,9 @@ public class APIHelper {
         }
     }
 
-    //Helper Post Login
-    public static class PostAsyncLogin extends AsyncTask<HttpPost, Void, String>
-    {
-        @Override
-        protected String doInBackground(HttpPost... params)
-        {
-            try {
-                HttpClient httpclient = new DefaultHttpClient();
-
-                HttpPost httppost = params[0];
-                HttpResponse response = httpclient.execute(httppost);
-
-                HttpEntity entity = response.getEntity();
-                String result = Utils.convertStreamToString(entity.getContent());
 
 
-                return new String(result);
 
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-    }
 
     //Helper Post
     public static class PostAsync extends AsyncTask<HttpPost, Void, String>
@@ -431,7 +408,6 @@ public class APIHelper {
                 HttpEntity entity = response.getEntity();
                 String result = Utils.convertStreamToString(entity.getContent());
 
-
                 return new String(result);
 
             }
@@ -442,11 +418,11 @@ public class APIHelper {
         }
 
         @Override
-        protected void onPostExecute(String result)
-        {
+        protected void onPostExecute(String result) {
             //Parse json for status code
             //if 200 = Toast for success
             String statusCode = Utils.ParseJsonStatusCode(result);
+            Log.d("statusCodePost", result);
             if(statusCode.equals("200")||statusCode.equals("201"))
             {
                 Toast.makeText(RideshareApp.getAppContext(), "Succesvol opgeslagen in database", Toast.LENGTH_SHORT).show();
@@ -527,6 +503,7 @@ public class APIHelper {
             //Parse json for status code
             //if 200 = Toast for success
             String statusCode = Utils.ParseJsonStatusCode(result);
+            Log.d("statusCodePut", statusCode);
             if(statusCode.equals("200")||statusCode.equals("201"))
             {
                 Toast.makeText(RideshareApp.getAppContext(), "Succesvol aangepast in database", Toast.LENGTH_SHORT).show();
@@ -566,6 +543,7 @@ public class APIHelper {
             //Parse json for status code
             //if 200 = Toast for success
             String statusCode = Utils.ParseJsonStatusCode(result);
+            Log.d("statusCodeDelete", statusCode);
             if(statusCode.equals("200")||statusCode.equals("201"))
             {
                 Toast.makeText(RideshareApp.getAppContext(), "Succesvol verwijderd", Toast.LENGTH_SHORT).show();

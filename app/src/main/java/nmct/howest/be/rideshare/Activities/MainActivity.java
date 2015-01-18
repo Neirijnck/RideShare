@@ -28,13 +28,15 @@ import nmct.howest.be.rideshare.R;
 public class MainActivity extends ActionBarActivity {
 
     //Variables
+    //Prefs
+    SharedPreferences prefs;
     //An account type, in the form of a domain name
     public static final String ACCOUNT_TYPE = "nmct.howest.be.rideshare.account";
-    //The account name
+    // The account name
     public static final String ACCOUNT = "RideShareAccount";
-    //Instance fields
+    // Instance fields
     Account mAccount;
-    //A content resolver for accessing the provider
+    // A content resolver for accessing the provider
     ContentResolver mResolver;
 
     //Tab variables
@@ -45,15 +47,26 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        /*if(getIntent() != null && getIntent().getExtras() != null) {
+            Integer p = getIntent().getExtras().getInt("PAGE", 0);
+            String msg = getIntent().getExtras().getString("TOAST", "");
+            pager.setCurrentItem(p, true);
+
+            if(!msg.isEmpty()) {
+                Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+            }
+        }*/
+
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+        prefs = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+        String token = prefs.getString("accessToken", "");
+        String reg_id = prefs.getString("REG_ID", "");
 
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
-        String token = pref.getString("accessToken", "");
-
-        if(token == null || token == "") {
+        if(token.isEmpty() || reg_id.isEmpty()) {
             callFacebookLogout(this);
+            return;
         }
 
         checkAppCount();
@@ -75,6 +88,7 @@ public class MainActivity extends ActionBarActivity {
         mAccount = CreateSyncAccount(this);
 
         mResolver = getContentResolver();
+
     }
 
     @Override
@@ -91,20 +105,16 @@ public class MainActivity extends ActionBarActivity {
     public static Account CreateSyncAccount(Context context)
     {
         // Create the account type and default account
-        Account newAccount = new Account(
-                ACCOUNT, ACCOUNT_TYPE);
+        Account newAccount = new Account(ACCOUNT, ACCOUNT_TYPE);
 
         // Get an instance of the Android account manager
         AccountManager accountManager =
-                (AccountManager) context.getSystemService(
-                        ACCOUNT_SERVICE);
+                (AccountManager) context.getSystemService(ACCOUNT_SERVICE);
 
-        if (accountManager.addAccountExplicitly(newAccount, null, null))
-        {
+        if (accountManager.addAccountExplicitly(newAccount, null, null)){
             return newAccount;
         }
-        else
-        {
+        else{
             Log.e("Account", "Already exists or error");
             return null;
         }
@@ -139,8 +149,8 @@ public class MainActivity extends ActionBarActivity {
                 session.closeAndClearTokenInformation();
             }
         }
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
         prefs.edit().remove("accessToken").commit();
+        //prefs.edit().remove("REG_ID").commit();
         Intent intent = new Intent(this.getApplicationContext(), LoginActivity.class);
         this.startActivity(intent);
     }
@@ -161,12 +171,10 @@ public class MainActivity extends ActionBarActivity {
     //Check how many times the app was opened
     private void checkAppCount(){
         super.onStart();
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
-        SharedPreferences.Editor edt = pref.edit();
-        int count = pref.getInt("count", 0);
+        SharedPreferences.Editor edt = prefs.edit();
+        int count = prefs.getInt("count", 0);
         count ++;
-        if(count == 10)
-        {
+        if(count == 20){
             new AlertDialog.Builder(this)
                     .setTitle("Please donate!")
                     .setMessage("Vind je deze app nuttig? Steun de ontwikkeling ervan door te doneren aan de ontwikkelaars.")

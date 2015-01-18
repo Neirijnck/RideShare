@@ -134,6 +134,7 @@ public class ProfileLoader extends AsyncTaskLoader<User>
                     }
                     else if (key.equals("birthday"))
                     {
+                        //TODO: wat als er geen birthday is opgegeven?
                         birthday = reader.nextString();
                         user.setBirthday(birthday);
                     }
