@@ -185,7 +185,7 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
         } catch (ParseException ex) {
             Log.e("ParseException Date", ex.getMessage());
         }
-        if(birthday.equals("00-00-00")||TextUtils.isEmpty(birthday))
+        if(birthday.equals("01-01-0001")||TextUtils.isEmpty(birthday))
         {
             birthday="Leeftijd onbekend.";
         }

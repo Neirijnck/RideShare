@@ -211,7 +211,6 @@ public class TripsLoader extends AsyncTaskLoader<List<Trip>>
                         }
                         id++;
                     }
-                    trip.setType("Mijn opgeslagen ritten");
                     trip.setFacebookID(Utils.getUserFacebookIDFromUserID(token, trip.getUserID()));
                 }
                 reader.endObject();

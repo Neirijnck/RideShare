@@ -5,17 +5,18 @@ import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 
+import java.util.Locale;
+
 import nmct.howest.be.rideshare.Helpers.APIHelper;
-import nmct.howest.be.rideshare.Helpers.Utils;
 import nmct.howest.be.rideshare.R;
 import nmct.howest.be.rideshare.RideshareApp;
 
@@ -68,8 +69,18 @@ public class SettingsActivity extends ActionBarActivity
             pref_language.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener()
             {
                 @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    Object obj = newValue;
+                public boolean onPreferenceChange(Preference preference, Object newValue)
+                {
+                    Locale myLocale = new Locale(newValue.toString());
+                    Locale.setDefault(myLocale);
+                    Configuration config = new Configuration();
+                    config.locale = myLocale;
+                    getActivity().getResources().updateConfiguration(config, getActivity().getResources().getDisplayMetrics());
+
+                    //Restart app
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
                     return true;
                 }
             });
@@ -106,7 +117,6 @@ public class SettingsActivity extends ActionBarActivity
                     return true;
                 }
             });
-
         }
     }
 

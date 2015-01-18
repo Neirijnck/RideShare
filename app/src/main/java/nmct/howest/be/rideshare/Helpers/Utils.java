@@ -37,6 +37,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.TimeZone;
 
 import nmct.howest.be.rideshare.Models.Message;
@@ -57,7 +58,7 @@ public class Utils
         String inputPattern = "dd-MM-yyyy";
         String  outputPattern = "yyyy-MM-dd";
 
-        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern, Locale.getDefault());
         SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
 
         Date dateObject = null;

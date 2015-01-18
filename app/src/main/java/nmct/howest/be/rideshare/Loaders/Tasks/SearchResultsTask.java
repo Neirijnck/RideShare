@@ -2,7 +2,6 @@ package nmct.howest.be.rideshare.Loaders.Tasks;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.JsonReader;
 import android.util.Log;

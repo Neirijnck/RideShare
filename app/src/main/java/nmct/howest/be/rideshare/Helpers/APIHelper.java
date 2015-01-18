@@ -47,7 +47,7 @@ public class APIHelper {
             parameters.add(new BasicNameValuePair("birthday", birthday));
             httppost.setEntity(new UrlEncodedFormEntity(parameters));
 
-            PostAsync task = new PostAsync();
+            PostAsyncLogin task = new PostAsyncLogin();
             task.execute(httppost);
         }
         catch (IOException e) {
@@ -380,7 +380,7 @@ public class APIHelper {
         }
     }
 
-    //Update Match
+    //Update Match with message
     public static void AddMessageToMatch(String fbToken, String matchId, Message m, String tripId)
     {
         try {
@@ -399,9 +399,46 @@ public class APIHelper {
         }
     }
 
+    //Helper Post Login
+    public static class PostAsyncLogin extends AsyncTask<HttpPost, Void, String>
+    {
+        @Override
+        protected String doInBackground(HttpPost... params)
+        {
+            try {
+                HttpClient httpclient = new DefaultHttpClient();
 
+                HttpPost httppost = params[0];
+                HttpResponse response = httpclient.execute(httppost);
 
+                HttpEntity entity = response.getEntity();
+                String result = Utils.convertStreamToString(entity.getContent());
 
+                return new String(result);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result)
+        {
+            //Parse json for status code
+            //if 200 = Toast for success
+            String statusCode = Utils.ParseJsonStatusCode(result);
+            Log.d("statusCodePost", result);
+            if(statusCode.equals("200")||statusCode.equals("201"))
+            {
+                Toast.makeText(RideshareApp.getAppContext(), "Succesvol aangemeld", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                Toast.makeText(RideshareApp.getAppContext(), "Er is iets misgelopen", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
     //Helper Post
     public static class PostAsync extends AsyncTask<HttpPost, Void, String>
@@ -419,7 +456,6 @@ public class APIHelper {
                 String result = Utils.convertStreamToString(entity.getContent());
 
                 return new String(result);
-
             }
             catch (Exception e) {
                 e.printStackTrace();

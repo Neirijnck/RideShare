@@ -35,7 +35,7 @@ import nmct.howest.be.rideshare.Helpers.ConnectivityHelper;
 import nmct.howest.be.rideshare.Helpers.Utils;
 import nmct.howest.be.rideshare.R;
 
-public class LoginFragment extends Fragment {
+public class LoginFragment extends Fragment{
 
     //Variables
     private FragmentActivity context;
@@ -115,7 +115,7 @@ public class LoginFragment extends Fragment {
                                     birthday = Utils.parseDateToISOString(date, "00:00");
                                 }
                                 else{
-                                    birthday=Utils.parseDateToISOString("00-00-00", "00:00");
+                                    birthday=Utils.parseDateToISOString("01-01-0001", "00:00");
                                 }
 
                                 if (user.getLocation() != null) {

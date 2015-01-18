@@ -27,7 +27,6 @@ import java.util.List;
 
 import nmct.howest.be.rideshare.Activities.SearchActivity;
 import nmct.howest.be.rideshare.Adapters.TripRecyclerAdapter;
-import nmct.howest.be.rideshare.Loaders.Json.SpecialTripsLoader;
 import nmct.howest.be.rideshare.Loaders.Json.TripsLoader;
 import nmct.howest.be.rideshare.Models.Trip;
 import nmct.howest.be.rideshare.R;
@@ -153,9 +152,9 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
             case TRIPS_SAVED_LOADER_ID:
                 return new TripsLoader(getActivity(), getResources().getString(R.string.API_Trips));
             case TRIPS_REQUESTS_LOADER_ID:
-                return new SpecialTripsLoader(getActivity(), getResources().getString(R.string.API_Trips_Requests));
+                return new TripsLoader(getActivity(), getResources().getString(R.string.API_Trips_Requests));
             case TRIPS_REQUESTED_LOADER_ID:
-                return new SpecialTripsLoader(getActivity(), getResources().getString(R.string.API_Trips_Requested));
+                return new TripsLoader(getActivity(), getResources().getString(R.string.API_Trips_Requested));
             default:
                 return null;
         }
@@ -167,6 +166,8 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
 
         if(loader.getId()==TRIPS_SAVED_LOADER_ID)
         {
+            //This is a saved trip
+            for(Trip trip: trips){trip.setType("Mijn opgeslagen ritten");}
             if(mSavedTrips!=null)
             {
                 mSavedTrips = trips;
