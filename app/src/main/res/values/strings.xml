@@ -109,11 +109,8 @@
 
     <!-- Site -->
     <string name="Site">http://sharemyrideapp.me</string>
-    <string name="API_Donate">http://sharemyrideapp.me/donate</string>
-    
     <string name="Site_Icon">http://sharemyrideapp.me/img/logo.png</string>
-    <string name="API">http://188.226.154.228/api/v1/</string>
-    <string name="API_Donate">http://188.226.154.228/donate</string>
+    <string name="Site_Donate">http://sharemyrideapp.me/donate</string>
 
     <!-- Notifications -->
     <string name="requestNotification"> zou graag meerijden met jou</string>

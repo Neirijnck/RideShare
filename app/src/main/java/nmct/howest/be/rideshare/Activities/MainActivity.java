@@ -18,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.facebook.Session;
@@ -95,10 +96,20 @@ public class MainActivity extends ActionBarActivity {
     protected void onResume() {
         super.onResume();
 
-        Bundle extras = getIntent().getExtras();
+        /*Bundle extras = getIntent().getExtras();
         if (extras != null) {
             Integer p = extras.getInt("PAGE");
             pager.setCurrentItem(p, true);
+        }*/
+
+        if(getIntent() != null && getIntent().getExtras() != null) {
+            Integer p = getIntent().getExtras().getInt("PAGE", 0);
+            String msg = getIntent().getExtras().getString("TOAST", "");
+            pager.setCurrentItem(p, true);
+
+            if (!msg.isEmpty()) {
+                Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -180,7 +191,7 @@ public class MainActivity extends ActionBarActivity {
                     .setMessage("Vind je deze app nuttig? Steun de ontwikkeling ervan door te doneren aan de ontwikkelaars.")
                     .setPositiveButton("Doneer", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.API_Donate)));
+                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.Site_Donate)));
                             startActivity(browserIntent);
                         }
                     })
