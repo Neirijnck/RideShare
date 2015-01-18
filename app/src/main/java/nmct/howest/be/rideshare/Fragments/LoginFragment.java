@@ -63,10 +63,12 @@ public class LoginFragment extends Fragment {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     //dialog.dismiss();
-                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                    /*Intent intent = new Intent(Intent.ACTION_MAIN);
                     intent.addCategory(Intent.CATEGORY_HOME);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+                    startActivity(intent);*/
+                    android.os.Process.killProcess(android.os.Process.myPid());
+                    System.exit(1);
                 }
             });
             builder.show();
@@ -99,46 +101,56 @@ public class LoginFragment extends Fragment {
                     List<String> permissions = session.getPermissions();
                     Log.d("permissies", permissions.toString());
                     Log.i(TAG, "Access Token: " + session.getAccessToken());
-                    Request.executeMeRequestAsync(session,
-                            new Request.GraphUserCallback() {
-                                @Override
-                                public void onCompleted(GraphUser user, Response response) {
-                                    if (user != null) {
-                                        String location = "";
-                                        String gender = "";
-                                        String birthday = "";
-                                        if (user.getBirthday() != null) {
-                                            String date = user.getBirthday();
-                                            date = date.replace("/", "-");
-                                            birthday = Utils.parseDateToISOString(date, "00:00");
-                                        }
-                                        else{birthday=Utils.parseDateToISOString("00-00-00", "00:00");}
-                                        if (user.getLocation() != null) {
-                                            location = user.getLocation().getName().substring(0, user.getLocation().getName().indexOf(","));
-                                        }
-                                        if (user.asMap().get("gender").toString() != null) {
-                                            if (user.asMap().get("gender").toString().equals("male"))
-                                                gender = "M";
-                                            else if (user.asMap().get("gender").toString().equals("female"))
-                                                gender = "V";
-                                        }
-                                        APIHelper.AddUser(user.getName(), user.getFirstName(),
-                                                user.getLastName(), user.asMap().get("email").toString(),
-                                                session.getAccessToken(), user.getLink(), user.getId(), location,
-                                                gender, "", "https://graph.facebook.com/" + user.getId() + "/picture?type=large", birthday);
-                                        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-                                        SharedPreferences.Editor edt = pref.edit();
-                                        edt.putString("accessToken", session.getAccessToken());
-                                        edt.putString("myUserID", user.getId());
-                                        edt.commit();
-                                        Intent intent = new Intent(getActivity(), MainActivity.class);
-                                        getActivity().startActivity(intent);
-                                    }
+                    Request.executeMeRequestAsync(session, new Request.GraphUserCallback() {
+                        @Override
+                        public void onCompleted(GraphUser user, Response response) {
+                            if (user != null) {
+                                String location = "";
+                                String gender = "";
+                                String birthday = "";
+
+                                if (user.getBirthday() != null) {
+                                    String date = user.getBirthday();
+                                    date = date.replace("/", "-");
+                                    birthday = Utils.parseDateToISOString(date, "00:00");
                                 }
-                            });
+                                else{
+                                    birthday=Utils.parseDateToISOString("00-00-00", "00:00");
+                                }
+
+                                if (user.getLocation() != null) {
+                                    location = user.getLocation().getName().substring(0, user.getLocation().getName().indexOf(","));
+                                }
+
+                                if (user.asMap().get("gender").toString() != null) {
+                                    if (user.asMap().get("gender").toString().equals("male"))
+                                        gender = "M";
+                                    else if (user.asMap().get("gender").toString().equals("female"))
+                                        gender = "V";
+                                }
+
+                                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                                String reg_id = prefs.getString("REG_ID", "");
+                                Log.d("reg_id", reg_id );
+
+                                APIHelper.AddUser(user.getName(), user.getFirstName(),
+                                        user.getLastName(), user.asMap().get("email").toString(),
+                                        session.getAccessToken(), user.getLink(), user.getId(), location,
+                                        gender, "https://graph.facebook.com/" + user.getId() + "/picture?type=large", birthday, reg_id);
+
+                                SharedPreferences.Editor edt = prefs.edit();
+                                edt.putString("accessToken", session.getAccessToken());
+                                edt.putString("myUserID", user.getId());
+                                edt.commit();
+                                Intent intent = new Intent(getActivity(), MainActivity.class);
+                                getActivity().startActivity(intent);
+                            }
+                        }
+                    });
                 }
             }
         });
+
         //End Facebook Login
         return view;
     }

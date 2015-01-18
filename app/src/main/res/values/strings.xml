@@ -4,18 +4,23 @@
     <!-- General -->
     <string name="app_name">Share My Ride</string>
     <string name="app_description">De beste carpool app die er is!</string>
+
+    <!-- Actions -->
     <string name="action_settings">Instellingen</string>
     <string name="action_logout">Uitloggen</string>
     <string name="action_edit">Aanpassen</string>
     <string name="action_add">Toevoegen</string>
     <string name="action_delete">Verwijderen</string>
-    <string name="login">We plaatsen niets zonder jouw toestemming.</string>
 
     <!-- Components -->
     <string name="Plan">Plannen</string>
     <string name="Search">Zoeken</string>
     <string name="Trips">Ritten</string>
     <string name="Profile">Profiel</string>
+
+    <!-- Login -->
+    <string name="login">We posten niets op Facebook zonder toestemming.</string>
+    <string name="btnLogin">Aanmelden</string>
 
     <!-- Common -->
     <string name="From">Van</string>
@@ -26,7 +31,8 @@
     <string name="Price">Prijs</string>
     <string name="Save">Opslaan</string>
     <string name="Searching">Zoeken</string>
-    <string name="learn_more">Leer meer</string>
+    <string name="Status">Status</string>
+    <string name="Travelers">Medereizigers:</string>
 
     <!-- Plan -->
     <string name="Plan_Title">Plan een volgende rit:</string>
@@ -66,8 +72,8 @@
 
     <!-- Details Activity and fragments -->
     <string name="title_activity_details">Details</string>
+    <string name="title_activity_other_profile">Other Profile</string>
     <string name="Added_Message">Bijgevoegd bericht:</string>
-    <string name="Status">Status:</string>
     <string name="Status_Accepted">Geaccepteerd</string>
     <string name="Status_NotAccepted">Nog niet geaccepteerd</string>
     <string name="Status_Declined">Geweigerd</string>
@@ -78,13 +84,6 @@
     <string name="Title_Saved">Mijn rit:</string>
     <string name="Title_Request">Jouw aanvraag: </string>
     <string name="Title_Requested">Aangevraagd: </string>
-    <string name="OR_From">Van:</string>
-    <string name="OR_To">Naar:</string>
-    <string name="OR_Date">Datum:</string>
-    <string name="OR_Hour">Uur:</string>
-    <string name="OR_Repeat">Herhaald:</string>
-    <string name="OR_Price">Prijs:</string>
-    <string name="OR_Travelers">Medereizigers:</string>
 
     <!-- Dialog Review-->
     <string name="dialog_ok">OK</string>
@@ -100,17 +99,24 @@
     <string name="pref_delete_profile">Verwijder profiel</string>
 
     <!-- API -->
-    <string name="Site">http://188.226.154.228</string>
-    <string name="Site_Icon">http://sharemyrideapp.me/img/logo.png</string>
     <string name="API">http://188.226.154.228/api/v1/</string>
-    <string name="API_Donate">http://188.226.154.228/donate</string>
     <string name="API_Profile">http://188.226.154.228/api/v1/profile/</string>
     <string name="API_Trips">http://188.226.154.228/api/v1/trips/</string>
     <string name="API_Trips_Search">http://188.226.154.228/api/v1/trips/search/</string>
+    
     <string name="API_Trips_Requests">http://188.226.154.228/api/v1/trips?show=requests</string>
-    <string name="API_Trips_Requested">http://188.226.154.228/api/v1/trips?show=requested</string>
+    <string name="API_Trips_Requested">http://188.226.154.228/api/v1/trips?show=requestedandaccepted</string>
     <string name="API_Trips_Accepted">http://188.226.154.228/api/v1/trips?show=accepted</string>
 
-    <string name="title_activity_other_profile">Other Profile</string>
+    <!-- Site -->
+    <string name="Site">http://sharemyrideapp.me</string>
+    <string name="Site_Icon">http://sharemyrideapp.me/img/logo.png</string>
+    <string name="Site_Donate">http://sharemyrideapp.me/donate</string>
+
+    <!-- Notifications -->
+    <string name="requestNotification"> zou graag meerijden met jou</string>
+    <string name="acceptedNotification">Je kan meerijden met </string>
+    <string name="reviewNotification">  heeft een review op je profiel geschreven</string>
+    <string name="messageNotification"> heeft je een bericht gestuurd</string>
 
 </resources>
