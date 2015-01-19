@@ -2,7 +2,6 @@ package nmct.howest.be.rideshare.Fragments;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -32,10 +31,7 @@ import java.util.List;
 import nmct.howest.be.rideshare.Activities.MainActivity;
 import nmct.howest.be.rideshare.Adapters.ImagePagerAdapter;
 import nmct.howest.be.rideshare.Helpers.APIHelper;
-import nmct.howest.be.rideshare.Account.AccountUtils;
-import nmct.howest.be.rideshare.Helpers.ConnectivityHelper;
 import nmct.howest.be.rideshare.Helpers.Utils;
-import nmct.howest.be.rideshare.Loaders.Database.Contract;
 import nmct.howest.be.rideshare.R;
 
 public class LoginFragment extends Fragment{

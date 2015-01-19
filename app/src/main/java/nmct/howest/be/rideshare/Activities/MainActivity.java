@@ -1,7 +1,5 @@
 package nmct.howest.be.rideshare.Activities;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -9,13 +7,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -27,8 +21,8 @@ import android.widget.Toast;
 import com.astuetz.PagerSlidingTabStrip;
 import com.facebook.Session;
 
-import nmct.howest.be.rideshare.Adapters.TabPagerAdapter;
 import nmct.howest.be.rideshare.Account.AccountUtils;
+import nmct.howest.be.rideshare.Adapters.TabPagerAdapter;
 import nmct.howest.be.rideshare.Loaders.Database.Contract;
 import nmct.howest.be.rideshare.R;
 

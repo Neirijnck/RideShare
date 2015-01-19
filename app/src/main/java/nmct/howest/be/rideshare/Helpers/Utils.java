@@ -52,7 +52,6 @@ public class Utils
         return ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
     }
 
-
     // Check App version
     public static int getAppVersion(Context context) {
         try {
@@ -62,7 +61,6 @@ public class Utils
             throw new RuntimeException("Could not get package name: " + e);
         }
     }
-
 
     // Parse array of booleans
     public static boolean areAllFalse(boolean[] array){
@@ -112,8 +110,6 @@ public class Utils
         return repeatString;
     }
 
-
-
     // Convert payment
     public static String setPayment(String Payment) {
         if(Payment.isEmpty()) {
@@ -123,7 +119,6 @@ public class Utils
             return "€" + Payment;
         }
     }
-
 
     // Convert status
     public static String convertStatus(int status) {
@@ -153,8 +148,6 @@ public class Utils
                 return 0;
         }
     }
-
-
 
     // Parse Date/Time <=> ISOString
     public static String parseDateToISOString(String date, String time) {
@@ -219,8 +212,6 @@ public class Utils
         return formatted.substring(0, 22) + ":" + formatted.substring(22);
     }
 
-
-
     // Stream converter
     public static String convertStreamToString(InputStream is) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
@@ -242,8 +233,6 @@ public class Utils
         }
         return sb.toString();
     }
-
-
 
     // API Status Parser
     public static String ParseJsonStatusCode(String json){
@@ -282,8 +271,6 @@ public class Utils
         }
         return statusCode;
     }
-
-
 
     // API Get form UserID
     public static String getUserNameFromUserID(String token, String userID) throws IOException
@@ -470,8 +457,6 @@ public class Utils
         return bm;
     }
 
-
-
     // Matches and Details
     public static void sendMessage(String token, EditText txtMessage, String matchID, String tripID) {
         String messageText = txtMessage.getText().toString().trim();
@@ -554,4 +539,5 @@ public class Utils
 
         return messageView;
     }
+
 }
