@@ -2,56 +2,69 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="nmct.howest.be.rideshare" >
 
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="21" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS"/>
-    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
-    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
     <permission
         android:name="com.example.gcm.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
+
     <uses-permission android:name="com.example.gcm.permission.C2D_MESSAGE" />
 
-    <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="21"/>
+    <android:uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
 
     <application
-        android:name="nmct.howest.be.rideshare.RideshareApp"
+        android:name=".RideshareApp"
         android:allowBackup="true"
+        android:configChanges="locale"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:logo="@drawable/ic_logo"
         android:theme="@style/RideShare.Material" >
 
-        <!--ACTIVITIES-->
+        <!-- ACTIVITIES -->
         <activity
-            android:name="nmct.howest.be.rideshare.Activities.LoginActivity"
+            android:name=".Activities.LoginActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="nmct.howest.be.rideshare.Activities.MainActivity"
+            android:name=".Activities.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="nmct.howest.be.rideshare.Activities.SearchActivity"
+            android:name=".Activities.SearchActivity"
             android:label="@string/title_activity_zoek"
-            android:parentActivityName="nmct.howest.be.rideshare.Activities.MainActivity" >
+            android:parentActivityName=".Activities.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="nmct.howest.be.rideshare.Activities.MainActivity" />
         </activity>
         <activity
-            android:name="nmct.howest.be.rideshare.Activities.DetailsActivity"
+            android:name=".Activities.DetailsActivity"
             android:label="@string/title_activity_details" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -61,51 +74,51 @@
             android:name="com.facebook.LoginActivity"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
         <activity
-            android:name="nmct.howest.be.rideshare.Activities.SettingsActivity"
+            android:name=".Activities.SettingsActivity"
             android:label="@string/title_activity_settings" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="nmct.howest.be.rideshare.Activities.MainActivity" />
         </activity>
         <activity
-            android:name="nmct.howest.be.rideshare.Activities.ProfileActivity"
+            android:name=".Activities.ProfileActivity"
             android:label="@string/title_activity_profile" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="nmct.howest.be.rideshare.Activities.MainActivity" />
         </activity>
         <activity
-            android:name="nmct.howest.be.rideshare.Activities.OtherProfileActivity"
+            android:name=".Activities.OtherProfileActivity"
             android:label="@string/title_activity_other_profile" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="nmct.howest.be.rideshare.Activities.MainActivity" />
         </activity>
 
-        <!--RECEIVER-->
+        <!-- RECEIVER -->
         <receiver
-            android:name="nmct.howest.be.rideshare.Services.GcmBroadcastReceiver"
+            android:name=".Services.GcmBroadcastReceiver"
             android:enabled="true"
             android:exported="true"
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
                 <category android:name="com.example.gcm" />
             </intent-filter>
         </receiver>
 
-        <!--SERVICES-->
+        <!-- SERVICES -->
         <service
-            android:name="nmct.howest.be.rideshare.Services.GcmIntentService"
+            android:name=".Services.GcmIntentService"
             android:exported="false" />
-
         <service
             android:name=".Services.SyncService"
             android:enabled="true"
-            android:exported="true"
-            android:process=":sync">
+            android:exported="true" >
+
+            <!-- android:process=":sync" -->
             <intent-filter>
                 <action android:name="android.content.SyncAdapter" />
             </intent-filter>
@@ -113,37 +126,39 @@
             <meta-data
                 android:name="android.content.SyncAdapter"
                 android:resource="@xml/sync_adapter" />
-
         </service>
-
         <service
-            android:name=".Services.AuthenticatorService">
+            android:name=".Services.AuthenticatorService"
+            android:enabled="true"
+            android:exported="true" >
             <intent-filter>
-                <action android:name="android.accounts.AccountAuthenticator"/>
+                <action android:name="android.accounts.AccountAuthenticator" />
             </intent-filter>
+
             <meta-data
                 android:name="android.accounts.AccountAuthenticator"
                 android:resource="@xml/authenticator" />
         </service>
 
-        <!--PROVIDER-->
+        <!-- PROVIDER -->
         <provider
             android:name=".Loaders.Database.Provider"
             android:authorities="nmct.howest.be.rideshare.contentprovider"
             android:enabled="true"
             android:exported="true"
-            android:syncable="true">
+            android:syncable="true" >
         </provider>
 
-        <!--META DATA-->
-        <!-- <meta-data
+        <!-- META DATA -->
+        <!--
+             <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version"/> -->
+            android:value="@integer/google_play_services_version"/>
+        -->
 
         <meta-data
             android:name="nmct.howest.be.rideshare.webservice.auth.location"
             android:value="http://188.226.154.228" />
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/app_id" />

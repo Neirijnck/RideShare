@@ -85,7 +85,7 @@
     <string name="Title_Request">Jouw aanvraag: </string>
     <string name="Title_Requested">Aangevraagd: </string>
 
-    <!-- Dialog Review-->
+    <!-- Dialog Review -->
     <string name="dialog_ok">OK</string>
     <string name="dialog_review">Jouw mening:</string>
     <string name="dialog_userRating">Rate gebruiker:</string>
@@ -103,7 +103,6 @@
     <string name="API_Profile">http://188.226.154.228/api/v1/profile/</string>
     <string name="API_Trips">http://188.226.154.228/api/v1/trips/</string>
     <string name="API_Trips_Search">http://188.226.154.228/api/v1/trips/search/</string>
-    
     <string name="API_Trips_Requests">http://188.226.154.228/api/v1/trips?show=requests</string>
     <string name="API_Trips_Requested">http://188.226.154.228/api/v1/trips?show=requestedandaccepted</string>
     <string name="API_Trips_Accepted">http://188.226.154.228/api/v1/trips?show=accepted</string>
@@ -118,5 +117,7 @@
     <string name="acceptedNotification">Je kan meerijden met </string>
     <string name="reviewNotification">  heeft een review op je profiel geschreven</string>
     <string name="messageNotification"> heeft je een bericht gestuurd</string>
+    <string name="title_activity_main_activity2">MainActivity2</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

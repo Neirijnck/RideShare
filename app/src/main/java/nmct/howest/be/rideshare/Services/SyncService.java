@@ -13,6 +13,7 @@ public class SyncService extends Service
     private static final Object sSyncAdapterLock = new Object();
 
     public SyncService() {
+        super();
     }
 
     @Override

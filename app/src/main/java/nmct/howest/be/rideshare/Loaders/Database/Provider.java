@@ -38,16 +38,16 @@ public class Provider extends ContentProvider
 
     static {
         sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-        sUriMatcher.addURI(Contract.AUTHORITY, "Users", USERS);
-        sUriMatcher.addURI(Contract.AUTHORITY, "Users/#", USER_ID);
-        sUriMatcher.addURI(Contract.AUTHORITY, "Reviews", REVIEWS);
-        sUriMatcher.addURI(Contract.AUTHORITY, "Reviews/#", REVIEW_ID);
-        sUriMatcher.addURI(Contract.AUTHORITY, "Trips", TRIPS);
-        sUriMatcher.addURI(Contract.AUTHORITY, "Trips/#", TRIP_ID);
-        sUriMatcher.addURI(Contract.AUTHORITY, "Matches", MATCHES);
-        sUriMatcher.addURI(Contract.AUTHORITY, "Matches/#", MATCH_ID);
-        sUriMatcher.addURI(Contract.AUTHORITY, "Messages", MESSAGES);
-        sUriMatcher.addURI(Contract.AUTHORITY, "Messages/#", MESSAGE_ID);
+        sUriMatcher.addURI(Contract.AUTHORITY, "User", USERS);
+        sUriMatcher.addURI(Contract.AUTHORITY, "User/*", USER_ID);
+        sUriMatcher.addURI(Contract.AUTHORITY, "Review", REVIEWS);
+        sUriMatcher.addURI(Contract.AUTHORITY, "Review/*", REVIEW_ID);
+        sUriMatcher.addURI(Contract.AUTHORITY, "Trip", TRIPS);
+        sUriMatcher.addURI(Contract.AUTHORITY, "Trip/*", TRIP_ID);
+        sUriMatcher.addURI(Contract.AUTHORITY, "Match", MATCHES);
+        sUriMatcher.addURI(Contract.AUTHORITY, "Match/*", MATCH_ID);
+        sUriMatcher.addURI(Contract.AUTHORITY, "Message", MESSAGES);
+        sUriMatcher.addURI(Contract.AUTHORITY, "Message/*", MESSAGE_ID);
 
         sUsersProjectionMap = new HashMap<String, String>();
         sUsersProjectionMap.put(Contract.User._ID, Contract.User._ID);
@@ -71,7 +71,6 @@ public class Provider extends ContentProvider
         sUsersProjectionMap.put(Contract.Review.KEY_API_ID, Contract.Review.KEY_API_ID);
         sReviewsProjectionMap.put(Contract.Review.KEY_USERID, Contract.Review.KEY_USERID);
         sReviewsProjectionMap.put(Contract.Review.KEY_CREATED_ON, Contract.Review.KEY_CREATED_ON);
-        sReviewsProjectionMap.put(Contract.Review.KEY_LAST_EDITED_ON, Contract.Review.KEY_LAST_EDITED_ON);
         sReviewsProjectionMap.put(Contract.Review.KEY_SCORE , Contract.Review.KEY_SCORE);
         sReviewsProjectionMap.put(Contract.Review.KEY_TEXT,  Contract.Review.KEY_TEXT);
         sReviewsProjectionMap.put(Contract.Review.KEY_USER_ID,  Contract.Review.KEY_USER_ID);
@@ -129,7 +128,7 @@ public class Provider extends ContentProvider
                 qb.setTables(Contract.User.CONTENT_DIRECTORY);
                 qb.setProjectionMap(sUsersProjectionMap);
                 qb.appendWhere(
-                        "(" + Contract.User.KEY_API_ID + "=" + uri.getPathSegments().get(Contract.User.USER_ID_PATH_POSITION) + ")"
+                        "(" + Contract.User.KEY_API_ID + "='" + uri.getPathSegments().get(Contract.User.USER_ID_PATH_POSITION) + "')"
                 );
                 break;
             case REVIEWS:
@@ -140,7 +139,7 @@ public class Provider extends ContentProvider
                 qb.setTables(Contract.Review.CONTENT_DIRECTORY);
                 qb.setProjectionMap(sReviewsProjectionMap);
                 qb.appendWhere(
-                        "(" + Contract.Review.KEY_API_ID + "=" + uri.getPathSegments().get(Contract.Review.REVIEW_ID_PATH_POSITION) + ")"
+                        "(" + Contract.Review.KEY_API_ID + "='" + uri.getPathSegments().get(Contract.Review.REVIEW_ID_PATH_POSITION) + "')"
                 );
                 break;
             case TRIPS:
@@ -151,7 +150,7 @@ public class Provider extends ContentProvider
                 qb.setTables(Contract.Trip.CONTENT_DIRECTORY);
                 qb.setProjectionMap(sTripsProjectionMap);
                 qb.appendWhere(
-                        "(" + Contract.Trip.KEY_API_ID + "=" + uri.getPathSegments().get(Contract.Trip.TRIP_ID_PATH_POSITION) + ")"
+                        "(" + Contract.Trip.KEY_API_ID + "='" + uri.getPathSegments().get(Contract.Trip.TRIP_ID_PATH_POSITION) + "')"
                 );
                 break;
             case MATCHES:
@@ -162,7 +161,7 @@ public class Provider extends ContentProvider
                 qb.setTables(Contract.Match.CONTENT_DIRECTORY);
                 qb.setProjectionMap(sMatchesProjectionMap);
                 qb.appendWhere(
-                        "(" + Contract.Match.KEY_API_ID + "=" + uri.getPathSegments().get(Contract.Match.MATCH_ID_PATH_POSITION) + ")"
+                        "(" + Contract.Match.KEY_API_ID + "='" + uri.getPathSegments().get(Contract.Match.MATCH_ID_PATH_POSITION) + "')"
                 );
                 break;
             case MESSAGES:
@@ -173,7 +172,7 @@ public class Provider extends ContentProvider
                 qb.setTables(Contract.Message.CONTENT_DIRECTORY);
                 qb.setProjectionMap(sMessagesProjectionMap);
                 qb.appendWhere(
-                        "(" + Contract.Message.KEY_API_ID + "=" + uri.getPathSegments().get(Contract.Message.MESSAGE_ID_PATH_POSITION) + ")"
+                        "(" + Contract.Message.KEY_API_ID + "='" + uri.getPathSegments().get(Contract.Message.MESSAGE_ID_PATH_POSITION) + "')"
                 );
                 break;
             default:
@@ -392,8 +391,7 @@ public class Provider extends ContentProvider
                 );
                 break;
             case USER_ID:
-                String userId = uri.getPathSegments().get(Contract.User.USER_ID_PATH_POSITION);
-                finalWhere = Contract.User.KEY_API_ID + "=" + userId;
+                finalWhere = Contract.User.KEY_API_ID + "='" + uri.getPathSegments().get(Contract.User.USER_ID_PATH_POSITION) +"'";
                 if (where != null) {
                     finalWhere = DatabaseUtils.concatenateWhere(finalWhere, where);
                 }
@@ -414,8 +412,7 @@ public class Provider extends ContentProvider
                 );
                 break;
             case REVIEW_ID:
-                String reviewId = uri.getPathSegments().get(Contract.Review.REVIEW_ID_PATH_POSITION);
-                finalWhere = Contract.Review.KEY_API_ID + "=" + reviewId;
+                finalWhere = Contract.Review.KEY_API_ID + "='" + uri.getPathSegments().get(Contract.Review.REVIEW_ID_PATH_POSITION)+"'";
                 if (where != null) {
                     finalWhere = DatabaseUtils.concatenateWhere(finalWhere, where);
                 }
@@ -436,8 +433,7 @@ public class Provider extends ContentProvider
                 );
                 break;
             case TRIP_ID:
-                String tripId = uri.getPathSegments().get(Contract.Trip.TRIP_ID_PATH_POSITION);
-                finalWhere = Contract.Trip.KEY_API_ID + "=" + tripId;
+                finalWhere = Contract.Trip.KEY_API_ID + "='" + uri.getPathSegments().get(Contract.Trip.TRIP_ID_PATH_POSITION) + "'";
                 if (where != null) {
                     finalWhere = DatabaseUtils.concatenateWhere(finalWhere, where);
                 }
@@ -458,8 +454,7 @@ public class Provider extends ContentProvider
                 );
                 break;
             case MATCH_ID:
-                String matchId = uri.getPathSegments().get(Contract.Match.MATCH_ID_PATH_POSITION);
-                finalWhere = Contract.Match.KEY_API_ID + "=" + matchId;
+                finalWhere = Contract.Match.KEY_API_ID + "='" + uri.getPathSegments().get(Contract.Match.MATCH_ID_PATH_POSITION) + "'";
                 if (where != null) {
                     finalWhere = DatabaseUtils.concatenateWhere(finalWhere, where);
                 }
@@ -480,8 +475,7 @@ public class Provider extends ContentProvider
                 );
                 break;
             case MESSAGE_ID:
-                String messageId = uri.getPathSegments().get(Contract.Message.MESSAGE_ID_PATH_POSITION);
-                finalWhere = Contract.Message.KEY_API_ID + "=" + messageId;
+                finalWhere = Contract.Message.KEY_API_ID + "='" + uri.getPathSegments().get(Contract.Message.MESSAGE_ID_PATH_POSITION) + "'";
                 if (where != null) {
                     finalWhere = DatabaseUtils.concatenateWhere(finalWhere, where);
                 }

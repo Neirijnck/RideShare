@@ -27,7 +27,7 @@ public class SQLHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_USER = "CREATE TABLE "
             + Contract.User.CONTENT_DIRECTORY + "("
             + Contract.UserColumns._ID + " INTEGER PRIMARY KEY,"
-            + Contract.UserColumns.KEY_API_ID + "TEXT,"
+            + Contract.UserColumns.KEY_API_ID + " TEXT,"
             + Contract.UserColumns.KEY_USERID + " TEXT,"
             + Contract.UserColumns.KEY_FACEBOOK_TOKEN + " TEXT,"
             + Contract.UserColumns.KEY_FACEBOOK_ID + " TEXT,"
@@ -46,10 +46,9 @@ public class SQLHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_REVIEW ="CREATE TABLE "
             + Contract.Review.CONTENT_DIRECTORY + "("
             + Contract.ReviewColumns._ID + " INTEGER PRIMARY KEY,"
-            + Contract.ReviewColumns.KEY_API_ID + "TEXT,"
+            + Contract.ReviewColumns.KEY_API_ID + " TEXT,"
             + Contract.ReviewColumns.KEY_USERID+ " TEXT,"
             + Contract.ReviewColumns.KEY_CREATED_ON + " DATETIME,"
-            + Contract.ReviewColumns.KEY_LAST_EDITED_ON + " DATETIME,"
             + Contract.ReviewColumns.KEY_SCORE + " INTEGER,"
             + Contract.ReviewColumns.KEY_TEXT + " TEXT,"
             + Contract.ReviewColumns.KEY_USER_ID + " INTEGER"
@@ -58,7 +57,7 @@ public class SQLHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_TRIP ="CREATE TABLE "
             + Contract.Trip.CONTENT_DIRECTORY + "("
             + Contract.TripColumns._ID + " INTEGER PRIMARY KEY,"
-            + Contract.TripColumns.KEY_API_ID + "TEXT,"
+            + Contract.TripColumns.KEY_API_ID + " TEXT,"
             + Contract.TripColumns.KEY_USERID + " TEXT,"
             + Contract.TripColumns.KEY_FROM + " TEXT,"
             + Contract.TripColumns.KEY_TO + " TEXT,"
@@ -71,7 +70,7 @@ public class SQLHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_MATCH ="CREATE TABLE "
             + Contract.Match.CONTENT_DIRECTORY + "("
             + Contract.MatchColumns._ID + " INTEGER PRIMARY KEY,"
-            + Contract.MatchColumns.KEY_API_ID + "TEXT,"
+            + Contract.MatchColumns.KEY_API_ID + " TEXT,"
             + Contract.MatchColumns.KEY_USERID + " TEXT,"
             + Contract.MatchColumns.KEY_FROM + " TEXT,"
             + Contract.MatchColumns.KEY_TO + " TEXT,"
@@ -83,7 +82,7 @@ public class SQLHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_MESSAGE ="CREATE TABLE "
             + Contract.Message.CONTENT_DIRECTORY + "("
             + Contract.MessageColumns._ID + " INTEGER PRIMARY KEY,"
-            + Contract.MessageColumns.KEY_API_ID + "TEXT,"
+            + Contract.MessageColumns.KEY_API_ID + " TEXT,"
             + Contract.MessageColumns.KEY_USERID + " TEXT,"
             + Contract.MessageColumns.KEY_TEXT + " TEXT,"
             + Contract.MessageColumns.KEY_DATE_TIME + " DATETIME,"
@@ -116,11 +115,11 @@ public class SQLHelper extends SQLiteOpenHelper {
         Log.e(LOG, "Upgrading database from version " + oldVersion + " to "
                 + newVersion + ", which will destroy all old data");
 
-        db.execSQL("DROP TABLE " + Contract.User.CONTENT_DIRECTORY);
-        db.execSQL("DROP TABLE " + Contract.Review.CONTENT_DIRECTORY);
-        db.execSQL("DROP TABLE " + Contract.Trip.CONTENT_DIRECTORY);
-        db.execSQL("DROP TABLE " + Contract.Match.CONTENT_DIRECTORY);
-        db.execSQL("DROP TABLE " + Contract.Message.CONTENT_DIRECTORY);
+        db.execSQL("DROP TABLE IF EXISTS " + Contract.User.CONTENT_DIRECTORY);
+        db.execSQL("DROP TABLE IF EXISTS " + Contract.Review.CONTENT_DIRECTORY);
+        db.execSQL("DROP TABLE IF EXISTS " + Contract.Trip.CONTENT_DIRECTORY);
+        db.execSQL("DROP TABLE IF EXISTS " + Contract.Match.CONTENT_DIRECTORY);
+        db.execSQL("DROP TABLE IF EXISTS " + Contract.Message.CONTENT_DIRECTORY);
 
         db.execSQL(CREATE_TABLE_USER);
         db.execSQL(CREATE_TABLE_REVIEW);

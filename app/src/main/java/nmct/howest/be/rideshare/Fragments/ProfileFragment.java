@@ -2,6 +2,7 @@ package nmct.howest.be.rideshare.Fragments;
 
 import android.app.Dialog;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -38,6 +40,7 @@ import java.util.TimeZone;
 
 import nmct.howest.be.rideshare.Adapters.ReviewRecyclerAdapter;
 import nmct.howest.be.rideshare.Helpers.APIHelper;
+import nmct.howest.be.rideshare.Loaders.Database.Contract;
 import nmct.howest.be.rideshare.Loaders.Json.ProfileLoader;
 import nmct.howest.be.rideshare.Models.Review;
 import nmct.howest.be.rideshare.Models.User;
@@ -118,23 +121,6 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
 
         return view;
     }
-
-    private LoaderManager.LoaderCallbacks<User> CurrentUserLoader
-            = new LoaderManager.LoaderCallbacks<User>() {
-
-        @Override
-        public Loader<User> onCreateLoader(int id, Bundle args) {
-            return new ProfileLoader(getActivity(), getResources().getString(R.string.API_Profile));
-        }
-
-        @Override
-        public void onLoadFinished(Loader<User> loader, User user) {
-            CurrentUser = user;
-        }
-
-        @Override
-        public void onLoaderReset(Loader<User> loader) {}
-    };
 
     //Implementation of ProfileLoader
     @Override
@@ -271,5 +257,31 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
         });
         popDialog.show();
     }
+
+    //Get current user from DB
+    private LoaderManager.LoaderCallbacks<Cursor> CurrentUserLoader = new LoaderManager.LoaderCallbacks<Cursor>() {
+
+        @Override
+        public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+            return new CursorLoader(getActivity(), Contract.User.CONTENT_URI, new String[]
+                    {
+                            Contract.User.KEY_API_ID, Contract.User.KEY_USERNAME
+                    }, null, null, null);
+        }
+
+        @Override
+        public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+            CurrentUser = new User();
+            while(cursor.moveToNext())
+            {
+                CurrentUser.setID(cursor.getString(cursor.getColumnIndex(Contract.User.KEY_API_ID)));
+                CurrentUser.setUserName(cursor.getString(cursor.getColumnIndex(Contract.User.KEY_USERNAME)));
+            }
+            cursor.close();
+        }
+
+        @Override
+        public void onLoaderReset(Loader<Cursor> loader) {}
+    };
 
 }

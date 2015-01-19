@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -38,9 +39,11 @@ import android.widget.ToggleButton;
 
 import java.util.Calendar;
 
+import nmct.howest.be.rideshare.Account.AccountUtils;
 import nmct.howest.be.rideshare.Activities.SearchActivity;
 import nmct.howest.be.rideshare.Helpers.APIHelper;
 import nmct.howest.be.rideshare.Helpers.ConnectivityHelper;
+import nmct.howest.be.rideshare.Loaders.Database.Contract;
 import nmct.howest.be.rideshare.R;
 import nmct.howest.be.rideshare.RideshareApp;
 

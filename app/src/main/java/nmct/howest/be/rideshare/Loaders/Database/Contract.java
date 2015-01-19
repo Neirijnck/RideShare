@@ -10,7 +10,7 @@ public class Contract
     //USER TABLE
     public interface UserColumns extends BaseColumns
     {
-        public static final String KEY_API_ID="_id";
+        public static final String KEY_API_ID="_idAPI";
         public static final String KEY_USERID = "UserID";
         public static final String KEY_FACEBOOK_TOKEN = "FacebookToken";
         public static final String KEY_FACEBOOK_ID = "FacebookID";
@@ -41,10 +41,9 @@ public class Contract
     //REVIEW TABLE
     public interface ReviewColumns extends BaseColumns
     {
-        public static final String KEY_API_ID="_id";
+        public static final String KEY_API_ID="_idAPI";
         public static final String KEY_USERID = "UserID";
         public static final String KEY_CREATED_ON = "DateTime";
-        public static final String KEY_LAST_EDITED_ON = "DateTime";
         public static final String KEY_SCORE = "Score";
         public static final String KEY_TEXT = "Text";
         public static final String KEY_USER_ID = "User_ID";
@@ -65,11 +64,11 @@ public class Contract
     //TRIP TABLE
     public interface TripColumns extends BaseColumns
     {
-        public static final String KEY_API_ID="_id";
+        public static final String KEY_API_ID="_idAPI";
         public static final String KEY_USERID = "UserID";
         public static final String KEY_DATE_TIME = "DateTime";
-        public static final String KEY_FROM = "From";
-        public static final String KEY_TO = "To";
+        public static final String KEY_FROM = "'From'";
+        public static final String KEY_TO = "'To'";
         public static final String KEY_PAYMENT = "Payment";
         public static final String KEY_REPEAT= "Repeat";
         public static final String KEY_USER_ID = "User_ID";
@@ -90,11 +89,11 @@ public class Contract
     //MATCH TABLE
     public interface MatchColumns extends BaseColumns
     {
-        public static final String KEY_API_ID="_id";
+        public static final String KEY_API_ID="_idAPI";
         public static final String KEY_USERID = "UserID";
         public static final String KEY_DATE_TIME = "DateTime";
-        public static final String KEY_FROM = "From";
-        public static final String KEY_TO = "To";
+        public static final String KEY_FROM = "'From'";
+        public static final String KEY_TO = "'To'";
         public static final String KEY_STATUS = "Status";
         public static final String KEY_TRIP_ID = "Trip_ID";
     }
@@ -114,7 +113,7 @@ public class Contract
     //MESSAGE TABLE
     public interface MessageColumns extends BaseColumns
     {
-        public static final String KEY_API_ID="_id";
+        public static final String KEY_API_ID="_idAPI";
         public static final String KEY_USERID = "UserID";
         public static final String KEY_TEXT = "Text";
         public static final String KEY_DATE_TIME = "DateTime";

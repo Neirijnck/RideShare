@@ -24,6 +24,7 @@ import nmct.howest.be.rideshare.Helpers.Utils;
 import nmct.howest.be.rideshare.Models.Match;
 import nmct.howest.be.rideshare.Models.Message;
 import nmct.howest.be.rideshare.Models.Trip;
+import nmct.howest.be.rideshare.RideshareApp;
 
 public class TripsLoader extends AsyncTaskLoader<List<Trip>>
 {
@@ -31,6 +32,8 @@ public class TripsLoader extends AsyncTaskLoader<List<Trip>>
     private final String mUrl;
     private List<Trip> trips = new ArrayList<Trip>();
     private Context context;
+    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(RideshareApp.getAppContext());
+    String myUserID = pref.getString("myUserID", "");
 
     public TripsLoader(Context context, String url) {
         super(context);
@@ -202,7 +205,11 @@ public class TripsLoader extends AsyncTaskLoader<List<Trip>>
                                 match.setFacebookID(Utils.getUserFacebookIDFromUserID(token,match.getUserID()));
                                 match.setUserName(Utils.getUserNameFromUserID(token, match.getUserID()));
                                 reader.endObject();
-                                matches.add(match);
+
+                                //Only my matches
+                                if(match.getUserID().equals(myUserID)) {
+                                    matches.add(match);
+                                }
                             }
                             reader.endArray();
                             trip.setMatches(matches);

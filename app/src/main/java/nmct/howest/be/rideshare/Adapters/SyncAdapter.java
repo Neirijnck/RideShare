@@ -38,10 +38,10 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter
 
             SyncUtils utils = new SyncUtils(getContext());
             utils.syncUser(token, provider);
-            utils.syncTrips(token, provider);
-            utils.syncReviews(token, provider);
-            utils.syncMatches(token, provider);
-            //utils.syncMessages(token, provider);
+//            utils.syncReviews(token, provider);
+//            utils.syncTrips(token, provider);
+//            utils.syncMatches(token, provider);
+//            utils.syncMessages(token, provider);
 
         } catch (Exception e) {
             e.printStackTrace();

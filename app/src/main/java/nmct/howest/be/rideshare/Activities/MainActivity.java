@@ -1,7 +1,5 @@
 package nmct.howest.be.rideshare.Activities;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -9,9 +7,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -24,21 +26,14 @@ import com.astuetz.PagerSlidingTabStrip;
 import com.facebook.Session;
 
 import nmct.howest.be.rideshare.Adapters.TabPagerAdapter;
+import nmct.howest.be.rideshare.Account.AccountUtils;
+import nmct.howest.be.rideshare.Loaders.Database.Contract;
 import nmct.howest.be.rideshare.R;
 
 public class MainActivity extends ActionBarActivity {
 
     //Variables
-    //Prefs
     SharedPreferences prefs;
-    //An account type, in the form of a domain name
-    public static final String ACCOUNT_TYPE = "nmct.howest.be.rideshare.account";
-    // The account name
-    public static final String ACCOUNT = "RideShareAccount";
-    // Instance fields
-    Account mAccount;
-    // A content resolver for accessing the provider
-    ContentResolver mResolver;
 
     //Tab variables
     private ViewPager pager;
@@ -65,7 +60,7 @@ public class MainActivity extends ActionBarActivity {
         String token = prefs.getString("accessToken", "");
         String reg_id = prefs.getString("REG_ID", "");
 
-        if(token.isEmpty() || reg_id.isEmpty()) {
+        if (token.isEmpty() || reg_id.isEmpty()) {
             callFacebookLogout(this);
             return;
         }
@@ -85,11 +80,18 @@ public class MainActivity extends ActionBarActivity {
         tabs.setViewPager(pager);
         tabs.setTextColor(getResources().getColor(R.color.rideshare_secondary));
 
-        //Create the dummy account
-        mAccount = CreateSyncAccount(this);
+        //Set up a sync account if needed
+        if (!AccountUtils.isAccountExists(this)) {
+            AccountUtils.CreateSyncAccount(this);
+        }
 
-        mResolver = getContentResolver();
+        //Set sync to automatically
+//        ContentResolver.setSyncAutomatically(AccountUtils.getAccount(this), Contract.AUTHORITY, true);
 
+        //Request sync
+        Bundle settingsBundle = new Bundle();
+        settingsBundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
+        ContentResolver.requestSync(AccountUtils.getAccount(this), Contract.AUTHORITY, settingsBundle);
     }
 
     @Override
@@ -102,7 +104,7 @@ public class MainActivity extends ActionBarActivity {
             pager.setCurrentItem(p, true);
         }*/
 
-        if(getIntent() != null && getIntent().getExtras() != null) {
+        if (getIntent() != null && getIntent().getExtras() != null) {
             Integer p = getIntent().getExtras().getInt("PAGE", 0);
             String msg = getIntent().getExtras().getString("TOAST", "");
             pager.setCurrentItem(p, true);
@@ -110,24 +112,6 @@ public class MainActivity extends ActionBarActivity {
             if (!msg.isEmpty()) {
                 Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
             }
-        }
-    }
-
-    public static Account CreateSyncAccount(Context context)
-    {
-        // Create the account type and default account
-        Account newAccount = new Account(ACCOUNT, ACCOUNT_TYPE);
-
-        // Get an instance of the Android account manager
-        AccountManager accountManager =
-                (AccountManager) context.getSystemService(ACCOUNT_SERVICE);
-
-        if (accountManager.addAccountExplicitly(newAccount, null, null)){
-            return newAccount;
-        }
-        else{
-            Log.e("Account", "Already exists or error");
-            return null;
         }
     }
 
@@ -180,12 +164,12 @@ public class MainActivity extends ActionBarActivity {
     }
 
     //Check how many times the app was opened
-    private void checkAppCount(){
+    private void checkAppCount() {
         super.onStart();
         SharedPreferences.Editor edt = prefs.edit();
         int count = prefs.getInt("count", 0);
-        count ++;
-        if(count == 20){
+        count++;
+        if (count == 20) {
             new AlertDialog.Builder(this)
                     .setTitle("Please donate!")
                     .setMessage("Vind je deze app nuttig? Steun de ontwikkeling ervan door te doneren aan de ontwikkelaars.")
@@ -218,9 +202,9 @@ public class MainActivity extends ActionBarActivity {
 
             count = 0;
         }
-        edt.putInt("count", count );
+        edt.putInt("count", count);
         edt.commit();
-        Log.d("count",""+count);
+        Log.d("count", "" + count);
     }
 
 }

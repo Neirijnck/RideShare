@@ -3,17 +3,18 @@ package nmct.howest.be.rideshare.Helpers;
 import android.content.ContentProviderClient;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.JsonReader;
 
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
-
-import javax.net.ssl.HttpsURLConnection;
 
 import nmct.howest.be.rideshare.Loaders.Database.Contract;
 
@@ -22,6 +23,8 @@ public class SyncUtils
     //Variables
     private final String mServer;
     private final Context mContext;
+    SharedPreferences prefs;
+    SharedPreferences.Editor edt;
 
     public SyncUtils(Context ctx) {
         mContext = ctx;
@@ -29,6 +32,10 @@ public class SyncUtils
             ApplicationInfo appInfo = ctx.getPackageManager().getApplicationInfo(ctx.getPackageName(), PackageManager.GET_META_DATA);
             Bundle bundle = appInfo.metaData;
             mServer = bundle.getString("nmct.howest.be.rideshare.webservice.auth.location");
+
+            prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+            edt = prefs.edit();
+
         } catch (PackageManager.NameNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -40,7 +47,7 @@ public class SyncUtils
         {
             URL url = new URL(mServer + "/api/v1/trips");
 
-            HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setDoInput(true);
             connection.setInstanceFollowRedirects(false);
             connection.setRequestMethod("GET");
@@ -163,7 +170,7 @@ public class SyncUtils
             String userID = "";
             URL url = new URL(mServer + "/api/v1/trips/" + userID + "/match");
 
-            HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setDoInput(true);
             connection.setInstanceFollowRedirects(false);
             connection.setRequestMethod("GET");
@@ -235,7 +242,7 @@ public class SyncUtils
         {
             URL url = new URL(mServer + "/api/v1/profile");
 
-            HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setDoInput(true);
             connection.setInstanceFollowRedirects(false);
             connection.setRequestMethod("GET");
@@ -310,9 +317,14 @@ public class SyncUtils
                 reader.endObject();
 
                 Uri uri = Contract.User.ITEM_CONTENT_URI.buildUpon().appendEncodedPath(values.getAsString(Contract.User.KEY_API_ID)).build();
-                Cursor cursor = contentProviderClient.query(
-                        uri,
-                        new String[]{Contract.User.KEY_API_ID}, null, null, null);
+                Cursor cursor = contentProviderClient.query(uri, new String[]{Contract.User.KEY_API_ID}, null, null, null);
+
+                //Get my userID and insert in prefs
+                String userID = values.get(Contract.User.KEY_API_ID).toString();
+
+                edt.putString("myUserID", userID);
+                edt.commit();
+
                 if(cursor.getCount() > 0) {
                     values.remove(Contract.User.KEY_API_ID);
                     contentProviderClient.update(uri, values, null, null);
@@ -335,10 +347,10 @@ public class SyncUtils
 
     public void syncReviews(String accessToken, ContentProviderClient contentProviderClient) throws Exception {
         try {
-            String userID = "";
+            String userID = prefs.getString("myUserID", "");
             URL url = new URL(mServer + "/api/v1/profile/" + userID + "/review");
 
-            HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setDoInput(true);
             connection.setInstanceFollowRedirects(false);
             connection.setRequestMethod("GET");

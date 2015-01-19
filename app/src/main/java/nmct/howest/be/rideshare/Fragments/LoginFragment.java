@@ -2,6 +2,7 @@ package nmct.howest.be.rideshare.Fragments;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,8 +32,10 @@ import java.util.List;
 import nmct.howest.be.rideshare.Activities.MainActivity;
 import nmct.howest.be.rideshare.Adapters.ImagePagerAdapter;
 import nmct.howest.be.rideshare.Helpers.APIHelper;
+import nmct.howest.be.rideshare.Account.AccountUtils;
 import nmct.howest.be.rideshare.Helpers.ConnectivityHelper;
 import nmct.howest.be.rideshare.Helpers.Utils;
+import nmct.howest.be.rideshare.Loaders.Database.Contract;
 import nmct.howest.be.rideshare.R;
 
 public class LoginFragment extends Fragment{
@@ -140,8 +143,8 @@ public class LoginFragment extends Fragment{
 
                                 SharedPreferences.Editor edt = prefs.edit();
                                 edt.putString("accessToken", session.getAccessToken());
-                                edt.putString("myUserID", user.getId());
                                 edt.commit();
+
                                 Intent intent = new Intent(getActivity(), MainActivity.class);
                                 getActivity().startActivity(intent);
                             }
@@ -150,7 +153,6 @@ public class LoginFragment extends Fragment{
                 }
             }
         });
-
         //End Facebook Login
         return view;
     }
