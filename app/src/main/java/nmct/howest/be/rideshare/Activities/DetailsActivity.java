@@ -6,7 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import nmct.howest.be.rideshare.Fragments.DetailMatchFragment;
+import nmct.howest.be.rideshare.Fragments.DetailMatchTripFragment;
 import nmct.howest.be.rideshare.Fragments.DetailRequestTripFragment;
 import nmct.howest.be.rideshare.Fragments.DetailRequestedTripFragment;
 import nmct.howest.be.rideshare.Fragments.DetailSavedTripFragment;
@@ -56,8 +56,8 @@ public class DetailsActivity extends ActionBarActivity {
                     ft.replace(R.id.fragment_container_details, detailSavedTripFragment);
                     break;
                 case 3:
-                    DetailMatchFragment detailMatchFragment = new DetailMatchFragment().newInstance(id);
-                    ft.replace(R.id.fragment_container_details, detailMatchFragment);
+                    DetailMatchTripFragment detailMatchTripFragment = new DetailMatchTripFragment().newInstance(id);
+                    ft.replace(R.id.fragment_container_details, detailMatchTripFragment);
                     break;
             }
             ft.commit();
@@ -72,7 +72,7 @@ public class DetailsActivity extends ActionBarActivity {
             case R.id.home:
                 return true;
             case 16908332:
-                //MainActivity.pager.setCurrentItem(2, true);
+                MainActivity.pager.setCurrentItem(2, true);
                 this.finish();
                 return true;
         }

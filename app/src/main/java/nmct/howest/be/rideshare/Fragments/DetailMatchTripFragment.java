@@ -35,7 +35,7 @@ import nmct.howest.be.rideshare.R;
 import nmct.howest.be.rideshare.RideshareApp;
 
 
-public class DetailMatchFragment extends Fragment {
+public class DetailMatchTripFragment extends Fragment {
 
     //Variables
     private Trip mTrip;
@@ -61,8 +61,8 @@ public class DetailMatchFragment extends Fragment {
     SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(RideshareApp.getAppContext());
     String token = pref.getString("accessToken", "");
 
-    public static DetailMatchFragment newInstance(String id) {
-        DetailMatchFragment fragment = new DetailMatchFragment();
+    public static DetailMatchTripFragment newInstance(String id) {
+        DetailMatchTripFragment fragment = new DetailMatchTripFragment();
         Bundle args = new Bundle();
         args.putString("id", id);
         fragment.setArguments(args);

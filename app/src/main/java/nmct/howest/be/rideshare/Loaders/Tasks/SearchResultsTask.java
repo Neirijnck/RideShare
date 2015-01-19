@@ -26,6 +26,7 @@ import java.util.List;
 
 import nmct.howest.be.rideshare.Adapters.SearchResultRecyclerAdapter;
 import nmct.howest.be.rideshare.Helpers.Utils;
+import nmct.howest.be.rideshare.Loaders.Json.PlaceJSONParser;
 import nmct.howest.be.rideshare.Models.Match;
 import nmct.howest.be.rideshare.Models.Message;
 import nmct.howest.be.rideshare.Models.Trip;
@@ -43,8 +44,7 @@ public class SearchResultsTask extends AsyncTask<Bundle, Void, List<Trip>>
     private RecyclerView mSearchResultsRecyclerView;
     private SearchResultRecyclerAdapter mSearchResultRecyclerAdapter;
 
-    public SearchResultsTask(String fbToken, final ProgressBar progress, RecyclerView listSearchResults, TextView txtNoResults)
-    {
+    public SearchResultsTask(String fbToken, final ProgressBar progress, RecyclerView listSearchResults, TextView txtNoResults) {
         this.mProgress = progress;
         this.mSearchResultsRecyclerView = listSearchResults;
         this.mTxtNoResults = txtNoResults;
@@ -57,11 +57,29 @@ public class SearchResultsTask extends AsyncTask<Bundle, Void, List<Trip>>
         List<Trip> trips = new ArrayList<>();
 
         Bundle b = params[0];
-        String fromCity = b.getString("from");
-        String toCity = b.getString("to");
+        String fromAddress = b.getString("from");
+        String fromPlaceid = b.getString("fromPlaceid");
+        String toAddress = b.getString("to");
+        String toPlaceid = b.getString("toPlaceid");
         String date = b.getString("date");
         String time = b.getString("time");
         boolean share = b.getBoolean("share");
+
+        String fromLoc = "";
+        String toLoc = "";
+
+        //Get Location
+        PlaceJSONParser placeJSONParser = new PlaceJSONParser();
+        if(!fromPlaceid.isEmpty()) {
+            fromLoc = placeJSONParser.getLocation(fromPlaceid);
+        }
+
+        if(!toPlaceid.isEmpty()) {
+            toLoc = placeJSONParser.getLocation(toPlaceid);
+        }
+
+
+
 
         String datetime= Utils.parseDateToISOString(date, time);
 
@@ -73,8 +91,10 @@ public class SearchResultsTask extends AsyncTask<Bundle, Void, List<Trip>>
             httppost.addHeader("Authorization", token);
 
             List<NameValuePair> parameters = new ArrayList<NameValuePair>();
-            parameters.add(new BasicNameValuePair("from", fromCity.trim()));
-            parameters.add(new BasicNameValuePair("to", toCity.trim()));
+            parameters.add(new BasicNameValuePair("from", fromAddress.trim()));
+            parameters.add(new BasicNameValuePair("to", toAddress.trim()));
+            parameters.add(new BasicNameValuePair("fromLoc", fromLoc));
+            parameters.add(new BasicNameValuePair("toLoc", toLoc));
 //            parameters.add(new BasicNameValuePair("searchDistance", "5"));  //in KM
 
             if(!datetime.isEmpty())

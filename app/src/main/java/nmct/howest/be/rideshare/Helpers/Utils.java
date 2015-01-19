@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
 import android.text.TextUtils;
 import android.util.JsonReader;
 import android.util.Log;
@@ -37,7 +38,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.TimeZone;
 
 import nmct.howest.be.rideshare.Models.Message;
@@ -47,111 +47,35 @@ import nmct.howest.be.rideshare.RideshareApp;
 
 public class Utils
 {
-    public static boolean areAllFalse(boolean[] array)
-    {
+    // Check internet connectivity
+    public static boolean isNetworkAvailable(Context context) {
+        return ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
+    }
+
+
+    // Check App version
+    public static int getAppVersion(Context context) {
+        try {
+            PackageInfo packageInfo = context.getPackageManager() .getPackageInfo(context.getPackageName(), 0);
+            return packageInfo.versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            throw new RuntimeException("Could not get package name: " + e);
+        }
+    }
+
+
+    // Parse array of booleans
+    public static boolean areAllFalse(boolean[] array){
         for(boolean b : array) if(b) return false;
         return true;
     }
 
-    public static String parseDateToISOString(String date, String time)
-    {
-        String inputPattern = "dd-MM-yyyy";
-        String  outputPattern = "yyyy-MM-dd";
-
-        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern, Locale.getDefault());
-        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
-
-        Date dateObject = null;
-        String str = null;
-
-        try {
-            dateObject = inputFormat.parse(date);
-            str = outputFormat.format(dateObject);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        StringBuilder sb = new StringBuilder().append(str).append("T").append(time).append(":00.000Z");
-
-        return sb.toString();
-    }
-
-    public static String parseNowToISOString() {
-        Date date = Calendar.getInstance().getTime();
-        String formatted = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
-                .format(date);
-        return formatted.substring(0, 22) + ":" + formatted.substring(22);
-    }
-
-    public static String ParseJsonStatusCode(String json)
-    {
-        String statusCode="";
-        String message="";
-
-        Reader stringReader = new StringReader(json);
-        JsonReader reader = new JsonReader(stringReader);
-        try
-        {
-            reader.beginObject();
-            while (reader.hasNext())
-            {
-                while (reader.hasNext())
-                {
-                    String key = reader.nextName();
-                    if (key.equals("status")) {
-                        statusCode = reader.nextString();
-                    } else if (key.equals("message")) {
-                        message = reader.nextString();
-                    }
-                    else{
-                        reader.skipValue();
-                    }
-                }
-            }
-            reader.endObject();
-        }
-        catch(IOException ex)
-        {
-            Log.e("IOException", ex.getMessage());
-        }
-        finally
-        {
-            try{reader.close();}catch(IOException e){
-                Log.e("IOException", e.getMessage());
-            }
-        }
-
-        return statusCode;
-    }
-
-    public static String convertStreamToString(InputStream is) {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-        StringBuilder sb = new StringBuilder();
-
-        String line = null;
-        try {
-            while ((line = reader.readLine()) != null) {
-                sb.append(line + "\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                is.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return sb.toString();
-    }
-
-    public static String parseBoolArrayToDays(boolean[] array)
-    {
+    public static String parseBoolArrayToDays(boolean[] array){
         String repeatString="";
         for(int i = 0; i < 7; i++)
         {
             if(array[i])
             {
-                //Add day to full string
                 switch(i)
                 {
                     case 0:
@@ -188,8 +112,93 @@ public class Utils
         return repeatString;
     }
 
-    public static String parseISOStringToDate(String ISODate)
-    {
+
+
+    // Convert payment
+    public static String setPayment(String Payment) {
+        if(Payment.isEmpty()) {
+            return "Geen bedrag opgegeven.";
+        }
+        else {
+            return "€" + Payment;
+        }
+    }
+
+
+    // Convert status
+    public static String convertStatus(int status) {
+        switch(status)
+        {
+            case 0:
+                return "Nog niet geaccepteerd";
+            case 1:
+                return "Geaccepteerd";
+            case 2:
+                return "Geweigerd";
+            default:
+                return "";
+        }
+    }
+
+    public static int convertStatusToProgress(int status) {
+        switch (status)
+        {
+            case 0:
+                return 1 ;
+            case 1:
+                return 100;
+            case 2:
+                return 100;
+            default:
+                return 0;
+        }
+    }
+
+
+
+    // Parse Date/Time <=> ISOString
+    public static String parseDateToISOString(String date, String time) {
+        String inputPattern = "dd-MM-yyyy";
+        String  outputPattern = "yyyy-MM-dd";
+
+        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+
+        Date dateObject = null;
+        String str = null;
+
+        try {
+            dateObject = inputFormat.parse(date);
+            str = outputFormat.format(dateObject);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        StringBuilder sb = new StringBuilder().append(str).append("T").append(time).append(":00.000Z");
+
+        return sb.toString();
+    }
+
+    public static String parseISOStringToTime(String ISODate) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        String timeString = "";
+        try {
+            Date date = sdf.parse(ISODate);
+            long millis = date.getTime();
+
+            //long second = (millis / 1000) % 60;
+            long minute = (millis / (1000 * 60)) % 60;
+            long hour = (millis / (1000 * 60 * 60)) % 24;
+
+            timeString = String.format("%02d:%02d", hour, minute);
+        }
+        catch (ParseException ex){
+            Log.e("ParseException Date", ex.getMessage());
+        }
+        return timeString;
+    }
+
+    public static String parseISOStringToDate(String ISODate) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         sdf.setTimeZone(TimeZone.getDefault());
         String dateString="";
@@ -203,15 +212,80 @@ public class Utils
         return dateString;
     }
 
-    public static int getAppVersion(Context context) {
-        try {
-            PackageInfo packageInfo = context.getPackageManager() .getPackageInfo(context.getPackageName(), 0);
-            return packageInfo.versionCode;
-        } catch (PackageManager.NameNotFoundException e) {
-            throw new RuntimeException("Could not get package name: " + e);
-        }
+    public static String parseNowToISOString() {
+        Date date = Calendar.getInstance().getTime();
+        String formatted = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+                .format(date);
+        return formatted.substring(0, 22) + ":" + formatted.substring(22);
     }
 
+
+
+    // Stream converter
+    public static String convertStreamToString(InputStream is) {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        StringBuilder sb = new StringBuilder();
+
+        String line = null;
+        try {
+            while ((line = reader.readLine()) != null) {
+                sb.append(line + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return sb.toString();
+    }
+
+
+
+    // API Status Parser
+    public static String ParseJsonStatusCode(String json){
+        String statusCode= "";
+        String message= "";
+
+        Reader stringReader = new StringReader(json);
+        JsonReader reader = new JsonReader(stringReader);
+        try
+        {
+            reader.beginObject();
+            while (reader.hasNext())
+            {
+                while (reader.hasNext())
+                {
+                    String key = reader.nextName();
+                    if (key.equals("status")) {
+                        statusCode = reader.nextString();
+                    } else if (key.equals("message")) {
+                        message = reader.nextString();
+                    }
+                    else{
+                        reader.skipValue();
+                    }
+                }
+            }
+            reader.endObject();
+        }
+        catch(IOException ex) {
+            Log.e("IOException", ex.getMessage());
+        }
+        finally {
+            try{reader.close();}catch(IOException e){
+                Log.e("IOException", e.getMessage());
+            }
+        }
+        return statusCode;
+    }
+
+
+
+    // API Get form UserID
     public static String getUserNameFromUserID(String token, String userID) throws IOException
     {
         String userName="";
@@ -238,12 +312,10 @@ public class Utils
             {
                 while (reader.hasNext()) {
                     String key = reader.nextName();
-                    if (key.equals("userName"))
-                    {
+                    if (key.equals("userName")) {
                         userName = reader.nextString();
                     }
-                    else
-                    {
+                    else {
                         reader.skipValue();
                     }
                 }
@@ -286,12 +358,10 @@ public class Utils
             {
                 while (reader.hasNext()) {
                     String key = reader.nextName();
-                    if (key.equals("facebookImg"))
-                    {
+                    if (key.equals("facebookImg")) {
                         facebookImgUrl = reader.nextString();
                     }
-                    else
-                    {
+                    else {
                         reader.skipValue();
                     }
                 }
@@ -400,69 +470,9 @@ public class Utils
         return bm;
     }
 
-    public static String parseISOStringToTime(String ISODate)
-    {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-        String timeString = "";
-        try {
-            Date date = sdf.parse(ISODate);
-            long millis = date.getTime();
 
-            //long second = (millis / 1000) % 60;
-            long minute = (millis / (1000 * 60)) % 60;
-            long hour = (millis / (1000 * 60 * 60)) % 24;
 
-            timeString = String.format("%02d:%02d", hour, minute);
-        }
-        catch (ParseException ex){
-            Log.e("ParseException Date", ex.getMessage());
-        }
-        return timeString;
-    }
-
-    public static String setPayment(String Payment)
-    {
-        Log.d("Payment", Payment);
-
-        if(Payment.isEmpty()) {
-            return "Geen bedrag opgegeven.";
-        }
-        else {
-            return "€" + Payment;
-        }
-    }
-
-    public static String convertStatus(int status)
-    {
-        switch(status)
-        {
-            case 0:
-                return "Nog niet geaccepteerd";
-            case 1:
-                return "Geaccepteerd";
-            case 2:
-                return "Geweigerd";
-            default:
-                return "";
-        }
-    }
-
-    public static int convertStatusToProgress(int status)
-    {
-        switch (status)
-        {
-            case 0:
-                return 1 ;
-            case 1:
-                return 100;
-            case 2:
-                return 100;
-            default:
-                return 0;
-        }
-    }
-
+    // Matches and Details
     public static void sendMessage(String token, EditText txtMessage, String matchID, String tripID) {
         String messageText = txtMessage.getText().toString().trim();
         if(TextUtils.isEmpty(messageText))
@@ -544,5 +554,4 @@ public class Utils
 
         return messageView;
     }
-
 }
