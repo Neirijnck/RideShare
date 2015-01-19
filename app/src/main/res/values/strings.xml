@@ -36,6 +36,7 @@
 
     <!-- Plan -->
     <string name="Plan_Title">Plan een volgende rit:</string>
+    <string name="str_atv_places">Enter Place Here</string>
 
     <!-- Search -->
     <string name="Search_ShareFb">Deel op Facebook</string>

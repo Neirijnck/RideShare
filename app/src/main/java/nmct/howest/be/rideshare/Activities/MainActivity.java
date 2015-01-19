@@ -1,5 +1,7 @@
 package nmct.howest.be.rideshare.Activities;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -36,22 +38,12 @@ public class MainActivity extends ActionBarActivity {
     SharedPreferences prefs;
 
     //Tab variables
-    private ViewPager pager;
+    public static ViewPager pager;
     private TabPagerAdapter TabAdapter;
     private PagerSlidingTabStrip tabs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        /*if(getIntent() != null && getIntent().getExtras() != null) {
-            Integer p = getIntent().getExtras().getInt("PAGE", 0);
-            String msg = getIntent().getExtras().getString("TOAST", "");
-            pager.setCurrentItem(p, true);
-
-            if(!msg.isEmpty()) {
-                Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
-            }
-        }*/
 
         super.onCreate(savedInstanceState);
 
@@ -97,12 +89,6 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-        /*Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            Integer p = extras.getInt("PAGE");
-            pager.setCurrentItem(p, true);
-        }*/
 
         if (getIntent() != null && getIntent().getExtras() != null) {
             Integer p = getIntent().getExtras().getInt("PAGE", 0);

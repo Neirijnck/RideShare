@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import nmct.howest.be.rideshare.Activities.MainActivity;
 import nmct.howest.be.rideshare.Activities.SearchActivity;
 import nmct.howest.be.rideshare.Adapters.TripRecyclerAdapter;
 import nmct.howest.be.rideshare.Loaders.Json.TripsLoader;
@@ -93,7 +94,7 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //MainActivity.pager.setCurrentItem(0, true);
+                MainActivity.pager.setCurrentItem(0, true);
             }
         });
 

@@ -24,7 +24,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
-        <EditText
+        <nmct.howest.be.rideshare.View.CustomAutoCompleteTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/txtFromSearch"
@@ -36,7 +36,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="25dp" />
 
-        <EditText
+        <nmct.howest.be.rideshare.View.CustomAutoCompleteTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/txtToSearch"

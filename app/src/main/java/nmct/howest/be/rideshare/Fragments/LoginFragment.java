@@ -57,7 +57,7 @@ public class LoginFragment extends Fragment{
 
         //Has internet?
         Context c = getActivity();
-        if (!ConnectivityHelper.isNetworkAvailable(c)) {
+        if (!Utils.isNetworkAvailable(c)) {
             AlertDialog.Builder builder = new AlertDialog.Builder(c);
             builder.setTitle("No Internet connection.");
             builder.setMessage("You have no internet connection");

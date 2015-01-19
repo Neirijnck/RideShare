@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +18,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
@@ -24,8 +28,11 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.Calendar;
+import java.util.HashMap;
 
 import nmct.howest.be.rideshare.Activities.SearchActivity;
+import nmct.howest.be.rideshare.Loaders.Json.PlaceJSONParser;
+import nmct.howest.be.rideshare.Loaders.Tasks.PlacesTask;
 import nmct.howest.be.rideshare.R;
 
 public class SearchFragment extends Fragment
@@ -34,11 +41,14 @@ public class SearchFragment extends Fragment
     private Button btnSearch;
     static EditText txbDatePlan;
     static EditText txbTimePlan;
-    private EditText txtFrom;
-    private EditText txtTo;
+    private AutoCompleteTextView txtFrom;
+    private AutoCompleteTextView txtTo;
     private EditText txtDate;
     private EditText txtTime;
     private CheckBox chkShare;
+
+    HashMap<String, String> fromLoc = new HashMap<String, String>();
+    HashMap<String, String> toLoc = new HashMap<String, String>();
 
     public SearchFragment() {}
 
@@ -52,13 +62,74 @@ public class SearchFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
-        txtFrom = (EditText) view.findViewById(R.id.txtFromSearch);
-        txtTo = (EditText) view.findViewById(R.id.txtToSearch);
+        txtFrom = (AutoCompleteTextView) view.findViewById(R.id.txtFromSearch);
+        txtTo = (AutoCompleteTextView) view.findViewById(R.id.txtToSearch);
         txbDatePlan = (EditText) view.findViewById(R.id.txtDateSearch);
         //txtDate = (EditText) view.findViewById(R.id.txtDateSearch);
         txbTimePlan = (EditText) view.findViewById(R.id.txtTimeSearch);
         //txtTime = (EditText) view.findViewById(R.id.txtTimeSearch);
         chkShare = (CheckBox) view.findViewById(R.id.chkShareOnFacebook);
+
+
+        //From Google Maps
+        txtFrom.setThreshold(2);
+        txtFrom.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s != null && s != "" && start >= 2) {
+                    Log.d("request send", count + " -- " + s.toString());
+                    PlacesTask placesTask = new PlacesTask(txtFrom, getActivity());
+                    placesTask.execute(s.toString());
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Auto-generated method stub
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Auto-generated method stub
+            }
+        });
+        txtFrom.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View arg1, int pos, long id) {
+                fromLoc = PlaceJSONParser.PLACES.get(pos);
+            }
+        });
+
+
+        //To Google Maps
+        txtTo.setThreshold(2);
+        txtTo.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s != null && s != "" && start >= 2) {
+                    PlacesTask placesTask = new PlacesTask(txtTo, getActivity());
+                    placesTask.execute(s.toString());
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Auto-generated method stub
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Auto-generated method stub
+            }
+        });
+        txtTo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View arg1, int pos, long id) {
+                toLoc = PlaceJSONParser.PLACES.get(pos);
+            }
+        });
 
         //SearchActivity
         btnSearch = (Button) view.findViewById(R.id.btnSearch);
@@ -66,13 +137,24 @@ public class SearchFragment extends Fragment
             @Override
             public void onClick(View view)
             {
+
                 //Required fields should not be empty
-                if(TextUtils.isEmpty(txtFrom.getText().toString())||TextUtils.isEmpty(txtTo.getText().toString())||TextUtils.isEmpty(txbDatePlan.getText().toString())||TextUtils.isEmpty(txbTimePlan.getText().toString()))
-                {
+                if(TextUtils.isEmpty(txtFrom.getText().toString())||TextUtils.isEmpty(txtTo.getText().toString())||TextUtils.isEmpty(txbDatePlan.getText().toString())||TextUtils.isEmpty(txbTimePlan.getText().toString())) {
                     Toast.makeText(getActivity(), "Vul alle verplichte velden in", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
+                    String fromPlaceid = "";
+                    String toPlaceid = "";
+
+                    if(!fromLoc.isEmpty()) {
+                        fromPlaceid = "placeid=" + fromLoc.get("place_id");
+                    }
+
+                    if(!toLoc.isEmpty()) {
+                        toPlaceid = "placeid=" + toLoc.get("place_id");
+                    }
+
                     Intent intent = new Intent(getActivity(), SearchActivity.class);
                     Bundle b = new Bundle();
                     //Enter all parameters
@@ -80,6 +162,8 @@ public class SearchFragment extends Fragment
                     b.putString("to", txtTo.getText().toString());
                     b.putString("date", txbDatePlan.getText().toString());
                     b.putString("time", txbTimePlan.getText().toString());
+                    b.putString("fromPlaceid", fromPlaceid);
+                    b.putString("toPlaceid", toPlaceid);
                     if(chkShare.isChecked()){b.putBoolean("share", true);}
                     else{b.putBoolean("share", false);}
 
@@ -194,5 +278,4 @@ public class SearchFragment extends Fragment
             txbTimePlan.setText(time);
         }
     }
-
 }

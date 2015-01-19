@@ -18,7 +18,7 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 import java.io.IOException;
 
 import nmct.howest.be.rideshare.Fragments.LoginFragment;
-import nmct.howest.be.rideshare.Helpers.ConnectivityHelper;
+import nmct.howest.be.rideshare.Helpers.Utils;
 import nmct.howest.be.rideshare.R;
 
 public class LoginActivity extends FragmentActivity {
@@ -41,7 +41,7 @@ public class LoginActivity extends FragmentActivity {
         context = getApplicationContext();
 
         // Check device for Play Services APK.
-        if(ConnectivityHelper.isNetworkAvailable(context)) {
+        if(Utils.isNetworkAvailable(context)) {
             if (checkPlayServices()) {
                 gcm = GoogleCloudMessaging.getInstance(this);
                 regid = getRegistrationId();

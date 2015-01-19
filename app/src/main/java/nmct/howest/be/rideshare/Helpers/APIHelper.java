@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import nmct.howest.be.rideshare.Loaders.Json.PlaceJSONParser;
 import nmct.howest.be.rideshare.Models.Match;
 import nmct.howest.be.rideshare.Models.Message;
 import nmct.howest.be.rideshare.Models.Review;
@@ -47,7 +48,7 @@ public class APIHelper {
             parameters.add(new BasicNameValuePair("birthday", birthday));
             httppost.setEntity(new UrlEncodedFormEntity(parameters));
 
-            PostAsyncLogin task = new PostAsyncLogin();
+            PostAsync task = new PostAsync();
             task.execute(httppost);
         }
         catch (IOException e) {
@@ -156,35 +157,10 @@ public class APIHelper {
         }
     }
 
-    //Minimum parameters
-    public static void PlanTrip(String fbToken, String from, String to, String date, String time)
+    // Plan Trip
+    public static void PlanTrip(String fbToken, String from, String fromPlaceid, String to, String toPlaceid, String date, String time, String price, boolean[] repeat)
     {
-        try {
-            String dateTime = Utils.parseDateToISOString(date, time);
-
-            HttpPost httppost = new HttpPost(RideshareApp.getAppContext().getResources().getString(R.string.API_Trips));
-            httppost.addHeader("Authorization", fbToken);
-
-            List<NameValuePair> parameters = new ArrayList<NameValuePair>();
-            parameters.add(new BasicNameValuePair("from", from));
-            parameters.add(new BasicNameValuePair("to", to));
-
-            if(!dateTime.isEmpty())
-                parameters.add(new BasicNameValuePair("datetime", dateTime));
-
-            httppost.setEntity(new UrlEncodedFormEntity(parameters));
-
-            PostAsync task = new PostAsync();
-            task.execute(httppost);
-        }
-        catch (IOException e) {
-            Log.d("", "Error in http connection " + e.toString());
-        }
-    }
-
-    //With price
-    public static void PlanTrip(String fbToken, String from, String to, String date, String time, String price) {
-        try {
+        /*try {*/
             String dateTime = Utils.parseDateToISOString(date, time);
 
             price = TextUtils.substring(price, 1, price.length());
@@ -202,87 +178,22 @@ public class APIHelper {
             if(!price.isEmpty())
                 parameters.add(new BasicNameValuePair("payment", price));
 
-            httppost.setEntity(new UrlEncodedFormEntity(parameters));
+            if(repeat != null) {
+                parameters.add(new BasicNameValuePair("repeat.mo", ""+repeat[0]));
+                parameters.add(new BasicNameValuePair("repeat.tu", ""+repeat[1]));
+                parameters.add(new BasicNameValuePair("repeat.we", ""+repeat[2]));
+                parameters.add(new BasicNameValuePair("repeat.th", ""+repeat[3]));
+                parameters.add(new BasicNameValuePair("repeat.fr", ""+repeat[4]));
+                parameters.add(new BasicNameValuePair("repeat.sa", ""+repeat[5]));
+                parameters.add(new BasicNameValuePair("repeat.su", ""+repeat[6]));
+            }
 
-            PostAsync task = new PostAsync();
+            PostPlanAsync task = new PostPlanAsync(parameters, fromPlaceid, toPlaceid);
             task.execute(httppost);
-        }
+        /*}
         catch (IOException e) {
             Log.d("", "Error in http connection " + e.toString());
-        }
-    }
-
-    //With repeat
-    public static void PlanTrip(String fbToken, String from, String to, String date, String time, boolean[] repeat)
-    {
-        try {
-            String dateTime = Utils.parseDateToISOString(date, time);
-
-            HttpPost httppost = new HttpPost(RideshareApp.getAppContext().getResources().getString(R.string.API_Trips));
-            httppost.addHeader("Authorization", fbToken);
-
-            List<NameValuePair> parameters = new ArrayList<NameValuePair>();
-            parameters.add(new BasicNameValuePair("from", from));
-            parameters.add(new BasicNameValuePair("to", to));
-
-            if(!dateTime.isEmpty())
-                parameters.add(new BasicNameValuePair("datetime", dateTime));
-
-            parameters.add(new BasicNameValuePair("repeat.mo", ""+repeat[0]));
-            parameters.add(new BasicNameValuePair("repeat.tu", ""+repeat[1]));
-            parameters.add(new BasicNameValuePair("repeat.we", ""+repeat[2]));
-            parameters.add(new BasicNameValuePair("repeat.th", ""+repeat[3]));
-            parameters.add(new BasicNameValuePair("repeat.fr", ""+repeat[4]));
-            parameters.add(new BasicNameValuePair("repeat.sa", ""+repeat[5]));
-            parameters.add(new BasicNameValuePair("repeat.su", ""+repeat[6]));
-
-            httppost.setEntity(new UrlEncodedFormEntity(parameters));
-
-            PostAsync task = new PostAsync();
-            task.execute(httppost);
-        }
-        catch (IOException e) {
-            Log.d("", "Error in http connection " + e.toString());
-        }
-    }
-
-    //With everything filled in
-    public static void PlanTrip(String fbToken, String from, String to, String date, String time, String price, boolean[] repeat)
-    {
-        try {
-            String dateTime = Utils.parseDateToISOString(date, time);
-
-            price = TextUtils.substring(price, 1, price.length());
-
-            HttpPost httppost = new HttpPost(RideshareApp.getAppContext().getResources().getString(R.string.API_Trips));
-            httppost.addHeader("Authorization", fbToken);
-
-            List<NameValuePair> parameters = new ArrayList<NameValuePair>();
-            parameters.add(new BasicNameValuePair("from", from));
-            parameters.add(new BasicNameValuePair("to", to));
-
-            if(!dateTime.isEmpty())
-                parameters.add(new BasicNameValuePair("datetime", dateTime));
-
-            if(!price.isEmpty())
-                parameters.add(new BasicNameValuePair("payment", price));
-
-            parameters.add(new BasicNameValuePair("repeat.mo", ""+repeat[0]));
-            parameters.add(new BasicNameValuePair("repeat.tu", ""+repeat[1]));
-            parameters.add(new BasicNameValuePair("repeat.we", ""+repeat[2]));
-            parameters.add(new BasicNameValuePair("repeat.th", ""+repeat[3]));
-            parameters.add(new BasicNameValuePair("repeat.fr", ""+repeat[4]));
-            parameters.add(new BasicNameValuePair("repeat.sa", ""+repeat[5]));
-            parameters.add(new BasicNameValuePair("repeat.su", ""+repeat[6]));
-
-            httppost.setEntity(new UrlEncodedFormEntity(parameters));
-
-            PostAsync task = new PostAsync();
-            task.execute(httppost);
-        }
-        catch (IOException e) {
-            Log.d("", "Error in http connection " + e.toString());
-        }
+        }*/
     }
 
     //Delete Trip
@@ -380,7 +291,7 @@ public class APIHelper {
         }
     }
 
-    //Update Match with message
+    //Update Match
     public static void AddMessageToMatch(String fbToken, String matchId, Message m, String tripId)
     {
         try {
@@ -399,22 +310,49 @@ public class APIHelper {
         }
     }
 
-    //Helper Post Login
-    public static class PostAsyncLogin extends AsyncTask<HttpPost, Void, String>
+
+    //Helper Post Plan
+    public static class PostPlanAsync extends AsyncTask<HttpPost, Void, String>
     {
+        List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+        String fromPlaceid;
+        String toPlaceid;
+
+        public PostPlanAsync(List<NameValuePair> parameters, String fromPlaceid, String toPlaceid) {
+            this.parameters = parameters;
+            this.fromPlaceid = fromPlaceid;
+            this.toPlaceid = toPlaceid;
+        }
+
         @Override
-        protected String doInBackground(HttpPost... params)
-        {
+        protected String doInBackground(HttpPost... param) {
             try {
+
+                HttpPost httpPost = param[0];
+
+                PlaceJSONParser placeJSONParser = new PlaceJSONParser();
+                if(!fromPlaceid.isEmpty()) {
+                    String fromLoc = placeJSONParser.getLocation(fromPlaceid);
+                    parameters.add(new BasicNameValuePair("fromLoc", fromLoc));
+                    Log.d("fromLoc", fromLoc);
+                }
+
+                if(!toPlaceid.isEmpty()) {
+                    String toLoc = placeJSONParser.getLocation(toPlaceid);
+                    parameters.add(new BasicNameValuePair("toLoc", toLoc));
+                }
+
+                httpPost.setEntity(new UrlEncodedFormEntity(parameters));
+
                 HttpClient httpclient = new DefaultHttpClient();
 
-                HttpPost httppost = params[0];
-                HttpResponse response = httpclient.execute(httppost);
+                HttpResponse response = httpclient.execute(httpPost);
 
                 HttpEntity entity = response.getEntity();
                 String result = Utils.convertStreamToString(entity.getContent());
 
                 return new String(result);
+
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -423,15 +361,14 @@ public class APIHelper {
         }
 
         @Override
-        protected void onPostExecute(String result)
-        {
+        protected void onPostExecute(String result) {
             //Parse json for status code
             //if 200 = Toast for success
             String statusCode = Utils.ParseJsonStatusCode(result);
             Log.d("statusCodePost", result);
             if(statusCode.equals("200")||statusCode.equals("201"))
             {
-                Toast.makeText(RideshareApp.getAppContext(), "Succesvol aangemeld", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RideshareApp.getAppContext(), "Succesvol opgeslagen in database", Toast.LENGTH_SHORT).show();
             }
             else
             {
@@ -439,6 +376,7 @@ public class APIHelper {
             }
         }
     }
+
 
     //Helper Post
     public static class PostAsync extends AsyncTask<HttpPost, Void, String>
@@ -456,6 +394,7 @@ public class APIHelper {
                 String result = Utils.convertStreamToString(entity.getContent());
 
                 return new String(result);
+
             }
             catch (Exception e) {
                 e.printStackTrace();

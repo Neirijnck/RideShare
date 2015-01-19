@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import nmct.howest.be.rideshare.Helpers.ConnectivityHelper;
+import nmct.howest.be.rideshare.Helpers.Utils;
 import nmct.howest.be.rideshare.Loaders.Tasks.SearchResultsTask;
 import nmct.howest.be.rideshare.R;
 import nmct.howest.be.rideshare.RideshareApp;
@@ -34,7 +34,7 @@ public class SearchResultsFragment extends Fragment
     public SearchResultsFragment() {}
 
     //New instance of this fragment with parameters
-    public static SearchResultsFragment newInstance(String from, String to, String date, String time, boolean share) {
+    public static SearchResultsFragment newInstance(String from, String fromPlaceid, String to,String toPlaceid, String date, String time, boolean share) {
         SearchResultsFragment fragment = new SearchResultsFragment();
         Bundle args = new Bundle();
         args.putString("from", from);
@@ -42,6 +42,8 @@ public class SearchResultsFragment extends Fragment
         args.putString("date", date);
         args.putString("time", time);
         args.putBoolean("share", share);
+        args.putString("fromPlaceid", fromPlaceid);
+        args.putString("toPlaceid", toPlaceid);
         fragment.setArguments(args);
         return fragment;
     }
@@ -62,7 +64,7 @@ public class SearchResultsFragment extends Fragment
 
         //Has internet?
         Context c = getActivity();
-        if(!ConnectivityHelper.isNetworkAvailable(c)) {
+        if(!Utils.isNetworkAvailable(c)) {
             AlertDialog.Builder builder = new AlertDialog.Builder(c);
             builder.setTitle("No Internet connection.");
             builder.setMessage("You have no internet connection");

@@ -18,7 +18,9 @@ public class SearchActivity extends ActionBarActivity
 {
     //Variables
     private String from="";
+    private String fromPlaceid="";
     private String to="";
+    private String toPlaceid="";
     private String date="";
     private String time="";
     private boolean share;
@@ -34,20 +36,21 @@ public class SearchActivity extends ActionBarActivity
 
         Bundle b = getIntent().getExtras();
         from = b.getString("from");
+        fromPlaceid = b.getString("fromPlaceid");
         to = b.getString("to");
+        toPlaceid = b.getString("toPlaceid");
         date = b.getString("date");
         time = b.getString("time");
         share = b.getBoolean("share");
 
-        if(share == true)
-        {
+        if(share){
             share(from, to, date, time);
         }
 
         //Add searchResultsFragment to the container
         if (findViewById(R.id.fragment_container_search) != null) {
 
-            SearchResultsFragment searchResultsFragment = SearchResultsFragment.newInstance(from, to, date, time, share);
+            SearchResultsFragment searchResultsFragment = SearchResultsFragment.newInstance(from, fromPlaceid, to, toPlaceid ,date, time, share);
 
             // Add the fragment to the 'fragment_container' Layout
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -64,7 +67,7 @@ public class SearchActivity extends ActionBarActivity
             case R.id.home:
                 return true;
             case 16908332:
-                //MainActivity.pager.setCurrentItem(1, true);
+                MainActivity.pager.setCurrentItem(1, true);
                 this.finish();
                 return true;
         }
