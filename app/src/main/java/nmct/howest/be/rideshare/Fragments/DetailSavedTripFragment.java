@@ -95,8 +95,8 @@ public class DetailSavedTripFragment extends Fragment implements LoaderManager.L
         {
             case R.id.action_delete:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Verwijderen trip");
-                builder.setMessage("Ben je zeker dat je deze trip wilt verwijderen?");
+                builder.setTitle(getActivity().getResources().getString(R.string.dialogTitleDeleteTrip));
+                builder.setMessage(getActivity().getResources().getString(R.string.dialogDeleteTrip));
                 builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 
                     @Override
@@ -108,7 +108,7 @@ public class DetailSavedTripFragment extends Fragment implements LoaderManager.L
                         getActivity().finish();
                     }
                 });
-                builder.setNegativeButton("Annuleer", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(getActivity().getResources().getString(R.string.dialogCancel), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //Just dismiss the dialog

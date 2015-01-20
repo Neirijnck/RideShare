@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.JsonReader;
+import android.util.Log;
 
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -331,6 +332,8 @@ public class SyncUtils
                 } else {
                     contentProviderClient.insert(Contract.User.CONTENT_URI, values);
                 }
+
+                Log.d("Sync", "Working just fine!");
 
                 isr.close();
                 connection.disconnect();

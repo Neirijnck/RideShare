@@ -243,8 +243,8 @@ public class PlanFragment extends Fragment{
                     Context c = getActivity();
                     if (!Utils.isNetworkAvailable(c)) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(c);
-                        builder.setTitle("No Internet connection.");
-                        builder.setMessage("You have no internet connection");
+                        builder.setTitle(getActivity().getResources().getString(R.string.dialogTitleNoConnection));
+                        builder.setMessage(getActivity().getResources().getString(R.string.dialogNoConnection));
                         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 
                             @Override

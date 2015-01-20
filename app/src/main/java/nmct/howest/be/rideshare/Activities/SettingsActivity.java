@@ -5,7 +5,6 @@ import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -13,8 +12,6 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-
-import java.util.Locale;
 
 import nmct.howest.be.rideshare.Helpers.APIHelper;
 import nmct.howest.be.rideshare.Helpers.Utils;
@@ -88,8 +85,8 @@ public class SettingsActivity extends ActionBarActivity
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    builder.setTitle("Verwijderen profiel");
-                    builder.setMessage("Ben je zeker dat je uw profiel wilt verwijderen?");
+                    builder.setTitle(getActivity().getResources().getString(R.string.dialogDeleteProfileTitle));
+                    builder.setMessage(getActivity().getResources().getString(R.string.dialogDeleteProfile));
                     builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 
                         @Override
@@ -103,7 +100,7 @@ public class SettingsActivity extends ActionBarActivity
                             startActivity(intent);
                         }
                     });
-                    builder.setNegativeButton("Annuleer", new DialogInterface.OnClickListener() {
+                    builder.setNegativeButton(getActivity().getResources().getString(R.string.dialogCancel), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             //Just dismiss the dialog

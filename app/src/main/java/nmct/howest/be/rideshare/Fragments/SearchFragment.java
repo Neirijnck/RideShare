@@ -138,7 +138,7 @@ public class SearchFragment extends Fragment
 
                 //Required fields should not be empty
                 if(TextUtils.isEmpty(txtFromSearch.getText().toString())||TextUtils.isEmpty(txtToSearch.getText().toString())||TextUtils.isEmpty(txtDateSearch.getText().toString())||TextUtils.isEmpty(txtTimeSearch.getText().toString())) {
-                    Toast.makeText(getActivity(), "Vul alle verplichte velden in", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.nothingFilledIn), Toast.LENGTH_SHORT).show();
                 }
                 else
                 {

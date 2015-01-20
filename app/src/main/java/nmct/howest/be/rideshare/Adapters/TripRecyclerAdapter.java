@@ -142,7 +142,7 @@ public class TripRecyclerAdapter extends RecyclerView.Adapter<TripRecyclerAdapte
                     }
                 });
 
-                holder.txtTripTitle.setText(trip.getFrom() + " naar " + trip.getTo());
+                holder.txtTripTitle.setText(trip.getFrom() + RideshareApp.getAppContext().getResources().getString(R.string.adapterTo) + trip.getTo());
 
                 String dateString= Utils.parseISOStringToDate(trip.getDatetime());
                 holder.txtTripInfoDate.setText(dateString);
@@ -150,15 +150,15 @@ public class TripRecyclerAdapter extends RecyclerView.Adapter<TripRecyclerAdapte
                 boolean[] repeat = trip.getRepeat();
 
                 String repeatString= Utils.parseBoolArrayToDays(repeat);
-                holder.txtTripInfo.setText("Herhaald: " + repeatString);
+                holder.txtTripInfo.setText(RideshareApp.getAppContext().getResources().getString(R.string.adapterRepeat) + repeatString);
 
 
                 if(trip.getPayment().equals("") || trip.getPayment().equals("0")) {
-                    holder.txtTripPrice.setText("Kost: Gratis");
+                    holder.txtTripPrice.setText(RideshareApp.getAppContext().getResources().getString(R.string.adapterCostFree));
                 }
                 else
                 {
-                    holder.txtTripPrice.setText("Kost: €" + trip.getPayment());
+                    holder.txtTripPrice.setText(RideshareApp.getAppContext().getResources().getString(R.string.adapterCostPay) + trip.getPayment());
                 }
 
                 //Set picture of the person who planned the trip
@@ -193,8 +193,8 @@ public class TripRecyclerAdapter extends RecyclerView.Adapter<TripRecyclerAdapte
                 });
 
                 holder.txtTripTitle.setText(m.getUserName());
-                holder.txtTripInfoDate.setText("Aanvraag naar " + m.getTo());
-                holder.txtTripInfo.setText("Status: " + Utils.convertStatus(m.getStatus()));
+                holder.txtTripInfoDate.setText(RideshareApp.getAppContext().getResources().getString(R.string.adapterRequestTo) + m.getTo());
+                holder.txtTripInfo.setText(RideshareApp.getAppContext().getResources().getString(R.string.adapterStatus) + Utils.convertStatus(m.getStatus()));
                 if (m.getStatus() == 1) {
                     holder.txtTripInfo.setTextColor(RideshareApp.getAppContext().getResources().getColor(R.color.rideshare_text_green));
                 } else if (m.getStatus() == 2)
@@ -235,9 +235,9 @@ public class TripRecyclerAdapter extends RecyclerView.Adapter<TripRecyclerAdapte
                 });
 
                 holder.txtTripTitle.setText(m.getUserName());
-                holder.txtTripInfoDate.setText("Verzoek naar " + m.getTo());
+                holder.txtTripInfoDate.setText(RideshareApp.getAppContext().getResources().getString(R.string.adapterRequestedTo) + m.getTo());
                 holder.txtTripPrice.setText(m.getDatetime());
-                holder.txtTripInfo.setText("Status: " + Utils.convertStatus(m.getStatus()));
+                holder.txtTripInfo.setText(RideshareApp.getAppContext().getResources().getString(R.string.adapterStatus) + Utils.convertStatus(m.getStatus()));
                 if(m.getStatus()==1){holder.txtTripInfo.setTextColor(RideshareApp.getAppContext().getResources().getColor(R.color.rideshare_text_green));}
                 else if(m.getStatus()==2)holder.txtTripInfo.setTextColor(RideshareApp.getAppContext().getResources().getColor(R.color.rideshare_text_red));{}
 

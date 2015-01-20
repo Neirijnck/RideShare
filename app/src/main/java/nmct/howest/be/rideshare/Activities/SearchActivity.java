@@ -97,8 +97,12 @@ public class SearchActivity extends ActionBarActivity
             public void call(Session session, SessionState state, Exception exception) {
                 if (session.isOpened()) {
                     Bundle bundle = new Bundle();
-                    bundle.putString("caption", "The best carpool app out there.");
-                    bundle.putString("description", "Ik zoek een  rit van "+ van +" naar "+tot+" op "+datum+" om "+ tijd);
+                    bundle.putString("caption", getResources().getString(R.string.shareCaption));
+                    bundle.putString("description",
+                            getResources().getString(R.string.shareFirst)+ van +
+                                    getResources().getString(R.string.shareSecond)+tot+
+                                    getResources().getString(R.string.shareThird)+datum+
+                                    getResources().getString(R.string.shareFourth)+ tijd);
                     bundle.putString("link", getResources().getString(R.string.Site));
                     bundle.putString("name", "Share My Ride");
                     bundle.putString("picture", getResources().getString(R.string.Site_Icon));

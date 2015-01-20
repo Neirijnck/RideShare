@@ -57,7 +57,7 @@ public class SearchResultRecyclerAdapter extends RecyclerView.Adapter<SearchResu
         //Animation
         setAnimation(holder.itemView, position);
 
-        holder.txtSearchResultFromTo.setText(tripResult.getFrom() + " naar " + tripResult.getTo());
+        holder.txtSearchResultFromTo.setText(tripResult.getFrom() + RideshareApp.getAppContext().getResources().getString(R.string.adapterTo) + tripResult.getTo());
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         sdf.setTimeZone(TimeZone.getDefault());

@@ -86,8 +86,8 @@ public class DetailRequestTripFragment extends Fragment {
         {
             case R.id.action_delete:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Verwijderen aanvraag");
-                builder.setMessage("Ben je zeker dat je deze aanvraag wilt verwijderen?");
+                builder.setTitle(getActivity().getResources().getString(R.string.dialogTitleDeleteRequest));
+                builder.setMessage(getActivity().getResources().getString(R.string.dialogDeleteRequest));
                 builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 
                     @Override
@@ -99,7 +99,7 @@ public class DetailRequestTripFragment extends Fragment {
                         getActivity().finish();
                     }
                 });
-                builder.setNegativeButton("Annuleer", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(getActivity().getResources().getString(R.string.dialogCancel), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //Just dismiss the dialog

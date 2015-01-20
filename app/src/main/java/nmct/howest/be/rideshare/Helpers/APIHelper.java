@@ -341,11 +341,11 @@ public class APIHelper {
             Log.d("statusCodePost", result);
             if(statusCode.equals("200")||statusCode.equals("201"))
             {
-                Toast.makeText(RideshareApp.getAppContext(), "Succesvol aangemeld", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RideshareApp.getAppContext(), RideshareApp.getAppContext().getResources().getString(R.string.loginSuccesNotification), Toast.LENGTH_SHORT).show();
             }
             else
             {
-                Toast.makeText(RideshareApp.getAppContext(), "Er is iets misgelopen", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RideshareApp.getAppContext(), RideshareApp.getAppContext().getResources().getString(R.string.wrongNotification), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -415,11 +415,11 @@ public class APIHelper {
             Log.d("statusCodePost", result);
             if(statusCode.equals("200")||statusCode.equals("201"))
             {
-                Toast.makeText(RideshareApp.getAppContext(), "Trip werd toegevoegd", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RideshareApp.getAppContext(), RideshareApp.getAppContext().getResources().getString(R.string.tripAddedNotification), Toast.LENGTH_SHORT).show();
             }
             else
             {
-                Toast.makeText(RideshareApp.getAppContext(), "Er is iets misgelopen", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RideshareApp.getAppContext(), RideshareApp.getAppContext().getResources().getString(R.string.wrongNotification), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -457,11 +457,11 @@ public class APIHelper {
             Log.d("statusCodePost", result);
             if(statusCode.equals("200")||statusCode.equals("201"))
             {
-                Toast.makeText(RideshareApp.getAppContext(), "Succesvol opgeslagen in database", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RideshareApp.getAppContext(), RideshareApp.getAppContext().getResources().getString(R.string.dbSavedNotification), Toast.LENGTH_SHORT).show();
             }
             else
             {
-                Toast.makeText(RideshareApp.getAppContext(), "Er is iets misgelopen", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RideshareApp.getAppContext(), RideshareApp.getAppContext().getResources().getString(R.string.wrongNotification), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -497,11 +497,11 @@ public class APIHelper {
             String statusCode = Utils.ParseJsonStatusCode(result);
             if(statusCode.equals("200")||statusCode.equals("201"))
             {
-                Toast.makeText(RideshareApp.getAppContext(), "Bericht verzonden", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RideshareApp.getAppContext(), RideshareApp.getAppContext().getResources().getString(R.string.messageSentNotification), Toast.LENGTH_SHORT).show();
             }
             else
             {
-                Toast.makeText(RideshareApp.getAppContext(), "Er is iets misgelopen", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RideshareApp.getAppContext(), RideshareApp.getAppContext().getResources().getString(R.string.wrongNotification), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -538,11 +538,11 @@ public class APIHelper {
             Log.d("statusCodePut", statusCode);
             if(statusCode.equals("200")||statusCode.equals("201"))
             {
-                Toast.makeText(RideshareApp.getAppContext(), "Succesvol aangepast in database", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RideshareApp.getAppContext(), RideshareApp.getAppContext().getResources().getString(R.string.dbEditedNotification), Toast.LENGTH_SHORT).show();
             }
             else
             {
-                Toast.makeText(RideshareApp.getAppContext(), "Er is iets misgelopen", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RideshareApp.getAppContext(), RideshareApp.getAppContext().getResources().getString(R.string.wrongNotification), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -578,11 +578,11 @@ public class APIHelper {
             Log.d("statusCodeDelete", statusCode);
             if(statusCode.equals("200")||statusCode.equals("201"))
             {
-                Toast.makeText(RideshareApp.getAppContext(), "Succesvol verwijderd", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RideshareApp.getAppContext(), RideshareApp.getAppContext().getResources().getString(R.string.dbDeletedNotification), Toast.LENGTH_SHORT).show();
             }
             else
             {
-                Toast.makeText(RideshareApp.getAppContext(), "Er is iets misgelopen", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RideshareApp.getAppContext(), RideshareApp.getAppContext().getResources().getString(R.string.wrongNotification), Toast.LENGTH_SHORT).show();
             }
         }
     }

@@ -62,6 +62,41 @@
     <string name="Profile_NoReviews">Er zijn nog geen reviews.</string>
     <string name="Profile_other_title">Profiel:</string>
     <string name="Button_Review">Schrijf Review</string>
+    <string name="genderMale">M</string>
+    <string name="genderFemale">V</string>
+    <string name="locationUnknown">Locatie onbekend</string>
+    <string name="ageUnknown">Leeftijd onbekend.</string>
+    <string name="carUnknown">Auto onbekend</string>
+    <string name="places">&#160;plaatsen</string>
+    <string name="placesShort">&#160;pl.)</string>
+
+    <!--Adapter literal strings-->
+    <string name="adapterTo">&#160;naar&#160;</string>
+    <string name="adapterRepeat">Herhaald:&#160;</string>
+    <string name="adapterCostFree">Kost: Gratis</string>
+    <string name="adapterCostPay">Kost: €</string>
+    <string name="adapterRequestTo">Aanvraag naar:&#160;</string>
+    <string name="adapterRequestedTo">Verzoek naar:&#160;</string>
+    <string name="adapterStatus">Status:&#160;</string>
+
+    <!--Days-->
+    <string name="day_mo">ma,&#160;</string>
+    <string name="day_tu">di,&#160;</string>
+    <string name="day_wed">woe,&#160;</string>
+    <string name="day_th">don,&#160;</string>
+    <string name="day_fr">vrij,&#160;</string>
+    <string name="day_sa">za,&#160;</string>
+    <string name="day_sun">zon,&#160;</string>
+    <string name="never">Nooit</string>
+
+    <!--Payment-->
+    <string name="costFree">Geen bedrag opgegeven.</string>
+    <string name="costPay">€</string>
+
+    <!--Status-->
+    <string name="statusNoAction">Nog niet geaccepteerd</string>
+    <string name="statusAccepted">Geaccepteerd</string>
+    <string name="statusDeclined">Geweigerd</string>
 
     <!-- Search Results -->
     <string name="title_activity_zoek">Zoekresultaten</string>
@@ -118,5 +153,36 @@
     <string name="acceptedNotification">Je kan meerijden met </string>
     <string name="reviewNotification">  heeft een review op je profiel geschreven</string>
     <string name="messageNotification"> heeft je een bericht gestuurd</string>
+    <string name="wrongNotification">Er is iets misgelopen</string>
+    <string name="loginSuccesNotification">Succesvol aangemeld</string>
+    <string name="tripAddedNotification">Rit is toegevoegd</string>
+    <string name="dbSavedNotification">Succesvol opgeslagen in database</string>
+    <string name="dbEditedNotification">Succesvol aangepast in database</string>
+    <string name="dbDeletedNotification">Succesvol verwijderd</string>
+    <string name="messageSentNotification">Bericht verzonden</string>
+    <string name="noMessageFilledIn">Vul een bericht in</string>
+    <string name="nothingFilledIn">Vul alle verplichte velden in</string>
+    <string name="placesNoNumber">Aantal plaatsen moet een getal zijn</string>
+
+    <!--Dialogs-->
+    <string name="dialogTitleDeleteRequest">Verwijderen aanvraag</string>
+    <string name="dialogDeleteRequest">Ben je zeker dat je deze aanvraag wilt verwijderen?</string>
+    <string name="dialogTitleDeleteTrip">Verwijderen rit</string>
+    <string name="dialogDeleteTrip">Ben je zeker dat je deze rit wilt verwijderen?</string>
+    <string name="dialogDeleteProfileTitle">Verwijderen profiel</string>
+    <string name="dialogDeleteProfile">Ben je zeker dat je uw profiel wilt verwijderen?</string>
+    <string name="dialogCancel">Annuleer</string>
+    <string name="dialogTitleNoConnection">Geen internet verbinding</string>
+    <string name="dialogNoConnection">Je hebt geen internet verbinding</string>
+    <string name="dialogDonateTitle">Doneren</string>
+    <string name="dialogDonate">Vind je deze app nuttig? Steun de ontwikkeling ervan door te doneren aan de ontwikkelaars.</string>
+    <string name="dialogDonateButton">Doneer</string>
+
+    <!--Share-->
+    <string name="shareCaption">De beste carpool app die er is.</string>
+    <string name="shareFirst">Ik zoek een  rit van&#160;</string>
+    <string name="shareSecond">&#160;naar&#160;</string>
+    <string name="shareThird">&#160;op&#160;</string>
+    <string name="shareFourth">&#160;om&#160;</string>
 
 </resources>

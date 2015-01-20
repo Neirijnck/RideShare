@@ -100,7 +100,7 @@ public class EditProfileFragment extends Fragment
                 //Check if empty!
                 if(TextUtils.isEmpty(firstName)||TextUtils.isEmpty(lastName)||TextUtils.isEmpty(userName)||TextUtils.isEmpty(location))
                 {
-                    Toast.makeText(getActivity(), "Vul alle verplichte velden in", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.nothingFilledIn), Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -117,7 +117,7 @@ public class EditProfileFragment extends Fragment
                     {
                         int amount=1;
                         try{ amount = Integer.parseInt(places);}
-                        catch (NumberFormatException  ex){Toast.makeText(getActivity(), "Aantal plaatsen moet een getal zijn", Toast.LENGTH_SHORT).show();}
+                        catch (NumberFormatException  ex){Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.placesNoNumber), Toast.LENGTH_SHORT).show();}
 
                         APIHelper.EditUser(userName.trim(), firstName.trim(), lastName.trim(), token, location.trim(), amount);
                     }

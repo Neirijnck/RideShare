@@ -171,7 +171,7 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
         txtName.setText(user.getFirstName() + " " + user.getLastName());
 
         if (TextUtils.isEmpty(user.getLocation())) {
-            txtPlace.setText("Locatie niet bekend");
+            txtPlace.setText(getActivity().getResources().getString(R.string.locationUnknown));
         } else {
             txtPlace.setText(user.getLocation());
         }
@@ -190,20 +190,20 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
         }
         if(birthday.equals("01-01-0001")||TextUtils.isEmpty(birthday))
         {
-            birthday="Leeftijd onbekend.";
+            birthday=getActivity().getResources().getString(R.string.ageUnknown);
         }
 
         if(TextUtils.isEmpty(user.getGender())){txtGenderAge.setText(birthday);}
         else{txtGenderAge.setText(user.getGender() + ", " + birthday);}
 
         if (!TextUtils.isEmpty(user.getCarType()) && !TextUtils.isEmpty(user.getAmountOfSeats())) {
-            txtCar.setText(user.getCarType() + " (" + user.getAmountOfSeats() + " pl.)");
+            txtCar.setText(user.getCarType() + " (" + user.getAmountOfSeats() + getActivity().getResources().getString(R.string.placesShort));
         } else if (!TextUtils.isEmpty(user.getCarType()) && TextUtils.isEmpty(user.getAmountOfSeats())) {
             txtCar.setText(user.getCarType());
         } else if (TextUtils.isEmpty(user.getCarType()) && !TextUtils.isEmpty(user.getAmountOfSeats())) {
-            txtCar.setText(user.getAmountOfSeats() + " plaatsen");
+            txtCar.setText(user.getAmountOfSeats() + getActivity().getResources().getString(R.string.places));
         } else {
-            txtCar.setText("Auto niet bekend");
+            txtCar.setText(getActivity().getResources().getString(R.string.carUnknown));
         }
 
 //        profilePictureView.setDefaultProfilePicture(user.getBitmapFb());

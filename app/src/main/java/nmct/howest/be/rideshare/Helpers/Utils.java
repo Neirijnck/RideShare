@@ -89,31 +89,31 @@ public class Utils
                 switch(i)
                 {
                     case 0:
-                        repeatString += "ma, ";
+                        repeatString += RideshareApp.getAppContext().getResources().getString(R.string.day_mo);
                         break;
                     case 1:
-                        repeatString += "di, ";
+                        repeatString += RideshareApp.getAppContext().getResources().getString(R.string.day_tu);
                         break;
                     case 2:
-                        repeatString += "woe, ";
+                        repeatString += RideshareApp.getAppContext().getResources().getString(R.string.day_wed);
                         break;
                     case 3:
-                        repeatString += "don, ";
+                        repeatString += RideshareApp.getAppContext().getResources().getString(R.string.day_th);
                         break;
                     case 4:
-                        repeatString += "vrij, ";
+                        repeatString += RideshareApp.getAppContext().getResources().getString(R.string.day_fr);
                         break;
                     case 5:
-                        repeatString += "za, ";
+                        repeatString += RideshareApp.getAppContext().getResources().getString(R.string.day_sa);
                         break;
                     case 6:
-                        repeatString += "zon, ";
+                        repeatString += RideshareApp.getAppContext().getResources().getString(R.string.day_sun);
                         break;
                 }
             }
         }
         if(repeatString.isEmpty()) {
-            repeatString = "Nooit";
+            repeatString = RideshareApp.getAppContext().getResources().getString(R.string.never);
         }
         else {
             repeatString = repeatString.substring(0, repeatString.length() - 2);
@@ -125,10 +125,10 @@ public class Utils
     // Convert payment
     public static String setPayment(String Payment) {
         if(Payment.isEmpty()) {
-            return "Geen bedrag opgegeven.";
+            return RideshareApp.getAppContext().getResources().getString(R.string.costFree);
         }
         else {
-            return "€" + Payment;
+            return RideshareApp.getAppContext().getResources().getString(R.string.costPay) + Payment;
         }
     }
 
@@ -137,11 +137,11 @@ public class Utils
         switch(status)
         {
             case 0:
-                return "Nog niet geaccepteerd";
+                return RideshareApp.getAppContext().getResources().getString(R.string.statusNoAction);
             case 1:
-                return "Geaccepteerd";
+                return RideshareApp.getAppContext().getResources().getString(R.string.statusAccepted);
             case 2:
-                return "Geweigerd";
+                return RideshareApp.getAppContext().getResources().getString(R.string.statusDeclined);
             default:
                 return "";
         }
@@ -474,7 +474,7 @@ public class Utils
         String messageText = txtMessage.getText().toString().trim();
         if(TextUtils.isEmpty(messageText))
         {
-            Toast.makeText(RideshareApp.getAppContext(), "Vul een bericht in", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RideshareApp.getAppContext(), RideshareApp.getAppContext().getResources().getString(R.string.noMessageFilledIn), Toast.LENGTH_SHORT).show();
         }
         else
         {
