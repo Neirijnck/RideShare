@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
-            android:maxLength="28"
+            android:maxLength="30"
             android:text="@string/Trip_MyRequests_title"
             android:id="@+id/txtTripTitle"
             android:layout_toEndOf="@+id/imgTripPicture"

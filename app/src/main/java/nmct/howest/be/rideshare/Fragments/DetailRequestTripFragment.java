@@ -42,8 +42,8 @@ public class DetailRequestTripFragment extends Fragment {
     private String urlTrip;
     private String urlUser;
 
-    private static final int USER_LOADER_ID = 2;
     private static final int TRIP_LOADER_ID = 1;
+    private static final int USER_LOADER_ID = 2;
 
     private TextView txtDetailRequestFrom;
     private TextView txtDetailRequestTo;
