@@ -2,7 +2,9 @@ package nmct.howest.be.rideshare.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -29,8 +31,10 @@ import nmct.howest.be.rideshare.Activities.MainActivity;
 import nmct.howest.be.rideshare.Activities.SearchActivity;
 import nmct.howest.be.rideshare.Adapters.TripRecyclerAdapter;
 import nmct.howest.be.rideshare.Loaders.Json.TripsLoader;
+import nmct.howest.be.rideshare.Models.Match;
 import nmct.howest.be.rideshare.Models.Trip;
 import nmct.howest.be.rideshare.R;
+import nmct.howest.be.rideshare.RideshareApp;
 
 public class TripsFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<Trip>>
 {
@@ -45,6 +49,9 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
     private List<Trip> mSavedTrips = new ArrayList<Trip>();
     private List<Trip> mRequestTrips = new ArrayList<Trip>();
     private List<Trip> mRequestedTrips = new ArrayList<Trip>();
+
+    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(RideshareApp.getAppContext());
+    String myUserID = pref.getString("myUserID", "");
 
     private ViewHolder mViews;
     private TripRecyclerAdapter mTripRecyclerAdapter;
@@ -182,8 +189,19 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
         }
         else if(loader.getId()==TRIPS_REQUESTS_LOADER_ID)
         {
-            //This is a request trip
-            for(Trip trip: trips){trip.setType(getActivity().getResources().getString(R.string.Trip_MyRequests));}
+            //This is a request trip & only my request
+            for(Trip trip: trips)
+            {
+                trip.setType(getActivity().getResources().getString(R.string.Trip_MyRequests));
+                for(Match match : trip.getMatches())
+                {
+                    if(!match.getUserID().equals(myUserID))
+                    {
+                        //Not my request
+                        trip.getMatches().remove(match);
+                    }
+                }
+            }
             if(mRequestTrips!=null)
             {
                 mRequestTrips = trips;

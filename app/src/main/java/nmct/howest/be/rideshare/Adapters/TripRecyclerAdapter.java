@@ -2,7 +2,9 @@ package nmct.howest.be.rideshare.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -36,11 +38,17 @@ public class TripRecyclerAdapter extends RecyclerView.Adapter<TripRecyclerAdapte
     private final ArrayList<LineItem> mItems;
     private List<Trip> mTrips;
     private Context mContext;
+    private SharedPreferences pref;
+    private String myUserID;
 
     public TripRecyclerAdapter(Context context, List<Trip> mData)
     {
         this.mTrips = mData;
         this.mItems = new ArrayList<LineItem>();
+        this.mContext = context;
+
+        pref = PreferenceManager.getDefaultSharedPreferences(context);
+        myUserID = pref.getString("myUserID", "");
 
         //Insert headers into list of items
         String lastHeader = "";
@@ -187,8 +195,12 @@ public class TripRecyclerAdapter extends RecyclerView.Adapter<TripRecyclerAdapte
                 holder.txtTripTitle.setText(m.getUserName());
                 holder.txtTripInfoDate.setText("Aanvraag naar " + m.getTo());
                 holder.txtTripInfo.setText("Status: " + Utils.convertStatus(m.getStatus()));
-                if(m.getStatus()==1){holder.txtTripInfo.setTextColor(RideshareApp.getAppContext().getResources().getColor(R.color.rideshare_text_green));}
-                else if(m.getStatus()==2)holder.txtTripInfo.setTextColor(RideshareApp.getAppContext().getResources().getColor(R.color.rideshare_text_red));{}
+                if (m.getStatus() == 1) {
+                    holder.txtTripInfo.setTextColor(RideshareApp.getAppContext().getResources().getColor(R.color.rideshare_text_green));
+                } else if (m.getStatus() == 2)
+                    holder.txtTripInfo.setTextColor(RideshareApp.getAppContext().getResources().getColor(R.color.rideshare_text_red));
+                {
+                }
                 holder.txtTripPrice.setText(m.getDatetime());
 
                 //Set picture of the person who planned the trip

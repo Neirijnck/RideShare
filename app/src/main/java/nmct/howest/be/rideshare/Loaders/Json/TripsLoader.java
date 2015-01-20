@@ -224,10 +224,7 @@ public class TripsLoader extends AsyncTaskLoader<List<Trip>>
                                 match.setUserName(Utils.getUserNameFromUserID(token, match.getUserID()));
                                 reader.endObject();
 
-                                //Only my matches
-                                if(match.getUserID().equals(myUserID)) {
-                                    matches.add(match);
-                                }
+                                matches.add(match);
                             }
                             reader.endArray();
                             trip.setMatches(matches);
