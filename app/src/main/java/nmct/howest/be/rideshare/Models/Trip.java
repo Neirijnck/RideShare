@@ -7,8 +7,10 @@ public class Trip {
     //Fields
     private String ID = "";
     private String userID = "";
-    private String from  ="";
+    private String from  = "";
+    private String fromLoc  = "";
     private String to = "";
+    private String toLoc  = "";
     private String datetime = "";
     private String payment ="";
     private boolean[] repeat =  new boolean[7]; //mo, tu, we, th, fr, sa, su
@@ -102,12 +104,22 @@ public class Trip {
         this.userName = userName;
     }
 
+    public String getFromLoc() { return fromLoc; }
+
+    public void setFromLoc(String fromLoc) { this.fromLoc = fromLoc; }
+
+    public String getToLoc() { return toLoc; }
+
+    public void setToLoc(String toLoc) { this.toLoc = toLoc;}
+
     //Ctor
-    public Trip(String ID, String userID, String from, String to, String datetime, String payment, boolean[] repeat, List<Match> matches) {
+    public Trip(String ID, String userID, String from, String fromLoc, String to, String toLoc, String datetime, String payment, boolean[] repeat, List<Match> matches) {
         this.ID = ID;
         this.userID = userID;
         this.from = from;
         this.to = to;
+        this.fromLoc = fromLoc;
+        this.toLoc = toLoc;
         this.datetime = datetime;
         this.payment = payment;
         this.repeat = repeat;

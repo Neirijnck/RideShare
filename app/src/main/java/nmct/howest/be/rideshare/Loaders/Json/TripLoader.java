@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.content.AsyncTaskLoader;
+import android.text.TextUtils;
 import android.util.JsonReader;
+import android.util.JsonToken;
 import android.util.Log;
 
 import org.apache.http.HttpEntity;
@@ -99,6 +101,22 @@ public class TripLoader extends AsyncTaskLoader<Trip>
                     } else if (key.equals("to")) {
                         to = reader.nextString();
                         trip.setTo(to);
+                    } else if (key.equals("fromLoc") && reader.peek() != JsonToken.NULL) {
+                        List doubles = new ArrayList();
+                        reader.beginArray();
+                        while (reader.hasNext()) {
+                            doubles.add(reader.nextDouble());
+                        }
+                        reader.endArray();
+                        trip.setFromLoc(TextUtils.join(",", doubles.toArray()));
+                    } else if (key.equals("toLoc") && reader.peek() != JsonToken.NULL) {
+                        List doubles = new ArrayList();
+                        reader.beginArray();
+                        while (reader.hasNext()) {
+                            doubles.add(reader.nextDouble());
+                        }
+                        reader.endArray();
+                        trip.setToLoc(TextUtils.join(",", doubles.toArray()));
                     } else if (key.equals("datetime")) {
                         dateTime = reader.nextString();
                         trip.setDatetime(dateTime);

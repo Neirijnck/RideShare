@@ -39,10 +39,10 @@ public class SearchFragment extends Fragment
 {
     //Variables
     private Button btnSearch;
-    static EditText txbDatePlan;
-    static EditText txbTimePlan;
-    private AutoCompleteTextView txtFrom;
-    private AutoCompleteTextView txtTo;
+    static EditText txtDateSearch;
+    static EditText txtTimeSearch;
+    private AutoCompleteTextView txtFromSearch;
+    private AutoCompleteTextView txtToSearch;
     private EditText txtDate;
     private EditText txtTime;
     private CheckBox chkShare;
@@ -62,24 +62,22 @@ public class SearchFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
-        txtFrom = (AutoCompleteTextView) view.findViewById(R.id.txtFromSearch);
-        txtTo = (AutoCompleteTextView) view.findViewById(R.id.txtToSearch);
-        txbDatePlan = (EditText) view.findViewById(R.id.txtDateSearch);
-        //txtDate = (EditText) view.findViewById(R.id.txtDateSearch);
-        txbTimePlan = (EditText) view.findViewById(R.id.txtTimeSearch);
-        //txtTime = (EditText) view.findViewById(R.id.txtTimeSearch);
+        txtFromSearch = (AutoCompleteTextView) view.findViewById(R.id.txtFromSearch);
+        txtToSearch = (AutoCompleteTextView) view.findViewById(R.id.txtToSearch);
+        txtDateSearch = (EditText) view.findViewById(R.id.txtDateSearch);
+        txtTimeSearch = (EditText) view.findViewById(R.id.txtTimeSearch);
         chkShare = (CheckBox) view.findViewById(R.id.chkShareOnFacebook);
 
 
         //From Google Maps
-        txtFrom.setThreshold(2);
-        txtFrom.addTextChangedListener(new TextWatcher() {
+        txtFromSearch.setThreshold(2);
+        txtFromSearch.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s != null && s != "" && start >= 2) {
                     Log.d("request send", count + " -- " + s.toString());
-                    PlacesTask placesTask = new PlacesTask(txtFrom, getActivity());
+                    PlacesTask placesTask = new PlacesTask(txtFromSearch, getActivity());
                     placesTask.execute(s.toString());
                 }
             }
@@ -94,7 +92,7 @@ public class SearchFragment extends Fragment
                 // Auto-generated method stub
             }
         });
-        txtFrom.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        txtFromSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View arg1, int pos, long id) {
                 fromLoc = PlaceJSONParser.PLACES.get(pos);
@@ -103,13 +101,13 @@ public class SearchFragment extends Fragment
 
 
         //To Google Maps
-        txtTo.setThreshold(2);
-        txtTo.addTextChangedListener(new TextWatcher() {
+        txtToSearch.setThreshold(2);
+        txtToSearch.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s != null && s != "" && start >= 2) {
-                    PlacesTask placesTask = new PlacesTask(txtTo, getActivity());
+                    PlacesTask placesTask = new PlacesTask(txtToSearch, getActivity());
                     placesTask.execute(s.toString());
                 }
             }
@@ -124,7 +122,7 @@ public class SearchFragment extends Fragment
                 // Auto-generated method stub
             }
         });
-        txtTo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        txtToSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View arg1, int pos, long id) {
                 toLoc = PlaceJSONParser.PLACES.get(pos);
@@ -139,7 +137,7 @@ public class SearchFragment extends Fragment
             {
 
                 //Required fields should not be empty
-                if(TextUtils.isEmpty(txtFrom.getText().toString())||TextUtils.isEmpty(txtTo.getText().toString())||TextUtils.isEmpty(txbDatePlan.getText().toString())||TextUtils.isEmpty(txbTimePlan.getText().toString())) {
+                if(TextUtils.isEmpty(txtFromSearch.getText().toString())||TextUtils.isEmpty(txtToSearch.getText().toString())||TextUtils.isEmpty(txtDateSearch.getText().toString())||TextUtils.isEmpty(txtTimeSearch.getText().toString())) {
                     Toast.makeText(getActivity(), "Vul alle verplichte velden in", Toast.LENGTH_SHORT).show();
                 }
                 else
@@ -158,10 +156,10 @@ public class SearchFragment extends Fragment
                     Intent intent = new Intent(getActivity(), SearchActivity.class);
                     Bundle b = new Bundle();
                     //Enter all parameters
-                    b.putString("from", txtFrom.getText().toString());
-                    b.putString("to", txtTo.getText().toString());
-                    b.putString("date", txbDatePlan.getText().toString());
-                    b.putString("time", txbTimePlan.getText().toString());
+                    b.putString("from", txtFromSearch.getText().toString());
+                    b.putString("to", txtToSearch.getText().toString());
+                    b.putString("date", txtDateSearch.getText().toString());
+                    b.putString("time", txtTimeSearch.getText().toString());
                     b.putString("fromPlaceid", fromPlaceid);
                     b.putString("toPlaceid", toPlaceid);
                     if(chkShare.isChecked()){b.putBoolean("share", true);}
@@ -174,7 +172,7 @@ public class SearchFragment extends Fragment
         });
 
         //Date picker
-        txbDatePlan.setOnClickListener(new View.OnClickListener() {
+        txtDateSearch.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -184,7 +182,7 @@ public class SearchFragment extends Fragment
         });
 
         //Time picker
-        txbTimePlan.setOnClickListener(new View.OnClickListener() {
+        txtTimeSearch.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -244,7 +242,7 @@ public class SearchFragment extends Fragment
 
             Log.e("", date);
 
-            txbDatePlan.setText(date);
+            txtDateSearch.setText(date);
         }
     }
 
@@ -275,7 +273,7 @@ public class SearchFragment extends Fragment
                 time += minute;
             }
 
-            txbTimePlan.setText(time);
+            txtTimeSearch.setText(time);
         }
     }
 }

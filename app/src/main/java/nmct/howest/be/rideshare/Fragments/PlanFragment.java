@@ -54,12 +54,12 @@ public class PlanFragment extends Fragment{
     //Variables
     private SwitchCompat repeatSwitch;
     private LinearLayout tglBtns;
-    static AutoCompleteTextView txtPlanTo;
-    static AutoCompleteTextView txtPlanFrom;
+    static AutoCompleteTextView txtToPlan;
+    static AutoCompleteTextView txtFromPlan;
     static EditText txbDatePlan;
     static EditText txbTimePlan;
-    static EditText txtPlanPrice;
-    static Button btnPlanSave;
+    static EditText txtPricePlan;
+    static Button btnSavePlan;
     private ToggleButton tglMo;
     private ToggleButton tglTu;
     private ToggleButton tglWe;
@@ -87,12 +87,12 @@ public class PlanFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_plan, container, false);
 
-        txtPlanTo = (AutoCompleteTextView) view.findViewById(R.id.txtPlanTo);
-        txtPlanFrom = (AutoCompleteTextView) view.findViewById(R.id.txtPlanFrom);
+        txtToPlan = (AutoCompleteTextView) view.findViewById(R.id.txtPlanTo);
+        txtFromPlan = (AutoCompleteTextView) view.findViewById(R.id.txtPlanFrom);
         repeatSwitch = (SwitchCompat) view.findViewById(R.id.repeatSwitch);
         tglBtns = (LinearLayout) view.findViewById(R.id.tglBtns);
-        txtPlanPrice = (EditText) view.findViewById(R.id.txtPlanPrice);
-        btnPlanSave = (Button) view.findViewById(R.id.btnPlanSave);
+        txtPricePlan = (EditText) view.findViewById(R.id.txtPlanPrice);
+        btnSavePlan = (Button) view.findViewById(R.id.btnPlanSave);
 
         tglMo = (ToggleButton) view.findViewById(R.id.tglMonday);
         tglTu = (ToggleButton) view.findViewById(R.id.tglTuesday);
@@ -111,14 +111,14 @@ public class PlanFragment extends Fragment{
         });
 
         //From Google Maps
-        txtPlanFrom.setThreshold(2);
-        txtPlanFrom.addTextChangedListener(new TextWatcher() {
+        txtFromPlan.setThreshold(2);
+        txtFromPlan.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s != null && s != "" && start >= 2) {
                     Log.d("request send", count + " -- " + s.toString());
-                    PlacesTask placesTask = new PlacesTask(txtPlanFrom, getActivity());
+                    PlacesTask placesTask = new PlacesTask(txtFromPlan, getActivity());
                     placesTask.execute(s.toString());
                 }
             }
@@ -133,7 +133,7 @@ public class PlanFragment extends Fragment{
                 // Auto-generated method stub
             }
         });
-        txtPlanFrom.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        txtFromPlan.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View arg1, int pos, long id) {
                 fromLoc = PlaceJSONParser.PLACES.get(pos);
@@ -142,13 +142,13 @@ public class PlanFragment extends Fragment{
 
 
         //To Google Maps
-        txtPlanTo.setThreshold(2);
-        txtPlanTo.addTextChangedListener(new TextWatcher() {
+        txtToPlan.setThreshold(2);
+        txtToPlan.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s != null && s != "" && start >= 2) {
-                    PlacesTask placesTask = new PlacesTask(txtPlanTo, getActivity());
+                    PlacesTask placesTask = new PlacesTask(txtToPlan, getActivity());
                     placesTask.execute(s.toString());
                 }
             }
@@ -163,7 +163,7 @@ public class PlanFragment extends Fragment{
                 // Auto-generated method stub
             }
         });
-        txtPlanTo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        txtToPlan.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View arg1, int pos, long id) {
                 toLoc = PlaceJSONParser.PLACES.get(pos);
@@ -193,10 +193,10 @@ public class PlanFragment extends Fragment{
         });
 
         //Price field
-        txtPlanPrice.setText("€");
-        Selection.setSelection(txtPlanPrice.getText(), txtPlanPrice.getText().length());
+        txtPricePlan.setText("€");
+        Selection.setSelection(txtPricePlan.getText(), txtPricePlan.getText().length());
 
-        txtPlanPrice.addTextChangedListener(new TextWatcher() {
+        txtPricePlan.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -209,21 +209,21 @@ public class PlanFragment extends Fragment{
             @Override
             public void afterTextChanged(Editable s) {
                 if (!s.toString().startsWith("€")) {
-                    txtPlanPrice.setText("€");
-                    Selection.setSelection(txtPlanPrice.getText(), txtPlanPrice.getText().length());
+                    txtPricePlan.setText("€");
+                    Selection.setSelection(txtPricePlan.getText(), txtPricePlan.getText().length());
                 }
             }
         });
 
-        btnPlanSave.setOnClickListener(new View.OnClickListener() {
+        btnSavePlan.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 String date = txbDatePlan.getText().toString();
                 String time = txbTimePlan.getText().toString();
-                String price = txtPlanPrice.getText().toString();
-                String from = txtPlanFrom.getText().toString();
-                String to = txtPlanTo.getText().toString();
+                String price = txtPricePlan.getText().toString();
+                String from = txtFromPlan.getText().toString();
+                String to = txtToPlan.getText().toString();
                 boolean mo = tglMo.isChecked();
                 boolean tu = tglTu.isChecked();
                 boolean we = tglWe.isChecked();
@@ -258,10 +258,10 @@ public class PlanFragment extends Fragment{
                         //Coordinates
                         String fromPlaceid = "";
                         String toPlaceid = "";
-                        if(!fromLoc.isEmpty()) {
+                        if (!fromLoc.isEmpty()) {
                             fromPlaceid = "placeid=" + fromLoc.get("place_id");
                         }
-                        if(!toLoc.isEmpty()) {
+                        if (!toLoc.isEmpty()) {
                             toPlaceid = "placeid=" + toLoc.get("place_id");
                         }
 
@@ -269,7 +269,7 @@ public class PlanFragment extends Fragment{
 
                         //If there is only a price
                         if (!price.equals("€") && !repeatSwitch.isChecked()) {
-                            APIHelper.PlanTrip(token, from.trim(),fromPlaceid, to.trim(),toPlaceid, date, time, price.trim(), emptyBoolArr);
+                            APIHelper.PlanTrip(token, from.trim(), fromPlaceid, to.trim(), toPlaceid, date, time, price.trim(), emptyBoolArr);
                         }
                         //If there are only repeat days
                         else if (price.equals("€") && repeatSwitch.isChecked()) {
@@ -280,7 +280,7 @@ public class PlanFragment extends Fragment{
                             repeatDays[4] = fr;
                             repeatDays[5] = sa;
                             repeatDays[6] = su;
-                            APIHelper.PlanTrip(token, from.trim(),fromPlaceid, to.trim(),toPlaceid, date, time, "€", repeatDays);
+                            APIHelper.PlanTrip(token, from.trim(), fromPlaceid, to.trim(), toPlaceid, date, time, "€", repeatDays);
                         }
                         //Both price and repeat days
                         else if (!price.equals("€") && repeatSwitch.isChecked()) {
@@ -291,11 +291,11 @@ public class PlanFragment extends Fragment{
                             repeatDays[4] = fr;
                             repeatDays[5] = sa;
                             repeatDays[6] = su;
-                            APIHelper.PlanTrip(token, from.trim(),fromPlaceid, to.trim(),toPlaceid, date, time, price.trim(), repeatDays);
+                            APIHelper.PlanTrip(token, from.trim(), fromPlaceid, to.trim(), toPlaceid, date, time, price.trim(), repeatDays);
                         }
                         //No price and repeat days
                         else {
-                            APIHelper.PlanTrip(token, from.trim(),fromPlaceid, to.trim(),toPlaceid, date, time, "€", emptyBoolArr);
+                            APIHelper.PlanTrip(token, from.trim(), fromPlaceid, to.trim(), toPlaceid, date, time, "€", emptyBoolArr);
                         }
                     }
                 }
