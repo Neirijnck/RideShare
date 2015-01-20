@@ -40,7 +40,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:textColor="@color/rideshare_text"
-            android:maxLength="30"
+            android:maxLength="27"
             android:layout_marginLeft="10dp"/>
 
         <TextView
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="From To"
-            android:maxLength="30"
+            android:maxLength="27"
             android:id="@+id/txtSearchResultFromTo"
             android:layout_below="@+id/txtSearchResultName"
             android:layout_toRightOf="@+id/imgSearchResult"

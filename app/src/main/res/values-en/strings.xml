@@ -154,6 +154,7 @@
     <!-- Notifications -->
     <string name="requestNotification"> would love to travel with you</string>
     <string name="acceptedNotification">You can drive along with </string>
+    <string name="deniedNotification">declined your request.</string>
     <string name="reviewNotification">  has written a review on your profile</string>
     <string name="messageNotification"> sent you a message</string>
     <string name="wrongNotification">Something went wrong</string>

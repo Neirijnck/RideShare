@@ -211,7 +211,9 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
 //            profilePictureView.setProfileId(user.getFacebookID());
 //        profilePictureView.setCropped(true);
 
-        profilePictureView.setImageBitmap(Utils.getRoundedBitmap(user.getBitmapFb()));
+        if(user.getBitmapFb()!=null) {
+            profilePictureView.setImageBitmap(Utils.getRoundedBitmap(user.getBitmapFb()));
+        }
     }
 
 }

@@ -107,6 +107,7 @@ public class DetailRequestedTripFragment extends Fragment {
                 if (actionId == EditorInfo.IME_ACTION_SEND) {
                     Utils.sendMessage(token, txtDetailRequestedAddMessage, getArguments().getString("matchID"), getArguments().getString("id"));
                     getLoaderManager().restartLoader(TRIP_LOADER_ID, null, TripLoaderListener).forceLoad();
+                    txtDetailRequestedAddMessage.setText("");
                     handled = true;
                 }
                 return handled;
@@ -118,6 +119,7 @@ public class DetailRequestedTripFragment extends Fragment {
             public void onClick(View v) {
                 Utils.sendMessage(token, txtDetailRequestedAddMessage, getArguments().getString("matchID"), getArguments().getString("id"));
                 getLoaderManager().restartLoader(TRIP_LOADER_ID, null, TripLoaderListener).forceLoad();
+                txtDetailRequestedAddMessage.setText("");
             }
         });
 

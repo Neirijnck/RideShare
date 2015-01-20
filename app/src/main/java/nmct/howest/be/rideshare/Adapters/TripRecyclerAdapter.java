@@ -177,7 +177,6 @@ public class TripRecyclerAdapter extends RecyclerView.Adapter<TripRecyclerAdapte
                     m.setUserID(match.getUserID());
                     m.setFacebookID(match.getFacebookID());
                     m.setUserName(match.getUserName());
-                }
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -205,6 +204,7 @@ public class TripRecyclerAdapter extends RecyclerView.Adapter<TripRecyclerAdapte
 
                 //Set picture of the person who planned the trip
                 holder.imgProfilePicture.setProfileId(m.getFacebookID());
+                }
             }
             else if(trip.getType().equals(mContext.getResources().getString(R.string.Trip_Requests)))
             {

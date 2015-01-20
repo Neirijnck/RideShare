@@ -95,6 +95,11 @@ public class GcmIntentService extends IntentService {
                 msg = getString(R.string.acceptedNotification) + " " + userName + ".";
                 intent.putExtra("TOAST", msg);
                 break;
+            case "Deny":
+                intent.putExtra("PAGE", 2);
+                msg = userName + " " + getString(R.string.deniedNotification);
+                intent.putExtra("TOAST", msg);
+                break;
             case "Message":
                 intent.putExtra("PAGE", 2);
                 msg = userName + " " + getString(R.string.messageNotification) + ".";

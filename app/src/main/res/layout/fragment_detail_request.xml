@@ -252,7 +252,7 @@
                 android:id="@+id/progDetailRequestStatus"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="7dp"
-                android:layout_marginLeft="7dp"
+                android:layout_marginLeft="10dp"
                 android:progress="1"
                 android:max="100"
                 android:minHeight="5dp"

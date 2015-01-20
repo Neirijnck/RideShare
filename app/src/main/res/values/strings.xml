@@ -173,6 +173,7 @@
     <!-- Notifications -->
     <string name="requestNotification"> zou graag meerijden met jou</string>
     <string name="acceptedNotification">Je kan meerijden met </string>
+    <string name="deniedNotification">heeft jouw aanvraag geweigerd.</string>
     <string name="reviewNotification">  heeft een review op je profiel geschreven</string>
     <string name="messageNotification"> heeft je een bericht gestuurd</string>
     <string name="wrongNotification">Er is iets misgelopen</string>

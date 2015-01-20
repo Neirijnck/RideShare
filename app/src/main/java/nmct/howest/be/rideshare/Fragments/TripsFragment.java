@@ -184,8 +184,8 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
         }
         else if(loader.getId()==TRIPS_REQUESTS_LOADER_ID)
         {
+            List<Trip> TripsSeparateMatches = new ArrayList<>();
             //This is a request trip & only my request
-            List<Match> myRequestMatches = new ArrayList<>();
             for(Trip trip: trips)
             {
                 trip.setType(getActivity().getResources().getString(R.string.Trip_MyRequests));
@@ -193,15 +193,20 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
                 {
                     if(match.getUserID().equals(myUserID))
                     {
-                        //If i's my request, add to the list
+                        List<Match> myRequestMatches = new ArrayList<>();
+                        //If i's my request, add to the list and make new trip object to show in recyclerview
                         myRequestMatches.add(match);
+                        Trip requestTrip = new Trip();
+                        requestTrip.setID(trip.getID());
+                        requestTrip.setType(getActivity().getResources().getString(R.string.Trip_MyRequests));
+                        requestTrip.setMatches(myRequestMatches);
+                        TripsSeparateMatches.add(requestTrip);
                     }
                 }
-                trip.setMatches(myRequestMatches);
             }
             if(mRequestTrips!=null)
             {
-                mRequestTrips = trips;
+                mRequestTrips = TripsSeparateMatches;
 
                 //Sort trips on date
                 Collections.sort(mRequestTrips, Collections.reverseOrder(new Trip.compareToDate()));
