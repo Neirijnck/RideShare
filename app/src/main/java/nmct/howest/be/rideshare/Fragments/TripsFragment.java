@@ -168,7 +168,7 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
         if(loader.getId()==TRIPS_SAVED_LOADER_ID)
         {
             //This is a saved trip
-            for(Trip trip: trips){trip.setType("Mijn opgeslagen ritten");}
+            for(Trip trip: trips){trip.setType(getActivity().getResources().getString(R.string.Trip_SavedTrips));}
             if(mSavedTrips!=null)
             {
                 mSavedTrips = trips;
@@ -183,7 +183,7 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
         else if(loader.getId()==TRIPS_REQUESTS_LOADER_ID)
         {
             //This is a request trip
-            for(Trip trip: trips){trip.setType("Ritaanvragen");}
+            for(Trip trip: trips){trip.setType(getActivity().getResources().getString(R.string.Trip_MyRequests));}
             if(mRequestTrips!=null)
             {
                 mRequestTrips = trips;
@@ -198,7 +198,7 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
         else if(loader.getId()==TRIPS_REQUESTED_LOADER_ID)
         {
             //This is a requested trip
-            for(Trip trip: trips){trip.setType("Ritverzoeken");}
+            for(Trip trip: trips){trip.setType(getActivity().getResources().getString(R.string.Trip_Requests));}
             if(mRequestedTrips!=null)
             {
                 mRequestedTrips = trips;

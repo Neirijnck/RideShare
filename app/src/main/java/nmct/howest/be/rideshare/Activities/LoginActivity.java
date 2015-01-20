@@ -40,6 +40,12 @@ public class LoginActivity extends FragmentActivity {
         prefs = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
         context = getApplicationContext();
 
+        prefs = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+        String language = prefs.getString("language", "");
+
+        //Set Language
+        Utils.changeLanguage(language);
+
         // Check device for Play Services APK.
         if(Utils.isNetworkAvailable(context)) {
             if (checkPlayServices()) {

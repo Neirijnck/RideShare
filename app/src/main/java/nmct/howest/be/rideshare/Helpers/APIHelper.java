@@ -48,7 +48,7 @@ public class APIHelper {
             parameters.add(new BasicNameValuePair("birthday", birthday));
             httppost.setEntity(new UrlEncodedFormEntity(parameters));
 
-            PostAsync task = new PostAsync();
+            PostLoginAsync task = new PostLoginAsync();
             task.execute(httppost);
         }
         catch (IOException e) {
@@ -310,6 +310,45 @@ public class APIHelper {
         }
     }
 
+    //Helper post Login
+    public static class PostLoginAsync extends AsyncTask<HttpPost, Void, String>
+    {
+        @Override
+        protected String doInBackground(HttpPost... params) {
+            try {
+                HttpClient httpclient = new DefaultHttpClient();
+
+                HttpPost httppost = params[0];
+                HttpResponse response = httpclient.execute(httppost);
+
+                HttpEntity entity = response.getEntity();
+                String result = Utils.convertStreamToString(entity.getContent());
+
+                return new String(result);
+
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            //Parse json for status code
+            //if 200 = Toast for success
+            String statusCode = Utils.ParseJsonStatusCode(result);
+            Log.d("statusCodePost", result);
+            if(statusCode.equals("200")||statusCode.equals("201"))
+            {
+                Toast.makeText(RideshareApp.getAppContext(), "Succesvol aangemeld", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                Toast.makeText(RideshareApp.getAppContext(), "Er is iets misgelopen", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
     //Helper Post Plan
     public static class PostPlanAsync extends AsyncTask<HttpPost, Void, String>
@@ -368,7 +407,7 @@ public class APIHelper {
             Log.d("statusCodePost", result);
             if(statusCode.equals("200")||statusCode.equals("201"))
             {
-                Toast.makeText(RideshareApp.getAppContext(), "Succesvol opgeslagen in database", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RideshareApp.getAppContext(), "Trip werd toegevoegd", Toast.LENGTH_SHORT).show();
             }
             else
             {

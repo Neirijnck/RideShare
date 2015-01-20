@@ -120,7 +120,7 @@ public class TripRecyclerAdapter extends RecyclerView.Adapter<TripRecyclerAdapte
             //Set card
             final Trip trip = ((LineItemTrip) item).trip;
 
-            if(trip.getType().equals("Mijn opgeslagen ritten"))
+            if(trip.getType().equals(mContext.getResources().getString(R.string.Trip_SavedTrips)))
             {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -156,7 +156,7 @@ public class TripRecyclerAdapter extends RecyclerView.Adapter<TripRecyclerAdapte
                 //Set picture of the person who planned the trip
                 holder.imgProfilePicture.setProfileId(trip.getFacebookID());
             }
-            else if(trip.getType().equals("Ritaanvragen"))
+            else if(trip.getType().equals(mContext.getResources().getString(R.string.Trip_MyRequests)))
             {
                 final Match m = new Match();
                 for(Match match: trip.getMatches())
@@ -194,7 +194,7 @@ public class TripRecyclerAdapter extends RecyclerView.Adapter<TripRecyclerAdapte
                 //Set picture of the person who planned the trip
                 holder.imgProfilePicture.setProfileId(m.getFacebookID());
             }
-            else if(trip.getType().equals("Ritverzoeken"))
+            else if(trip.getType().equals(mContext.getResources().getString(R.string.Trip_Requests)))
             {
                 final Match m = new Match();
                 for(Match match: trip.getMatches())

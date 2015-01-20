@@ -21,7 +21,6 @@
     app:pstsTextAllCaps="true"
     app:pstsUnderlineColor="@color/rideshare_primary"
     app:pstsUnderlineHeight="0dp"
-    app:pstsShouldExpand="true"
     android:layout_below="@+id/toolbarLayout"
     android:layout_alignParentLeft="true"
     android:layout_alignParentStart="true" />

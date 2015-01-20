@@ -20,27 +20,51 @@ public class ReviewRecyclerAdapter extends RecyclerView.Adapter<ReviewRecyclerAd
 {
     //Variables
     private List<Review> mReviews;
+    private View mHeader;
+    private static final int VIEW_TYPE_HEADER =0;
+    private static final int VIEW_TYPE_ITEM=1;
 
-    public ReviewRecyclerAdapter(List<Review> mData) {
+    public ReviewRecyclerAdapter(View header, List<Review> mData) {
         this.mReviews = mData;
+        this.mHeader = header;
     }
 
-    public void updateList(List<Review> reviews) {
+    public void updateList(View header, List<Review> reviews) {
         mReviews = reviews;
+        mHeader = header;
         notifyDataSetChanged();
+    }
+
+    public boolean isHeader(int position)
+    {
+        return position ==0;
     }
 
     @Override
     public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_review, parent, false);
+        if (viewType == VIEW_TYPE_HEADER) {
+            return new RecyclerViewHolder(mHeader);
+        }
+        View itemView;
+        itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_review, parent, false);
         return new RecyclerViewHolder(itemView);
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return isHeader(position) ?
+                VIEW_TYPE_HEADER : VIEW_TYPE_ITEM;
     }
 
     @Override
     public void onBindViewHolder(RecyclerViewHolder holder, int position)
     {
-        Review review = mReviews.get(position);
+        if (isHeader(position)) {
+            return;
+        }
+
+        Review review = mReviews.get(position-1);
 
         holder.txtReviewName.setText(review.getUserName());
         holder.imgReviewPic.setProfileId(review.getFacebookID());
@@ -57,7 +81,7 @@ public class ReviewRecyclerAdapter extends RecyclerView.Adapter<ReviewRecyclerAd
     @Override
     public int getItemCount()
     {
-        return mReviews.size();
+        return mReviews.size()+1;
     }
 
     public static class RecyclerViewHolder extends RecyclerView.ViewHolder

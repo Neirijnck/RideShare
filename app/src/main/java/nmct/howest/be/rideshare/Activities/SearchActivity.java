@@ -1,6 +1,8 @@
 package nmct.howest.be.rideshare.Activities;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,6 +14,7 @@ import com.facebook.SessionState;
 import com.facebook.widget.WebDialog;
 
 import nmct.howest.be.rideshare.Fragments.SearchResultsFragment;
+import nmct.howest.be.rideshare.Helpers.Utils;
 import nmct.howest.be.rideshare.R;
 
 public class SearchActivity extends ActionBarActivity
@@ -24,11 +27,18 @@ public class SearchActivity extends ActionBarActivity
     private String date="";
     private String time="";
     private boolean share;
+    SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+        String language = prefs.getString("language", "");
+
+        //Set Language
+        Utils.changeLanguage(language);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

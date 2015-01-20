@@ -8,6 +8,8 @@ import nmct.howest.be.rideshare.Fragments.MyProfileFragment;
 import nmct.howest.be.rideshare.Fragments.PlanFragment;
 import nmct.howest.be.rideshare.Fragments.SearchFragment;
 import nmct.howest.be.rideshare.Fragments.TripsFragment;
+import nmct.howest.be.rideshare.R;
+import nmct.howest.be.rideshare.RideshareApp;
 
 public class TabPagerAdapter extends FragmentStatePagerAdapter
 {
@@ -15,7 +17,12 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter
         super(fm);
     }
 
-    private final String[] TITLES = {"Plannen","Zoeken","Ritten","Profiel"};
+    private final String[] TITLES = {
+            RideshareApp.getAppContext().getResources().getString(R.string.Plan),
+            RideshareApp.getAppContext().getResources().getString(R.string.Search),
+            RideshareApp.getAppContext().getResources().getString(R.string.Trips),
+            RideshareApp.getAppContext().getResources().getString(R.string.Profile)
+    };
 
     @Override
     public CharSequence getPageTitle(int position) {

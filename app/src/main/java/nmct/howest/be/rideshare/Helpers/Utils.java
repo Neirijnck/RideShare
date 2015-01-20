@@ -3,6 +3,7 @@ package nmct.howest.be.rideshare.Helpers;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
@@ -38,6 +39,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.TimeZone;
 
 import nmct.howest.be.rideshare.Models.Message;
@@ -60,6 +62,16 @@ public class Utils
         } catch (PackageManager.NameNotFoundException e) {
             throw new RuntimeException("Could not get package name: " + e);
         }
+    }
+
+    //Set App language
+    public static void changeLanguage(String language)
+    {
+        Locale myLocale = new Locale(language);
+        Locale.setDefault(myLocale);
+        Configuration config = new Configuration();
+        config.locale = myLocale;
+        RideshareApp.getAppContext().getResources().updateConfiguration(config, RideshareApp.getAppContext().getResources().getDisplayMetrics());
     }
 
     // Parse array of booleans

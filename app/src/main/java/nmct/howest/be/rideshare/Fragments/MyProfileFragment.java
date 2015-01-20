@@ -15,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.facebook.widget.ProfilePictureView;
@@ -41,6 +42,7 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
     private static final int USER_LOADER_ID = 1;
 
     private User mUser;
+    private View mHeader;
     private ProfilePictureView profilePictureView;
     private TextView txtName;
     private TextView txtPlace;
@@ -85,8 +87,10 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
         mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mReviewRecyclerView.setLayoutManager(mLayoutManager);
 
+        mHeader = LayoutInflater.from(getActivity()).inflate(R.layout.header_my_profile, mReviewRecyclerView, false);
+
         // Setting the adapter.
-        mReviewRecyclerAdapter = new ReviewRecyclerAdapter(reviews);
+        mReviewRecyclerAdapter = new ReviewRecyclerAdapter(mHeader, reviews);
         mReviewRecyclerView.setAdapter(mReviewRecyclerAdapter);
 
         return view;
@@ -133,37 +137,36 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
         mUser = user;
         fillData(user);
 
+        //Make layout visible when loaded
+        ProgressBar progProfile = (ProgressBar) getActivity().findViewById(R.id.progressBarProfile);
+        progProfile.setVisibility(View.INVISIBLE);
+
+        mReviewRecyclerView.setVisibility(View.VISIBLE);
+
         if (user.getReviews() != null) {
             reviews.addAll(user.getReviews());
 
             //Sort list so it's always the same
             Collections.sort(reviews, Collections.reverseOrder(new Review.compareToDate()));
 
-            mReviewRecyclerAdapter.updateList(reviews);
-        }
-
-        //If list isn't empty, show the list
-        if (!reviews.isEmpty()) {
-            TextView txbNoReviews = (TextView) getActivity().findViewById(R.id.txbNoReviews);
-            txbNoReviews.setVisibility(View.INVISIBLE);
-
-            mReviewRecyclerView.setVisibility(View.VISIBLE);
+            mReviewRecyclerAdapter.updateList(mHeader, reviews);
         }
     }
 
     @Override
     public void onLoaderReset(Loader<User> Loader) {
         reviews.clear();
-        mReviewRecyclerAdapter.updateList(reviews);
+        mReviewRecyclerAdapter.updateList(mHeader, reviews);
     }
 
     private void fillData(User user) {
-        txtName = (TextView) getView().findViewById(R.id.txtName);
-        txtPlace = (TextView) getView().findViewById(R.id.txtPlace);
-        txtGenderAge = (TextView) getView().findViewById(R.id.txtGenderAge);
-        txtCar = (TextView) getView().findViewById(R.id.txtCar);
-        txtUserName = (TextView) getView().findViewById(R.id.txtUserName);
-        profilePictureView = (ProfilePictureView) getView().findViewById(R.id.imgProfilePicture);
+
+        txtName = (TextView) mHeader.findViewById(R.id.txtName);
+        txtPlace = (TextView) mHeader.findViewById(R.id.txtPlace);
+        txtGenderAge = (TextView) mHeader.findViewById(R.id.txtGenderAge);
+        txtCar = (TextView) mHeader.findViewById(R.id.txtCar);
+        txtUserName = (TextView) mHeader.findViewById(R.id.txtUserName);
+        profilePictureView = (ProfilePictureView) mHeader.findViewById(R.id.imgProfilePicture);
 
         txtName.setText(user.getFirstName() + " " + user.getLastName());
 
@@ -202,6 +205,8 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
         } else {
             txtCar.setText("Auto niet bekend");
         }
+
+//        profilePictureView.setDefaultProfilePicture(user.getBitmapFb());
         if (!TextUtils.isEmpty(user.getFacebookID()))
             profilePictureView.setProfileId(user.getFacebookID());
         profilePictureView.setCropped(true);

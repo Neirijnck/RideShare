@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import java.util.Locale;
 
 import nmct.howest.be.rideshare.Helpers.APIHelper;
+import nmct.howest.be.rideshare.Helpers.Utils;
 import nmct.howest.be.rideshare.R;
 import nmct.howest.be.rideshare.RideshareApp;
 
@@ -71,11 +72,7 @@ public class SettingsActivity extends ActionBarActivity
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue)
                 {
-                    Locale myLocale = new Locale(newValue.toString());
-                    Locale.setDefault(myLocale);
-                    Configuration config = new Configuration();
-                    config.locale = myLocale;
-                    getActivity().getResources().updateConfiguration(config, getActivity().getResources().getDisplayMetrics());
+                    Utils.changeLanguage(newValue.toString());
 
                     //Restart app
                     Intent intent = new Intent(getActivity(), MainActivity.class);

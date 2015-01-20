@@ -1,6 +1,8 @@
 package nmct.howest.be.rideshare.Activities;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +12,7 @@ import nmct.howest.be.rideshare.Fragments.DetailMatchTripFragment;
 import nmct.howest.be.rideshare.Fragments.DetailRequestTripFragment;
 import nmct.howest.be.rideshare.Fragments.DetailRequestedTripFragment;
 import nmct.howest.be.rideshare.Fragments.DetailSavedTripFragment;
+import nmct.howest.be.rideshare.Helpers.Utils;
 import nmct.howest.be.rideshare.R;
 
 public class DetailsActivity extends ActionBarActivity {
@@ -18,11 +21,18 @@ public class DetailsActivity extends ActionBarActivity {
     private String id = "";
     private String matchID="";
     private Integer type;
+    SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+        String language = prefs.getString("language", "");
+
+        //Set Language
+        Utils.changeLanguage(language);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

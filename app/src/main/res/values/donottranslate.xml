@@ -4,12 +4,12 @@
     <string-array name="languages">
         <item>Nederlands</item>
         <item>English</item>
-        <item>Français</item>
+        <!--<item>Français</item>-->
     </string-array>
 
     <string-array name="languageData">
         <item>nl</item>
         <item>en</item>
-        <item>fr</item>
+        <!--<item>fr</item>-->
     </string-array>
 </resources>

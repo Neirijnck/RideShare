@@ -51,6 +51,7 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
 
     //Variables
     private User CurrentUser;
+    private View mHeader;
     private String UserId;
     private ProfilePictureView profilePictureView;
     private TextView txtName;
@@ -106,8 +107,10 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
         mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mReviewRecyclerView.setLayoutManager(mLayoutManager);
 
+        mHeader = LayoutInflater.from(getActivity()).inflate(R.layout.header_other_profile, mReviewRecyclerView, false);
+
         // Setting the adapter.
-        mReviewRecyclerAdapter = new ReviewRecyclerAdapter(reviews);
+        mReviewRecyclerAdapter = new ReviewRecyclerAdapter(mHeader, reviews);
         mReviewRecyclerView.setAdapter(mReviewRecyclerAdapter);
 
         Button btnGo=(Button) view.findViewById(R.id.btnOtherProfileReview);
@@ -135,7 +138,7 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
 
         //Make layout visible when loaded and remove progressbar
         mProgressBar.setVisibility(View.INVISIBLE);
-        mLayoutOtherProfile.setVisibility(View.VISIBLE);
+        mReviewRecyclerView.setVisibility(View.VISIBLE);
 
         getActivity().setTitle(user.getUserName());
 
@@ -145,32 +148,24 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
             //Sort list so it's always the same
             Collections.sort(reviews, Collections.reverseOrder(new Review.compareToDate()));
 
-            mReviewRecyclerAdapter.updateList(reviews);
-        }
-
-        //If list isnt empty, show the list
-        if (!reviews.isEmpty()) {
-            TextView txbNoReviews = (TextView) getActivity().findViewById(R.id.txbProfileNoReviews);
-            txbNoReviews.setVisibility(View.INVISIBLE);
-
-            mReviewRecyclerView.setVisibility(View.VISIBLE);
+            mReviewRecyclerAdapter.updateList(mHeader, reviews);
         }
     }
 
     @Override
     public void onLoaderReset(Loader<User> Loader) {
         reviews.clear();
-        mReviewRecyclerAdapter.updateList(reviews);
+        mReviewRecyclerAdapter.updateList(mHeader, reviews);
     }
 
     private void fillData(User user) {
 
-        txtName = (TextView) getView().findViewById(R.id.txtOtherName);
-        txtPlace = (TextView) getView().findViewById(R.id.txtOtherPlace);
-        txtGenderAge = (TextView) getView().findViewById(R.id.txtOtherGenderAge);
-        txtCar = (TextView) getView().findViewById(R.id.txtOtherCar);
-        txtUserName = (TextView) getView().findViewById(R.id.txtOtherUserName);
-        profilePictureView = (ProfilePictureView) getView().findViewById(R.id.imgOtherProfilePicture);
+        txtName = (TextView) mHeader.findViewById(R.id.txtOtherName);
+        txtPlace = (TextView) mHeader.findViewById(R.id.txtOtherPlace);
+        txtGenderAge = (TextView) mHeader.findViewById(R.id.txtOtherGenderAge);
+        txtCar = (TextView) mHeader.findViewById(R.id.txtOtherCar);
+        txtUserName = (TextView) mHeader.findViewById(R.id.txtOtherUserName);
+        profilePictureView = (ProfilePictureView) mHeader.findViewById(R.id.imgOtherProfilePicture);
 
         txtName.setText(user.getFirstName() + " " + user.getLastName());
 

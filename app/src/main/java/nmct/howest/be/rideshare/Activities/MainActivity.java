@@ -23,6 +23,7 @@ import com.facebook.Session;
 
 import nmct.howest.be.rideshare.Account.AccountUtils;
 import nmct.howest.be.rideshare.Adapters.TabPagerAdapter;
+import nmct.howest.be.rideshare.Helpers.Utils;
 import nmct.howest.be.rideshare.Loaders.Database.Contract;
 import nmct.howest.be.rideshare.R;
 
@@ -45,6 +46,10 @@ public class MainActivity extends ActionBarActivity {
         prefs = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
         String token = prefs.getString("accessToken", "");
         String reg_id = prefs.getString("REG_ID", "");
+        String language = prefs.getString("language", "");
+
+        //Set Language
+        Utils.changeLanguage(language);
 
         if (token.isEmpty() || reg_id.isEmpty()) {
             callFacebookLogout(this);

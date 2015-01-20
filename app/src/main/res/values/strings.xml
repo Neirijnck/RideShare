@@ -73,7 +73,7 @@
 
     <!-- Details Activity and fragments -->
     <string name="title_activity_details">Details</string>
-    <string name="title_activity_other_profile">Other Profile</string>
+    <string name="title_activity_other_profile">Profiel</string>
     <string name="Added_Message">Bijgevoegd bericht:</string>
     <string name="Status_Accepted">Geaccepteerd</string>
     <string name="Status_NotAccepted">Nog niet geaccepteerd</string>
