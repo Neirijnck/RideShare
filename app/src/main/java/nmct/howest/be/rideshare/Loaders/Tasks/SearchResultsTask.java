@@ -72,10 +72,14 @@ public class SearchResultsTask extends AsyncTask<Bundle, Void, List<Trip>>
         PlaceJSONParser placeJSONParser = new PlaceJSONParser();
         if(!fromPlaceid.isEmpty()) {
             fromLoc = placeJSONParser.getLocation(fromPlaceid);
+            fromLoc = fromLoc.replace("[", "");
+            fromLoc = fromLoc.replace("]", "");
         }
 
         if(!toPlaceid.isEmpty()) {
             toLoc = placeJSONParser.getLocation(toPlaceid);
+            toLoc = toLoc.replace("[", "");
+            toLoc = toLoc.replace("]", "");
         }
 
 
@@ -93,8 +97,19 @@ public class SearchResultsTask extends AsyncTask<Bundle, Void, List<Trip>>
             List<NameValuePair> parameters = new ArrayList<NameValuePair>();
             parameters.add(new BasicNameValuePair("from", fromAddress.trim()));
             parameters.add(new BasicNameValuePair("to", toAddress.trim()));
-            parameters.add(new BasicNameValuePair("fromLoc", fromLoc));
-            parameters.add(new BasicNameValuePair("toLoc", toLoc));
+
+            if(!fromLoc.isEmpty()) {
+                String[] partsFrom = fromLoc.split(",");
+                parameters.add(new BasicNameValuePair("fromLoc", partsFrom[0]));
+                parameters.add(new BasicNameValuePair("fromLoc", partsFrom[1]));
+            }
+
+            if(!toLoc.isEmpty()) {
+                String[] partsTo = toLoc.split(",");
+                parameters.add(new BasicNameValuePair("toLoc", partsTo[0]));
+                parameters.add(new BasicNameValuePair("toLoc", partsTo[1]));
+            }
+
 //            parameters.add(new BasicNameValuePair("searchDistance", "5"));  //in KM
 
             if(!datetime.isEmpty())

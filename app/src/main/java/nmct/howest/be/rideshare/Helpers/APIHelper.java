@@ -333,13 +333,21 @@ public class APIHelper {
                 PlaceJSONParser placeJSONParser = new PlaceJSONParser();
                 if(!fromPlaceid.isEmpty()) {
                     String fromLoc = placeJSONParser.getLocation(fromPlaceid);
-                    parameters.add(new BasicNameValuePair("fromLoc", fromLoc));
-                    Log.d("fromLoc", fromLoc);
+                    fromLoc = fromLoc.replace("[", "");
+                    fromLoc = fromLoc.replace("]", "");
+                    String[] parts = fromLoc.split(",");
+                    parameters.add(new BasicNameValuePair("fromLoc", parts[0]));
+                    parameters.add(new BasicNameValuePair("fromLoc", parts[1]));
+                    Log.d("params", parts[0] + " - " + parts[1]);
                 }
 
                 if(!toPlaceid.isEmpty()) {
                     String toLoc = placeJSONParser.getLocation(toPlaceid);
-                    parameters.add(new BasicNameValuePair("toLoc", toLoc));
+                    toLoc = toLoc.replace("[", "");
+                    toLoc = toLoc.replace("]", "");
+                    String[] parts = toLoc.split(",");
+                    parameters.add(new BasicNameValuePair("toLoc", parts[0]));
+                    parameters.add(new BasicNameValuePair("toLoc", parts[1]));
                 }
 
                 httpPost.setEntity(new UrlEncodedFormEntity(parameters));
