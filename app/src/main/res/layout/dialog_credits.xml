@@ -13,33 +13,32 @@
         android:id="@+id/txtDialogCreditsTitle" />
 
     <ImageView
-        android:layout_width="85dp"
-        android:layout_height="85dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:id="@+id/imgTeamMember1"
         android:src="@drawable/team_member_1"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginTop="15dp"
         android:layout_below="@+id/txtDialogCreditsTitle"
-        android:layout_toLeftOf="@+id/imgTeamMember2"
-        android:layout_toStartOf="@+id/imgTeamMember2" />
+        android:layout_alignLeft="@+id/txtGoogle"
+        android:layout_alignStart="@+id/txtGoogle" />
 
     <ImageView
-        android:layout_width="85dp"
-        android:layout_height="85dp"
-        android:layout_marginTop="30dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:id="@+id/imgTeamMember2"
         android:src="@drawable/team_member_2"
-        android:layout_below="@+id/txtDialogCreditsTitle"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginLeft="15dp"
+        android:layout_alignTop="@+id/imgTeamMember1"
+        android:layout_toRightOf="@+id/imgTeamMember1"
+        android:layout_toEndOf="@+id/imgTeamMember1" />
 
     <ImageView
-        android:layout_width="85dp"
-        android:layout_height="85dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:id="@+id/imgTeamMember3"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="30dp"
         android:src="@drawable/team_member_3"
-        android:layout_below="@+id/txtDialogCreditsTitle"
+        android:layout_marginLeft="15dp"
+        android:layout_alignTop="@+id/imgTeamMember2"
         android:layout_toRightOf="@+id/imgTeamMember2"
         android:layout_toEndOf="@+id/imgTeamMember2" />
 
