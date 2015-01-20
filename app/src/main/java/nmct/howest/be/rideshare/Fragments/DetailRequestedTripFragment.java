@@ -150,9 +150,15 @@ public class DetailRequestedTripFragment extends Fragment {
 
         @Override
         public void onLoadFinished(Loader<Trip> loader, Trip trip) {
-            urlUser = getResources().getString(R.string.API_Profile) + trip.getMatches().get(0).getUserID();
-            getLoaderManager().initLoader(USER_LOADER_ID, null, UserLoaderListener).forceLoad();
-            fillData(trip);
+            for(Match match : trip.getMatches())
+            {
+                if(match.getId().equals(getArguments().getString("matchID")))
+                {
+                    urlUser = getResources().getString(R.string.API_Profile) + match.getUserID();
+                    getLoaderManager().initLoader(USER_LOADER_ID, null, UserLoaderListener).forceLoad();
+                    fillData(trip);
+                }
+            }
         }
 
         @Override
