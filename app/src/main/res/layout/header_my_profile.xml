@@ -2,12 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <com.facebook.widget.ProfilePictureView
+    <!--<com.facebook.widget.ProfilePictureView-->
+        <!--android:layout_width="130dp"-->
+        <!--android:layout_height="130dp"-->
+        <!--android:id="@+id/imgProfilePicture"-->
+        <!--android:layout_alignParentTop="true">-->
+    <!--</com.facebook.widget.ProfilePictureView>-->
+
+    <ImageView
         android:layout_width="130dp"
         android:layout_height="130dp"
-        android:id="@+id/imgProfilePicture"
-        android:layout_alignParentTop="true">
-    </com.facebook.widget.ProfilePictureView>
+        android:id="@+id/imgProfilePicture"/>
 
     <TextView
         android:layout_width="wrap_content"

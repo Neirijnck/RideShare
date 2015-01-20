@@ -15,10 +15,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import com.facebook.widget.ProfilePictureView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,6 +29,7 @@ import java.util.TimeZone;
 
 import nmct.howest.be.rideshare.Activities.ProfileActivity;
 import nmct.howest.be.rideshare.Adapters.ReviewRecyclerAdapter;
+import nmct.howest.be.rideshare.Helpers.Utils;
 import nmct.howest.be.rideshare.Loaders.Json.ProfileLoader;
 import nmct.howest.be.rideshare.Models.Review;
 import nmct.howest.be.rideshare.Models.User;
@@ -43,7 +43,7 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
 
     private User mUser;
     private View mHeader;
-    private ProfilePictureView profilePictureView;
+    private ImageView profilePictureView;
     private TextView txtName;
     private TextView txtPlace;
     private TextView txtGenderAge;
@@ -166,7 +166,7 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
         txtGenderAge = (TextView) mHeader.findViewById(R.id.txtGenderAge);
         txtCar = (TextView) mHeader.findViewById(R.id.txtCar);
         txtUserName = (TextView) mHeader.findViewById(R.id.txtUserName);
-        profilePictureView = (ProfilePictureView) mHeader.findViewById(R.id.imgProfilePicture);
+        profilePictureView = (ImageView) mHeader.findViewById(R.id.imgProfilePicture);
 
         txtName.setText(user.getFirstName() + " " + user.getLastName());
 
@@ -207,9 +207,11 @@ public class MyProfileFragment extends Fragment implements LoaderManager.LoaderC
         }
 
 //        profilePictureView.setDefaultProfilePicture(user.getBitmapFb());
-        if (!TextUtils.isEmpty(user.getFacebookID()))
-            profilePictureView.setProfileId(user.getFacebookID());
-        profilePictureView.setCropped(true);
+//        if (!TextUtils.isEmpty(user.getFacebookID()))
+//            profilePictureView.setProfileId(user.getFacebookID());
+//        profilePictureView.setCropped(true);
+
+        profilePictureView.setImageBitmap(Utils.getRoundedBitmap(user.getBitmapFb()));
     }
 
 }
