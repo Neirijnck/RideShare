@@ -40,6 +40,16 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        if (getIntent() != null && getIntent().getExtras() != null) {
+            Integer p = getIntent().getExtras().getInt("PAGE", 0);
+            String msg = getIntent().getExtras().getString("TOAST", "");
+            pager.setCurrentItem(p, true);
+
+            if (!msg.isEmpty()) {
+                Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+            }
+        }
+
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
@@ -89,7 +99,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onResume() {
         super.onResume();
 
-        if (getIntent() != null && getIntent().getExtras() != null) {
+        /*if (getIntent() != null && getIntent().getExtras() != null) {
             Integer p = getIntent().getExtras().getInt("PAGE", 0);
             String msg = getIntent().getExtras().getString("TOAST", "");
             pager.setCurrentItem(p, true);
@@ -97,7 +107,7 @@ public class MainActivity extends ActionBarActivity {
             if (!msg.isEmpty()) {
                 Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
             }
-        }
+        }*/
     }
 
     @Override

@@ -89,10 +89,6 @@ public class PlacesTask extends AsyncTask<String, Void, String> {
             SimpleAdapter adapter = new SimpleAdapter(context, result, android.R.layout.simple_list_item_1, from, to);
             view.setAdapter(adapter);
         }
-
-        private SimpleAdapter myMethod(SimpleAdapter adapter){
-            return adapter;
-        }
     }
 }
 
