@@ -190,17 +190,19 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
         else if(loader.getId()==TRIPS_REQUESTS_LOADER_ID)
         {
             //This is a request trip & only my request
+            List<Match> myRequestMatches = new ArrayList<>();
             for(Trip trip: trips)
             {
                 trip.setType(getActivity().getResources().getString(R.string.Trip_MyRequests));
                 for(Match match : trip.getMatches())
                 {
-                    if(!match.getUserID().equals(myUserID))
+                    if(match.getUserID().equals(myUserID))
                     {
-                        //Not my request
-                        trip.getMatches().remove(match);
+                        //If i's my request, add to the list
+                        myRequestMatches.add(match);
                     }
                 }
+                trip.setMatches(myRequestMatches);
             }
             if(mRequestTrips!=null)
             {
