@@ -15,4 +15,5 @@ public class RideshareApp extends Application
     public static Context getAppContext() {
         return RideshareApp.context;
     }
+
 }

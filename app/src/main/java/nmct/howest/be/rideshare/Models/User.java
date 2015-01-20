@@ -22,10 +22,7 @@ public class User {
     private String amountOfSeats ="";
     private Boolean donated = false;
     private Bitmap bitmapFb;
-
-
     private List<Review> reviews;
-
 
     //Getters and setters
     public String getID() {

@@ -161,35 +161,35 @@ public class APIHelper {
     public static void PlanTrip(String fbToken, String from, String fromPlaceid, String to, String toPlaceid, String date, String time, String price, boolean[] repeat)
     {
         /*try {*/
-            String dateTime = Utils.parseDateToISOString(date, time);
+        String dateTime = Utils.parseDateToISOString(date, time);
 
-            price = TextUtils.substring(price, 1, price.length());
+        price = TextUtils.substring(price, 1, price.length());
 
-            HttpPost httppost = new HttpPost(RideshareApp.getAppContext().getResources().getString(R.string.API_Trips));
-            httppost.addHeader("Authorization", fbToken);
+        HttpPost httppost = new HttpPost(RideshareApp.getAppContext().getResources().getString(R.string.API_Trips));
+        httppost.addHeader("Authorization", fbToken);
 
-            List<NameValuePair> parameters = new ArrayList<NameValuePair>();
-            parameters.add(new BasicNameValuePair("from", from));
-            parameters.add(new BasicNameValuePair("to", to));
+        List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+        parameters.add(new BasicNameValuePair("from", from));
+        parameters.add(new BasicNameValuePair("to", to));
 
-            if(!dateTime.isEmpty())
-                parameters.add(new BasicNameValuePair("datetime", dateTime));
+        if(!dateTime.isEmpty())
+            parameters.add(new BasicNameValuePair("datetime", dateTime));
 
-            if(!price.isEmpty())
-                parameters.add(new BasicNameValuePair("payment", price));
+        if(!price.isEmpty())
+            parameters.add(new BasicNameValuePair("payment", price));
 
-            if(repeat != null) {
-                parameters.add(new BasicNameValuePair("repeat.mo", ""+repeat[0]));
-                parameters.add(new BasicNameValuePair("repeat.tu", ""+repeat[1]));
-                parameters.add(new BasicNameValuePair("repeat.we", ""+repeat[2]));
-                parameters.add(new BasicNameValuePair("repeat.th", ""+repeat[3]));
-                parameters.add(new BasicNameValuePair("repeat.fr", ""+repeat[4]));
-                parameters.add(new BasicNameValuePair("repeat.sa", ""+repeat[5]));
-                parameters.add(new BasicNameValuePair("repeat.su", ""+repeat[6]));
-            }
+        if(repeat != null) {
+            parameters.add(new BasicNameValuePair("repeat.mo", ""+repeat[0]));
+            parameters.add(new BasicNameValuePair("repeat.tu", ""+repeat[1]));
+            parameters.add(new BasicNameValuePair("repeat.we", ""+repeat[2]));
+            parameters.add(new BasicNameValuePair("repeat.th", ""+repeat[3]));
+            parameters.add(new BasicNameValuePair("repeat.fr", ""+repeat[4]));
+            parameters.add(new BasicNameValuePair("repeat.sa", ""+repeat[5]));
+            parameters.add(new BasicNameValuePair("repeat.su", ""+repeat[6]));
+        }
 
-            PostPlanAsync task = new PostPlanAsync(parameters, fromPlaceid, toPlaceid);
-            task.execute(httppost);
+        PostPlanAsync task = new PostPlanAsync(parameters, fromPlaceid, toPlaceid);
+        task.execute(httppost);
         /*}
         catch (IOException e) {
             Log.d("", "Error in http connection " + e.toString());

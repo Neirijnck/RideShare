@@ -62,7 +62,7 @@ public class GcmIntentService extends IntentService {
         if (!extras.isEmpty()) {
 
             if (GoogleCloudMessaging.MESSAGE_TYPE_SEND_ERROR.equals(messageType)) {
-                    Log.e("Log","Error");
+                Log.e("Log","Error");
 
             } else if (GoogleCloudMessaging.MESSAGE_TYPE_DELETED.equals(messageType)) {
                 Log.e("Log","Error");

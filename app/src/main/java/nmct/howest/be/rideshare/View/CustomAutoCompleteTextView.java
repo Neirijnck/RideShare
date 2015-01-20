@@ -41,12 +41,6 @@ public class CustomAutoCompleteTextView extends AutoCompleteTextView {
 
 
        /* */
-
-
-
-
-
-
     }
 
     @Override
@@ -54,7 +48,6 @@ public class CustomAutoCompleteTextView extends AutoCompleteTextView {
         HashMap<String, String> hm = (HashMap<String, String>) selectedItem;
         return hm.get("description");
     }
-
 
     void init() {
         //imgCross.setBounds(0, 0, imgCross.getIntrinsicWidth(), imgCross.getIntrinsicHeight());

@@ -58,21 +58,6 @@ public class LoginActivity extends FragmentActivity {
             }
         }
 
-        //Check de facebook keyhash
-       /* try {
-            PackageInfo info = getPackageManager().getPackageInfo(
-                    this.getPackageName(),
-                    PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.d("erreur", "");
-        } catch (NoSuchAlgorithmException e) {
-        }*/
-
         //Facebook session check
         Session session = Session.getActiveSession();
         if(session==null){
@@ -190,7 +175,6 @@ public class LoginActivity extends FragmentActivity {
                 Log.d("", "");
             }
         }.execute(null, null, null);
-
     }
 
 }

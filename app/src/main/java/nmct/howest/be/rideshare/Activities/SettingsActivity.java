@@ -64,6 +64,7 @@ public class SettingsActivity extends ActionBarActivity
 
             addPreferencesFromResource(R.xml.basic_preferences);
 
+            //Set new language
             Preference pref_language = findPreference("language");
             pref_language.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener()
             {
@@ -80,6 +81,7 @@ public class SettingsActivity extends ActionBarActivity
                 }
             });
 
+            //Delete my profile
             Preference pref_delete_profile = findPreference("delete_profile");
             pref_delete_profile.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener()
             {
@@ -113,6 +115,7 @@ public class SettingsActivity extends ActionBarActivity
                 }
             });
 
+            //Show credits
             Preference pref_credits = findPreference("credits");
             pref_credits.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override

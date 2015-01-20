@@ -10,6 +10,7 @@
         android:id="@+id/txtDialogReview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/rideshare_text"
         android:text="@string/dialog_review"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -22,6 +23,7 @@
 
     <TextView
         android:id="@+id/txtDialogUserRating"
+        android:textColor="@color/rideshare_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/dialog_userRating"

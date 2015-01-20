@@ -13,13 +13,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <!--<com.facebook.widget.ProfilePictureView-->
-    <!--android:layout_width="130dp"-->
-    <!--android:layout_height="130dp"-->
-    <!--android:id="@+id/imgOtherProfilePicture"-->
-    <!--android:layout_below="@+id/txtOtherTitle"-->
-    <!--></com.facebook.widget.ProfilePictureView>-->
-
     <ImageView
         android:layout_width="130dp"
         android:layout_height="130dp"

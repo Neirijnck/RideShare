@@ -64,11 +64,6 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
                                                             int section) {
             int sectionKind = section % 2;
             final SectionLayoutManager slm;
-//            if (sectionKind == 0) {
-//                slm = mGridSectionLayoutManager;
-//            } else {
-//                slm = mLinearSectionLayoutManager;
-//            }
             slm = mLinearSectionLayoutManager;
             return slm;
         }

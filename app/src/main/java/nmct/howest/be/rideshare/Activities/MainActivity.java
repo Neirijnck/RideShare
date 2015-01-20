@@ -40,16 +40,6 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        if (getIntent() != null && getIntent().getExtras() != null) {
-            Integer p = getIntent().getExtras().getInt("PAGE", 0);
-            String msg = getIntent().getExtras().getString("TOAST", "");
-            pager.setCurrentItem(p, true);
-
-            if (!msg.isEmpty()) {
-                Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
-            }
-        }
-
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
@@ -81,25 +71,7 @@ public class MainActivity extends ActionBarActivity {
         tabs.setViewPager(pager);
         tabs.setTextColor(getResources().getColor(R.color.rideshare_secondary));
 
-        //Set up a sync account if needed
-        if (!AccountUtils.isAccountExists(this)) {
-            AccountUtils.CreateSyncAccount(this);
-        }
-
-        //Set sync to automatically
-//        ContentResolver.setSyncAutomatically(AccountUtils.getAccount(this), Contract.AUTHORITY, true);
-
-        //Request sync
-        Bundle settingsBundle = new Bundle();
-        settingsBundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
-        ContentResolver.requestSync(AccountUtils.getAccount(this), Contract.AUTHORITY, settingsBundle);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        /*if (getIntent() != null && getIntent().getExtras() != null) {
+        if (getIntent() != null && getIntent().getExtras() != null) {
             Integer p = getIntent().getExtras().getInt("PAGE", 0);
             String msg = getIntent().getExtras().getString("TOAST", "");
             pager.setCurrentItem(p, true);
@@ -107,7 +79,17 @@ public class MainActivity extends ActionBarActivity {
             if (!msg.isEmpty()) {
                 Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
             }
-        }*/
+        }
+
+        //Set up a sync account if needed
+        if (!AccountUtils.isAccountExists(this)) {
+            AccountUtils.CreateSyncAccount(this);
+        }
+
+        //Request sync
+        Bundle settingsBundle = new Bundle();
+        settingsBundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
+        ContentResolver.requestSync(AccountUtils.getAccount(this), Contract.AUTHORITY, settingsBundle);
     }
 
     @Override
