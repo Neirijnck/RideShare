@@ -125,28 +125,28 @@
     <string name="dialog_review">Your opinion:</string>
     <string name="dialog_userRating">Rate user:</string>
 
-    <!-- Facebook login and admin -->
-    <string name="app_id">551430101654024</string>
-
     <!-- Settings -->
     <string name="title_activity_settings">Settings</string>
     <string name="pref_language">Language content</string>
     <string name="pref_delete_profile">Delete profile</string>
 
+    <!-- Facebook login and admin -->
+    <!--<string name="app_id">551430101654024</string>-->
+
     <!-- API -->
-    <string name="API">http://188.226.154.228/api/v1/</string>
-    <string name="API_Profile">http://188.226.154.228/api/v1/profile/</string>
-    <string name="API_Trips">http://188.226.154.228/api/v1/trips/</string>
-    <string name="API_Trips_Search">http://188.226.154.228/api/v1/trips/search/</string>
-    
-    <string name="API_Trips_Requests">http://188.226.154.228/api/v1/trips?show=requests</string>
-    <string name="API_Trips_Requested">http://188.226.154.228/api/v1/trips?show=requestedandaccepted</string>
-    <string name="API_Trips_Accepted">http://188.226.154.228/api/v1/trips?show=accepted</string>
+    <!--<string name="API">http://188.226.154.228/api/v1/</string>-->
+    <!--<string name="API_Profile">http://188.226.154.228/api/v1/profile/</string>-->
+    <!--<string name="API_Trips">http://188.226.154.228/api/v1/trips/</string>-->
+    <!--<string name="API_Trips_Search">http://188.226.154.228/api/v1/trips/search/</string>-->
+    <!---->
+    <!--<string name="API_Trips_Requests">http://188.226.154.228/api/v1/trips?show=requests</string>-->
+    <!--<string name="API_Trips_Requested">http://188.226.154.228/api/v1/trips?show=requestedandaccepted</string>-->
+    <!--<string name="API_Trips_Accepted">http://188.226.154.228/api/v1/trips?show=accepted</string>-->
 
     <!-- Site -->
-    <string name="Site">http://sharemyrideapp.me</string>
-    <string name="Site_Icon">http://sharemyrideapp.me/img/logo.png</string>
-    <string name="Site_Donate">http://sharemyrideapp.me/donate</string>
+    <!--<string name="Site">http://sharemyrideapp.me</string>-->
+    <!--<string name="Site_Icon">http://sharemyrideapp.me/img/logo.png</string>-->
+    <!--<string name="Site_Donate">http://sharemyrideapp.me/donate</string>-->
 
     <!-- Notifications -->
     <string name="requestNotification"> would love to travel with you</string>

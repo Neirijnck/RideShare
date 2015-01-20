@@ -135,13 +135,22 @@
     <string name="pref_delete_profile">Verwijder profiel</string>
 
     <!-- API -->
-    <string name="API">http://188.226.154.228/api/v1/</string>
-    <string name="API_Profile">http://188.226.154.228/api/v1/profile/</string>
-    <string name="API_Trips">http://188.226.154.228/api/v1/trips/</string>
-    <string name="API_Trips_Search">http://188.226.154.228/api/v1/trips/search/</string>
-    <string name="API_Trips_Requests">http://188.226.154.228/api/v1/trips?show=requests</string>
-    <string name="API_Trips_Requested">http://188.226.154.228/api/v1/trips?show=requestedandaccepted</string>
-    <string name="API_Trips_Accepted">http://188.226.154.228/api/v1/trips?show=accepted</string>
+    <!--<string name="API">http://188.226.154.228/api/v1/</string>-->
+    <!--<string name="API_Profile">http://188.226.154.228/api/v1/profile/</string>-->
+    <!--<string name="API_Trips">http://188.226.154.228/api/v1/trips/</string>-->
+    <!--<string name="API_Trips_Search">http://188.226.154.228/api/v1/trips/search/</string>-->
+    <!--<string name="API_Trips_Requests">http://188.226.154.228/api/v1/trips?show=requests</string>-->
+    <!--<string name="API_Trips_Requested">http://188.226.154.228/api/v1/trips?show=requestedandaccepted</string>-->
+    <!--<string name="API_Trips_Accepted">http://188.226.154.228/api/v1/trips?show=accepted</string>-->
+
+    <string name="Domain">http://188.166.7.147</string>
+    <string name="API">http://188.166.7.147/api/v1/</string>
+    <string name="API_Profile">http://188.166.7.147/api/v1/profile/</string>
+    <string name="API_Trips">http://188.166.7.147/api/v1/trips/</string>
+    <string name="API_Trips_Search">http://188.166.7.147/api/v1/trips/search/</string>
+    <string name="API_Trips_Requests">http://188.166.7.147/api/v1/trips?show=requests</string>
+    <string name="API_Trips_Requested">http://188.166.7.147/api/v1/trips?show=requestedandaccepted</string>
+    <string name="API_Trips_Accepted">http://188.166.7.147/api/v1/trips?show=accepted</string>
 
     <!-- Site -->
     <string name="Site">http://sharemyrideapp.me</string>
