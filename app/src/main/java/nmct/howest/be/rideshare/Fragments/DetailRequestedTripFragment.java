@@ -144,6 +144,7 @@ public class DetailRequestedTripFragment extends Fragment {
         return view;
     }
 
+
     private LoaderManager.LoaderCallbacks<Trip> TripLoaderListener = new LoaderManager.LoaderCallbacks<Trip>() {
         @Override
         public Loader<Trip> onCreateLoader(int id, Bundle args) {
