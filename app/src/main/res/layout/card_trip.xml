@@ -52,6 +52,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Datum"
+            android:maxLength="30"
             android:id="@+id/txtTripInfoDate"
             android:layout_toEndOf="@+id/imgTripPicture"
             android:layout_below="@+id/txtTripTitle"

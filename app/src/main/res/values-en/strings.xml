@@ -129,6 +129,9 @@
     <string name="title_activity_settings">Settings</string>
     <string name="pref_language">Language content</string>
     <string name="pref_delete_profile">Delete profile</string>
+    <string name="pref_general">General</string>
+    <string name="pref_advanced">Advanced</string>
+    <string name="pref_credits">Credits</string>
 
     <!-- Facebook login and admin -->
     <!--<string name="app_id">551430101654024</string>-->
@@ -177,6 +180,8 @@
     <string name="dialogDonateTitle">Please donate!</string>
     <string name="dialogDonate">Do you think this app is useful? Support its development by donating.</string>
     <string name="dialogDonateButton">Donate</string>
+    <string name="dialogCreditsTitle">Made with love by:</string>
+    <string name="dialogCreditsThanksTo">Special thanks to:</string>
 
     <!--Share-->
     <string name="shareCaption">The best carpool app out there.</string>

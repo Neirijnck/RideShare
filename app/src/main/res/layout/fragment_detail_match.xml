@@ -136,6 +136,7 @@
                 android:layout_alignTop="@+id/txbMatchFrom"
                 android:layout_toRightOf="@+id/txbMatchFrom"
                 android:layout_toEndOf="@+id/txbMatchFrom"
+                android:maxLength="25"
                 android:layout_marginLeft="50dp"/>
 
             <TextView
@@ -143,6 +144,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/txtMatchTo"
+                android:maxLength="25"
                 android:layout_alignTop="@+id/txbMatchTo"
                 android:layout_alignLeft="@+id/txtMatchFrom"
                 android:layout_alignStart="@+id/txtMatchFrom" />
@@ -151,7 +153,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text=""
+                android:maxLength="25"
                 android:id="@+id/txtMatchDate"
                 android:layout_alignTop="@+id/txbMatchDate"
                 android:layout_alignLeft="@+id/txtMatchTo"
@@ -161,7 +163,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text=""
+                android:maxLength="25"
                 android:id="@+id/txtMatchHour"
                 android:layout_alignTop="@+id/txbMatchHour"
                 android:layout_alignLeft="@+id/txtMatchDate"

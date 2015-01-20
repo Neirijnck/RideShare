@@ -133,8 +133,12 @@
     <string name="title_activity_settings">Instellingen</string>
     <string name="pref_language">Taal inhoud</string>
     <string name="pref_delete_profile">Verwijder profiel</string>
+    <string name="pref_general">Algemeen</string>
+    <string name="pref_advanced">Geavanceerd</string>
+    <string name="pref_credits">Credits</string>
 
     <!-- API -->
+    <!--<string name="Domain">http://188.226.154.228</string>-->
     <!--<string name="API">http://188.226.154.228/api/v1/</string>-->
     <!--<string name="API_Profile">http://188.226.154.228/api/v1/profile/</string>-->
     <!--<string name="API_Trips">http://188.226.154.228/api/v1/trips/</string>-->
@@ -186,6 +190,9 @@
     <string name="dialogDonateTitle">Doneren</string>
     <string name="dialogDonate">Vind je deze app nuttig? Steun de ontwikkeling ervan door te doneren aan de ontwikkelaars.</string>
     <string name="dialogDonateButton">Doneer</string>
+    <string name="dialogCreditsTitle">Met liefde gemaakt door:</string>
+    <string name="dialogCreditsThanksTo">Speciale dank aan:</string>
+    <string name="dialogCreditsThanksToGoogle">Google, places API</string>
 
     <!--Share-->
     <string name="shareCaption">De beste carpool app die er is.</string>

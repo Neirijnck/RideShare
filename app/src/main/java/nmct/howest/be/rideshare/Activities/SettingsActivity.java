@@ -1,6 +1,7 @@
 package nmct.howest.be.rideshare.Activities;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -111,6 +112,20 @@ public class SettingsActivity extends ActionBarActivity
                     return true;
                 }
             });
+
+            Preference pref_credits = findPreference("credits");
+            pref_credits.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    //Show credits dialog
+                    final Dialog popDialog = new Dialog(getActivity());
+                    popDialog.setContentView(R.layout.dialog_credits);
+                    popDialog.setTitle("Credits");
+                    popDialog.show();
+                    return true;
+                }
+            });
+
         }
     }
 

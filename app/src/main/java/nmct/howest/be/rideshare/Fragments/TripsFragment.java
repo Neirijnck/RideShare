@@ -215,11 +215,26 @@ public class TripsFragment extends Fragment implements LoaderManager.LoaderCallb
         }
         else if(loader.getId()==TRIPS_REQUESTED_LOADER_ID)
         {
+            List<Trip> TripsSeparateMatches = new ArrayList<>();
             //This is a requested trip
-            for(Trip trip: trips){trip.setType(getActivity().getResources().getString(R.string.Trip_Requests));}
+            for(Trip trip: trips)
+            {
+                trip.setType(getActivity().getResources().getString(R.string.Trip_Requests));
+                for(Match match : trip.getMatches())
+                {
+                    //Make new trip object to show in recyclerview for each match
+                    List<Match> myMatches = new ArrayList<>();
+                    myMatches.add(match);
+                    Trip requestedTrip = new Trip();
+                    requestedTrip.setID(trip.getID());
+                    requestedTrip.setType(getActivity().getResources().getString(R.string.Trip_Requests));
+                    requestedTrip.setMatches(myMatches);
+                    TripsSeparateMatches.add(requestedTrip);
+                }
+            }
             if(mRequestedTrips!=null)
             {
-                mRequestedTrips = trips;
+                mRequestedTrips = TripsSeparateMatches;
 
                 //Sort trips on date
                 Collections.sort(mRequestedTrips, Collections.reverseOrder(new Trip.compareToDate()));

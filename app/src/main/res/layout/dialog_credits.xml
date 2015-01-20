@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/dialogCreditsTitle"
+        android:textColor="@color/rideshare_text"
+        android:id="@+id/txtDialogCreditsTitle" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imgTeamMember1"
+        android:src="@drawable/team_member_1"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_below="@+id/txtDialogCreditsTitle"
+        android:layout_toLeftOf="@+id/imgTeamMember2"
+        android:layout_toStartOf="@+id/imgTeamMember2" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:id="@+id/imgTeamMember2"
+        android:src="@drawable/team_member_2"
+        android:layout_below="@+id/txtDialogCreditsTitle"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imgTeamMember3"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:src="@drawable/team_member_3"
+        android:layout_below="@+id/txtDialogCreditsTitle"
+        android:layout_toRightOf="@+id/imgTeamMember2"
+        android:layout_toEndOf="@+id/imgTeamMember2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/dialogCreditsThanksTo"
+        android:textColor="@color/rideshare_text"
+        android:id="@+id/txtThanksTo"
+        android:layout_below="@+id/imgTeamMember1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="28dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/rideshare_text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/dialogCreditsThanksToGoogle"
+        android:id="@+id/txtGoogle"
+        android:layout_margin="5dp"
+        android:layout_below="@+id/txtThanksTo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>
