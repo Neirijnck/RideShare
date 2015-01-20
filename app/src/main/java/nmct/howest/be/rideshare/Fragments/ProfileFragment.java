@@ -199,6 +199,7 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
             txtGenderAge.setText("Verjaardag niet bekend");
         }
 
+
         if (!TextUtils.isEmpty(user.getCarType()) && !TextUtils.isEmpty(user.getAmountOfSeats())) {
             txtCar.setText(user.getCarType() + " (" + user.getAmountOfSeats() + " pl.)");
         } else if (!TextUtils.isEmpty(user.getCarType()) && TextUtils.isEmpty(user.getAmountOfSeats())) {
