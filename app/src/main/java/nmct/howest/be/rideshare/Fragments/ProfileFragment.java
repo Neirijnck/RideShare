@@ -99,8 +99,6 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
         View view = inflater.inflate(R.layout.fragment_other_profile, container, false);
 
         mProgressBar = (ProgressBar) view.findViewById(R.id.progressBarOtherProfile);
-        mLayoutOtherProfile = (RelativeLayout) view.findViewById(R.id.container_other_profile);
-
         mReviewRecyclerView = (RecyclerView) view.findViewById(R.id.lstProfileReviews);
 
         // Setting the LayoutManager.
@@ -109,11 +107,7 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
 
         mHeader = LayoutInflater.from(getActivity()).inflate(R.layout.header_other_profile, mReviewRecyclerView, false);
 
-        // Setting the adapter.
-        mReviewRecyclerAdapter = new ReviewRecyclerAdapter(mHeader, reviews);
-        mReviewRecyclerView.setAdapter(mReviewRecyclerAdapter);
-
-        Button btnGo=(Button) view.findViewById(R.id.btnOtherProfileReview);
+        Button btnGo=(Button) mHeader.findViewById(R.id.btnOtherProfileReview);
         btnGo.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -121,6 +115,10 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
                 itemRatingPopup();
             }
         });
+
+        // Setting the adapter.
+        mReviewRecyclerAdapter = new ReviewRecyclerAdapter(mHeader, reviews);
+        mReviewRecyclerView.setAdapter(mReviewRecyclerAdapter);
 
         return view;
     }
